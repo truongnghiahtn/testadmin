@@ -1,19 +1,19 @@
-import React, { Fragment } from "react";
-import { Route, Redirect } from "react-router-dom";
-import Header from "../Layout/Header/Header"
-import Footer from "../Layout/Footer/Footer"
+import React from "react";
+import { Route } from "react-router-dom";
+import Navbar from "../components/Navbar/index";
+import Footer from "../components/Footer/index";
 
 const HomeLayout = props => {
   return (
-    <Fragment>
-      {/* <Header /> */}
+    <React.Fragment>
+      <Navbar />
       {props.children}
       <Footer />
-    </Fragment>
+    </React.Fragment>
   );
 };
 
-export default function HomeTemplate({ Component, ...props }) {
+const HomeTemplate = ({ Component, ...props }) => {
   return (
     <Route
       {...props}
@@ -26,4 +26,6 @@ export default function HomeTemplate({ Component, ...props }) {
       }}
     />
   );
-}
+};
+
+export default HomeTemplate;

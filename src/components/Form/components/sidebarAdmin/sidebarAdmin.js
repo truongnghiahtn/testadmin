@@ -123,10 +123,10 @@ export default class sidebarAdmin extends Component {
               </li>
               <li></li>
               <li>
-                <NavLink  href="website.html" className="iq-waves-effect" to="/admin/User">
+                <a href="website.html" className="iq-waves-effect">
                   <i className="fab fa-chrome" aria-hidden="true" />
                   <span>Website</span>
-                </NavLink >
+                </a>
               </li>
               <li>
                 <a href="#" className="iq-waves-effect">

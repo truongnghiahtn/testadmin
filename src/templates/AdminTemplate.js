@@ -19,13 +19,12 @@ export default function AdminTemplate({ Component, ...props }) {
     <Route
       {...props}
       render={propsComponent => {
-        if (localStorage.getItem("userAdmin")) {
           return (
             <Adminlayout>
               <Component {...propsComponent} />
             </Adminlayout>
           );
-        }
+      
         // chuyen ve trang admin
         return <Redirect to="/admin" />;
       }}

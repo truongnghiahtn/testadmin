@@ -3,10 +3,7 @@ import TrangDichvu from "./page/home/TrangDichVu/TrangDichVu";
 import TrangBlog from "./page/home/TrangBlog/TrangBlog";
 import TrangLienHe from "./page/home/TrangLienHe/TrangLienHe";
 import TrangMauThietKe from "./page/home/TrangMauThietke/TrangMauThietKe";
-import Dashboard from "./page/admin/Dashboard/Dashboard"
-
-
-
+import Dashboard from "./page/admin/Dashboard/Dashboard";
 
 const routesHome = [
   {

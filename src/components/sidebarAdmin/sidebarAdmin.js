@@ -1,12 +1,88 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
-
+const $ = window.jQuery;
 export default class sidebarAdmin extends Component {
+  componentDidMount() {
+    /*---------------------------------------------------------------------
+        Scrollbar
+    -----------------------------------------------------------------------*/
+    let Scrollbar = window.Scrollbar;
+    if ($("#sidebar-scrollbar").length) {
+      Scrollbar.init(document.querySelector("#sidebar-scrollbar"));
+    }
+    let Scrollbar1 = window.Scrollbar;
+    if ($("#right-sidebar-scrollbar").length) {
+      Scrollbar1.init(document.querySelector("#right-sidebar-scrollbar"));
+    }
+
+    /*---------------------------------------------------------------------
+        Page Menu
+    -----------------------------------------------------------------------*/
+    $(document).on("click", ".wrapper-menu", function() {
+      $(this).toggleClass("open");
+      $("body").toggleClass("sidebar-main");
+    });
+
+    /* Sidebar Widget */
+
+    function checkClass(ele, type, className) {
+      switch (type) {
+        case "addClass":
+          if (!ele.hasClass(className)) {
+            ele.addClass(className);
+          }
+          break;
+        case "removeClass":
+          if (ele.hasClass(className)) {
+            ele.removeClass(className);
+          }
+          break;
+        case "toggleClass":
+          ele.toggleClass(className);
+          break;
+        default:
+          break;
+      }
+    }
+    $(".iq-sidebar-menu .active").each(function(ele, index) {
+      $(this)
+        .find(".iq-submenu")
+        .parent()
+        .addClass("menu-open");
+      $(this)
+        .find(".iq-submenu")
+        .addClass("menu-open");
+    });
+    $(document).on("click", ".iq-sidebar-menu li", function() {
+      if ($(this).hasClass("menu-open")) {
+        $(this)
+          .find(".iq-submenu")
+          .slideUp("slow");
+        checkClass($(this), "removeClass", "menu-open");
+        if (!$(this).find(".iq-submenu.menu-open .menu-open").length) {
+          checkClass($(this).find(".menu-open"), "removeClass", "menu-open");
+        } else {
+          checkClass($(this).find(".iq-submenu"), "removeClass", "menu-open");
+        }
+      } else if ($(this).find(".iq-submenu").length) {
+        $(this)
+          .find(".iq-submenu")
+          .slideDown("slow");
+        checkClass($(this), "addClass", "menu-open");
+        checkClass($(this).find(".iq-submenu"), "addClass", "menu-open");
+      }
+    });
+  }
   render() {
     return (
       <div className="iq-sidebar">
         <div className="iq-sidebar-logo d-flex justify-content-between">
           <a href="index.html">
-            <img src="images/logo-base.png" className="img-fluid" alt />
+            <img
+              src="/assets/images/logo-base.png"
+              className="img-fluid"
+              alt=""
+            />
           </a>
           <div className="iq-menu-bt-sidebar">
             <div className="iq-menu-bt align-self-center">
@@ -38,22 +114,22 @@ export default class sidebarAdmin extends Component {
                 <i className="ri-subtract-line" />
                 <span>Quản lý</span>
               </li>
-              <li className>
+              <li>
                 <a href="account.html" className="iq-waves-effect">
                   <i className="fa fa-user-circle" aria-hidden="true" />
                   <span>User</span>
                 </a>
               </li>
               <li></li>
-              <li className>
+              <li>
                 <a href="website.html" className="iq-waves-effect">
-                  <i className="fa fa-chrome" aria-hidden="true" />
+                  <i className="fab fa-chrome" aria-hidden="true" />
                   <span>Website</span>
                 </a>
               </li>
               <li>
-                <a href="javascript:void(0);" className="iq-waves-effect">
-                  <i className="fa fa-address-card-o" aria-hidden="true" />
+                <a href="#" className="iq-waves-effect">
+                  <i className="fa fa-address-card" aria-hidden="true"></i>
                   <span>Khách hàng</span>
                   <i className="ri-arrow-right-s-line iq-arrow-right" />
                 </a>
@@ -73,7 +149,7 @@ export default class sidebarAdmin extends Component {
                 </ul>
               </li>
               <li>
-                <a href="javascript:void(0);" className="iq-waves-effect">
+                <a href="#" className="iq-waves-effect">
                   <i className="fa fa-language" aria-hidden="true" />
                   <span>Ngôn ngữ</span>
                   <i className="ri-arrow-right-s-line iq-arrow-right" />

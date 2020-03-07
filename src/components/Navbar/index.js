@@ -1,11 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.scss";
 import { NavLink } from "react-router-dom";
+import $ from "jquery";
 
 const Navbar = () => {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    $(".offcanvas").on("click", function() {
+      $(this).toggleClass("dl-active");
+      if ($(".offcanvas").hasClass("dl-active")) {
+        $(".paper_menu").css("display", "block");
+      } else {
+        $(".paper_menu").css("display", "none");
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (width < 1024) {
+      if ($(".offcanvas").hasClass("dl-active")) {
+        $(".paper_menu").css("display", "block");
+      } else {
+        $(".paper_menu").css("display", "none");
+      }
+      $(".responsive-menu")
+        .removeClass("xv-menuwrapper")
+        .addClass("dl-menuwrapper");
+      $(".dl-menu").addClass("dl-menuopen dl-menu-toggle");
+    } else {
+      $(".paper_menu").css("display", "block");
+      $(".responsive-menu")
+        .removeClass("dl-menuwrapper ")
+        .addClass("xv-menuwrapper");
+      $(".dl-menu").removeClass("dl-menuopen");
+    }
+  }, [width]);
+
   return (
     <nav className="mainnav navbar navbar-default justify-content-between">
       <div className="container relative">
+        <a
+          className="offcanvas dl-trigger paper-nav-toggle"
+          data-toggle="offcanvas"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i></i>
+        </a>
         <div className="tc-site-logo">
           <NavLink title="Tra câu Việt - Anh" to="/">
             <div className="tc-site-logo-text">

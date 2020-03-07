@@ -114,7 +114,7 @@ export default class Dashboard extends Component {
                   <img
                     src="/assets/images/logo.png"
                     className="img-fluid"
-                    alt=""
+                    
                   />
                   <span>XRay</span>
                 </a>
@@ -151,7 +151,7 @@ export default class Dashboard extends Component {
                         <div className="rounded-circle iq-card-icon bg-warning">
                           <img
                             src="/assets/images/language/uk_big.png"
-                            alt=""
+                            
                           />
                         </div>
                         <div className="text-right">
@@ -171,7 +171,7 @@ export default class Dashboard extends Component {
                         <div className="rounded-circle iq-card-icon bg-danger">
                           <img
                             src="/assets/images/language/france_big.png"
-                            alt=""
+                            
                           />
                         </div>
                         <div className="text-right">
@@ -191,7 +191,7 @@ export default class Dashboard extends Component {
                         <div className="rounded-circle iq-card-icon bg-info">
                           <img
                             src="/assets/images/language/japan_big.png"
-                            alt=""
+                            
                           />
                         </div>
                         <div className="text-right">

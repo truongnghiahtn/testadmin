@@ -202,7 +202,7 @@ export default class headerAdmin extends Component {
                           <img
                             className="avatar-40 rounded"
                             src="/assets/images/user/01.jpg"
-                            alt
+                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -220,7 +220,7 @@ export default class headerAdmin extends Component {
                           <img
                             className="avatar-40 rounded"
                             src="images/user/02.jpg"
-                            alt
+                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -238,7 +238,7 @@ export default class headerAdmin extends Component {
                           <img
                             className="avatar-40 rounded"
                             src="images/user/03.jpg"
-                            alt
+                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -256,7 +256,7 @@ export default class headerAdmin extends Component {
                           <img
                             className="avatar-40 rounded"
                             src="images/user/04.jpg"
-                            alt
+                           
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -294,7 +294,7 @@ export default class headerAdmin extends Component {
                           <img
                             className="avatar-40 rounded"
                             src="images/user/01.jpg"
-                            alt
+                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -311,7 +311,7 @@ export default class headerAdmin extends Component {
                           <img
                             className="avatar-40 rounded"
                             src="images/user/02.jpg"
-                            alt
+                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -328,7 +328,7 @@ export default class headerAdmin extends Component {
                           <img
                             className="avatar-40 rounded"
                             src="images/user/03.jpg"
-                            alt
+                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -345,7 +345,7 @@ export default class headerAdmin extends Component {
                           <img
                             className="avatar-40 rounded"
                             src="images/user/04.jpg"
-                            alt
+                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -362,7 +362,7 @@ export default class headerAdmin extends Component {
                           <img
                             className="avatar-40 rounded"
                             src="images/user/05.jpg"
-                            alt
+                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -388,7 +388,7 @@ export default class headerAdmin extends Component {
               <img
                 src="/assets/images/user/1.jpg"
                 className="img-fluid rounded mr-3"
-                alt="user"
+                
               />
               <div className="caption">
                 <h6 className="mb-0 line-height">Bini Jets</h6>

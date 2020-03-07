@@ -1,40 +1,45 @@
-import TrangChu from "./page/home/TrangChu/TrangChu";
-import TrangDichvu from "./page/home/TrangDichVu/TrangDichVu";
-import TrangBlog from "./page/home/TrangBlog/TrangBlog";
-import TrangLienHe from "./page/home/TrangLienHe/TrangLienHe";
-import TrangMauThietKe from "./page/home/TrangMauThietke/TrangMauThietKe";
+import Home from "./page/home/TrangChu/index";
+import GioiThieu from "./page/home/GioiThieu";
+import DieuKhoan from "./page/home/DieuKhoan";
+import API from "./page/home/API";
+import BoSung from "./page/home/BoSung";
+import LienHe from "./page/home/LienHe";
 import Dashboard from "./page/admin/Dashboard/Dashboard";
+import User from "./page/admin/user/user"
+
+
+
 
 const routesHome = [
   {
     path: "/",
     exact: true,
-    component: TrangChu
+    component: Home
   },
   {
-    path: "/Trangchu",
-    exact: false,
-    component: TrangChu
+    path: "/gioi-thieu",
+    exact: true,
+    component: GioiThieu
   },
   {
-    path: "/Dich-vu",
-    exact: false,
-    component: TrangDichvu
+    path: "/dieu-khoan",
+    exact: true,
+    component: DieuKhoan
   },
   {
-    path: "/Blog",
-    exact: false,
-    component: TrangBlog
+    path: "/API",
+    exact: true,
+    component: API
   },
   {
-    path: "/Lien-he",
-    exact: false,
-    component: TrangLienHe
+    path: "/bo-sung",
+    exact: true,
+    component: BoSung
   },
   {
-    path: "/Mau-thiet-ke",
-    exact: false,
-    component: TrangMauThietKe
+    path: "/lien-he",
+    exact: true,
+    component: LienHe
   }
 ];
 
@@ -45,7 +50,13 @@ const routesAdmin = [
     path: "/admin/dashboard",
     exact: false,
     component: Dashboard
+  },
+  {
+    path:"/admin/User",
+    exact: false,
+    component: User
   }
 ];
 
 export { routesAdmin };
+

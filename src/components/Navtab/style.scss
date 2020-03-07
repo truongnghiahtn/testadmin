@@ -1,0 +1,35 @@
+.Navtab {
+  padding: 20px 0 0;
+  .nav {
+    &.nav-tabs {
+      border: none;
+    }
+    .nav-item {
+      .nav-link {
+        border: none;
+        line-height: 3rem;
+        padding: 0 1.06667rem !important;
+        background: 0 0;
+        opacity: 0.9;
+        color: #777;
+        font-size: 16px;
+        &::first-letter {
+          text-transform: capitalize;
+        }
+        &.active {
+          font-weight: 600;
+          color: #1e85dd;
+          background: #fff;
+          border-radius: 5px 5px 0 0;
+        }
+      }
+    }
+  }
+  .tab-content {
+    .tab-pane {
+      &.active {
+        background-color: #fff;
+      }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+.seaction {
+  margin: 10px 0;
+}
+.search-section {
+  position: relative;
+  .masthead {
+    padding: 0;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    width: 1%;
+    padding: 170px 0 0;
+    text-align: center;
+    form#tc-search-form {
+      position: relative;
+      margin-top: 10px;
+
+      .tc-search-textboxwrap {
+        display: block;
+        position: relative;
+        border-radius: 4px;
+        .tc-search-textbox {
+          display: block;
+          margin: 0 auto;
+          width: 100%;
+          padding: 0.8em 10em 0.8em 1em;
+          border: 2px solid #e1e8ee;
+          outline: 0;
+          -webkit-appearance: none;
+          border-radius: 30px;
+          font-size: 18px;
+          color: #86939e;
+          opacity: 0.92;
+        }
+        .tc-search-selectbox {
+          width: 10rem;
+          display: block;
+          position: absolute;
+          margin-top: auto;
+          right: 50px;
+          margin-bottom: auto;
+          top: 0;
+          bottom: 0;
+          cursor: pointer;
+          &::before {
+            position: absolute;
+            content: "|";
+            left: 1rem;
+            top: 0.85rem;
+            color: #dedede;
+            font-size: 1.5rem;
+          }
+          &::after {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.8rem;
+            line-height: 1.5;
+            display: inline-block;
+            width: 0;
+            height: 0;
+            margin-left: 0.255em;
+            vertical-align: 0.255em;
+            content: "";
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-bottom: 0;
+            border-left: 0.3em solid transparent;
+            color: #a7a7a7;
+          }
+          select {
+            display: inline-block;
+            height: 100%;
+            line-height: 1.5;
+            color: #a7a7a7;
+            vertical-align: middle;
+            background: 0 0;
+            border: none;
+            font-size: 18px;
+            -webkit-appearance: none;
+            cursor: pointer;
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+        .tc-search-button {
+          display: block;
+          position: absolute;
+          right: 20px;
+          top: 8px;
+          width: 40px;
+          height: 40px;
+          cursor: pointer;
+          i {
+            display: block;
+            position: absolute;
+            font-size: 32px;
+            font-weight: 400;
+            color: #e1e8ee;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            line-height: 1.4;
+            &::before {
+              font-weight: 900;
+              font-family: "Font Awesome\ 5 Free";
+            }
+          }
+        }
+      }
+    }
+  }
+}

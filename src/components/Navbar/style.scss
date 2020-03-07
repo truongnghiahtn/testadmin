@@ -1,0 +1,68 @@
+.mainnav {
+  padding: 0 !important;
+  z-index: 9999;
+  border-radius: 0;
+  background: 0 0;
+  border: none;
+  .relative {
+    position: relative;
+    .tc-site-logo {
+      float: left;
+      margin-top: 10px;
+      a {
+        display: block;
+        line-height: 1;
+        text-decoration: none;
+        color: #8d8d8d;
+        .tc-site-logo-text {
+          text-align: center;
+          font-family: Arial !important;
+          h1 {
+            color: #1e85dd;
+            font-size: 1.5em;
+            display: inline;
+            margin: 0;
+            font-weight: 600;
+          }
+          span {
+            font-weight: 400;
+            font-size: 1.5em;
+          }
+          h2 {
+            font-size: 0.75em;
+            margin-top: 4px;
+          }
+        }
+      }
+    }
+    .paper_menu {
+      .xv-menuwrapper {
+        float: right;
+        .dl-menu {
+          margin: 0;
+          display: flex;
+          position: static;
+          padding: 0;
+          text-align: left;
+          float: none;
+          li {
+            list-style: none;
+            a {
+              padding: 0 20px;
+              display: block;
+              font-size: 13px;
+              font-weight: 400;
+              color: #86939e;
+              position: relative;
+              margin-left: 15px;
+              text-decoration: none;
+              &.active {
+                color: #007bff;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

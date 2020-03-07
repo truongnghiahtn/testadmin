@@ -10,9 +10,9 @@ const Navbar = () => {
     $(".offcanvas").on("click", function() {
       $(this).toggleClass("dl-active");
       if ($(".offcanvas").hasClass("dl-active")) {
-        $(".paper_menu").css("display", "block");
+        $(".dl-menu").addClass("dl-menuopen dl-menu-toggle");
       } else {
-        $(".paper_menu").css("display", "none");
+        $(".dl-menu").removeClass("dl-menuopen");
       }
     });
   }, []);
@@ -30,20 +30,17 @@ const Navbar = () => {
   useEffect(() => {
     if (width < 1024) {
       if ($(".offcanvas").hasClass("dl-active")) {
-        $(".paper_menu").css("display", "block");
+        $(".dl-menu").addClass("dl-menuopen");
       } else {
-        $(".paper_menu").css("display", "none");
+        $(".dl-menu").removeClass("dl-menuopen");
       }
       $(".responsive-menu")
         .removeClass("xv-menuwrapper")
         .addClass("dl-menuwrapper");
-      $(".dl-menu").addClass("dl-menuopen dl-menu-toggle");
     } else {
-      $(".paper_menu").css("display", "block");
       $(".responsive-menu")
         .removeClass("dl-menuwrapper ")
         .addClass("xv-menuwrapper");
-      $(".dl-menu").removeClass("dl-menuopen");
     }
   }, [width]);
 

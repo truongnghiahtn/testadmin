@@ -35,7 +35,7 @@ const Navbar = () => {
               <li>
                 <NavLink to="/lien-he">Liên hệ</NavLink>
               </li>
-              <li className="share-menu-item" title data-tlite>
+              <li className="share-menu-item">
                 <div className="heart" />
                 <div
                   className="fb-share-button fb_iframe_widget"
@@ -54,8 +54,8 @@ const Navbar = () => {
                       height="1000px"
                       title="fb:share_button Facebook Social Plugin"
                       frameBorder={0}
-                      allowTransparency="true"
-                      allowFullScreen="true"
+                      // allowTransparency={true}
+                      // allowFullScreen={true}
                       scrolling="no"
                       allow="encrypted-media"
                       src="https://www.facebook.com/v3.2/plugins/share_button.php?app_id=272842896385019&channel=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D46%23cb%3Df2d3842d6bcd0c8%26domain%3Dtracau.vn%26origin%3Dhttps%253A%252F%252Ftracau.vn%252Ff2194904ce75f64%26relation%3Dparent.parent&container_width=20&href=https%3A%2F%2Ftracau.vn%2F&layout=button_count&locale=en_US&mobile_iframe=false&sdk=joey&size=small"
@@ -65,7 +65,7 @@ const Navbar = () => {
                         width: 94,
                         height: 20
                       }}
-                      className
+                      // className
                     />
                   </span>
                 </div>

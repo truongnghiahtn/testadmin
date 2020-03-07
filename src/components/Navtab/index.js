@@ -42,7 +42,14 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     width: "100%",
     backgroundColor: theme.palette.background.paper,
-    padding: 20
+    marginTop: 20,
+    textTransform: "uppercase"
+  },
+  upperFirstLetter: {
+    textTransform: "none",
+    "&::first-letter": {
+      textTransform: "uppercase"
+    }
   }
 }));
 
@@ -50,7 +57,7 @@ export default function Navtab() {
   const data = [
     { id: "tracau", name: "tra câu", content: "" },
     { id: "tratu", name: "tra từ", content: "" },
-    { id: "phude", name: "phu đề phim", content: "" },
+    { id: "phude", name: "phụ đề phim", content: "" },
     { id: "video", name: "video", content: "" },
     { id: "hinhanh", name: "hình ảnh", content: "" },
     { id: "amnhac", name: "âm nhạc", content: "" },
@@ -70,7 +77,7 @@ export default function Navtab() {
       return (
         <Tab
           value={item.id}
-          label={item.id}
+          label={item.name}
           key={index}
           {...a11yProps(`${item.id}`)}
         />
@@ -82,22 +89,22 @@ export default function Navtab() {
     return data.map((item, index) => {
       return (
         <TabPanel value={value} index={item.id} key={index}>
-          <h3>{item.name}</h3>
+          <h4 className="text-center">{item.name}</h4>
         </TabPanel>
       );
     });
   };
 
   return (
-    <div className={classes.root + ` container`}>
-      <AppBar position="static" color="default">
+    <div className={classes.root + ` container navtab`}>
+      <AppBar position="static">
         <Tabs
           value={value}
           onChange={handleChange}
-          indicatorColor="primary"
+          /*           indicatorColor="stan" */
           textColor="primary"
           variant="scrollable"
-          scrollButtons="auto"
+          scrollButtons="on"
           aria-label="scrollable auto tabs example"
         >
           {renderTab()}

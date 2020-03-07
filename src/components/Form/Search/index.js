@@ -7,7 +7,7 @@ const Search = props => {
   const [prevKw, setPrevKw] = useState("");
   const [currentKw, setCurrentKw] = useState("");
   useEffect(() => {
-    if (prevKw === currentKw) {
+    if (prevKw === currentKw && currentKw) {
       props.getDataSearchApi(currentKw);
       setPrevKw("");
     }
@@ -25,7 +25,7 @@ const Search = props => {
         $("#tc-content-search").addClass("show");
       }
     });
-  }, [prevKw, currentKw, props]);
+  }, [prevKw, currentKw, props.dataSearch]);
 
   const renderDataSearch = () => {
     return props.dataSearch.map((item, index) => {
@@ -40,6 +40,9 @@ const Search = props => {
 
   const handleOnChange = event => {
     let value = event.target.value;
+    if (!value) {
+      props.getDataSearchApi(value);
+    }
     setCurrentKw(value);
     setTimeout(() => {
       setPrevKw(value);
@@ -91,7 +94,7 @@ const Search = props => {
                     </span>
                   </form>
                   <div id="tc-content-search">
-                    {props.dataSearch ? renderDataSearch() : ""}
+                    {props.dataSearch.length > 0 ? renderDataSearch() : ""}
                   </div>
                 </div>
               </div>

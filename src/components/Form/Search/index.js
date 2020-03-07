@@ -7,18 +7,23 @@ const Search = props => {
   const [prevKw, setPrevKw] = useState("");
   const [currentKw, setCurrentKw] = useState("");
   useEffect(() => {
-    if (prevKw === currentKw && currentKw) {
+    if (prevKw === currentKw) {
       props.getDataSearchApi(currentKw);
       setPrevKw("");
     }
-    props.dataSearch.length && currentKw
-      ? $("#tc-content-search").addClass("show")
-      : $("#tc-content-search").removeClass("show");
-
+    if (props.dataSearch.length && currentKw) {
+      $("#tc-content-search").addClass("show");
+    } else {
+      $("#tc-content-search").removeClass("show");
+    }
     $(document).on("click", function(e) {
       e.target.id != "tc-s"
         ? $("#tc-content-search").removeClass("show")
         : $("#tc-content-search").addClass("show");
+
+      if ($("#tc-content-search").has(e.target).length !== 0) {
+        $("#tc-content-search").addClass("show");
+      }
     });
   }, [prevKw, currentKw, props]);
 
@@ -38,7 +43,7 @@ const Search = props => {
     setCurrentKw(value);
     setTimeout(() => {
       setPrevKw(value);
-    }, 1000);
+    }, 500);
   };
 
   return (
@@ -85,7 +90,9 @@ const Search = props => {
                       </div>
                     </span>
                   </form>
-                  <div id="tc-content-search">{renderDataSearch()}</div>
+                  <div id="tc-content-search">
+                    {props.dataSearch ? renderDataSearch() : ""}
+                  </div>
                 </div>
               </div>
             </div>

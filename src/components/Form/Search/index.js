@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./style.scss";
 import { connect } from "react-redux";
 import * as action from "../../../redux/action/index";
-import * as $ from "jquery";
 const Search = props => {
+  const [prevKw, setPrevKw] = useState("");
+  const [currentKw, setCurrentKw] = useState("");
   useEffect(() => {
-    $(document).on("click", function(e) {
-      e.target.id != "tc-s"
-        ? $("#tc-content-search").removeClass("show")
-        : $("#tc-content-search").addClass("show");
-    });
-  }, []);
+    if (prevKw === currentKw && currentKw) {
+      props.getDataSearchApi(currentKw);
+    }
+  }, [prevKw, currentKw]);
 
   const renderDataSearch = () => {
     return props.dataSearch.map((item, index) => {
@@ -24,12 +23,11 @@ const Search = props => {
   };
 
   const handleOnChange = event => {
-    if (event.target.value) {
-      props.getDataSearchApi(event.target.value);
-      $("#tc-content-search").addClass("show");
-    } else {
-      $("#tc-content-search").removeClass("show");
-    }
+    let value = event.target.value;
+    setCurrentKw(value);
+    setTimeout(() => {
+      setPrevKw(value);
+    }, 2000);
   };
 
   return (
@@ -55,8 +53,8 @@ const Search = props => {
                         name="keyword"
                         autoFocus
                         autoComplete="off"
-                        onChange={handleOnChange}
-                        on
+                        // onChange={handleOnChange}
+                        onKeyUp={handleOnChange}
                       />
                       <div id="tc-d" className="tc-search-selectbox">
                         <select id="tc-db">

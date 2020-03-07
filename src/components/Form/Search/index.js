@@ -1,6 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./style.scss";
-const Search = () => {
+import { connect } from "react-redux";
+import * as action from "../../../redux/action/index";
+import * as $ from "jquery";
+const Search = props => {
+  useEffect(() => {
+    $(document).on("click", function(e) {
+      e.target.id != "tc-s"
+        ? $("#tc-content-search").removeClass("show")
+        : $("#tc-content-search").addClass("show");
+    });
+  }, []);
+
+  const renderDataSearch = () => {
+    return props.dataSearch.map((item, index) => {
+      return (
+        <div
+          key={index}
+          dangerouslySetInnerHTML={{ __html: item.fields.shorttext }}
+        ></div>
+      );
+    });
+  };
+
+  const handleOnChange = event => {
+    if (event.target.value) {
+      props.getDataSearchApi(event.target.value);
+      $("#tc-content-search").addClass("show");
+    } else {
+      $("#tc-content-search").removeClass("show");
+    }
+  };
+
   return (
     <section className="search-section home-search">
       <div className="masthead text-center">
@@ -21,9 +52,11 @@ const Search = () => {
                         className="tc-search-textbox"
                         type="text"
                         placeholder="Nhập từ hoặc câu cần tìm kiếm"
-                        name="s"
-                        autofocus
+                        name="keyword"
+                        autoFocus
                         autoComplete="off"
+                        onChange={handleOnChange}
+                        on
                       />
                       <div id="tc-d" className="tc-search-selectbox">
                         <select id="tc-db">
@@ -33,7 +66,7 @@ const Search = () => {
                         </select>
                       </div>
                       <div id="tc-b" className="tc-search-button">
-                        <i class="fab fa-search"></i>
+                        <i className="fab fa-search"></i>
                       </div>
                       <div
                         id="tc-x"
@@ -44,6 +77,7 @@ const Search = () => {
                       </div>
                     </span>
                   </form>
+                  <div id="tc-content-search">{renderDataSearch()}</div>
                 </div>
               </div>
             </div>
@@ -54,4 +88,16 @@ const Search = () => {
   );
 };
 
-export default Search;
+const mapStateToProps = state => {
+  return {
+    dataSearch: state.deMoReducer.dataSearch
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    getDataSearchApi: data => {
+      dispatch(action.getDataSearchApi(data));
+    }
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

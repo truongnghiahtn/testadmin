@@ -112,4 +112,55 @@
       }
     }
   }
+  #tc-content-search {
+    margin-top: 2px;
+    text-align: left;
+    cursor: default;
+    border: 1px solid #eee;
+    border-top: 0;
+    background: #fff;
+    position: absolute;
+    display: none;
+    z-index: 9999;
+    max-height: 254px;
+    overflow: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    border-radius: 16px;
+    width: 98%;
+    &.show {
+      display: block;
+    }
+    .autocomplete-suggestion {
+      position: relative;
+      padding: 0 0.6em;
+      line-height: 23px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 1.02em;
+      color: #333;
+      .sl {
+        float: left;
+        color: #1371bb;
+        font-weight: 500;
+        font-size: 14px;
+      }
+      .sr {
+        float: right;
+        font-size: 14px;
+        color: #aaa;
+      }
+      p {
+        padding-left: 5px;
+        display: inline-block;
+        word-break: break-all;
+        white-space: normal;
+      }
+      &:hover {
+        background: #f0f0f0;
+        cursor: pointer;
+      }
+    }
+  }
 }

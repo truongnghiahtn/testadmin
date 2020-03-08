@@ -221,7 +221,7 @@ class childModalMovies extends Component {
                   onBlur={this.handleErrors}
                   onKeyUp={this.handleErrors}
                   name="title"
-                  value={this.state.values.title}
+                  value={this.state.values.title ? this.state.values.title : ""}
                 />
               </label>
               {this.state.errors.title !== "" ? (
@@ -237,7 +237,10 @@ class childModalMovies extends Component {
                 <div className="col">
                   <label>Nội dung</label>
                   <ReactSummernote
-                    value={this.state.values.content}
+                    value={
+                      this.state.values.content ? this.state.values.content : ""
+                    }
+                    defaultValue="content"
                     name="content"
                     options={{
                       lang: "ru-RU",
@@ -295,7 +298,7 @@ class childModalMovies extends Component {
                   onBlur={this.handleErrors}
                   onKeyUp={this.handleErrors}
                   name="image"
-                  value={this.state.values.image}
+                  value={this.state.values.image ? this.state.values.image : ""}
                 />
               </label>
               {this.state.errors.image !== "" ? (
@@ -317,7 +320,11 @@ class childModalMovies extends Component {
                   onBlur={this.handleErrors}
                   onKeyUp={this.handleErrors}
                   name="english_meaning"
-                  value={this.state.values.english_meaning}
+                  value={
+                    this.state.values.english_meaning
+                      ? this.state.values.english_meaning
+                      : ""
+                  }
                 />
               </label>
               {this.state.errors.english_meaning !== "" ? (
@@ -339,7 +346,11 @@ class childModalMovies extends Component {
                   onBlur={this.handleErrors}
                   onKeyUp={this.handleErrors}
                   name="Vietnamese_meaning"
-                  value={this.state.values.Vietnamese_meaning}
+                  value={
+                    this.state.values.Vietnamese_meaning
+                      ? this.state.values.Vietnamese_meaning
+                      : ""
+                  }
                 />
               </label>
               {this.state.errors.Vietnamese_meaning !== "" ? (

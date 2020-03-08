@@ -21,16 +21,15 @@ export default class sidebarAdmin extends Component {
     /*---------------------------------------------------------------------
         Page Menu
     -----------------------------------------------------------------------*/
-    $(document).on("click", ".wrapper-menu", function() {
+
+    $(".wrapper-menu").on("click", function() {
       $(this).toggleClass("open");
       $("body").toggleClass("sidebar-main");
     });
 
     $("#btn1").on("click", function() {
       if ($("#collapseOne").hasClass("show")) {
-        setTimeout(() => {
-          $("#menu1").removeClass("menu-open");
-        }, 300);
+        $("#menu1").removeClass("menu-open");
       } else {
         $("#menu1").addClass("menu-open");
       }
@@ -38,9 +37,7 @@ export default class sidebarAdmin extends Component {
 
     $("#btn2").on("click", function() {
       if ($("#collapseTwo").hasClass("show")) {
-        setTimeout(() => {
-          $("#menu2").removeClass("menu-open");
-        }, 300);
+        $("#menu2").removeClass("menu-open");
       } else {
         $("#menu2").addClass("menu-open");
       }

@@ -13,7 +13,8 @@ import AnhViet from "../TabContent/AnhViet";
 import NguPhap from "../TabContent/NguPhap";
 import ChuyenNganh from "../TabContent/ChuyenNganh";
 import VietViet from "../TabContent/VietViet";
-import AnhANh from "../TabContent/AnhAnh";
+import AnhAnh from "../TabContent/AnhAnh";
+import HinhAnh from "../TabContent/HinhAnh";
 import { connect } from "react-redux";
 import "./style.scss";
 
@@ -104,7 +105,7 @@ function Navtab(props) {
     {
       id: "dict_aa",
       name: "Anh Anh",
-      Component: AnhANh,
+      Component: AnhAnh,
       status: false,
       content: ""
     },
@@ -115,21 +116,34 @@ function Navtab(props) {
       status: true,
       content: ""
     },
-    { id: "video", name: "Video", Component: Video, status: true, content: "" }
+    {
+      id: "video",
+      name: "Video",
+      Component: Video,
+      status: true,
+      content: ""
+    },
+    {
+      id: "hinhAnh",
+      name: "Hình Ảnh",
+      Component: HinhAnh,
+      status: true,
+      content: ""
+    }
   ]);
   const [value, setValue] = React.useState("tracau");
 
   React.useEffect(() => {
-    console.log(data);
+    setValue("tracau");
     props.traTu.map((item, index) => {
-      if (item.includes(data[index + 1].id)) {
-        let dataNew = [...data];
-        dataNew[index + 1].status = item.includes(dataNew[index + 1].id);
-        dataNew[index + 1].content = item;
-        setData(dataNew);
-      }
+      let dataNew = [...data];
+      dataNew[index + 1].status = item.includes(dataNew[index + 1].id);
+      item.includes(data[index + 1].id)
+        ? (dataNew[index + 1].content = item)
+        : (dataNew[index + 1].content = "");
+      setData(dataNew);
     });
-  }, [value, props]);
+  }, [props]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -173,15 +187,16 @@ function Navtab(props) {
           scrollButtons="on"
           aria-label="scrollable auto tabs example"
         >
-          {renderTab()}
+          {props.traCau.length ? renderTab() : ""}
         </Tabs>
       </AppBar>
-      {renderTabPanel()}
+      {props.traCau.length ? renderTabPanel() : ""}
     </div>
   );
 }
 const mapStateToProps = state => {
   return {
+    traCau: state.deMoReducer.traCau,
     traTu: state.deMoReducer.traTu
   };
 };

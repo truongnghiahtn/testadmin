@@ -7,6 +7,24 @@ class PhuDePhim extends Component {
           return (
             <li key={index}>
               <article id={item._id} className="tc-row tc-row-content">
+                <div>
+                  <img
+                    className="lazy initial loaded"
+                    data-src={
+                      "https://tracau.vn/resources/posters/thumbnails/" +
+                      item.fields.thumbnail +
+                      ".jpg"
+                    }
+                    width="68px"
+                    height="101px"
+                    src={
+                      "https://tracau.vn/resources/posters/thumbnails/" +
+                      item.fields.thumbnail +
+                      ".jpg"
+                    }
+                    data-was-processed="true"
+                  />
+                </div>
                 <p className="tc-row--text vi">{item.fields.vi}</p>
                 <p
                   className="tc-row--text en"

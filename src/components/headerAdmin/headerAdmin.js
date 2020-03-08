@@ -3,152 +3,152 @@ import React, { Component } from "react";
 const $ = window.$;
 
 export default class headerAdmin extends Component {
-    componentDidMount(){
-        $(window).scroll(function() {
-            if ($(window).scrollTop() >= 75) {
-              $(".iq-top-navbar").addClass("fixed-header");
-            } else {
-              $(".iq-top-navbar").removeClass("fixed-header");
-            }
-          });
-      
-          /* Ripple Effect */
-      
-          $(document).on("click", ".iq-waves-effect", function(e) {
-            // Remove any old one
-            $(".ripple").remove();
-            // Setup
-            let posX = $(this).offset().left,
-              posY = $(this).offset().top,
-              buttonWidth = $(this).width(),
-              buttonHeight = $(this).height();
-      
-            // Add the element
-            $(this).prepend("<span class='ripple'></span>");
-      
-            // Make it round!
-            if (buttonWidth >= buttonHeight) {
-              buttonHeight = buttonWidth;
-            } else {
-              buttonWidth = buttonHeight;
-            }
-      
-            // Get the center of the element
-            let x = e.pageX - posX - buttonWidth / 2;
-            let y = e.pageY - posY - buttonHeight / 2;
-      
-            // Add the ripples CSS and start the animation
-            $(".ripple")
-              .css({
-                width: buttonWidth,
-                height: buttonHeight,
-                top: y + "px",
-                left: x + "px"
-              })
-              .addClass("rippleEffect");
-          });
-      
-          /* FullScreen */
-      
-          $(document).on("click", ".iq-full-screen", function() {
-            let elem = $(this);
-            if (
-              !document.fullscreenElement &&
-              !document.mozFullScreenElement && // Mozilla
-              !document.webkitFullscreenElement && // Webkit-Browser
-              !document.msFullscreenElement
-            ) {
-              // MS IE ab version 11
-      
-              if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-              } else if (document.documentElement.mozRequestFullScreen) {
-                document.documentElement.mozRequestFullScreen();
-              } else if (document.documentElement.webkitRequestFullscreen) {
-                document.documentElement.webkitRequestFullscreen(
-                  Element.ALLOW_KEYBOARD_INPUT
-                );
-              } else if (document.documentElement.msRequestFullscreen) {
-                document.documentElement.msRequestFullscreen(
-                  Element.ALLOW_KEYBOARD_INPUT
-                );
-              }
-            } else {
-              if (document.cancelFullScreen) {
-                document.cancelFullScreen();
-              } else if (document.mozCancelFullScreen) {
-                document.mozCancelFullScreen();
-              } else if (document.webkitCancelFullScreen) {
-                document.webkitCancelFullScreen();
-              } else if (document.msExitFullscreen) {
-                document.msExitFullscreen();
-              }
-            }
-            elem
-              .find("i")
-              .toggleClass("ri-fullscreen-line")
-              .toggleClass("ri-fullscreen-exit-line");
-          });
+  componentDidMount() {
+    $(window).scroll(function() {
+      if ($(window).scrollTop() >= 75) {
+        $(".iq-top-navbar").addClass("fixed-header");
+      } else {
+        $(".iq-top-navbar").removeClass("fixed-header");
+      }
+    });
 
-        //   search
-        $(document).on("click", function(e) {
-            let myTargetElement = e.target;
-            let selector, mainElement;
-            if (
-              $(myTargetElement).hasClass("search-toggle") ||
-              $(myTargetElement)
-                .parent()
-                .hasClass("search-toggle") ||
-              $(myTargetElement)
-                .parent()
-                .parent()
-                .hasClass("search-toggle")
-            ) {
-              if ($(myTargetElement).hasClass("search-toggle")) {
-                selector = $(myTargetElement).parent();
-                mainElement = $(myTargetElement);
-              } else if (
-                $(myTargetElement)
-                  .parent()
-                  .hasClass("search-toggle")
-              ) {
-                selector = $(myTargetElement)
-                  .parent()
-                  .parent();
-                mainElement = $(myTargetElement).parent();
-              } else if (
-                $(myTargetElement)
-                  .parent()
-                  .parent()
-                  .hasClass("search-toggle")
-              ) {
-                selector = $(myTargetElement)
-                  .parent()
-                  .parent()
-                  .parent();
-                mainElement = $(myTargetElement)
-                  .parent()
-                  .parent();
-              }
-              if (
-                !mainElement.hasClass("active") &&
-                $(".navbar-list li").find(".active")
-              ) {
-                $(".navbar-list li").removeClass("iq-show");
-                $(".navbar-list li .search-toggle").removeClass("active");
-              }
-      
-              selector.toggleClass("iq-show");
-              mainElement.toggleClass("active");
-      
-              e.preventDefault();
-            } else if ($(myTargetElement).is(".search-input")) {
-            } else {
-              $(".navbar-list li").removeClass("iq-show");
-              $(".navbar-list li .search-toggle").removeClass("active");
-            }
-          });
-    }
+    /* Ripple Effect */
+
+    $(document).on("click", ".iq-waves-effect", function(e) {
+      // Remove any old one
+      $(".ripple").remove();
+      // Setup
+      let posX = $(this).offset().left,
+        posY = $(this).offset().top,
+        buttonWidth = $(this).width(),
+        buttonHeight = $(this).height();
+
+      // Add the element
+      $(this).prepend("<span class='ripple'></span>");
+
+      // Make it round!
+      if (buttonWidth >= buttonHeight) {
+        buttonHeight = buttonWidth;
+      } else {
+        buttonWidth = buttonHeight;
+      }
+
+      // Get the center of the element
+      let x = e.pageX - posX - buttonWidth / 2;
+      let y = e.pageY - posY - buttonHeight / 2;
+
+      // Add the ripples CSS and start the animation
+      $(".ripple")
+        .css({
+          width: buttonWidth,
+          height: buttonHeight,
+          top: y + "px",
+          left: x + "px"
+        })
+        .addClass("rippleEffect");
+    });
+
+    /* FullScreen */
+
+    $(document).on("click", ".iq-full-screen", function() {
+      let elem = $(this);
+      if (
+        !document.fullscreenElement &&
+        !document.mozFullScreenElement && // Mozilla
+        !document.webkitFullscreenElement && // Webkit-Browser
+        !document.msFullscreenElement
+      ) {
+        // MS IE ab version 11
+
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
+          document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) {
+          document.documentElement.webkitRequestFullscreen(
+            Element.ALLOW_KEYBOARD_INPUT
+          );
+        } else if (document.documentElement.msRequestFullscreen) {
+          document.documentElement.msRequestFullscreen(
+            Element.ALLOW_KEYBOARD_INPUT
+          );
+        }
+      } else {
+        if (document.cancelFullScreen) {
+          document.cancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+          document.webkitCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+      }
+      elem
+        .find("i")
+        .toggleClass("ri-fullscreen-line")
+        .toggleClass("ri-fullscreen-exit-line");
+    });
+
+    //   search
+    $(document).on("click", function(e) {
+      let myTargetElement = e.target;
+      let selector, mainElement;
+      if (
+        $(myTargetElement).hasClass("search-toggle") ||
+        $(myTargetElement)
+          .parent()
+          .hasClass("search-toggle") ||
+        $(myTargetElement)
+          .parent()
+          .parent()
+          .hasClass("search-toggle")
+      ) {
+        if ($(myTargetElement).hasClass("search-toggle")) {
+          selector = $(myTargetElement).parent();
+          mainElement = $(myTargetElement);
+        } else if (
+          $(myTargetElement)
+            .parent()
+            .hasClass("search-toggle")
+        ) {
+          selector = $(myTargetElement)
+            .parent()
+            .parent();
+          mainElement = $(myTargetElement).parent();
+        } else if (
+          $(myTargetElement)
+            .parent()
+            .parent()
+            .hasClass("search-toggle")
+        ) {
+          selector = $(myTargetElement)
+            .parent()
+            .parent()
+            .parent();
+          mainElement = $(myTargetElement)
+            .parent()
+            .parent();
+        }
+        if (
+          !mainElement.hasClass("active") &&
+          $(".navbar-list li").find(".active")
+        ) {
+          $(".navbar-list li").removeClass("iq-show");
+          $(".navbar-list li .search-toggle").removeClass("active");
+        }
+
+        selector.toggleClass("iq-show");
+        mainElement.toggleClass("active");
+
+        e.preventDefault();
+      } else if ($(myTargetElement).is(".search-input")) {
+      } else {
+        $(".navbar-list li").removeClass("iq-show");
+        $(".navbar-list li .search-toggle").removeClass("active");
+      }
+    });
+  }
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light p-0">
@@ -198,11 +198,10 @@ export default class headerAdmin extends Component {
                     </div>
                     <a href="#" className="iq-sub-card">
                       <div className="media align-items-center">
-                        <div className>
+                        <div>
                           <img
                             className="avatar-40 rounded"
                             src="/assets/images/user/01.jpg"
-                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -216,11 +215,10 @@ export default class headerAdmin extends Component {
                     </a>
                     <a href="#" className="iq-sub-card">
                       <div className="media align-items-center">
-                        <div className>
+                        <div>
                           <img
                             className="avatar-40 rounded"
                             src="images/user/02.jpg"
-                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -234,11 +232,10 @@ export default class headerAdmin extends Component {
                     </a>
                     <a href="#" className="iq-sub-card">
                       <div className="media align-items-center">
-                        <div className>
+                        <div>
                           <img
                             className="avatar-40 rounded"
                             src="images/user/03.jpg"
-                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -252,11 +249,10 @@ export default class headerAdmin extends Component {
                     </a>
                     <a href="#" className="iq-sub-card">
                       <div className="media align-items-center">
-                        <div className>
+                        <div>
                           <img
                             className="avatar-40 rounded"
                             src="images/user/04.jpg"
-                           
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -290,11 +286,10 @@ export default class headerAdmin extends Component {
                     </div>
                     <a href="#" className="iq-sub-card">
                       <div className="media align-items-center">
-                        <div className>
+                        <div>
                           <img
                             className="avatar-40 rounded"
                             src="images/user/01.jpg"
-                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -307,11 +302,10 @@ export default class headerAdmin extends Component {
                     </a>
                     <a href="#" className="iq-sub-card">
                       <div className="media align-items-center">
-                        <div className>
+                        <div>
                           <img
                             className="avatar-40 rounded"
                             src="images/user/02.jpg"
-                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -324,11 +318,10 @@ export default class headerAdmin extends Component {
                     </a>
                     <a href="#" className="iq-sub-card">
                       <div className="media align-items-center">
-                        <div className>
+                        <div>
                           <img
                             className="avatar-40 rounded"
                             src="images/user/03.jpg"
-                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -341,11 +334,10 @@ export default class headerAdmin extends Component {
                     </a>
                     <a href="#" className="iq-sub-card">
                       <div className="media align-items-center">
-                        <div className>
+                        <div>
                           <img
                             className="avatar-40 rounded"
                             src="images/user/04.jpg"
-                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -358,11 +350,10 @@ export default class headerAdmin extends Component {
                     </a>
                     <a href="#" className="iq-sub-card">
                       <div className="media align-items-center">
-                        <div className>
+                        <div>
                           <img
                             className="avatar-40 rounded"
                             src="images/user/05.jpg"
-                            
                           />
                         </div>
                         <div className="media-body ml-3">
@@ -388,7 +379,6 @@ export default class headerAdmin extends Component {
               <img
                 src="/assets/images/user/1.jpg"
                 className="img-fluid rounded mr-3"
-                
               />
               <div className="caption">
                 <h6 className="mb-0 line-height">Bini Jets</h6>

@@ -21,17 +21,6 @@ const Search = props => {
       e.target.id != "tc-s"
         ? $("#tc-content-search").removeClass("show")
         : $("#tc-content-search").addClass("show");
-
-      // if ($("#tc-content-search").has(e.target).length !== 0) {
-      //   $("#tc-content-search").addClass("show");
-      // }
-    });
-
-    $(".autocomplete-suggestion").on("click", function(e) {
-      let dataVal = $(this).attr("data-val");
-      props.getTraCauApi(dataVal);
-      props.getPhuDePhimApi(dataVal);
-      props.getVideoApi(dataVal);
     });
   }, [prevKw, currentKw, props.dataSearch]);
 
@@ -41,6 +30,13 @@ const Search = props => {
         <div
           key={index}
           dangerouslySetInnerHTML={{ __html: item.fields.shorttext }}
+          onClick={() => {
+            props.getTraCauApi(item.fields.word);
+            props.getPhuDePhimApi(item.fields.word);
+            props.getVideoApi(item.fields.word);
+            props.saveWord(item.fields.word);
+            $("#tc-s")[0].value = item.fields.word;
+          }}
         ></div>
       );
     });
@@ -57,6 +53,14 @@ const Search = props => {
     }, 500);
   };
 
+  const handleOnSubmit = e => {
+    e.preventDefault();
+    props.getTraCauApi($("#tc-s")[0].value);
+    props.getPhuDePhimApi($("#tc-s")[0].value);
+    props.getVideoApi($("#tc-s")[0].value);
+    props.saveWord($("#tc-s")[0].value);
+  };
+
   return (
     <section className="search-section home-search">
       <div className="masthead text-center">
@@ -70,7 +74,11 @@ const Search = props => {
                     className="tc-header-title"
                     style={{ display: "none" }}
                   />
-                  <form id="tc-search-form" className="tc-search">
+                  <form
+                    id="tc-search-form"
+                    className="tc-search"
+                    onSubmit={handleOnSubmit}
+                  >
                     <span className="tc-search-textboxwrap">
                       <input
                         id="tc-s"
@@ -123,6 +131,9 @@ const mapDispatchToProps = dispatch => {
   return {
     getDataSearchApi: data => {
       dispatch(action.getDataSearchApi(data));
+    },
+    saveWord: word => {
+      dispatch(action.saveWord(word));
     },
     getTraCauApi: data => {
       dispatch(action.getTraCauApi(data));

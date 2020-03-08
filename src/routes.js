@@ -5,12 +5,9 @@ import API from "./page/home/API";
 import BoSung from "./page/home/BoSung";
 import LienHe from "./page/home/LienHe";
 import Dashboard from "./page/admin/Dashboard/Dashboard";
-import User from "./page/admin/user/user";
+import MoviesAdmin from "./page/admin/MoviesAdmin/MoviesAdmin";
 import Website from "./page/admin/website/website";
 import Add_movie from "./page/admin/add_movie/add_movie";
-
-
-
 
 const routesHome = [
   {
@@ -54,21 +51,20 @@ const routesAdmin = [
     component: Dashboard
   },
   {
-    path:"/admin-User",
+    path: "/movies",
     exact: false,
-    component: User
+    component: MoviesAdmin
   },
   {
-    path:"/admin-website",
-    exact:false,
-    component:Website
+    path: "/admin-website",
+    exact: false,
+    component: Website
   },
   {
-    path:"/add-movie",
-    exact:false,
-    component:Add_movie
-  },
+    path: "/add-movie",
+    exact: false,
+    component: Add_movie
+  }
 ];
 
 export { routesAdmin };
-

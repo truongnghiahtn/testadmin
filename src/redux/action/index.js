@@ -1,5 +1,8 @@
 import * as Actiontype from "./../constants/actionType";
 import { CallAPI } from "../../utils/callApi";
+import swal from "sweetalert";
+import Axios from "axios";
+
 export const getDataSearchApi = data => {
   return dispatch => {
     if (data) {
@@ -58,11 +61,160 @@ export const getVideoApi = data => {
       .then(rs => {
         dispatch({
           type: Actiontype.GET_VIDEO_API,
-          video: rs.data
+          video: rs.data.transcripts
         });
       })
       .catch(err => {
         console.log(err);
       });
+  };
+};
+
+//Movies Admin
+export const getMoviesApiDevfast = () => {
+  return dispatch => {
+    Axios({
+      method: "GET",
+      url: "http://apitracau.devfast.net/movies"
+    })
+      .then(res =>
+        dispatch({
+          type: Actiontype.GET_MOVIES_API_DEVFAST,
+          dataMovies: res.data
+        })
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
+export const addMoviesApiDevfast = data => {
+  return dispatch => {
+    Axios({
+      method: "POST",
+      url: "http://apitracau.devfast.net/movies",
+      data: data
+    })
+      .then(res => {
+        swal({
+          title: "Good job!",
+          text: `${res.statusText}!`,
+          icon: "success",
+          buttons: false,
+          timer: 1500
+        });
+        dispatch({
+          type: Actiontype.ADD_MOVIES_API_DEVFAST,
+          movie: res.data
+        });
+      })
+      .catch(err => {
+        setTimeout(() => {
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.error} !`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+        console.log(err);
+      });
+  };
+};
+
+export const actOnEditMovie = () => {
+  return dispatch => {
+    dispatch({ type: Actiontype.EDIT_MOVIE, movie: null });
+  };
+};
+
+export const actGetEditMovie = data => {
+  return dispatch => {
+    dispatch({ type: Actiontype.GET_EDIT_MOVIE, movie: data });
+  };
+};
+
+export const actEditMovieAPI = data => {
+  return dispatch => {
+    Axios({
+      method: "PUT",
+      url: `http://apitracau.devfast.net/movies/${data.id}`,
+      data: data
+    })
+      .then(res => {
+        setTimeout(() => {
+          swal({
+            title: "Good job!",
+            text: `${res.statusText}!`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+        dispatch(
+          {
+            type: Actiontype.EDIT_MOVIES_API_DEVFAST,
+            movie: res.data
+          },
+          console.log(res)
+        );
+      })
+      .catch(err => {
+        setTimeout(() => {
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.error} !`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+      });
+  };
+};
+
+export const actDelMovieAPI = id => {
+  return dispatch => {
+    Axios({
+      method: "DELETE",
+      url: `http://apitracau.devfast.net/movies/${id}`
+    })
+      .then(res => {
+        setTimeout(() => {
+          swal({
+            title: "Good job!",
+            text: `${res.statusText}!`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+        dispatch({
+          type: Actiontype.DEL_MOVIES_API_DEVFAST,
+          idMovie: res.data.data._id
+        });
+      })
+      .catch(err => {
+        setTimeout(() => {
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.error} !`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+      });
+  };
+};
+
+export const saveWord = word => {
+  return dispatch => {
+    dispatch({
+      type: Actiontype.SAVE_WORD,
+      word
+    });
   };
 };

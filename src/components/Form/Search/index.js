@@ -16,14 +16,22 @@ const Search = props => {
     } else {
       $("#tc-content-search").removeClass("show");
     }
+
     $(document).on("click", function(e) {
       e.target.id != "tc-s"
         ? $("#tc-content-search").removeClass("show")
         : $("#tc-content-search").addClass("show");
 
-      if ($("#tc-content-search").has(e.target).length !== 0) {
-        $("#tc-content-search").addClass("show");
-      }
+      // if ($("#tc-content-search").has(e.target).length !== 0) {
+      //   $("#tc-content-search").addClass("show");
+      // }
+    });
+
+    $(".autocomplete-suggestion").on("click", function(e) {
+      let dataVal = $(this).attr("data-val");
+      props.getTraCauApi(dataVal);
+      props.getPhuDePhimApi(dataVal);
+      props.getVideoApi(dataVal);
     });
   }, [prevKw, currentKw, props.dataSearch]);
 
@@ -115,6 +123,15 @@ const mapDispatchToProps = dispatch => {
   return {
     getDataSearchApi: data => {
       dispatch(action.getDataSearchApi(data));
+    },
+    getTraCauApi: data => {
+      dispatch(action.getTraCauApi(data));
+    },
+    getPhuDePhimApi: data => {
+      dispatch(action.getPhuDePhimApi(data));
+    },
+    getVideoApi: data => {
+      dispatch(action.getVideoApi(data));
     }
   };
 };

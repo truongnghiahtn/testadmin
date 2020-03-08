@@ -19,8 +19,10 @@ const deMoReducer = (state = initialState, action) => {
       state.word = action.word;
       return { ...state };
     case ActionType.GET_TRA_CAU_API:
-      state.traCau = action.traCau.sentences;
-      state.traTu = action.traCau.tratu[0].fields.fulltext
+      state.traCau = action.traCau;
+      return { ...state };
+    case ActionType.GET_TRA_TU_API:
+      state.traTu = action.traTu.fields.fulltext
         .split("</article>")
         .map(item => item + "</article>");
       state.traTu.splice(state.traTu.length - 1, state.traTu.length);

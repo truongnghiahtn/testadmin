@@ -2,7 +2,8 @@ import * as ActionType from "../constants/actionType";
 
 let initialState = {
   dataSearch: [],
-  traCau: {},
+  traCau: [],
+  traTu: [],
   phuDePhim: {},
   video: {}
 };
@@ -12,7 +13,11 @@ const deMoReducer = (state = initialState, action) => {
       state.dataSearch = action.dataSearch;
       return { ...state };
     case ActionType.GET_TRA_CAU_API:
-      state.traCau = action.traCau;
+      state.traCau = action.traCau.sentences;
+      state.traTu = action.traCau.tratu[0].fields.fulltext
+        .split("</article>")
+        .map(item => item + "</article>");
+      state.traTu.splice(state.traTu.length - 1, state.traTu.length);
       return { ...state };
     case ActionType.GET_PHU_DE_PHIM_API:
       state.phuDePhim = action.phuDePhim;

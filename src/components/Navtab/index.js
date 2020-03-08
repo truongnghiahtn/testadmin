@@ -7,9 +7,14 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import TraCau from "../TabContent/TraCau";
-import TraTu from "../TabContent/TraTu";
 import PhuDePhim from "../TabContent/PhuDePhim";
 import Video from "../TabContent/Video";
+import AnhViet from "../TabContent/AnhViet";
+import NguPhap from "../TabContent/NguPhap";
+import ChuyenNganh from "../TabContent/ChuyenNganh";
+import VietViet from "../TabContent/VietViet";
+import AnhANh from "../TabContent/AnhAnh";
+import { connect } from "react-redux";
 import "./style.scss";
 
 function TabPanel(props) {
@@ -58,20 +63,73 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Navtab() {
-  const data = [
-    { id: "tracau", name: "tra câu", content: "", Component: TraCau },
-    { id: "tratu", name: "tra từ", content: "", Component: TraTu },
-    { id: "phude", name: "phu đề phim", content: "", Component: PhuDePhim },
-    { id: "video", name: "video", content: "", Component: Video },
-    { id: "hinhanh", name: "hình ảnh", content: "" },
-    { id: "amnhac", name: "âm nhạc", content: "" },
-    { id: "hoathinh", name: "hoạt hình", content: "" },
-    { id: "tamsu", name: "tâm sự", content: "" }
-  ];
-
+function Navtab(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(data[0].id);
+  const [data, setData] = React.useState([
+    {
+      id: "tracau",
+      name: "Tra Câu",
+      Component: TraCau,
+      status: true,
+      content: ""
+    },
+    {
+      id: "dict_ev",
+      name: "Anh Việt",
+      Component: AnhViet,
+      status: false,
+      content: ""
+    },
+    {
+      id: "dict_np",
+      name: "Ngữ Pháp",
+      Component: NguPhap,
+      status: false,
+      content: ""
+    },
+    {
+      id: "dict_di",
+      name: "Chuyên Ngành",
+      Component: ChuyenNganh,
+      status: false,
+      content: ""
+    },
+    {
+      id: "dict_vv",
+      name: "Việt Việt",
+      Component: VietViet,
+      status: false,
+      content: ""
+    },
+    {
+      id: "dict_aa",
+      name: "Anh Anh",
+      Component: AnhANh,
+      status: false,
+      content: ""
+    },
+    {
+      id: "phude",
+      name: "Phụ Đề",
+      Component: PhuDePhim,
+      status: true,
+      content: ""
+    },
+    { id: "video", name: "Video", Component: Video, status: true, content: "" }
+  ]);
+  const [value, setValue] = React.useState("tracau");
+
+  React.useEffect(() => {
+    console.log(data);
+    props.traTu.map((item, index) => {
+      if (item.includes(data[index + 1].id)) {
+        let dataNew = [...data];
+        dataNew[index + 1].status = item.includes(dataNew[index + 1].id);
+        dataNew[index + 1].content = item;
+        setData(dataNew);
+      }
+    });
+  }, [value, props]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -79,23 +137,27 @@ export default function Navtab() {
 
   const renderTab = () => {
     return data.map((item, index) => {
-      return (
+      return item.status ? (
         <Tab
           value={item.id}
           label={item.name}
           key={index}
           {...a11yProps(`${item.id}`)}
         />
+      ) : (
+        ""
       );
     });
   };
 
   const renderTabPanel = () => {
     return data.map((item, index) => {
-      return (
+      return item.status ? (
         <TabPanel value={value} index={item.id} key={index}>
-          {item.Component ? <item.Component /> : ""}
+          {item.Component ? <item.Component content={item.content} /> : ""}
         </TabPanel>
+      ) : (
+        ""
       );
     });
   };
@@ -106,7 +168,6 @@ export default function Navtab() {
         <Tabs
           value={value}
           onChange={handleChange}
-          /*           indicatorColor="stan" */
           textColor="primary"
           variant="scrollable"
           scrollButtons="on"
@@ -119,3 +180,9 @@ export default function Navtab() {
     </div>
   );
 }
+const mapStateToProps = state => {
+  return {
+    traTu: state.deMoReducer.traTu
+  };
+};
+export default connect(mapStateToProps, null)(Navtab);

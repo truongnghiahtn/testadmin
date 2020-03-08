@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { withRouter, NavLink } from "react-router-dom";
+import "./style.scss";
 const $ = window.jQuery;
+
 export default class sidebarAdmin extends Component {
   componentDidMount() {
     /*---------------------------------------------------------------------
@@ -24,56 +26,27 @@ export default class sidebarAdmin extends Component {
       $("body").toggleClass("sidebar-main");
     });
 
-    /* Sidebar Widget */
-
-    function checkClass(ele, type, className) {
-      switch (type) {
-        case "addClass":
-          if (!ele.hasClass(className)) {
-            ele.addClass(className);
-          }
-          break;
-        case "removeClass":
-          if (ele.hasClass(className)) {
-            ele.removeClass(className);
-          }
-          break;
-        case "toggleClass":
-          ele.toggleClass(className);
-          break;
-        default:
-          break;
+    $("#btn1").on("click", function() {
+      if ($("#collapseOne").hasClass("show")) {
+        setTimeout(() => {
+          $("#menu1").removeClass("menu-open");
+        }, 300);
+      } else {
+        $("#menu1").addClass("menu-open");
       }
-    }
-    $(".iq-sidebar-menu .active").each(function(ele, index) {
-      $(this)
-        .find(".iq-submenu")
-        .parent()
-        .addClass("menu-open");
-      $(this)
-        .find(".iq-submenu")
-        .addClass("menu-open");
     });
-    $(document).on("click", ".iq-sidebar-menu li", function() {
-      if ($(this).hasClass("menu-open")) {
-        $(this)
-          .find(".iq-submenu")
-          .slideUp("slow");
-        checkClass($(this), "removeClass", "menu-open");
-        if (!$(this).find(".iq-submenu.menu-open .menu-open").length) {
-          checkClass($(this).find(".menu-open"), "removeClass", "menu-open");
-        } else {
-          checkClass($(this).find(".iq-submenu"), "removeClass", "menu-open");
-        }
-      } else if ($(this).find(".iq-submenu").length) {
-        $(this)
-          .find(".iq-submenu")
-          .slideDown("slow");
-        checkClass($(this), "addClass", "menu-open");
-        checkClass($(this).find(".iq-submenu"), "addClass", "menu-open");
+
+    $("#btn2").on("click", function() {
+      if ($("#collapseTwo").hasClass("show")) {
+        setTimeout(() => {
+          $("#menu2").removeClass("menu-open");
+        }, 300);
+      } else {
+        $("#menu2").addClass("menu-open");
       }
     });
   }
+
   render() {
     return (
       <div className="iq-sidebar">
@@ -128,13 +101,19 @@ export default class sidebarAdmin extends Component {
                   <span>Website</span>
                 </NavLink>
               </li>
-              <li className>
-                <a href="#" className="iq-waves-effect">
+              <li id="menu1">
+                <a
+                  href="#"
+                  className="iq-waves-effect collapsed"
+                  data-toggle="collapse"
+                  data-target="#collapseOne"
+                  id="btn1"
+                >
                   <i className="fa fa-address-card" aria-hidden="true"></i>
                   <span>Khách hàng</span>
                   <i className="ri-arrow-right-s-line iq-arrow-right" />
                 </a>
-                <ul className="iq-submenu">
+                <ul className="iq-submenu collapse" id="collapseOne">
                   <li>
                     <a href="#">
                       <i className="fa fa-id-badge" aria-hidden="true" />
@@ -149,13 +128,19 @@ export default class sidebarAdmin extends Component {
                   </li>
                 </ul>
               </li>
-              <li className>
-                <a href="#" className="iq-waves-effect">
+              <li id="menu2">
+                <a
+                  href="#"
+                  className="iq-waves-effect collapsed"
+                  data-toggle="collapse"
+                  data-target="#collapseTwo"
+                  id="btn2"
+                >
                   <i className="fa fa-language" aria-hidden="true" />
                   <span>Ngôn ngữ</span>
                   <i className="ri-arrow-right-s-line iq-arrow-right" />
                 </a>
-                <ul className="iq-submenu">
+                <ul className="iq-submenu collapse" id="collapseTwo">
                   <li>
                     <a href="english.html">
                       <i className="fa fa-flag-checkered" aria-hidden="true" />

@@ -5,7 +5,6 @@ export const CallAPI = (uri, method = "GET", body, headers) => {
   return Axios({
     method,
     url: `${api}/${uri}`,
-    data: body,
-    headers
+    data: body
   });
 };

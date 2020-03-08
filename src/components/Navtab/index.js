@@ -6,7 +6,12 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import TraCau from "../TabContent/TraCau";
+import TraTu from "../TabContent/TraTu";
+import PhuDePhim from "../TabContent/PhuDePhim";
+import Video from "../TabContent/Video";
 import "./style.scss";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -48,10 +53,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function Navtab() {
   const data = [
-    { id: "tracau", name: "tra câu", content: "" },
-    { id: "tratu", name: "tra từ", content: "" },
-    { id: "phude", name: "phu đề phim", content: "" },
-    { id: "video", name: "video", content: "" },
+    { id: "tracau", name: "tra câu", content: "", Component: TraCau },
+    { id: "tratu", name: "tra từ", content: "", Component: TraTu },
+    { id: "phude", name: "phu đề phim", content: "", Component: PhuDePhim },
+    { id: "video", name: "video", content: "", Component: Video },
     { id: "hinhanh", name: "hình ảnh", content: "" },
     { id: "amnhac", name: "âm nhạc", content: "" },
     { id: "hoathinh", name: "hoạt hình", content: "" },
@@ -82,7 +87,7 @@ export default function Navtab() {
     return data.map((item, index) => {
       return (
         <TabPanel value={value} index={item.id} key={index}>
-          <h3>{item.name}</h3>
+          {item.Component ? <item.Component /> : ""}
         </TabPanel>
       );
     });

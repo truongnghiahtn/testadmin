@@ -232,7 +232,7 @@ const HeaderAdmin = () => {
                           <div>
                             <img
                               className="avatar-40 rounded"
-                              src="images/user/02.jpg"
+                              src="/assets/images/user/02.jpg"
                             />
                           </div>
                           <div className="media-body ml-3">
@@ -249,7 +249,7 @@ const HeaderAdmin = () => {
                           <div>
                             <img
                               className="avatar-40 rounded"
-                              src="images/user/03.jpg"
+                              src="/assets/images/user/03.jpg"
                             />
                           </div>
                           <div className="media-body ml-3">
@@ -266,7 +266,7 @@ const HeaderAdmin = () => {
                           <div>
                             <img
                               className="avatar-40 rounded"
-                              src="images/user/04.jpg"
+                              src="/assets/images/user/04.jpg"
                             />
                           </div>
                           <div className="media-body ml-3">
@@ -303,7 +303,7 @@ const HeaderAdmin = () => {
                           <div>
                             <img
                               className="avatar-40 rounded"
-                              src="images/user/01.jpg"
+                              src="/assets/images/user/01.jpg"
                             />
                           </div>
                           <div className="media-body ml-3">
@@ -319,7 +319,7 @@ const HeaderAdmin = () => {
                           <div>
                             <img
                               className="avatar-40 rounded"
-                              src="images/user/02.jpg"
+                              src="/assets/images/user/02.jpg"
                             />
                           </div>
                           <div className="media-body ml-3">
@@ -335,7 +335,7 @@ const HeaderAdmin = () => {
                           <div>
                             <img
                               className="avatar-40 rounded"
-                              src="images/user/03.jpg"
+                              src="/assets/images/user/03.jpg"
                             />
                           </div>
                           <div className="media-body ml-3">
@@ -351,7 +351,7 @@ const HeaderAdmin = () => {
                           <div>
                             <img
                               className="avatar-40 rounded"
-                              src="images/user/04.jpg"
+                              src="/assets/images/user/04.jpg"
                             />
                           </div>
                           <div className="media-body ml-3">
@@ -367,7 +367,7 @@ const HeaderAdmin = () => {
                           <div>
                             <img
                               className="avatar-40 rounded"
-                              src="images/user/05.jpg"
+                              src="/assets/images/user/05.jpg"
                             />
                           </div>
                           <div className="media-body ml-3">

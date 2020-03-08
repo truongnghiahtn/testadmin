@@ -11,6 +11,7 @@ import PhuDePhim from "../TabContent/PhuDePhim";
 import Video from "../TabContent/Video";
 import AnhViet from "../TabContent/AnhViet";
 import NguPhap from "../TabContent/NguPhap";
+import DongNghia from "../TabContent/DongNghia";
 import ChuyenNganh from "../TabContent/ChuyenNganh";
 import VietViet from "../TabContent/VietViet";
 import VietAnh from "../TabContent/VietAnh";
@@ -90,6 +91,13 @@ function Navtab(props) {
       content: ""
     },
     {
+      id: "dict_th",
+      name: "Đồng nghĩa",
+      Component: DongNghia,
+      status: false,
+      content: ""
+    },
+    {
       id: "dict_di",
       name: "Chuyên ngành",
       Component: ChuyenNganh,
@@ -97,16 +105,16 @@ function Navtab(props) {
       content: ""
     },
     {
-      id: "dict_vv",
-      name: "Việt - Việt",
-      Component: VietViet,
+      id: "dict_ve",
+      name: "Việt - Anh",
+      Component: VietAnh,
       status: false,
       content: ""
     },
     {
-      id: "dict_ve",
-      name: "Việt - Anh",
-      Component: VietAnh,
+      id: "dict_vv",
+      name: "Việt - Việt",
+      Component: VietViet,
       status: false,
       content: ""
     },

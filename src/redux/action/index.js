@@ -7,7 +7,7 @@ import Axios from "axios";
 export const getDataSearchApi = data => {
   return dispatch => {
     if (data) {
-      CallAPI(`suggest/${data}`, "GET", null, null, apiDevFast)
+      CallAPI(`suggest/${data}`)
         .then(rs => {
           dispatch({
             type: Actiontype.GET_DATA_SEARCH,
@@ -28,7 +28,7 @@ export const getDataSearchApi = data => {
 
 export const getTraCauApi = data => {
   return dispatch => {
-    CallAPI(`sentence/${data}/en`, "GET", null, null, apiDevFast)
+    CallAPI(`sentence/${data}/en`)
       .then(rs => {
         dispatch({
           type: Actiontype.GET_TRA_CAU_API,
@@ -42,7 +42,7 @@ export const getTraCauApi = data => {
 };
 export const getTraTuApi = data => {
   return dispatch => {
-    CallAPI(`sentence/${data}/en`, "GET", null, null, apiDevFast)
+    CallAPI(`sentence/${data}/en`)
       .then(rs => {
         dispatch({
           type: Actiontype.GET_TRA_TU_API,
@@ -57,7 +57,7 @@ export const getTraTuApi = data => {
 
 export const getPhuDePhimApi = data => {
   return dispatch => {
-    CallAPI(`WBBcwnwQpV89/sub/${data}/en`)
+    CallAPI(`subtitle/${data}/en`)
       .then(rs => {
         dispatch({
           type: Actiontype.GET_PHU_DE_PHIM_API,
@@ -72,7 +72,7 @@ export const getPhuDePhimApi = data => {
 
 export const getVideoApi = data => {
   return dispatch => {
-    CallAPI(`WBBcwnwQpV89/trans/${data}`)
+    CallAPI(`video/${data}`)
       .then(rs => {
         dispatch({
           type: Actiontype.GET_VIDEO_API,

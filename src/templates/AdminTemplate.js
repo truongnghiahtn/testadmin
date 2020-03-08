@@ -1,13 +1,11 @@
 import React, { Fragment } from "react";
 import { Route, Redirect } from "react-router-dom";
-import Sidebar from "./../components/sidebarAdmin/sidebarAdmin";
 import Loader from "./../components/Loader/index";
 const Adminlayout = props => {
   return (
     <Fragment>
       <div className="wrapper">
         <Loader />
-        <Sidebar />
         {props.children}
       </div>
     </Fragment>

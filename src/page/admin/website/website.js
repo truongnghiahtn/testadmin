@@ -3,6 +3,7 @@ import HeaderAdmin from "./../../../components/headerAdmin/headerAdmin";
 import ReactSummernote from "react-summernote";
 import "react-summernote/dist/react-summernote.css"; // import styles
 import "react-summernote/lang/summernote-ru-RU"; // you can import any other locale
+import Navbaradmin from "./../../../components/sidebarAdmin/sidebarAdmin"
 
 export default class website extends Component {
   onChange(content) {
@@ -32,6 +33,8 @@ export default class website extends Component {
 
   render() {
     return (
+      <div className="wrapper">
+            <Navbaradmin/>
       <div id="content-page" className="content-page">
         {/* TOP Nav Bar */}
         <div className="iq-top-navbar">
@@ -266,6 +269,7 @@ export default class website extends Component {
           </div>
         </footer>
         {/* Footer END */}
+      </div>
       </div>
     );
   }

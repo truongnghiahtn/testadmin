@@ -61,7 +61,7 @@ export const getVideoApi = data => {
       .then(rs => {
         dispatch({
           type: Actiontype.GET_VIDEO_API,
-          video: rs.data
+          video: rs.data.transcripts
         });
       })
       .catch(err => {
@@ -207,5 +207,14 @@ export const actDelMovieAPI = id => {
           });
         }, 150);
       });
+  };
+};
+
+export const saveWord = word => {
+  return dispatch => {
+    dispatch({
+      type: Actiontype.SAVE_WORD,
+      word
+    });
   };
 };

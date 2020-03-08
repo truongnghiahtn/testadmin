@@ -47,7 +47,7 @@ class MoviesAdmin extends Component {
       if (index % 10 === 0) {
         numberPage++;
         return (
-          <li className="page-item active">
+          <li className="page-item active" key={index}>
             <a className="page-link" href="#">
               {numberPage}
             </a>

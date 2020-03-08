@@ -1,1 +1,1 @@
-export const api = "http://apitracau.devfast.net";
+export const api = "https://api.tracau.vn";

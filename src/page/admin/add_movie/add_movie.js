@@ -120,6 +120,30 @@ export default class add_movie extends Component {
                         <div className="form-group">
                           <div className="form-row">
                             <div className="col">
+                              <label>Tiêu đề phim</label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="form-group">
+                          <div className="form-row">
+                            <div className="col">
+                              <label>Tiêu đề</label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="form-group">
+                          <div className="form-row">
+                            <div className="col">
                               <label>Tiêu đề</label>
                               <input
                                 type="text"

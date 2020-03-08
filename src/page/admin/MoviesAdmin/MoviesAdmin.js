@@ -71,7 +71,7 @@ class MoviesAdmin extends Component {
                       aria-hidden="true"
                       style={{ marginRight: 10 }}
                     />
-                    Movie
+                    Phim
                   </h4>
                 </div>
                 <span
@@ -85,7 +85,7 @@ class MoviesAdmin extends Component {
                     onClick={() => this.props.onEditMovie()}
                   >
                     <i className="ri-add-fill">
-                      <span className="pl-1">Thêm movie</span>
+                      <span className="pl-1">Thêm phim</span>
                     </i>
                   </button>
                 </span>
@@ -99,11 +99,11 @@ class MoviesAdmin extends Component {
                     <thead>
                       <tr>
                         <th>STT</th>
-                        <th>Tiêu đề</th>
-                        <th>Nội dung</th>
+                        <th>Tên phim</th>
+                        <th>Phụ đề phim</th>
                         <th>Hình ảnh</th>
-                        <th>English</th>
-                        <th>Vietnamese</th>
+                        <th>EN</th>
+                        <th>VN</th>
                       </tr>
                     </thead>
                     <tbody>{this.renderTbody()}</tbody>

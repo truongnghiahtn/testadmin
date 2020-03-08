@@ -4,6 +4,20 @@ import * as action from "../../../redux/action/index";
 import ReactSummernote from "react-summernote";
 import "react-summernote/dist/react-summernote.css"; // import styles
 import "react-summernote/lang/summernote-ru-RU"; // you can import any other locale
+// Import React FilePond
+import { FilePond, registerPlugin } from "react-filepond";
+
+// Import FilePond styles
+import "filepond/dist/filepond.min.css";
+
+// Import the Image EXIF Orientation and Image Preview plugins
+// Note: These need to be installed separately
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+
+// Register the plugins
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 class childModalMovies extends Component {
   constructor(props) {
@@ -76,15 +90,11 @@ class childModalMovies extends Component {
     let { name, value } = event.target;
     let message = value === "" ? "Do not be empty" : "";
     let {
-      imageValid,
       titleValid,
       english_meaningValid,
       Vietnamese_meaningValid
     } = this.state;
     switch (name) {
-      case "image":
-        imageValid = message !== "" ? false : true;
-        break;
       case "title":
         titleValid = message !== "" ? false : true;
         break;
@@ -104,7 +114,6 @@ class childModalMovies extends Component {
     this.setState(
       {
         errors: { ...this.state.errors, [name]: message },
-        imageValid,
         titleValid,
         english_meaningValid,
         Vietnamese_meaningValid
@@ -195,9 +204,9 @@ class childModalMovies extends Component {
       <div>
         <div className="modal-header">
           {this.props.editInfoMovie === null ? (
-            <h5 className="modal-title">ADD MOVIE</h5>
+            <h5 className="modal-title">Thêm phim</h5>
           ) : (
-            <h5 className="modal-title">EDIT MOVIE</h5>
+            <h5 className="modal-title">Sửa phim</h5>
           )}
           <button
             type="button"
@@ -211,12 +220,12 @@ class childModalMovies extends Component {
         <div className="modal-body">
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <label>
-                Tiêu đề
+              <label style={{ width: "100%" }}>
+                Tên phim
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Tiêu đề"
+                  placeholder="Tên phim"
                   onChange={this.handleOnchange}
                   onBlur={this.handleErrors}
                   onKeyUp={this.handleErrors}
@@ -232,19 +241,111 @@ class childModalMovies extends Component {
                 ""
               )}
             </div>
+
+            <div className="row">
+              <div className="col">
+                <div className="form-group">
+                  <label style={{ width: "100%" }}>
+                    EN
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="English"
+                      onChange={this.handleOnchange}
+                      onBlur={this.handleErrors}
+                      onKeyUp={this.handleErrors}
+                      name="english_meaning"
+                      value={
+                        this.state.values.english_meaning
+                          ? this.state.values.english_meaning
+                          : ""
+                      }
+                    />
+                  </label>
+                  {this.state.errors.english_meaning !== "" ? (
+                    <div className="Form_err errform">
+                      (*) {this.state.errors.english_meaning}
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+              <div className="col">
+                <div className="form-group">
+                  <label style={{ width: "100%" }}>
+                    VN
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Vietnamese"
+                      onChange={this.handleOnchange}
+                      onBlur={this.handleErrors}
+                      onKeyUp={this.handleErrors}
+                      name="Vietnamese_meaning"
+                      value={
+                        this.state.values.Vietnamese_meaning
+                          ? this.state.values.Vietnamese_meaning
+                          : ""
+                      }
+                    />
+                  </label>
+                  {this.state.errors.Vietnamese_meaning !== "" ? (
+                    <div className="Form_err errform">
+                      (*) {this.state.errors.Vietnamese_meaning}
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <FilePond
+              ref={ref => (this.pond = ref)}
+              files={this.state.values.image}
+              allowMultiple={true}
+              maxFiles={1}
+              server="https://tracau.vn/resources/posters/thumbnails"
+              onupdatefiles={fileItems => {
+                // Set currently active file objects to this.state
+                console.log(fileItems);
+
+                this.setState(
+                  {
+                    values: {
+                      ...this.state.values,
+                      image: fileItems.length ? fileItems[0].file.name : ""
+                    },
+                    imageValid: true
+                  },
+                  () => {
+                    this.FormValidation();
+                  }
+                );
+              }}
+            />
+            {this.state.errors.image !== "" ? (
+              <div className="Form_err errform">
+                (*) {this.state.errors.image}
+              </div>
+            ) : (
+              ""
+            )}
+
             <div className="form-group">
               <div className="form-row">
                 <div className="col">
-                  <label>Nội dung</label>
+                  <label>Phụ đề phim</label>
                   <ReactSummernote
                     value={
                       this.state.values.content ? this.state.values.content : ""
                     }
-                    defaultValue="content"
+                    defaultValue=""
                     name="content"
                     options={{
                       lang: "ru-RU",
-                      height: 150,
+                      height: 200,
                       dialogsInBody: true,
                       value: "asdasd",
                       toolbar: [
@@ -267,95 +368,6 @@ class childModalMovies extends Component {
               {this.state.errors.content !== "" ? (
                 <div className="Form_err errform">
                   (*) {this.state.errors.content}
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
-
-            {/*            <nav aria-label="Page navigation example">
-              <ul className="pagination justify-content-end">
-                <button
-                  type="reset"
-                  className="btn iq-bg-danger"
-                  style={{ marginRight: 10 }}
-                >
-                  Cancel
-                </button>
-                <button type="submit" className="btn btn-primary">
-                  Submit
-                </button>
-              </ul>
-            </nav> */}
-            <div className="form-group m-0">
-              <label>
-                Hình ảnh
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Hình ảnh"
-                  onChange={this.handleOnchange}
-                  onBlur={this.handleErrors}
-                  onKeyUp={this.handleErrors}
-                  name="image"
-                  value={this.state.values.image ? this.state.values.image : ""}
-                />
-              </label>
-              {this.state.errors.image !== "" ? (
-                <div className="Form_err errform">
-                  (*) {this.state.errors.image}
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="form-group m-0">
-              <label>
-                English
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="English"
-                  onChange={this.handleOnchange}
-                  onBlur={this.handleErrors}
-                  onKeyUp={this.handleErrors}
-                  name="english_meaning"
-                  value={
-                    this.state.values.english_meaning
-                      ? this.state.values.english_meaning
-                      : ""
-                  }
-                />
-              </label>
-              {this.state.errors.english_meaning !== "" ? (
-                <div className="Form_err errform">
-                  (*) {this.state.errors.english_meaning}
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="form-group m-0">
-              <label>
-                Vietnamese
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Vietnamese"
-                  onChange={this.handleOnchange}
-                  onBlur={this.handleErrors}
-                  onKeyUp={this.handleErrors}
-                  name="Vietnamese_meaning"
-                  value={
-                    this.state.values.Vietnamese_meaning
-                      ? this.state.values.Vietnamese_meaning
-                      : ""
-                  }
-                />
-              </label>
-              {this.state.errors.Vietnamese_meaning !== "" ? (
-                <div className="Form_err errform">
-                  (*) {this.state.errors.Vietnamese_meaning}
                 </div>
               ) : (
                 ""
@@ -388,13 +400,26 @@ class childModalMovies extends Component {
                 </div>
               </React.Fragment>
             )}
-            <button
-              type="submit"
-              className="btn btn-success mt-4"
-              disabled={!this.state.formValid}
-            >
-              Submit
-            </button>
+
+            <nav aria-label="Page navigation example">
+              <ul className="pagination justify-content-end">
+                <button
+                  type="reset"
+                  className="btn iq-bg-danger"
+                  style={{ marginRight: 10 }}
+                  data-dismiss="modal"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={!this.state.formValid}
+                >
+                  Submit
+                </button>
+              </ul>
+            </nav>
           </form>
         </div>
       </div>

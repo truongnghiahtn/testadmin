@@ -88,10 +88,11 @@ export const getVideoApi = data => {
 //Movies Admin
 export const getMoviesApiDevfast = () => {
   return dispatch => {
-    Axios({
+    /*     Axios({
       method: "GET",
       url: "http://apitracau.devfast.net/movies"
-    })
+    }) */
+    CallAPI("movies", "GET", null, null, apiDevFast)
       .then(res =>
         dispatch({
           type: Actiontype.GET_MOVIES_API_DEVFAST,
@@ -106,11 +107,7 @@ export const getMoviesApiDevfast = () => {
 
 export const addMoviesApiDevfast = data => {
   return dispatch => {
-    Axios({
-      method: "POST",
-      url: "http://apitracau.devfast.net/movies",
-      data: data
-    })
+    CallAPI("movies", "POST", data, null, apiDevFast)
       .then(res => {
         swal({
           title: "Good job!",
@@ -153,11 +150,7 @@ export const actGetEditMovie = data => {
 
 export const actEditMovieAPI = data => {
   return dispatch => {
-    Axios({
-      method: "PUT",
-      url: `http://apitracau.devfast.net/movies/${data.id}`,
-      data: data
-    })
+    CallAPI(`movies/${data.id}`, "PUT", data, null, apiDevFast)
       .then(res => {
         setTimeout(() => {
           swal({
@@ -192,10 +185,7 @@ export const actEditMovieAPI = data => {
 
 export const actDelMovieAPI = id => {
   return dispatch => {
-    Axios({
-      method: "DELETE",
-      url: `http://apitracau.devfast.net/movies/${id}`
-    })
+    CallAPI(`movies/${id}`, "DELETE", null, null, apiDevFast)
       .then(res => {
         setTimeout(() => {
           swal({

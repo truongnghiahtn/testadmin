@@ -115,20 +115,20 @@ export default class sidebarAdmin extends Component {
                 <i className="ri-subtract-line" />
                 <span>Quản lý</span>
               </li>
-              <li>
+              <li className>
                 <NavLink className="iq-waves-effect" to="/movies">
                   <i className="fa fa-user-circle" aria-hidden="true" />
                   <span>Quản lý phim</span>
                 </NavLink>
               </li>
               <li></li>
-              <li>
+              <li className>
                 <NavLink className="iq-waves-effect" to="admin-website">
                   <i className="fab fa-chrome" aria-hidden="true" />
                   <span>Website</span>
                 </NavLink>
               </li>
-              <li>
+              <li className>
                 <a href="#" className="iq-waves-effect">
                   <i className="fa fa-address-card" aria-hidden="true"></i>
                   <span>Khách hàng</span>
@@ -149,7 +149,7 @@ export default class sidebarAdmin extends Component {
                   </li>
                 </ul>
               </li>
-              <li>
+              <li className>
                 <a href="#" className="iq-waves-effect">
                   <i className="fa fa-language" aria-hidden="true" />
                   <span>Ngôn ngữ</span>

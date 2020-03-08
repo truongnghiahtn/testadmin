@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import HeaderAdmin from "./../../../components/headerAdmin/headerAdmin"
+import { withRouter, NavLink } from "react-router-dom";
+
 
 export default class user extends Component {
   render() {
@@ -11,7 +13,7 @@ export default class user extends Component {
             <div className="iq-sidebar-logo">
               <div className="top-logo">
                 <a href="index.html" className="logo">
-                  <img src="images/logo.png" className="img-fluid" alt />
+                  <img src="images/logo.png" className="img-fluid"  />
                   <span>XRay</span>
                 </a>
               </div>
@@ -39,14 +41,14 @@ export default class user extends Component {
                     className="table-add float-right mb-3 mr-2"
                     style={{ marginTop: "1rem!important" }}
                   >
-                    <a
-                      href="account_insert.html"
+                    <NavLink
+                      to="/add-movie"
                       className="btn btn-sm iq-bg-success"
                     >
                       <i className="ri-add-fill">
                         <span className="pl-1">Thêm tài khoản</span>
                       </i>
-                    </a>
+                    </NavLink>
                   </span>
                 </div>
                 <div className="iq-card-body">
@@ -74,9 +76,9 @@ export default class user extends Component {
                       </thead>
                       <tbody>
                         <tr>
-                          <td contentEditable="true">Gio Metric</td>
-                          <td contentEditable="true">25</td>
-                          <td contentEditable="true">Deepends</td>
+                          <td >Gio Metric</td>
+                          <td >25</td>
+                          <td >Deepends</td>
                           <td>
                             <span className="table-remove">
                               <button

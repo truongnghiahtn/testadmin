@@ -4,7 +4,7 @@ import { CallAPI } from "../../utils/callApi";
 export const getDataSearchApi = data => {
   return dispatch => {
     if (data) {
-      CallAPI(`WBBcwnwQpV89/a/${data}`).then(rs => {
+      CallAPI(`/suggest/${data}`).then(rs => {
         dispatch({
           type: Actiontype.GET_DATA_SEARCH,
           dataSearch: rs.data.tratu

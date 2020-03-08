@@ -106,7 +106,7 @@ export default class sidebarAdmin extends Component {
                 <span>Trang chủ</span>
               </li>
               <li className="active">
-                <NavLink  className="iq-waves-effect" to="/admin-dashboard">
+                <NavLink className="iq-waves-effect" to="/admin-dashboard">
                   <i className="ri-home-8-fill" />
                   <span>Home</span>
                 </NavLink>
@@ -116,17 +116,17 @@ export default class sidebarAdmin extends Component {
                 <span>Quản lý</span>
               </li>
               <li>
-                <NavLink  className="iq-waves-effect"  to="/admin-User">
+                <NavLink className="iq-waves-effect" to="/movies">
                   <i className="fa fa-user-circle" aria-hidden="true" />
                   <span>Quản lý phim</span>
                 </NavLink>
               </li>
               <li></li>
               <li>
-                <NavLink   className="iq-waves-effect" to="admin-website">
+                <NavLink className="iq-waves-effect" to="admin-website">
                   <i className="fab fa-chrome" aria-hidden="true" />
                   <span>Website</span>
-                </NavLink >
+                </NavLink>
               </li>
               <li>
                 <a href="#" className="iq-waves-effect">

@@ -1,74 +1,70 @@
-.Navtab {
-  padding: 20px 0 0;
-  .nav {
-    /*     display: block !important;
-    overflow: hidden;
-    white-space: nowrap; */
-    &.nav-tabs {
-      border: none;
+.navtab {
+  .MuiPaper-root {
+    background-color: #fafafa;
+    &.MuiPaper-elevation4 {
+      box-shadow: none;
     }
-    .nav-item {
-      /*       display: inline-block; */
-      .nav-link {
-        border: none;
-        line-height: 3rem;
-        padding: 0 1.06667rem !important;
-        background: 0 0;
-        opacity: 0.9;
-        color: #777;
-        font-size: 16px;
-        &::first-letter {
-          text-transform: capitalize;
+    .MuiTabs-scroller {
+      .MuiTab-textColorPrimary {
+        &.Mui-selected {
+          background-color: #ffffff;
+          font-weight: 700;
         }
-        &.active {
-          font-weight: 600;
-          color: #1e85dd;
-          background: #fff;
-          border-radius: 5px 5px 0 0;
+        .MuiTab-wrapper {
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, serif;
+          font-size: 16px;
+          text-transform: none;
+          display: block;
+          &::first-letter {
+            text-transform: capitalize;
+          }
         }
+      }
+      .PrivateTabIndicator-root-68 {
+        background-color: unset;
+      }
+    }
+    .MuiSvgIcon-root {
+      fill: #212121;
+    }
+  }
+  .MuiTypography-body1 {
+    border-radius: 10px 16px;
+    .MuiTabs-scrollable {
+      .MuiTab-textColorPrimary.Mui-selected {
+        background-color: #ffffff;
       }
     }
   }
-  .tab-content {
-    .tab-pane {
-      &.active {
-        background-color: #fff;
-      }
-    }
+}
+
+@media (min-width: 576px) {
+  .navtab.container {
+    padding: 0;
+    max-width: 510px;
   }
 }
-
-button.next,
-button.prev {
-  position: absolute;
-  left: 0;
-  top: 0;
-  background: #f1f1f1;
-  border-radius: 4px;
-  width: 20px;
-  color: #ccc;
-  height: 100%;
-  padding: 0;
-  border: none;
-  outline: 0;
-  z-index: 999999;
+@media (min-width: 768px) {
+  .navtab.container {
+    padding: 0;
+    max-width: 690px;
+  }
 }
-
-.menu-item {
-  padding: 0 40px;
-  margin: 5px 10px;
-  user-select: none;
-  cursor: pointer;
-  border: none;
+@media (min-width: 992px) {
+  .navtab.container {
+    padding: 0;
+    max-width: 930px;
+  }
 }
-.menu-item-wrapper.active {
-  border: 1px blue solid;
+@media (min-width: 1200px) {
+  .navtab.container {
+    padding: 0;
+    max-width: 1110px;
+  }
 }
-.menu-item.active {
-  border: 1px green solid;
-}
-
-.scroll-menu-arrow {
-  padding: 20px;
-  cursor: pointer;
+@media (max-width: 576px) {
+  .navtab.container {
+    padding: 0;
+    width: 480px;
+  }
 }

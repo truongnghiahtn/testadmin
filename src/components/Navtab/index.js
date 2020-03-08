@@ -47,7 +47,14 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     width: "100%",
     backgroundColor: theme.palette.background.paper,
-    padding: 20
+    marginTop: 20,
+    textTransform: "uppercase"
+  },
+  upperFirstLetter: {
+    textTransform: "none",
+    "&::first-letter": {
+      textTransform: "uppercase"
+    }
   }
 }));
 
@@ -75,7 +82,7 @@ export default function Navtab() {
       return (
         <Tab
           value={item.id}
-          label={item.id}
+          label={item.name}
           key={index}
           {...a11yProps(`${item.id}`)}
         />
@@ -94,15 +101,15 @@ export default function Navtab() {
   };
 
   return (
-    <div className={classes.root + ` container`}>
-      <AppBar position="static" color="default">
+    <div className={classes.root + ` container navtab`}>
+      <AppBar position="static">
         <Tabs
           value={value}
           onChange={handleChange}
-          indicatorColor="primary"
+          /*           indicatorColor="stan" */
           textColor="primary"
           variant="scrollable"
-          scrollButtons="auto"
+          scrollButtons="on"
           aria-label="scrollable auto tabs example"
         >
           {renderTab()}

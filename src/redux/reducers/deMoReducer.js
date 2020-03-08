@@ -5,12 +5,16 @@ let initialState = {
   traCau: [],
   traTu: [],
   phuDePhim: {},
-  video: {}
+  video: {},
+  word: ""
 };
 const deMoReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.GET_DATA_SEARCH:
       state.dataSearch = action.dataSearch;
+      return { ...state };
+    case ActionType.SAVE_WORD:
+      state.word = action.word;
       return { ...state };
     case ActionType.GET_TRA_CAU_API:
       state.traCau = action.traCau.sentences;

@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 
 class ChuyenNganh extends Component {
+  renderDataHTML = () => {
+    return <div dangerouslySetInnerHTML={{ __html: this.props.content }}></div>;
+  };
   render() {
-    return <div>ChuyenNganh</div>;
+    return <div>{this.renderDataHTML()}</div>;
   }
 }
 

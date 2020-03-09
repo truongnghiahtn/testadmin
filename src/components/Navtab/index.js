@@ -69,49 +69,49 @@ function Navtab(props) {
   const [data, setData] = React.useState([
     {
       id: "tracau",
-      name: "Tra Câu",
+      name: "Tra Ccâu",
       Component: TraCau,
       status: true,
       content: ""
     },
     {
       id: "dict_ev",
-      name: "Anh Việt",
+      name: "Anh - Việt",
       Component: AnhViet,
       status: false,
       content: ""
     },
     {
       id: "dict_np",
-      name: "Ngữ Pháp",
+      name: "Ngữ pháp",
       Component: NguPhap,
       status: false,
       content: ""
     },
     {
       id: "dict_di",
-      name: "Chuyên Ngành",
+      name: "Chuyên ngành",
       Component: ChuyenNganh,
       status: false,
       content: ""
     },
     {
       id: "dict_vv",
-      name: "Việt Việt",
+      name: "Việt - Việt",
       Component: VietViet,
       status: false,
       content: ""
     },
     {
       id: "dict_aa",
-      name: "Anh Anh",
+      name: "Anh - Anh",
       Component: AnhAnh,
       status: false,
       content: ""
     },
     {
       id: "phude",
-      name: "Phụ Đề",
+      name: "Phụ đề phim",
       Component: PhuDePhim,
       status: true,
       content: ""
@@ -124,8 +124,8 @@ function Navtab(props) {
       content: ""
     },
     {
-      id: "hinhAnh",
-      name: "Hình Ảnh",
+      id: "hinhanh",
+      name: "Hình ảnh",
       Component: HinhAnh,
       status: true,
       content: ""
@@ -135,13 +135,21 @@ function Navtab(props) {
 
   React.useEffect(() => {
     setValue("tracau");
-    props.traTu.map((item, index) => {
-      let dataNew = [...data];
-      dataNew[index + 1].status = item.includes(dataNew[index + 1].id);
-      item.includes(data[index + 1].id)
-        ? (dataNew[index + 1].content = item)
-        : (dataNew[index + 1].content = "");
-      setData(dataNew);
+
+    data.map(item => {
+      if (
+        item.id !== "tracau" &&
+        item.id !== "phude" &&
+        item.id !== "video" &&
+        item.id !== "hinhanh"
+      ) {
+        let index = props.traTu.findIndex(it => it.includes(item.id));
+        let isFind = index !== -1 ? true : false;
+        item.status = isFind;
+        if (isFind) {
+          item.content = props.traTu[index];
+        }
+      }
     });
   }, [props]);
 

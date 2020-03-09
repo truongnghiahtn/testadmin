@@ -32,6 +32,7 @@ const Search = props => {
           dangerouslySetInnerHTML={{ __html: item.fields.shorttext }}
           onClick={() => {
             props.getTraCauApi(item.fields.word);
+            props.getTraTuApi(item.fields.word);
             props.getPhuDePhimApi(item.fields.word);
             props.getVideoApi(item.fields.word);
             props.saveWord(item.fields.word);
@@ -56,6 +57,7 @@ const Search = props => {
   const handleOnSubmit = e => {
     e.preventDefault();
     props.getTraCauApi($("#tc-s")[0].value);
+    props.getTraTuApi($("#tc-s")[0].value);
     props.getPhuDePhimApi($("#tc-s")[0].value);
     props.getVideoApi($("#tc-s")[0].value);
     props.saveWord($("#tc-s")[0].value);
@@ -137,6 +139,9 @@ const mapDispatchToProps = dispatch => {
     },
     getTraCauApi: data => {
       dispatch(action.getTraCauApi(data));
+    },
+    getTraTuApi: data => {
+      dispatch(action.getTraTuApi(data));
     },
     getPhuDePhimApi: data => {
       dispatch(action.getPhuDePhimApi(data));

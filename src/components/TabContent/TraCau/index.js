@@ -5,15 +5,10 @@ class TraCau extends Component {
     return this.props.traCau.length
       ? this.props.traCau.map((item, index) => {
           return (
-            <li key={index}>
-              <article id={item._id} className="tc-row tc-row-content">
-                <p className="tc-row--text vi">{item.fields.en}</p>
-                <p
-                  className="tc-row--text en"
-                  dangerouslySetInnerHTML={{ __html: item.fields.vi }}
-                ></p>
-              </article>
-            </li>
+            <li
+              key={index}
+              dangerouslySetInnerHTML={{ __html: item.fields.shorttext }}
+            ></li>
           );
         })
       : "";

@@ -1,3 +1,32 @@
-h1 {
-  color: red;
+.tc-row-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  li {
+    border-bottom: 1px solid #ededed;
+    list-style: none;
+  }
+}
+.tc-row.tc-row-content {
+  background: #fff;
+  display: block;
+  text-decoration: none;
+  padding: 20px 10px;
+  position: relative;
+  .tc-row--text {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.2;
+    font-weight: 400;
+    text-transform: initial;
+    &.en {
+      margin-top: 8px;
+    }
+    em {
+      font-style: normal;
+      font-weight: 700;
+      color: #1371bb;
+      position: relative;
+    }
+  }
 }

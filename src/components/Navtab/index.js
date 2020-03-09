@@ -97,16 +97,16 @@ function Navtab(props) {
       content: ""
     },
     {
-      id: "dict_vv",
-      name: "Việt - Việt",
-      Component: VietViet,
+      id: "dict_ve",
+      name: "Việt - Anh",
+      Component: VietAnh,
       status: false,
       content: ""
     },
     {
-      id: "dict_ve",
-      name: "Việt - Anh",
-      Component: VietAnh,
+      id: "dict_vv",
+      name: "Việt - Việt",
+      Component: VietViet,
       status: false,
       content: ""
     },

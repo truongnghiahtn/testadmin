@@ -5,7 +5,7 @@ class TraCau extends Component {
     return this.props.traCau.length
       ? this.props.traCau.map((item, index) => {
           return (
-            <li>
+            <li key={index}>
               <article id={item._id} className="tc-row tc-row-content">
                 <p className="tc-row--text vi">{item.fields.vi}</p>
                 <p className="tc-row--text en">
@@ -14,6 +14,10 @@ class TraCau extends Component {
                       __html: item.fields.en
                     }}
                   ></em>
+                  {/* <a
+                    href={`javascript:speakTS(${item._id})`}
+                    className="v"
+                  ></a> */}
                 </p>
               </article>
             </li>
@@ -23,7 +27,7 @@ class TraCau extends Component {
   };
   render() {
     return (
-      <article id="tc" data-tab-name="Tra câu" class="tcTab--slide active">
+      <article id="tc" data-tab-name="Tra câu" className="tcTab--slide active">
         <div className="tc-page__container">
           <ul className="tc-row-list">
             {this.props.traCau ? this.renderDataTraCau() : ""}

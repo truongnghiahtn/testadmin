@@ -11,6 +11,7 @@ import PhuDePhim from "../TabContent/PhuDePhim";
 import Video from "../TabContent/Video";
 import AnhViet from "../TabContent/AnhViet";
 import NguPhap from "../TabContent/NguPhap";
+import DongNghia from "../TabContent/DongNghia";
 import ChuyenNganh from "../TabContent/ChuyenNganh";
 import VietViet from "../TabContent/VietViet";
 import VietAnh from "../TabContent/VietAnh";
@@ -86,6 +87,13 @@ function Navtab(props) {
       id: "dict_np",
       name: "Ngữ pháp",
       Component: NguPhap,
+      status: false,
+      content: ""
+    },
+    {
+      id: "dict_th",
+      name: "Đồng nghĩa",
+      Component: DongNghia,
       status: false,
       content: ""
     },

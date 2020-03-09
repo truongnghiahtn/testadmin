@@ -39,6 +39,12 @@
           font-size: 30px;
           cursor: pointer;
           color: #fff;
+          &.large {
+            font-size: 40px;
+          }
+          &.xlarge {
+            font-size: 60px;
+          }
         }
         .toggle-transcript {
           position: absolute;

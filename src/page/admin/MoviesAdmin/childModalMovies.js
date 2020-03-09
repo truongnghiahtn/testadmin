@@ -217,7 +217,7 @@ class childModalMovies extends Component {
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div className="modal-body">
+        <div className="modal-body edit-modal">
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label style={{ width: "100%" }}>

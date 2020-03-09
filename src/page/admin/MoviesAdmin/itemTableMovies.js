@@ -18,6 +18,7 @@ class itemTable extends Component {
       <tr>
         <td>{stt}</td>
         <td>{this.convertHTML(movie.title)}</td>
+        <td className="movie_content">{this.convertHTML(movie.content)}</td>
         <td>{this.convertHTML(movie.content)}</td>
         <td>
           <img
@@ -26,9 +27,13 @@ class itemTable extends Component {
             style={{ width: "100px", height: "70px" }}
           />
         </td>
-        <td>{this.convertHTML(movie.english_meaning)}</td>
-        <td>{this.convertHTML(movie.Vietnamese_meaning)}</td>
-        <td>
+        <td className="content_en">
+          {this.convertHTML(movie.english_meaning)}
+        </td>
+        <td className="content_en">
+          {this.convertHTML(movie.Vietnamese_meaning)}
+        </td>
+        <td className="content_en">
           <span className="table-remove">
             <button
               type="button"

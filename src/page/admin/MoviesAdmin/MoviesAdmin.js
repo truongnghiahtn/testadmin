@@ -100,10 +100,10 @@ class MoviesAdmin extends Component {
                       <tr>
                         <th>STT</th>
                         <th>Tên phim</th>
-                        <th>Phụ đề phim</th>
-                        <th>Hình ảnh</th>
+                        <th>Tự đề phim</th>
                         <th>EN</th>
-                        <th>VN</th>
+                        <th>VI</th>
+                        <th>Chức năng</th>
                       </tr>
                     </thead>
                     <tbody>{this.renderTbody()}</tbody>

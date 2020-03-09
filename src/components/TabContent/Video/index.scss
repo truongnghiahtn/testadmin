@@ -1,0 +1,66 @@
+#dict_yg {
+  height: 800px;
+  .dict--content {
+    max-width: 100%;
+    padding-left: 8px;
+    #youtube-tab {
+      margin: auto;
+      .youtube-container {
+        background: #000;
+        margin-top: 10px;
+        border: 2px solid #e8e8e8;
+        .iframe-wrapper {
+          padding-bottom: 50.625%;
+          height: 0;
+          position: relative;
+          iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 90%;
+            height: 90%;
+            margin: auto;
+          }
+        }
+      }
+      .youtube-controls {
+        display: flex;
+        text-align: center;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-around;
+        background: #000;
+        margin: auto;
+        width: 100%;
+        position: relative;
+        .player-button {
+          font-size: 30px;
+          cursor: pointer;
+          color: #fff;
+        }
+        .toggle-transcript {
+          position: absolute;
+          font-size: 25px;
+          right: 0;
+          bottom: 0;
+          color: #fff;
+          cursor: pointer;
+        }
+      }
+      .youtube-caption {
+        padding-top: 10px;
+        margin-bottom: 50px;
+        font-size: 35px;
+        text-align: center;
+        word-break: break-word;
+        background: #fff;
+        position: relative;
+        .text {
+          color: #424242;
+        }
+      }
+    }
+  }
+}

@@ -18,11 +18,10 @@ class itemTable extends Component {
       <tr>
         <td>{stt}</td>
         <td>{this.convertHTML(movie.title)}</td>
-        <td>{this.convertHTML(movie.content)}</td>
-        <td>{movie.image}</td>
-        <td>{this.convertHTML(movie.english_meaning)}</td>
-        <td>{this.convertHTML(movie.Vietnamese_meaning)}</td>
-        <td>
+        <td className="movie_content">{this.convertHTML(movie.content)}</td>
+        <td className="content_en">{this.convertHTML(movie.english_meaning)}</td>
+        <td className="content_en">{this.convertHTML(movie.Vietnamese_meaning)}</td>
+        <td className="content_en">
           <span className="table-remove">
             <button
               type="button"

@@ -14,10 +14,12 @@ class TraCau extends Component {
                       __html: item.fields.en
                     }}
                   ></em>
-                  {/* <a
-                    href={`javascript:speakTS(${item._id})`}
+                  <a
+                    // href={`javascript:speakTS(${item._id})`}
                     className="v"
-                  ></a> */}
+                  >
+                    <i className="fa fa-bullhorn"></i>
+                  </a>
                 </p>
               </article>
             </li>

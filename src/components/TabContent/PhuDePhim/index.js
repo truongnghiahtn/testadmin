@@ -17,11 +17,6 @@ class PhuDePhim extends Component {
                       <td valign="top" style={{ width: "75px" }}>
                         <img
                           className="lazy initial loaded"
-                          data-src={
-                            "https://tracau.vn/resources/posters/thumbnails/" +
-                            item.fields.thumbnail +
-                            ".jpg"
-                          }
                           width="68px"
                           height="101px"
                           src={
@@ -29,7 +24,6 @@ class PhuDePhim extends Component {
                             item.fields.thumbnail +
                             ".jpg"
                           }
-                          data-was-processed="true"
                         />
                       </td>
                       <td valign="top">
@@ -59,7 +53,7 @@ class PhuDePhim extends Component {
                                   onClick={() => {
                                     this.snippet(item._id);
                                   }}
-                                  class="bttn bttn-default"
+                                  className="bttn bttn-default"
                                 >
                                   Xem trích dẫn
                                 </button>
@@ -93,7 +87,7 @@ class PhuDePhim extends Component {
       <article
         id="dict_movie_quotes"
         data-tab-name="Phụ đề phim"
-        class="tcTab--slide"
+        className="tcTab--slide"
       >
         <div className="tcTab--slidesContainer">
           <div className="tc-page__container">

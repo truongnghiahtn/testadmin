@@ -1,5 +1,6 @@
 import * as Actiontype from "./../constants/actionType";
 import { CallAPI } from "../../utils/callApi";
+import { apiDevFast } from "../../utils/config";
 import swal from "sweetalert";
 import Axios from "axios";
 

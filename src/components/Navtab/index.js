@@ -9,14 +9,8 @@ import Box from "@material-ui/core/Box";
 import TraCau from "../TabContent/TraCau";
 import PhuDePhim from "../TabContent/PhuDePhim";
 import Video from "../TabContent/Video";
-import AnhViet from "../TabContent/AnhViet";
-import NguPhap from "../TabContent/NguPhap";
-import DongNghia from "../TabContent/DongNghia";
-import ChuyenNganh from "../TabContent/ChuyenNganh";
-import VietViet from "../TabContent/VietViet";
-import VietAnh from "../TabContent/VietAnh";
-import AnhAnh from "../TabContent/AnhAnh";
 import HinhAnh from "../TabContent/HinhAnh";
+import TraTu from "../TabContent/TraTu";
 import { connect } from "react-redux";
 import "./style.scss";
 
@@ -79,49 +73,49 @@ function Navtab(props) {
     {
       id: "dict_ev",
       name: "Anh - Việt",
-      Component: AnhViet,
+      Component: TraTu,
       status: false,
       content: ""
     },
     {
       id: "dict_np",
       name: "Ngữ pháp",
-      Component: NguPhap,
+      Component: TraTu,
       status: false,
       content: ""
     },
     {
       id: "dict_th",
       name: "Đồng nghĩa",
-      Component: DongNghia,
+      Component: TraTu,
       status: false,
       content: ""
     },
     {
-      id: "dict_di",
+      id: "dict_cn",
       name: "Chuyên ngành",
-      Component: ChuyenNganh,
+      Component: TraTu,
       status: false,
       content: ""
     },
     {
       id: "dict_ve",
       name: "Việt - Anh",
-      Component: VietAnh,
+      Component: TraTu,
       status: false,
       content: ""
     },
     {
       id: "dict_vv",
       name: "Việt - Việt",
-      Component: VietViet,
+      Component: TraTu,
       status: false,
       content: ""
     },
     {
       id: "dict_aa",
       name: "Anh - Anh",
-      Component: AnhAnh,
+      Component: TraTu,
       status: false,
       content: ""
     },

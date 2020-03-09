@@ -28,5 +28,22 @@
       color: #1371bb;
       position: relative;
     }
+    a.v {
+      text-decoration: none;
+      color: #eee;
+      position: absolute;
+      right: 10px;
+      top: 40%;
+      height: 20px;
+      width: 20px;
+      text-align: center;
+      cursor: pointer;
+      &:hover {
+        color: #aaa;
+      }
+      &:active {
+        color: #eee;
+      }
+    }
   }
 }

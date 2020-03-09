@@ -1,0 +1,54 @@
+.makeStyles-root-1 {
+  text-transform: none !important;
+}
+.tcTab--slidesContainer .tcTab--slide {
+  padding: 0.5rem;
+  background: #fff;
+  color: #606676;
+  width: 100%;
+  .dict--title {
+    font-size: 16px;
+    font-weight: 700;
+    border-bottom: #ccc 1px dotted;
+    color: #c44133;
+    padding: 10px;
+    margin-bottom: 10px;
+    a.us {
+      text-decoration: none;
+      color: #ddd;
+      position: absolute;
+      right: 60px;
+      top: 0;
+      height: 20px;
+      width: 20px;
+      text-align: center;
+      font-weight: 400;
+      font-size: 30px;
+      &:hover {
+        color: #aaa;
+      }
+      &:active {
+        color: #eee;
+      }
+    }
+  }
+  .dict--content {
+    padding-left: 8px;
+    max-width: 100%;
+    table td {
+      padding: 4px 5px 4px 2px;
+    }
+    #I_C {
+      width: 1px;
+    }
+    #C_C {
+      font-weight: 500;
+    }
+  }
+}
+#dict_di {
+  k,
+  blockquote {
+    display: none;
+  }
+}

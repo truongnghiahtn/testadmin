@@ -19,7 +19,13 @@ class itemTable extends Component {
         <td>{stt}</td>
         <td>{this.convertHTML(movie.title)}</td>
         <td>{this.convertHTML(movie.content)}</td>
-        <td>{movie.image}</td>
+        <td>
+          <img
+            src={movie.image}
+            alt=""
+            style={{ width: "100px", height: "70px" }}
+          />
+        </td>
         <td>{this.convertHTML(movie.english_meaning)}</td>
         <td>{this.convertHTML(movie.Vietnamese_meaning)}</td>
         <td>

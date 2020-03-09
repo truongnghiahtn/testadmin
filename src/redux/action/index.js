@@ -7,7 +7,7 @@ import Axios from "axios";
 export const getDataSearchApi = data => {
   return dispatch => {
     if (data) {
-      CallAPI(`WBBcwnwQpV89/a/${data}`)
+      CallAPI(`suggest/${data}`, "GET", null, null, apiDevFast)
         .then(rs => {
           dispatch({
             type: Actiontype.GET_DATA_SEARCH,
@@ -28,11 +28,11 @@ export const getDataSearchApi = data => {
 
 export const getTraCauApi = data => {
   return dispatch => {
-    CallAPI(`suggest/${data}`, "GET", null, null, apiDevFast)
+    CallAPI(`sentence/${data}/en`, "GET", null, null, apiDevFast)
       .then(rs => {
         dispatch({
           type: Actiontype.GET_TRA_CAU_API,
-          traCau: rs.data.tratu
+          traCau: rs.data.sentences
         });
       })
       .catch(err => {
@@ -42,7 +42,7 @@ export const getTraCauApi = data => {
 };
 export const getTraTuApi = data => {
   return dispatch => {
-    CallAPI(`WBBcwnwQpV89/s/${data}/vi`)
+    CallAPI(`sentence/${data}/en`, "GET", null, null, apiDevFast)
       .then(rs => {
         dispatch({
           type: Actiontype.GET_TRA_TU_API,

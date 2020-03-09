@@ -13,6 +13,7 @@ import AnhViet from "../TabContent/AnhViet";
 import NguPhap from "../TabContent/NguPhap";
 import ChuyenNganh from "../TabContent/ChuyenNganh";
 import VietViet from "../TabContent/VietViet";
+import VietAnh from "../TabContent/VietAnh";
 import AnhAnh from "../TabContent/AnhAnh";
 import HinhAnh from "../TabContent/HinhAnh";
 import { connect } from "react-redux";
@@ -69,7 +70,7 @@ function Navtab(props) {
   const [data, setData] = React.useState([
     {
       id: "tracau",
-      name: "Tra Ccâu",
+      name: "Tra câu",
       Component: TraCau,
       status: true,
       content: ""
@@ -92,6 +93,13 @@ function Navtab(props) {
       id: "dict_di",
       name: "Chuyên ngành",
       Component: ChuyenNganh,
+      status: false,
+      content: ""
+    },
+    {
+      id: "dict_ve",
+      name: "Việt - Anh",
+      Component: VietAnh,
       status: false,
       content: ""
     },
@@ -136,21 +144,25 @@ function Navtab(props) {
   React.useEffect(() => {
     setValue("tracau");
 
-    data.map(item => {
+    let dataNew = data.map(item => {
       if (
         item.id !== "tracau" &&
         item.id !== "phude" &&
         item.id !== "video" &&
         item.id !== "hinhanh"
       ) {
-        let index = props.traTu.findIndex(it => it.includes(item.id));
+        let index = props.traTu.findIndex(it =>
+          it.includes(`data-tab-name="${item.name}"`)
+        );
         let isFind = index !== -1 ? true : false;
         item.status = isFind;
         if (isFind) {
           item.content = props.traTu[index];
         }
       }
+      return item;
     });
+    setData(dataNew);
   }, [props]);
 
   const handleChange = (event, newValue) => {

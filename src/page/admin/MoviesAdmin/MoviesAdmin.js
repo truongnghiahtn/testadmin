@@ -1,69 +1,62 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import "./style.scss";
 import ItemTable from "./itemTableMovies";
 import ChildModal from "./childModalMovies";
 import Modalfather from "../../../components/modal/fatherModal";
 import * as action from "../../../redux/action/index";
 import SearchAdmin from "../../../components/SearchAdmin";
+import Pagination from "../../../components/Pagination/index";
 const Modal = Modalfather(ChildModal);
 
 const MoviesAdmin = props => {
-  const [listMovies, setListMovies] = useState([]);
+  const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemPerPage, setItemPerPage] = useState(10);
+  const [numberPage, setNumberPage] = useState(1);
 
   useEffect(() => {
-    /*     const fetchPosts = async () => {
+    /*          const fetchPosts = async () => {
       setLoading(true);
-      const res = await props.getListMovies();
+      const res = await props.getListMovies(currentPage);
       console.log(res, 1);
       setLoading(false);
     };
-    fetchPosts(); */
-    props.getListMovies();
-  }, []);
+    fetchPosts();  */
+    setLoading(true);
+    props.getListMovies(currentPage);
+    setTimeout(() => {
+      setLoading(false);
+    }, 200);
+  }, [currentPage]);
 
   useEffect(() => {
-    setListMovies(props.listMovies.result);
-  }, [props.listMovies.result]);
+    setData(props.listMovies);
+  }, [props.listMovies]);
 
   const handleFilter = keyword => {
-    let listMovies = props.listMovies.result.filter(
+    let dataUpdate = { ...data };
+    dataUpdate.result = props.data.result.filter(
       item => item.title.toLowerCase().indexOf(keyword.toLowerCase()) > -1
     );
-    setListMovies({ listMovies });
+    setData({ dataUpdate });
   };
 
-  const renderPageItem = () => {
-    /* let numberPage = 0;
-    return listMovies.map((item, index) => {
-      if (index % 10 === 0) {
-        numberPage++;
-        return (
-          <li className="page-item active" key={index}>
-            <a className="page-link" href="#">
-              {numberPage}
-            </a>
-          </li>
-        );
-      }
-    }); */
+  const isEmpty = obj => {
+    return !obj || Object.keys(obj).length === 0;
   };
-
-  const indexOfLastItem = currentPage * itemPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemPerPage;
-  let currentMovies = [];
-  if (listMovies !== undefined) {
-    currentMovies = listMovies.slice(indexOfFirstItem, indexOfLastItem);
-  }
 
   const renderTbody = () => {
-    if (listMovies !== undefined) {
-      return listMovies.map((item, index) => (
+    if (!isEmpty(data)) {
+      return data.result.map((item, index) => (
         <ItemTable movie={item} stt={index} key={index} />
       ));
     }
+  };
+
+  const paginate = number => {
+    setCurrentPage(number);
+    setNumberPage(number);
   };
   return (
     <div className="container-fluid">
@@ -113,23 +106,70 @@ const MoviesAdmin = props => {
                       <th>Chức năng</th>
                     </tr>
                   </thead>
-                  <tbody>{renderTbody()}</tbody>
+                  {loading ? (
+                    <div
+                      className="loader"
+                      style={{ width: "2em", height: "2em", top: "120px" }}
+                    ></div>
+                  ) : (
+                    <tbody className="fadeIn animated">{renderTbody()}</tbody>
+                  )}
                 </table>
-                <nav aria-label="Page navigation example">
-                  <ul className="pagination justify-content-end">
-                    <li className="page-item">
-                      <a className="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">«</span>
-                      </a>
-                    </li>
-                    {renderPageItem()}
-                    <li className="page-item">
-                      <a className="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">»</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
+                {!isEmpty(data) ? (
+                  <nav aria-label="Page navigation example">
+                    <ul className="pagination justify-content-end">
+                      <li
+                        className={
+                          data.pagination.page === 1
+                            ? "page-item active"
+                            : "page-item"
+                        }
+                        onClick={() => {
+                          paginate(1);
+                          setNumberPage(-1);
+                        }}
+                      >
+                        <a className="page-link" href="#" aria-label="Previous">
+                          <span aria-hidden="true">«</span>
+                        </a>
+                      </li>
+
+                      <Pagination
+                        itemPerPage={data.pagination.itemPerPage}
+                        totalItem={data.pagination.totalItem}
+                        paginate={paginate}
+                        numberPage={numberPage}
+                      />
+
+                      <li
+                        className={
+                          data.pagination.page ===
+                          Math.ceil(
+                            data.pagination.totalItem /
+                              data.pagination.itemPerPage
+                          )
+                            ? "page-item active"
+                            : "page-item"
+                        }
+                        onClick={() => {
+                          paginate(
+                            Math.ceil(
+                              data.pagination.totalItem /
+                                data.pagination.itemPerPage
+                            )
+                          );
+                          setNumberPage(-1);
+                        }}
+                      >
+                        <a className="page-link" href="#" aria-label="Next">
+                          <span aria-hidden="true">»</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
@@ -147,8 +187,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    getListMovies: () => {
-      dispatch(action.getMoviesApiDevfast());
+    getListMovies: id => {
+      dispatch(action.getMoviesApiDevfast(id));
     },
     onEditMovie: () => {
       dispatch(action.actOnEditMovie());

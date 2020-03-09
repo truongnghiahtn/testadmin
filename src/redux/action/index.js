@@ -86,13 +86,9 @@ export const getVideoApi = data => {
 };
 
 //Movies Admin
-export const getMoviesApiDevfast = () => {
+export const getMoviesApiDevfast = id => {
   return dispatch => {
-    /*     Axios({
-      method: "GET",
-      url: "http://apitracau.devfast.net/movies"
-    }) */
-    CallAPI("movies", "GET", null, null, apiDevFast)
+    CallAPI(`movies?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
       .then(res =>
         dispatch({
           type: Actiontype.GET_MOVIES_API_DEVFAST,

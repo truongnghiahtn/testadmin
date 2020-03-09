@@ -16,13 +16,13 @@ class itemTable extends Component {
         <td>{this.convertHTML(movie.title)}</td>
         <td className="movie_content">{this.convertHTML(movie.content)}</td>
         <td>{this.convertHTML(movie.content)}</td>
-        <td>
+        {/*         <td>
           <img
             src={movie.image}
             alt=""
             style={{ width: "100px", height: "70px" }}
           />
-        </td>
+        </td> */}
         <td className="content_en">
           {this.convertHTML(movie.english_meaning)}
         </td>

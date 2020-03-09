@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import * as action from "../../../redux/action/index";
 import { connect } from "react-redux";
-import ChildModal from "./childModalMovies";
-import Modalfather from "../../../components/modal/fatherModal";
-
-const Modal = Modalfather(ChildModal);
 
 class itemTable extends Component {
   convertHTML = html => {

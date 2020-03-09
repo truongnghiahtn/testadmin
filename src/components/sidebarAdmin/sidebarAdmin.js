@@ -86,7 +86,7 @@ export default class sidebarAdmin extends Component {
                 <span>Quản lý</span>
               </li>
               <li className>
-                <NavLink className="iq-waves-effect" to="/movies">
+                <NavLink className="iq-waves-effect" to="/movie">
                   <i className="fa fa-user-circle" aria-hidden="true" />
                   <span>Quản lý phim</span>
                 </NavLink>
@@ -139,10 +139,10 @@ export default class sidebarAdmin extends Component {
                 </a>
                 <ul className="iq-submenu collapse" id="collapseTwo">
                   <li>
-                    <a href="english.html">
+                    <NavLink to="/admin/word">
                       <i className="fa fa-flag-checkered" aria-hidden="true" />
-                      Tiếng anh
-                    </a>
+                      Quản trị từ ngữ
+                    </NavLink>
                   </li>
                   <li>
                     <a href="film.html">

@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import HeaderAdmin from "./../../../components/headerAdmin/headerAdmin"
-import Navbaradmin from "./../../../components/sidebarAdmin/sidebarAdmin"
 const $ = window.$;
 
 export default class Dashboard extends Component {
@@ -106,8 +105,6 @@ export default class Dashboard extends Component {
   }
   render() {
     return (
-      <div className="wrapper" >
-           <Navbaradmin/>
       <div id="content-page" className="content-page">
         <div className="iq-top-navbar">
           <div className="iq-navbar-custom">
@@ -242,7 +239,6 @@ export default class Dashboard extends Component {
             </div>
           </div>
         </footer>
-      </div>
       </div>
     );
   }

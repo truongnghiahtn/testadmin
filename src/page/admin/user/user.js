@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import HeaderAdmin from "./../../../components/headerAdmin/headerAdmin"
-import Navbaradmin from "./../../../components/sidebarAdmin/sidebarAdmin"
 import { withRouter, NavLink } from "react-router-dom";
 
 
 export default class user extends Component {
   render() {
     return (
-      <div className="wrapper">
-            <Navbaradmin/>
       <div id="content-page" className="content-page">
         {/* TOP Nav Bar */}
         <div className="iq-top-navbar">
@@ -166,7 +163,6 @@ export default class user extends Component {
           </div>
         </footer>
         {/* Footer END */}
-      </div>
       </div>
     );
   }

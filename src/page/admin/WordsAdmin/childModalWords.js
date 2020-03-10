@@ -90,7 +90,7 @@ class childModalWords extends Component {
         role="tabpanel"
       >
         <ReactSummernote
-          value={this.checkFieldValue(item)}
+          value={this.checkFieldValue(item.id)}
           defaultValue={item.id}
           name={item.id}
           options={{
@@ -108,6 +108,14 @@ class childModalWords extends Component {
               ["insert", ["link", "picture", "video"]],
               ["view", ["fullscreen", "codeview"]]
             ]
+          }}
+          onChange={c => {
+            this.setState({
+              values: {
+                ...this.state.values,
+                [item.id]: c
+              }
+            });
           }}
         />
       </div>
@@ -346,165 +354,7 @@ class childModalWords extends Component {
                   {this.renderTab()}
                 </ul>
                 <div className="tab-content" id="pills-tabContent-1">
-                  <div
-                    className="tab-pane fade show active"
-                    id="pills-quotes-fill"
-                    role="tabpanel"
-                  >
-                    <ReactSummernote
-                      value={this.state.values.quotes}
-                      options={{
-                        lang: "ru-RU",
-                        height: 200,
-                        dialogsInBody: true,
-                        value: "",
-                        toolbar: [
-                          ["style", ["style"]],
-                          ["font", ["bold", "underline", "clear"]],
-                          ["fontname", ["fontname"]],
-                          ["color", ["Rencent  Color"]],
-                          ["para", ["ul", "ol", "paragraph"]],
-                          ["table", ["table"]],
-                          ["insert", ["link", "picture", "video"]],
-                          ["view", ["fullscreen", "codeview"]]
-                        ]
-                      }}
-                      onChange={c => {
-                        this.setState({
-                          values: { ...this.state.values, quotes: c }
-                        });
-                      }}
-                    />
-                  </div>
-                  <div
-                    className="tab-pane fade"
-                    id="pills-synonym-fill"
-                    role="tabpanel"
-                  >
-                    <ReactSummernote
-                      value={this.state.values.synonym}
-                      options={{
-                        lang: "ru-RU",
-                        height: 200,
-                        dialogsInBody: true,
-                        value: "",
-                        toolbar: [
-                          ["style", ["style"]],
-                          ["font", ["bold", "underline", "clear"]],
-                          ["fontname", ["fontname"]],
-                          ["color", ["Rencent  Color"]],
-                          ["para", ["ul", "ol", "paragraph"]],
-                          ["table", ["table"]],
-                          ["insert", ["link", "picture", "video"]],
-                          ["view", ["fullscreen", "codeview"]]
-                        ]
-                      }}
-                      onChange={c => {
-                        this.setState({
-                          values: { ...this.state.values, synonym: c }
-                        });
-                      }}
-                    />
-                  </div>
-                  <div
-                    className="tab-pane fade"
-                    id="pills-technical_term-fill"
-                    role="tabpanel"
-                  >
-                    <ReactSummernote
-                      value={this.state.values.technical_term}
-                      options={{
-                        lang: "ru-RU",
-                        height: 200,
-                        dialogsInBody: true,
-                        value: "",
-                        toolbar: [
-                          ["style", ["style"]],
-                          ["font", ["bold", "underline", "clear"]],
-                          ["fontname", ["fontname"]],
-                          ["color", ["Rencent  Color"]],
-                          ["para", ["ul", "ol", "paragraph"]],
-                          ["table", ["table"]],
-                          ["insert", ["link", "picture", "video"]],
-                          ["view", ["fullscreen", "codeview"]]
-                        ]
-                      }}
-                      onChange={c => {
-                        this.setState({
-                          values: {
-                            ...this.state.values,
-                            technical_term: c
-                          }
-                        });
-                      }}
-                    />
-                  </div>
-                  <div
-                    className="tab-pane fade"
-                    id="pills-english_to_Vietnamese-fill"
-                    role="tabpanel"
-                  >
-                    <ReactSummernote
-                      value={this.state.values.english_to_Vietnamese}
-                      options={{
-                        lang: "ru-RU",
-                        height: 200,
-                        dialogsInBody: true,
-                        value: "",
-                        toolbar: [
-                          ["style", ["style"]],
-                          ["font", ["bold", "underline", "clear"]],
-                          ["fontname", ["fontname"]],
-                          ["color", ["Rencent  Color"]],
-                          ["para", ["ul", "ol", "paragraph"]],
-                          ["table", ["table"]],
-                          ["insert", ["link", "picture", "video"]],
-                          ["view", ["fullscreen", "codeview"]]
-                        ]
-                      }}
-                      onChange={c => {
-                        this.setState({
-                          values: {
-                            ...this.state.values,
-                            english_to_Vietnamese: c
-                          }
-                        });
-                      }}
-                    />
-                  </div>
-                  <div
-                    className="tab-pane fade"
-                    id="pills-english_to_English-fill"
-                    role="tabpanel"
-                  >
-                    <ReactSummernote
-                      value={this.state.values.english_to_English}
-                      options={{
-                        lang: "ru-RU",
-                        height: 200,
-                        dialogsInBody: true,
-                        value: "",
-                        toolbar: [
-                          ["style", ["style"]],
-                          ["font", ["bold", "underline", "clear"]],
-                          ["fontname", ["fontname"]],
-                          ["color", ["Rencent  Color"]],
-                          ["para", ["ul", "ol", "paragraph"]],
-                          ["table", ["table"]],
-                          ["insert", ["link", "picture", "video"]],
-                          ["view", ["fullscreen", "codeview"]]
-                        ]
-                      }}
-                      onChange={c => {
-                        this.setState({
-                          values: {
-                            ...this.state.values,
-                            english_to_English: c
-                          }
-                        });
-                      }}
-                    />
-                  </div>
+                  {this.renderContentTab()}
                 </div>
               </div>
             </div>

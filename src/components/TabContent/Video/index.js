@@ -20,7 +20,7 @@ class Video extends Component {
                   ></iframe>
                 </div>
               </div>
-              <div className="youtube-controls player-button large">
+              {/* <div className="youtube-controls player-button large">
                 <i className="fa fa-angle-double-left player-button large"></i>
                 <i className="fa fa-undo player-button large"></i>
                 <i className="fa fa-pause player-button xlarge"></i>
@@ -29,7 +29,7 @@ class Video extends Component {
                 <div className="toggle-transcript player-button large">
                   <i className="fa fa-tv player-button"></i>
                 </div>
-              </div>
+              </div> */}
               <div
                 className="youtube-transcript"
                 style={{ display: "none" }}

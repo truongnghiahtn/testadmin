@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import * as action from "../../../redux/action/index";
 import { connect } from "react-redux";
-import ChildModal from "./childModalMovies";
-import Modalfather from "../../../components/modal/fatherModal";
-
-const Modal = Modalfather(ChildModal);
 
 class itemTable extends Component {
   convertHTML = html => {
@@ -16,11 +12,23 @@ class itemTable extends Component {
     let { movie, stt } = this.props;
     return (
       <tr>
-        <td>{stt}</td>
+        <td>{stt+1}</td>
         <td>{this.convertHTML(movie.title)}</td>
         <td className="movie_content">{this.convertHTML(movie.content)}</td>
-        <td className="content_en">{this.convertHTML(movie.english_meaning)}</td>
-        <td className="content_en">{this.convertHTML(movie.Vietnamese_meaning)}</td>
+        {/* <td>{this.convertHTML(movie.content)}</td> */}
+        {/*         <td>
+          <img
+            src={movie.image}
+            alt=""
+            style={{ width: "100px", height: "70px" }}
+          />
+        </td> */}
+        <td className="content_en">
+          {this.convertHTML(movie.english_meaning)}
+        </td>
+        <td className="content_en">
+          {this.convertHTML(movie.Vietnamese_meaning)}
+        </td>
         <td className="content_en">
           <span className="table-remove">
             <button

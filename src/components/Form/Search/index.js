@@ -30,6 +30,7 @@ const Search = props => {
         <div
           key={index}
           dangerouslySetInnerHTML={{ __html: item.fields.shorttext }}
+          className="s-suggest-content"
           onClick={() => {
             props.getTraCauApi(item.fields.word);
             props.getTraTuApi(item.fields.word);
@@ -56,11 +57,9 @@ const Search = props => {
 
   const handleOnSubmit = e => {
     e.preventDefault();
-    props.getTraCauApi($("#tc-s")[0].value);
-    props.getTraTuApi($("#tc-s")[0].value);
-    props.getPhuDePhimApi($("#tc-s")[0].value);
-    props.getVideoApi($("#tc-s")[0].value);
-    props.saveWord($("#tc-s")[0].value);
+    $(".s-suggest-content").length
+      ? $(".s-suggest-content")[0].click()
+      : props.saveWord(currentKw);
   };
 
   return (
@@ -90,7 +89,7 @@ const Search = props => {
                         name="keyword"
                         autoFocus
                         autoComplete="off"
-                        onKeyUp={handleOnChange}
+                        onChange={handleOnChange}
                       />
                       <div id="tc-d" className="tc-search-selectbox">
                         <select id="tc-db">

@@ -12,10 +12,9 @@ class itemTable extends Component {
     let { movie, stt } = this.props;
     return (
       <tr>
-        <td>{stt}</td>
+        <td className="index">{stt}</td>
         <td>{this.convertHTML(movie.title)}</td>
         <td className="movie_content">{this.convertHTML(movie.content)}</td>
-        <td>{this.convertHTML(movie.content)}</td>
         {/*         <td>
           <img
             src={movie.image}
@@ -24,10 +23,14 @@ class itemTable extends Component {
           />
         </td> */}
         <td className="content_en">
-          {this.convertHTML(movie.english_meaning)}
+          {movie.english_meaning
+            ? this.convertHTML(movie.english_meaning)
+            : "!#"}
         </td>
         <td className="content_en">
-          {this.convertHTML(movie.Vietnamese_meaning)}
+          {movie.Vietnamese_meaning
+            ? this.convertHTML(movie.Vietnamese_meaning)
+            : "!#"}
         </td>
         <td className="content_en">
           <span className="table-remove">

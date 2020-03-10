@@ -12,7 +12,7 @@ class itemTable extends Component {
     let { word, stt } = this.props;
     return (
       <tr>
-        <td className="content_en">{stt}</td>
+        <td className="index">{stt}</td>
         <td className="content_en">{this.convertHTML(word.word_name)}</td>
         <td className="content_en">
           {this.convertHTML(word.Vietnamese_meaning)}

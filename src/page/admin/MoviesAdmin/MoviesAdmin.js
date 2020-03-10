@@ -109,7 +109,7 @@ const MoviesAdmin = props => {
                     <tr>
                       <th>STT</th>
                       <th>Tên phim</th>
-                      <th>Tự đề phim</th>
+                      <th>Tựa đề phim</th>
                       <th>EN</th>
                       <th>VI</th>
                       <th>Chức năng</th>

@@ -28,6 +28,7 @@ class childModalWords extends Component {
         id: "",
         word_name: "",
         Vietnamese_meaning: "",
+        video: "",
         audio: "",
         quotes: "",
         synonym: "",
@@ -88,10 +89,10 @@ class childModalWords extends Component {
         className={index === 0 ? "tab-pane fade show active" : "tab-pane fade"}
         id={`pills-${item.id}-fill`}
         role="tabpanel"
+        key={index}
       >
         <ReactSummernote
           value={this.checkFieldValue(item.id)}
-          defaultValue={item.id}
           name={item.id}
           options={{
             lang: "ru-RU",
@@ -120,10 +121,6 @@ class childModalWords extends Component {
         />
       </div>
     ));
-  };
-
-  onChange = content => {
-    console.log(content);
   };
 
   handleOnchange = event => {
@@ -290,7 +287,11 @@ class childModalWords extends Component {
                       type="text"
                       className="form-control"
                       placeholder="kinds"
-                      name=""
+                      onChange={this.handleOnchange}
+                      name="video"
+                      value={
+                        this.state.values.video ? this.state.values.video : ""
+                      }
                     />
                   </label>
                 </div>

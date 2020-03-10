@@ -50,7 +50,6 @@ const WordsAdmin = props => {
 
   const renderTbody = () => {
     if (!isEmpty(data)) {
-      let length = data.result.length;
       return data.result.map((item, index) => (
         <ItemTable word={item} stt={index} key={index} />
       ));

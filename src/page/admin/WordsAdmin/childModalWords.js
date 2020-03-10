@@ -47,8 +47,13 @@ class childModalWords extends Component {
       word_nameValid: false,
       Vietnamese_meaningValid: false
     };
-    this.myRef = React.createRef();
   }
+
+  convertHTML = html => {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+  };
 
   renderTab = () => {
     return data.map((item, index) => (
@@ -124,17 +129,12 @@ class childModalWords extends Component {
   };
 
   handleOnchange = event => {
-    this.setState(
-      {
-        values: {
-          ...this.state.values,
-          [event.target.name]: event.target.value
-        }
-      },
-      () => {
-        console.log(this.state);
+    this.setState({
+      values: {
+        ...this.state.values,
+        [event.target.name]: event.target.value
       }
-    );
+    });
   };
 
   handleErrors = event => {
@@ -182,8 +182,6 @@ class childModalWords extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps && nextProps.editInfoWord) {
       //Update
-      console.log(nextProps.editInfoWord);
-
       this.setState({
         values: {
           ...this.state.values,
@@ -269,6 +267,26 @@ class childModalWords extends Component {
                       }
                     />
                   </label>
+
+                  {/*                   <ReactSummernote
+                    value={this.state.values.word_name}
+                    options={{
+                      lang: "ru-RU",
+                      height: 15,
+                      dialogsInBody: true,
+                      value: "",
+                      toolbar: [["view", ["fullscreen", "codeview"]]]
+                    }}
+                    onChange={c => {
+                      this.setState({
+                        values: {
+                          ...this.state.values,
+                          word_name: c
+                        }
+                      });
+                    }}
+                  /> */}
+
                   {this.state.errors.word_name !== "" ? (
                     <div className="Form_err errform">
                       (*) {this.state.errors.word_name}

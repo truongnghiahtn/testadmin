@@ -76,11 +76,11 @@ const MoviesAdmin = props => {
               <div className="iq-header-title">
                 <h4 className="card-title">
                   <i
-                    className="fa fa-user-circle"
+                    className="fa fa-film"
                     aria-hidden="true"
                     style={{ marginRight: 10 }}
                   />
-                  Phim
+                  Quản lý phim
                 </h4>
               </div>
               <span

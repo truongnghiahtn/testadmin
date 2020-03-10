@@ -1,15 +1,39 @@
-.loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
-  border-radius: 50%;
-  animation: spin 2s linear infinite;
+.indicator {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(2);
+  svg {
+    polyline {
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      &#back {
+        stroke: rgba(#3bd3ab, 0.3);
+      }
+      &#front {
+        stroke: #3bd3ab;
+        stroke-dasharray: 12, 36; //Dash 12 & Gap 36
+        stroke-dashoffset: 48;
+        animation: dash 1s linear infinite;
+      }
+    }
+  }
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+@keyframes dash {
+  62.5% {
+    opacity: 0;
   }
-  100% {
-    transform: rotate(360deg);
+  to {
+    stroke-dashoffset: 0;
   }
+}
+
+.cta {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  color: #222;
 }

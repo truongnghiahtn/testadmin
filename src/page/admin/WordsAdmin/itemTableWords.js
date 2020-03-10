@@ -9,25 +9,13 @@ class itemTable extends Component {
     return tmp.textContent || tmp.innerText || "";
   };
   render() {
-    let { movie, stt } = this.props;
+    let { word, stt } = this.props;
     return (
       <tr>
-        <td>{stt}</td>
-        <td>{this.convertHTML(movie.title)}</td>
-        <td className="movie_content">{this.convertHTML(movie.content)}</td>
-        <td>{this.convertHTML(movie.content)}</td>
-        {/*         <td>
-          <img
-            src={movie.image}
-            alt=""
-            style={{ width: "100px", height: "70px" }}
-          />
-        </td> */}
+        <td className="content_en">{stt}</td>
+        <td className="content_en">{this.convertHTML(word.word_name)}</td>
         <td className="content_en">
-          {this.convertHTML(movie.english_meaning)}
-        </td>
-        <td className="content_en">
-          {this.convertHTML(movie.Vietnamese_meaning)}
+          {this.convertHTML(word.Vietnamese_meaning)}
         </td>
         <td className="content_en">
           <span className="table-remove">
@@ -36,7 +24,7 @@ class itemTable extends Component {
               data-toggle="modal"
               data-target="#modelId"
               className="btn btn-warning mb-3"
-              onClick={() => this.props.editMovie(movie)}
+              onClick={() => this.props.editWord(word)}
             >
               <i className="fa fa-wrench" aria-hidden="true" />
               Sửa
@@ -44,7 +32,7 @@ class itemTable extends Component {
             <button
               type="button"
               className="btn btn-danger mb-3"
-              onClick={() => this.props.deleteMovie(movie._id)}
+              onClick={() => this.props.deleteWord(word._id)}
             >
               <i className="ri-delete-bin-2-fill pr-0" />
               Xóa
@@ -57,10 +45,10 @@ class itemTable extends Component {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    editMovie: data => {
-      dispatch(action.actGetEditMovie(data));
+    editWord: data => {
+      dispatch(action.actGetEditWord(data));
     },
-    deleteMovie: id => dispatch(action.actDelMovieAPI(id))
+    deleteWord: id => dispatch(action.actDelWordAPI(id))
   };
 };
 export default connect(null, mapDispatchToProps)(itemTable);

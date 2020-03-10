@@ -8,6 +8,7 @@ import Dashboard from "./page/admin/Dashboard/Dashboard";
 import MoviesAdmin from "./page/admin/MoviesAdmin/MoviesAdmin";
 import Website from "./page/admin/website/website";
 import Add_movie from "./page/admin/add_movie/add_movie";
+import WordsAdmin from "./page/admin/WordsAdmin/WordsAdmin";
 
 const routesHome = [
   {
@@ -51,7 +52,7 @@ const routesAdmin = [
     component: Dashboard
   },
   {
-    path: "/movies",
+    path: "/movie",
     exact: false,
     component: MoviesAdmin
   },
@@ -64,6 +65,11 @@ const routesAdmin = [
     path: "/add-movie",
     exact: false,
     component: Add_movie
+  },
+  {
+    path: "/admin/word",
+    exact: false,
+    component: WordsAdmin
   }
 ];
 

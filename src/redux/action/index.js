@@ -86,13 +86,9 @@ export const getVideoApi = data => {
 };
 
 //Movies Admin
-export const getMoviesApiDevfast = () => {
+export const getMoviesApiDevfast = id => {
   return dispatch => {
-    /*     Axios({
-      method: "GET",
-      url: "http://apitracau.devfast.net/movies"
-    }) */
-    CallAPI("movies", "GET", null, null, apiDevFast)
+    CallAPI(`movies?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
       .then(res =>
         dispatch({
           type: Actiontype.GET_MOVIES_API_DEVFAST,
@@ -125,7 +121,7 @@ export const addMoviesApiDevfast = data => {
         setTimeout(() => {
           swal({
             title: "Error",
-            text: ` ${err.response.data.error} !`,
+            text: ` ${err.response.data.error}!`,
             icon: "error",
             buttons: false,
             timer: 1500
@@ -173,7 +169,7 @@ export const actEditMovieAPI = data => {
         setTimeout(() => {
           swal({
             title: "Error",
-            text: ` ${err.response.data.error} !`,
+            text: ` ${err.response.data.error}!`,
             icon: "error",
             buttons: false,
             timer: 1500
@@ -205,7 +201,7 @@ export const actDelMovieAPI = id => {
         setTimeout(() => {
           swal({
             title: "Error",
-            text: ` ${err.response.data.error} !`,
+            text: ` ${err.response.data.error}!`,
             icon: "error",
             buttons: false,
             timer: 1500
@@ -221,5 +217,132 @@ export const saveWord = word => {
       type: Actiontype.SAVE_WORD,
       word
     });
+  };
+};
+
+//Words Admin
+export const getWordsApiDevfast = id => {
+  return dispatch => {
+    CallAPI(`words?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
+      .then(res =>
+        dispatch({
+          type: Actiontype.GET_WORDS_API_DEVFAST,
+          dataWords: res.data
+        })
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
+export const addWordsApiDevfast = data => {
+  return dispatch => {
+    CallAPI("words", "POST", data, null, apiDevFast)
+      .then(res => {
+        swal({
+          title: "Good job!",
+          text: `${res.statusText}!`,
+          icon: "success",
+          buttons: false,
+          timer: 1500
+        });
+        dispatch({
+          type: Actiontype.ADD_WORDS_API_DEVFAST,
+          word: res.data
+        });
+      })
+      .catch(err => {
+        setTimeout(() => {
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.error}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+        console.log(err);
+      });
+  };
+};
+
+export const actOnEditWord = () => {
+  return dispatch => {
+    dispatch({ type: Actiontype.EDIT_WORD, word: null });
+  };
+};
+
+export const actGetEditWord = data => {
+  return dispatch => {
+    dispatch({ type: Actiontype.GET_EDIT_WORD, word: data });
+  };
+};
+
+export const actEditWordAPI = data => {
+  return dispatch => {
+    CallAPI(`words/${data.id}`, "PUT", data, null, apiDevFast)
+      .then(res => {
+        setTimeout(() => {
+          swal({
+            title: "Good job!",
+            text: `${res.statusText}!`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+        dispatch(
+          {
+            type: Actiontype.EDIT_WORDS_API_DEVFAST,
+            word: res.data
+          },
+          console.log(res)
+        );
+      })
+      .catch(err => {
+        setTimeout(() => {
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.error}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+      });
+  };
+};
+
+export const actDelWordAPI = id => {
+  return dispatch => {
+    CallAPI(`words/${id}`, "DELETE", null, null, apiDevFast)
+      .then(res => {
+        setTimeout(() => {
+          swal({
+            title: "Good job!",
+            text: `${res.statusText}!`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+        dispatch({
+          type: Actiontype.DEL_WORDS_API_DEVFAST,
+          idWord: res.data.data._id
+        });
+      })
+      .catch(err => {
+        setTimeout(() => {
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.error}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+        console.log(err);
+      });
   };
 };

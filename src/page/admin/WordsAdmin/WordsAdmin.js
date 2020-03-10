@@ -75,7 +75,7 @@ const WordsAdmin = props => {
                     aria-hidden="true"
                     style={{ marginRight: 10 }}
                   />
-                  Word
+                  Quản trị từ ngữ
                 </h4>
               </div>
               <span

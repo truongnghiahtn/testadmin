@@ -92,6 +92,13 @@ function Navtab(props) {
       content: ""
     },
     {
+      id: "dict_np",
+      name: "Thành ngữ",
+      Component: TraTu,
+      status: false,
+      content: ""
+    },
+    {
       id: "dict_cn",
       name: "Chuyên ngành",
       Component: TraTu,
@@ -144,8 +151,8 @@ function Navtab(props) {
   const [value, setValue] = React.useState("tracau");
 
   React.useEffect(() => {
-    setValue("tracau");
-
+    if (props.traCau) setValue("tracau");
+    if (props.word && !props.traCau.length) setValue("hinhanh");
     let dataNew = data.map(item => {
       if (
         item.id !== "tracau" &&
@@ -210,14 +217,31 @@ function Navtab(props) {
           aria-label="scrollable auto tabs example"
         >
           {props.traCau.length ? renderTab() : ""}
+          {props.word && !props.traCau.length ? (
+            <Tab
+              value={data[data.length - 1].id}
+              label={data[data.length - 1].name}
+              {...a11yProps(`${data[data.length - 1].id}`)}
+            />
+          ) : (
+            ""
+          )}
         </Tabs>
       </AppBar>
       {props.traCau.length ? renderTabPanel() : ""}
+      {props.word && !props.traCau.length ? (
+        <TabPanel value={value} index={data[data.length - 1].id}>
+          <HinhAnh />
+        </TabPanel>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
 const mapStateToProps = state => {
   return {
+    word: state.deMoReducer.word,
     traCau: state.deMoReducer.traCau,
     traTu: state.deMoReducer.traTu
   };

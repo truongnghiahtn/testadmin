@@ -1,92 +1,67 @@
 .seaction {
   margin: 10px 0;
 }
+.makeStyles-root-1 {
+  display: none !important;
+}
 .search-section {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-image: url("/../assets/images/bg-head.jpg");
+  background-position: 50% 50%;
+  background-size: cover;
+  padding: 120px 0 70px;
+  text-align: center;
+  .search-title {
+    color: white;
+    font-size: 32px;
+    margin-bottom: 40px;
+    font-weight: 400;
+  }
   .masthead {
-    padding: 0;
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
-    width: 1%;
-    padding: 170px 0 0;
-    text-align: center;
+    position: relative;
+    width: 100%;
+    .container {
+      padding-left: 40px;
+      padding-right: 40px;
+      max-width: 940px;
+      margin-left: auto;
+      margin-right: auto;
+      box-sizing: content-box;
+      .tc-header {
+        width: 100%;
+        position: relative;
+      }
+    }
     form#tc-search-form {
       position: relative;
-      margin-top: 10px;
-
+      margin-bottom: 10px;
       .tc-search-textboxwrap {
-        display: block;
-        position: relative;
-        border-radius: 4px;
         .tc-search-textbox {
           display: block;
-          margin: 0 auto;
           width: 100%;
-          padding: 0.8em 10em 0.8em 1em;
-          border: 2px solid #e1e8ee;
-          outline: 0;
-          -webkit-appearance: none;
-          border-radius: 30px;
           font-size: 18px;
-          color: #86939e;
-          opacity: 0.92;
-        }
-        .tc-search-selectbox {
-          width: 10rem;
-          display: block;
-          position: absolute;
-          margin-top: auto;
-          right: 50px;
-          margin-bottom: auto;
-          top: 0;
-          bottom: 0;
-          cursor: pointer;
-          &::before {
-            position: absolute;
-            content: "|";
-            left: 1rem;
-            top: 0.85rem;
-            color: #dedede;
-            font-size: 1.5rem;
+          padding-left: 60px;
+          height: 60px;
+          background-color: rgba(255, 255, 255, 0.2);
+          border-color: transparent;
+          color: white;
+          font-weight: 100;
+          border-radius: 5px;
+          &::placeholder {
+            color: rgba(255, 255, 255, 0.75);
           }
-          &::after {
-            position: absolute;
-            right: 1.5rem;
-            top: 1.8rem;
-            line-height: 1.5;
-            display: inline-block;
-            width: 0;
-            height: 0;
-            margin-left: 0.255em;
-            vertical-align: 0.255em;
-            content: "";
-            border-top: 0.3em solid;
-            border-right: 0.3em solid transparent;
-            border-bottom: 0;
-            border-left: 0.3em solid transparent;
-            color: #a7a7a7;
-          }
-          select {
-            display: inline-block;
-            height: 100%;
-            line-height: 1.5;
-            color: #a7a7a7;
-            vertical-align: middle;
-            background: 0 0;
-            border: none;
-            font-size: 18px;
-            -webkit-appearance: none;
-            cursor: pointer;
-            &:focus {
-              outline: none;
-            }
+          &:focus {
+            background-color: rgba(255, 255, 255, 0.25);
+            border-color: transparent;
           }
         }
         .tc-search-button {
           display: block;
           position: absolute;
-          right: 20px;
+          left: 10px;
           top: 8px;
           width: 40px;
           height: 40px;
@@ -95,8 +70,8 @@
             display: block;
             position: absolute;
             font-size: 32px;
-            font-weight: 400;
-            color: #e1e8ee;
+            font-weight: 100;
+            color: rgba(255, 255, 255, 0.75);
             left: 0;
             top: 0;
             right: 0;
@@ -116,7 +91,6 @@
     margin-top: 2px;
     text-align: left;
     cursor: default;
-    border: 1px solid #eee;
     border-top: 0;
     background: #fff;
     position: absolute;
@@ -126,8 +100,8 @@
     overflow: hidden;
     overflow-y: auto;
     box-sizing: border-box;
-    border-radius: 16px;
-    width: 98%;
+    border-radius: 5px;
+    width: 101%;
     &.show {
       display: block;
     }
@@ -161,6 +135,46 @@
         background: #f0f0f0;
         cursor: pointer;
       }
+    }
+  }
+}
+
+
+// reposive
+@media(max-width:1199px){
+
+    .tc-search-textboxwrap {
+      .tc-search-textbox {
+   
+        width: 100%;
+  
+      }
+    
+    }
+}
+@media(max-width:992px){
+  form#tc-search-form {
+
+    .tc-search-textboxwrap {
+      .tc-search-textbox {
+   
+        width: 90%!important;
+  
+      }
+    
+    }
+  }
+}
+@media(max-width:767px){
+  form#tc-search-form {
+
+    .tc-search-textboxwrap {
+      .tc-search-textbox {
+   
+        width: 85%!important;
+  
+      }
+    
     }
   }
 }

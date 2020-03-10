@@ -1,38 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import "./style.scss";
-import ItemTable from "./itemTableMovies";
-import ChildModal from "./childModalMovies";
+import ItemTable from "./itemTableWords";
+import ChildModal from "./childModalWords";
 import Modalfather from "../../../components/modal/fatherModal";
 import * as action from "../../../redux/action/index";
 import SearchAdmin from "../../../components/SearchAdmin";
 import Pagination from "../../../components/Pagination/index";
 const Modal = Modalfather(ChildModal);
 
-const MoviesAdmin = props => {
+const WordsAdmin = props => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [numberPage, setNumberPage] = useState(1);
 
   useEffect(() => {
-    /*          const fetchPosts = async () => {
-      setLoading(true);
-      const res = await props.getListMovies(currentPage);
-      console.log(res, 1);
-      setLoading(false);
-    };
-    fetchPosts();  */
     setLoading(true);
-    props.getListMovies(currentPage);
+    props.getListWords(currentPage);
     setTimeout(() => {
       setLoading(false);
     }, 150);
   }, [currentPage]);
 
   useEffect(() => {
-    setData(props.listMovies);
-  }, [props.listMovies]);
+    setData(props.listWords);
+  }, [props.listWords]);
 
   const convertHTML = html => {
     var tmp = document.createElement("DIV");
@@ -42,9 +35,9 @@ const MoviesAdmin = props => {
 
   const handleFilter = keyword => {
     let dataUpdate = { ...data };
-    dataUpdate.result = props.listMovies.result.filter(
+    dataUpdate.result = props.listWords.result.filter(
       item =>
-        convertHTML(item.title)
+        convertHTML(item.word_name)
           .toLowerCase()
           .indexOf(keyword.toLowerCase()) > -1
     );
@@ -57,8 +50,9 @@ const MoviesAdmin = props => {
 
   const renderTbody = () => {
     if (!isEmpty(data)) {
+      let length = data.result.length;
       return data.result.map((item, index) => (
-        <ItemTable movie={item} stt={index} key={index} />
+        <ItemTable word={item} stt={index} key={index} />
       ));
     }
   };
@@ -67,6 +61,7 @@ const MoviesAdmin = props => {
     setCurrentPage(number);
     setNumberPage(number);
   };
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -80,7 +75,7 @@ const MoviesAdmin = props => {
                     aria-hidden="true"
                     style={{ marginRight: 10 }}
                   />
-                  Phim
+                  Word
                 </h4>
               </div>
               <span
@@ -91,10 +86,10 @@ const MoviesAdmin = props => {
                   data-toggle="modal"
                   data-target="#modelId"
                   className="btn btn-sm iq-bg-success"
-                  onClick={() => props.onEditMovie()}
+                  onClick={() => props.actOnEditWord()}
                 >
                   <i className="ri-add-fill">
-                    <span className="pl-1">Thêm phim</span>
+                    <span className="pl-1">Thêm word</span>
                   </i>
                 </button>
               </span>
@@ -108,10 +103,8 @@ const MoviesAdmin = props => {
                   <thead>
                     <tr>
                       <th>STT</th>
-                      <th>Tên phim</th>
-                      <th>Tự đề phim</th>
-                      <th>EN</th>
-                      <th>VI</th>
+                      <th>Tên từ / câu</th>
+                      <th>VN</th>
                       <th>Chức năng</th>
                     </tr>
                   </thead>
@@ -135,7 +128,7 @@ const MoviesAdmin = props => {
                         }
                         onClick={() => {
                           paginate(1);
-                          setNumberPage(-1);
+                          setNumberPage(1);
                         }}
                       >
                         <a className="page-link" href="#" aria-label="Previous">
@@ -167,7 +160,12 @@ const MoviesAdmin = props => {
                                 data.pagination.itemPerPage
                             )
                           );
-                          setNumberPage(-1);
+                          setNumberPage(
+                            Math.ceil(
+                              data.pagination.totalItem /
+                                data.pagination.itemPerPage
+                            )
+                          );
                         }}
                       >
                         <a className="page-link" href="#" aria-label="Next">
@@ -191,17 +189,17 @@ const MoviesAdmin = props => {
 
 const mapStateToProps = state => {
   return {
-    listMovies: state.deMoReducer.dataMovies
+    listWords: state.deMoReducer.dataWords
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    getListMovies: id => {
-      dispatch(action.getMoviesApiDevfast(id));
+    getListWords: id => {
+      dispatch(action.getWordsApiDevfast(id));
     },
-    onEditMovie: () => {
-      dispatch(action.actOnEditMovie());
+    actOnEditWord: () => {
+      dispatch(action.actOnEditWord());
     }
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(MoviesAdmin);
+export default connect(mapStateToProps, mapDispatchToProps)(WordsAdmin);

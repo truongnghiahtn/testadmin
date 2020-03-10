@@ -20,7 +20,7 @@
           text-align: center;
           font-family: Arial !important;
           h1 {
-            color: #1e85dd;
+            color: #00adff;
             font-size: 1.5em;
             display: inline;
             margin: 0;
@@ -29,11 +29,13 @@
           span {
             font-weight: 400;
             font-size: 1.5em;
+            color: rgba(255, 255, 255, 0.9);
           }
           h2 {
             font-size: 0.75em;
             margin-bottom: 0.5rem;
             font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
           }
         }
       }
@@ -55,13 +57,16 @@
               display: block;
               font-size: 13px;
               font-weight: 400;
-              color: #86939e;
+              color: rgba(256, 256, 256, 0.6);
               position: relative;
               margin-left: 15px;
               text-decoration: none;
               transition: none;
               &.active {
                 color: #007bff;
+              }
+              &:hover {
+                color: white;
               }
             }
           }
@@ -124,7 +129,7 @@
   transition: all 0.2s ease-out;
 }
 .paper-nav-toggle.paper-nav-white > i {
-  color: #fff;
+  color: white;
   background: #fff;
 }
 .paper-nav-toggle.paper-nav-white > i::after,
@@ -243,7 +248,7 @@
         border-bottom: 1px solid #fafafa;
         position: relative;
         a {
-          color: #86939e;
+          color: black;
           display: block;
           position: relative;
           padding: 15px 20px;

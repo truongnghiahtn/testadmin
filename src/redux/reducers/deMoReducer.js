@@ -12,7 +12,9 @@ let initialState = {
   dataWords: {},
   dataAllWords: {},
   editWord: null,
-  ADMIN_LOGIN: ""
+  ADMIN_LOGIN: "",
+  dataIntro: "",
+  dataTerm: ""
 };
 
 const deMoReducer = (state = initialState, action) => {
@@ -37,6 +39,12 @@ const deMoReducer = (state = initialState, action) => {
       return { ...state };
     case ActionType.GET_VIDEO_API:
       state.video = action.video;
+      return { ...state };
+    case ActionType.GET_INTRO:
+      state.dataIntro = action.dataIntro;
+      return { ...state };
+    case ActionType.GET_TERM:
+      state.dataTerm = action.dataTerm;
       return { ...state };
     //Movies
     case ActionType.GET_ALL_WORDS_API_DEVFAST:

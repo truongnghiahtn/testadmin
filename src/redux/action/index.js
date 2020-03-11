@@ -3,7 +3,6 @@ import { CallAPI } from "../../utils/callApi";
 import { apiDevFast } from "../../utils/config";
 import swal from "sweetalert";
 
-
 export const getDataSearchApi = data => {
   return dispatch => {
     if (data) {
@@ -82,6 +81,31 @@ export const getVideoApi = data => {
       .catch(err => {
         console.log(err);
       });
+  };
+};
+
+export const getDataPage = typePage => {
+  return dispatch => {
+    CallAPI(`staticContent/${typePage}`)
+      .then(rs => {
+        switch (typePage) {
+          case "INTRO":
+            dispatch({
+              type: Actiontype.GET_INTRO,
+              dataIntro: rs.data
+            });
+            break;
+          case "TERM":
+            dispatch({
+              type: Actiontype.GET_TERM,
+              dataTerm: rs.data
+            });
+            break;
+          default:
+            break;
+        }
+      })
+      .catch(err => {});
   };
 };
 
@@ -369,14 +393,13 @@ export const actloginAdmin = (user, history) => {
   return dispatch => {
     CallAPI(`/login`, "POST", user, null)
       .then(result => {
-      
-          sessionStorage.setItem("userAdmin", JSON.stringify(result.data));
-          history.push("admin-dashboard");
-          console.log(result.data);
-          dispatch({
-            type: Actiontype.ADMIN_LOGIN,
-            ADMIN_LOGIN: ""
-          });
+        sessionStorage.setItem("userAdmin", JSON.stringify(result.data));
+        history.push("admin-dashboard");
+        console.log(result.data);
+        dispatch({
+          type: Actiontype.ADMIN_LOGIN,
+          ADMIN_LOGIN: ""
+        });
       })
       .catch(err => {
         console.log(err);
@@ -397,4 +420,4 @@ export const actloginAdmin = (user, history) => {
       });
   };
 };
-// 
+//

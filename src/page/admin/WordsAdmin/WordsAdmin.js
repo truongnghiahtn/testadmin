@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import "./style.scss";
@@ -63,7 +64,7 @@ const WordsAdmin = props => {
       return data.result.map((item, index) => (
         <ItemTable
           word={item}
-          stt={index + data.pagination.minIndex}
+          stt={index + data.pagination.minIndex + 1}
           key={index}
         />
       ));
@@ -148,7 +149,7 @@ const WordsAdmin = props => {
                           paginate(currentPage > 1 ? currentPage - 1 : 1);
                         }}
                       >
-                        <a className="page-link" href="#" aria-label="Previous">
+                        <a className="page-link" aria-label="Previous">
                           <span aria-hidden="true">«</span>
                         </a>
                       </li>
@@ -177,7 +178,7 @@ const WordsAdmin = props => {
                           );
                         }}
                       >
-                        <a className="page-link" href="#" aria-label="Next">
+                        <a className="page-link" aria-label="Next">
                           <span aria-hidden="true">»</span>
                         </a>
                       </li>

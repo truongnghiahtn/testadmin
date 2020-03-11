@@ -42,11 +42,20 @@ class childModalMovies extends Component {
         Vietnamese_meaning: ""
       },
       formValid: false,
-      imageValid: false,
+      imageValid: true,
       titleValid: false,
       contentValid: false,
       english_meaningValid: false,
-      Vietnamese_meaningValid: false
+      Vietnamese_meaningValid: false,
+      files: [
+        {
+          source: "index.html",
+          options: {
+            type: "local"
+          }
+        }
+      ],
+      file: null
     };
   }
   handleOnchange = event => {
@@ -124,6 +133,7 @@ class childModalMovies extends Component {
       }
     );
   };
+
   FormValidation = () => {
     this.setState({
       formValid:
@@ -136,7 +146,6 @@ class childModalMovies extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-
     if (this.props.editInfoMovie === null) {
       this.props.addMovie(this.state.values);
       console.log(this.state.values);
@@ -170,20 +179,28 @@ class childModalMovies extends Component {
           english_meaning: "",
           Vietnamese_meaning: ""
         },
-
         imageValid: true,
         titleValid: true,
         contentValid: true,
         english_meaningValid: true,
         Vietnamese_meaningValid: true,
-        formValid: true
+        formValid: true,
+        files: [
+          ...this.state.files,
+          {
+            source: `http://27.71.233.139:3001${nextProps.editInfoMovie.image}`,
+            options: {
+              type: "local"
+            }
+          }
+        ]
       });
     } else {
       //ADD
       this.setState({
         values: {
           ...this.state.values,
-          image: "",
+          image: null,
           title: "",
           content: "",
           english_meaning: "",
@@ -194,7 +211,14 @@ class childModalMovies extends Component {
         contentValid: false,
         english_meaningValid: false,
         Vietnamese_meaningValid: false,
-        formValid: false
+        formValid: false,
+        files: [
+          {
+            source: "index.html",
+            options: {}
+          }
+        ],
+        file: null
       });
     }
   }
@@ -302,27 +326,18 @@ class childModalMovies extends Component {
             </div>
 
             <FilePond
-              ref={ref => (this.pond = ref)}
-              files={this.state.values.image}
-              allowMultiple={true}
+              files={this.state.files}
+              allowMultiple={false}
               maxFiles={1}
-              server="https://tracau.vn/resources/posters/thumbnails"
               onupdatefiles={fileItems => {
-                // Set currently active file objects to this.state
                 console.log(fileItems);
-
-                this.setState(
-                  {
-                    values: {
-                      ...this.state.values,
-                      image: fileItems.length ? fileItems[0].file.name : ""
-                    },
-                    imageValid: true
+                this.setState({
+                  values: {
+                    ...this.state.values,
+                    image: fileItems.length ? fileItems[0].file : ""
                   },
-                  () => {
-                    this.FormValidation();
-                  }
-                );
+                  files: fileItems.map(item => item.file)
+                });
               }}
             />
             {this.state.errors.image !== "" ? (

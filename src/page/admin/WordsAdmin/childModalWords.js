@@ -16,6 +16,7 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import $ from "jquery";
 
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
@@ -28,8 +29,9 @@ class childModalWords extends Component {
         id: "",
         word_name: "",
         Vietnamese_meaning: "",
-        video: "",
+        video: [1, 2, 3, 4],
         audio: "",
+        grammar: "",
         quotes: "",
         synonym: "",
         technical_term: "",
@@ -47,6 +49,19 @@ class childModalWords extends Component {
       word_nameValid: false,
       Vietnamese_meaningValid: false
     };
+  }
+
+  componentDidMount() {
+    $(".custom-file-input").on("change", function() {
+      var fileName = $(this)
+        .val()
+        .split("\\")
+        .pop();
+      $(this)
+        .siblings(".custom-file-label")
+        .addClass("selected")
+        .html(fileName);
+    });
   }
 
   convertHTML = html => {
@@ -73,6 +88,8 @@ class childModalWords extends Component {
 
   checkFieldValue = name => {
     switch (name) {
+      case "grammar":
+        return this.state.values.grammar;
       case "quotes":
         return this.state.values.quotes;
       case "synonym":
@@ -137,6 +154,15 @@ class childModalWords extends Component {
     });
   };
 
+  handleOnchangeAudio = e => {
+    this.setState({
+      values: {
+        ...this.state.values,
+        audio: e.target.files[0]
+      }
+    });
+  };
+
   handleErrors = event => {
     let { name, value } = event.target;
     let message = value === "" ? "Do not be empty" : "";
@@ -187,9 +213,11 @@ class childModalWords extends Component {
           ...this.state.values,
           word_name: nextProps.editInfoWord.word_name,
           Vietnamese_meaning: nextProps.editInfoWord.Vietnamese_meaning,
+          video: nextProps.editInfoWord.video,
           audio: nextProps.editInfoWord.audio,
           quotes: nextProps.editInfoWord.quotes,
           synonym: nextProps.editInfoWord.synonym,
+          grammar: nextProps.editInfoWord.grammar,
           id: nextProps.editInfoWord._id,
           technical_term: nextProps.editInfoWord.technical_term,
           english_to_Vietnamese: nextProps.editInfoWord.english_to_Vietnamese,
@@ -213,7 +241,9 @@ class childModalWords extends Component {
           ...this.state.values,
           word_name: "",
           Vietnamese_meaning: "",
-          audio: "",
+          video: [1, 2, 3, 4],
+          audio: null,
+          grammar: "",
           quotes: "",
           synonym: "",
           technical_term: "",
@@ -227,12 +257,19 @@ class childModalWords extends Component {
     }
   }
 
+  handleOnchangeVideo = e => {
+    console.log(e);
+  };
+
   render() {
     return (
       <div>
         <div className="modal-header">
           {this.props.editInfoWord === null ? (
-            <h5 className="modal-title">Thêm từ / câu</h5>
+            <h5 className="modal-title">
+              <img src="/assets/images/language/uk_big.png" alt="" />
+              <span>&nbsp;Thêm từ / câu</span>
+            </h5>
           ) : (
             <h5 className="modal-title">Sửa từ / câu</h5>
           )}
@@ -251,11 +288,11 @@ class childModalWords extends Component {
               <div className="col">
                 <div className="form-group">
                   <label style={{ width: "100%" }}>
-                    EN
+                    Từ / Câu tiếng anh
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="English"
+                      placeholder=""
                       onChange={this.handleOnchange}
                       onBlur={this.handleErrors}
                       onKeyUp={this.handleErrors}
@@ -267,25 +304,6 @@ class childModalWords extends Component {
                       }
                     />
                   </label>
-
-                  {/*                   <ReactSummernote
-                    value={this.state.values.word_name}
-                    options={{
-                      lang: "ru-RU",
-                      height: 15,
-                      dialogsInBody: true,
-                      value: "",
-                      toolbar: [["view", ["fullscreen", "codeview"]]]
-                    }}
-                    onChange={c => {
-                      this.setState({
-                        values: {
-                          ...this.state.values,
-                          word_name: c
-                        }
-                      });
-                    }}
-                  /> */}
 
                   {this.state.errors.word_name !== "" ? (
                     <div className="Form_err errform">
@@ -300,30 +318,11 @@ class childModalWords extends Component {
               <div className="col">
                 <div className="form-group">
                   <label style={{ width: "100%" }}>
-                    Kinds
+                    Từ / Câu tiếng việt
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="kinds"
-                      onChange={this.handleOnchange}
-                      name="video"
-                      value={
-                        this.state.values.video ? this.state.values.video : ""
-                      }
-                    />
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col">
-                <div className="form-group">
-                  <label style={{ width: "100%" }}>
-                    VN
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Vietnamese"
+                      placeholder=""
                       onChange={this.handleOnchange}
                       onBlur={this.handleErrors}
                       onKeyUp={this.handleErrors}
@@ -344,23 +343,75 @@ class childModalWords extends Component {
                   )}
                 </div>
               </div>
-
+            </div>
+            <div className="row">
               <div className="col">
                 <div className="form-group">
                   <label style={{ width: "100%" }}>
                     Audio
+                    <div className="custom-file">
+                      <input
+                        type="file"
+                        className="custom-file-input"
+                        id="customFile"
+                        placeholder="Audio"
+                        onChange={this.handleOnchangeAudio}
+                        name="audio"
+                        accept="audio/*"
+                        /* value={
+                          this.state.values.audio ? this.state.values.audio : ""
+                        } */
+                      />
+                      <label className="custom-file-label" htmlFor="customFile">
+                        Choose file
+                      </label>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-10">
+                <div className="form-group">
+                  <label style={{ width: "100%" }}>
+                    Video
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="audio"
-                      onChange={this.handleOnchange}
-                      name="audio"
-                      value={
-                        this.state.values.audio ? this.state.values.audio : ""
-                      }
+                      placeholder=""
+                      onChange={this.handleOnchangeVideo}
+                      name="video"
+                      value={this.state.values.video}
                     />
+                    {/* {this.state.values.video.map((item, index) => {
+                      return (
+                        <React.Fagment>
+                          
+                          {index === 0 ? (
+                            <button
+                              className="btn btn-primary form-control"
+                              style={{ lineHeight: "initial" }}
+                              onClick={() => {}}
+                            >
+                              Thêm video
+                            </button>
+                          ) : (
+                            ""
+                          )}
+                        </React.Fagment>
+                      ); */}
+                    })}
                   </label>
                 </div>
+              </div>
+              <div className="col-2" style={{ lineHeight: "83px" }}>
+                <button
+                  className="btn btn-primary form-control"
+                  style={{ lineHeight: "initial" }}
+                  onClick={() => {}}
+                >
+                  Thêm video
+                </button>
               </div>
             </div>
             <div className="tab-form">

@@ -16,7 +16,6 @@ const Pagination = ({ itemPerPage, totalItem, paginate, numberPage }) => {
           paginate(number);
         }}
         className="page-link"
-        href="#"
       >
         {number}
       </a>

@@ -102,8 +102,17 @@ export const getMoviesApiDevfast = id => {
 };
 
 export const addMoviesApiDevfast = data => {
+  /*   const config = {
+    headers: {
+      "content-type": "multipart/form-data"
+    }
+  }; */
+  let formData = new FormData();
+  for (let key in data) {
+    formData.append(key, data[key]);
+  }
   return dispatch => {
-    CallAPI("movies", "POST", data, null, apiDevFast)
+    CallAPI("movies", "POST", formData, null, apiDevFast)
       .then(res => {
         swal({
           title: "Good job!",
@@ -253,8 +262,12 @@ export const getWordsApiDevfast = id => {
 };
 
 export const addWordsApiDevfast = data => {
+  let formData = new FormData();
+  for (let key in data) {
+    formData.append(key, data[key]);
+  }
   return dispatch => {
-    CallAPI("words", "POST", data, null, apiDevFast)
+    CallAPI("words", "POST", formData, null, apiDevFast)
       .then(res => {
         swal({
           title: "Good job!",

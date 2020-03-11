@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 class TraCau extends Component {
   renderDataTraCau = () => {
-    return this.props.traCau.length
-      ? this.props.traCau.map((item, index) => {
+    console.log(this.props.traCau)
+    return this.props.traCau[0].length
+      ? this.props.traCau[0].map((item, index) => {
           return (
             <li key={index}>
               <article id={item._id} className="tc-row tc-row-content">

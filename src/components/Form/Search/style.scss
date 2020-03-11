@@ -1,7 +1,8 @@
 .seaction {
   margin: 10px 0;
 }
-.makeStyles-root-1 {
+.makeStyles-root-1,
+.makeStyles-root-59 {
   margin-top: 284px !important;
 }
 .search-section {
@@ -29,7 +30,6 @@
       max-width: 940px;
       margin-left: auto;
       margin-right: auto;
-      box-sizing: content-box;
       .tc-header {
         width: 100%;
         position: relative;
@@ -101,7 +101,7 @@
     overflow-y: auto;
     box-sizing: border-box;
     border-radius: 5px;
-    width: 101%;
+    width: 100%;
     &.show {
       display: block;
     }
@@ -138,43 +138,92 @@
     }
   }
 }
-
-
-// reposive
-@media(max-width:1199px){
-
-    .tc-search-textboxwrap {
-      .tc-search-textbox {
-   
-        width: 100%;
-  
+@media (max-width: 1024px) {
+  .search-section {
+    #tc-content-search {
+      .autocomplete-suggestion {
+        .sl,
+        p {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+        .sl {
+          max-width: 100px;
+        }
+        p {
+          max-width: 80%;
+        }
       }
-    
-    }
-}
-@media(max-width:992px){
-  form#tc-search-form {
-
-    .tc-search-textboxwrap {
-      .tc-search-textbox {
-   
-        width: 90%!important;
-  
-      }
-    
     }
   }
 }
-@media(max-width:767px){
-  form#tc-search-form {
-
-    .tc-search-textboxwrap {
-      .tc-search-textbox {
-   
-        width: 85%!important;
-  
+@media (max-width: 992px) {
+  .search-section {
+    .search-title {
+      font-size: 27px;
+    }
+    .masthead {
+      .container {
+        padding-left: 30px;
+        padding-right: 30px;
+        max-width: 100%;
+        box-sizing: border-box;
       }
-    
+    }
+    #tc-content-search {
+      .autocomplete-suggestion {
+        p {
+          max-width: 70%;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 767px) {
+  .search-section {
+    .search-title {
+      font-size: 27px;
+    }
+    .masthead {
+      .container {
+        padding-left: 15px;
+        padding-right: 15px;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+    }
+    #tc-content-search {
+      .autocomplete-suggestion {
+        p {
+          max-width: 65%;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 767px) {
+  .search-section {
+    .search-title {
+      font-size: 27px;
+    }
+    .masthead {
+      .container {
+        padding-left: 15px;
+        padding-right: 15px;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+    }
+    #tc-content-search {
+      .autocomplete-suggestion {
+        .sl {
+          max-width: 200px;
+        }
+        p {
+          display: none;
+        }
+      }
     }
   }
 }

@@ -10,9 +10,7 @@ const DieuKhoan = props => {
   return (
     <div>
       <PageTitleArea title="Điều khoản" />
-      <div className="main-page-content">
-        {props.dataTerm ? <div>{props.dataTerm.content}</div> : ""}
-      </div>
+      {props.dataTerm ? <div>{props.dataTerm.content}</div> : ""}
     </div>
   );
 };

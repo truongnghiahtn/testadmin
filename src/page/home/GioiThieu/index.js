@@ -10,9 +10,7 @@ const GioiThieu = props => {
   return (
     <div>
       <PageTitleArea title="Giới thiệu" />
-      <div className="main-page-content">
-        {props.dataIntro ? <div>{props.dataIntro.content}</div> : ""}
-      </div>
+      {props.dataIntro ? <div>{props.dataIntro.content}</div> : ""}
     </div>
   );
 };

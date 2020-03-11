@@ -1,15 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as action from "../../../redux/action";
+import PageTitleArea from "../../../components/PageTitleArea";
 
 const DieuKhoan = props => {
   React.useEffect(() => {
     props.getDataPage("TERM");
   }, []);
   return (
-    <h1 style={{ padding: "100px 0", textAlign: "center", color: "red" }}>
-      DieuKhoan
-    </h1>
+    <div>
+      <PageTitleArea title="Điều khoản" />
+      <div className="main-page-content">
+        {props.dataTerm ? <div>{props.dataTerm.content}</div> : ""}
+      </div>
+    </div>
   );
 };
 

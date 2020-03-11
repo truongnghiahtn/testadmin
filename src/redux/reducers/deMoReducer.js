@@ -10,8 +10,10 @@ let initialState = {
   editMovie: null,
   word: "",
   dataWords: {},
+  dataAllWords: {},
   editWord: null
 };
+
 const deMoReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.GET_DATA_SEARCH:
@@ -36,6 +38,9 @@ const deMoReducer = (state = initialState, action) => {
       state.video = action.video;
       return { ...state };
     //Movies
+    case ActionType.GET_ALL_WORDS_API_DEVFAST:
+      state.dataAllWords = action.dataWords;
+      return { ...state };
     case ActionType.GET_MOVIES_API_DEVFAST:
       state.dataMovies = action.dataMovies;
       return { ...state };
@@ -94,14 +99,22 @@ const deMoReducer = (state = initialState, action) => {
       let resultWords = state.dataWords.result.filter(
         item => action.idWord !== item._id
       );
+      let resulAlltWords = state.dataAllWords.result.filter(
+        item => action.idWord !== item._id
+      );
       let paginationWord = {
         ...state.dataWords.pagination,
         totalItem: totalItemWords
       };
       let dataWords = {
-        ...state.dataMovies,
+        ...state.dataWords,
         pagination: paginationWord,
         result: resultWords
+      };
+      state.dataAllWords = {
+        ...state.dataAllWords,
+        pagination: paginationWord,
+        result: resulAlltWords
       };
       state.dataWords = { ...dataWords };
       return { ...state };
@@ -111,23 +124,49 @@ const deMoReducer = (state = initialState, action) => {
         ...state.dataWords.pagination,
         totalItem: totalItemWords1
       };
+      let paginationAllWords1 = {
+        ...state.dataWords.pagination,
+        totalItem: totalItemWords1
+      };
       let resultWords1 = state.dataWords.result;
+      let resulAlltWords1 = state.dataAllWords.result;
       resultWords1.splice(0, 0, action.word);
+      resulAlltWords1.splice(0, 0, action.word);
       state.dataWords = {
         ...state.dataWords,
         pagination: paginationWords1,
         result: resultWords1
       };
+      state.dataAllWords = {
+        ...state.dataAllWords,
+        pagination: paginationAllWords1,
+        result: resulAlltWords1
+      };
       return { ...state };
     case ActionType.EDIT_WORDS_API_DEVFAST:
-      let stt = state.dataWords.result.findIndex(
+      let stt = state.dataAllWords.result.findIndex(
+        item => item._id === action.word._id
+      );
+      let stt2 = state.dataWords.result.findIndex(
         item => item._id === action.word._id
       );
       let listWordsUpdate = state.dataWords.result;
+      let listAllWordsUpdate = state.dataAllWords.result;
       if (stt !== -1) {
-        listWordsUpdate[stt] = action.word;
+        listAllWordsUpdate[stt] = action.word;
       }
-      state.dataWords = { ...state.dataWords, result: listWordsUpdate };
+
+      if (stt2 !== -1) {
+        listWordsUpdate[stt2] = action.word;
+      }
+      state.dataAllWords = {
+        ...state.dataAllWords,
+        result: listAllWordsUpdate
+      };
+      state.dataWords = {
+        ...state.dataWords,
+        result: listWordsUpdate
+      };
       return { ...state };
     default:
       return { ...state };

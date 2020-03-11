@@ -24,10 +24,14 @@ class itemTable extends Component {
           />
         </td> */}
         <td className="content_en">
-          {this.convertHTML(movie.english_meaning)}
+          {movie.english_meaning
+            ? this.convertHTML(movie.english_meaning)
+            : "!#"}
         </td>
         <td className="content_en">
-          {this.convertHTML(movie.Vietnamese_meaning)}
+          {movie.Vietnamese_meaning
+            ? this.convertHTML(movie.Vietnamese_meaning)
+            : "!#"}
         </td>
         <td className="content_en">
           <span className="table-remove">

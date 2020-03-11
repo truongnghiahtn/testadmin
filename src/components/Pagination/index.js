@@ -5,7 +5,6 @@ const Pagination = ({ itemPerPage, totalItem, paginate, numberPage }) => {
   for (let i = 1; i <= Math.ceil(totalItem / itemPerPage); i++) {
     pageNumber.push(i);
   }
-  console.log(numberPage);
 
   return pageNumber.map(number => (
     <li

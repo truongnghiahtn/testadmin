@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function fatherModal(Component) {
+  let nameC = Component.displayName;
   return function(props) {
     return (
       <div
@@ -11,7 +12,14 @@ export default function fatherModal(Component) {
         aria-labelledby="modelTitleId"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-lg" role="document">
+        <div
+          className={
+            nameC === "Connect(childModalWords)"
+              ? "modal-dialog modal-xl"
+              : "modal-dialog modal-lg"
+          }
+          role="document"
+        >
           <div className="modal-content">
             <Component />
           </div>

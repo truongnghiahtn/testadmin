@@ -87,7 +87,7 @@ export default class sidebarAdmin extends Component {
               </li>
               <li className>
                 <NavLink className="iq-waves-effect" to="/movie">
-                  <i className="fa fa-user-circle" aria-hidden="true" />
+                  <i className="fa fa-film" aria-hidden="true" />
                   <span>Quản lý phim</span>
                 </NavLink>
               </li>

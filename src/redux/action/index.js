@@ -221,9 +221,25 @@ export const saveWord = word => {
 };
 
 //Words Admin
+
+export const getAllWordsApiDevfast = () => {
+  return dispatch => {
+    CallAPI(`words`, "GET", null, null, apiDevFast)
+      .then(res =>
+        dispatch({
+          type: Actiontype.GET_ALL_WORDS_API_DEVFAST,
+          dataWords: res.data
+        })
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
 export const getWordsApiDevfast = id => {
   return dispatch => {
-    CallAPI(`words?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
+    CallAPI(`words?itemPerPage=5&page=${id}`, "GET", null, null, apiDevFast)
       .then(res =>
         dispatch({
           type: Actiontype.GET_WORDS_API_DEVFAST,

@@ -47,7 +47,7 @@ class Video extends Component {
   };
   render() {
     return (
-      <article id="dict_yg" data-tab-name="Video" class="tcTab--slide">
+      <article id="dict_yg" data-tab-name="Video" className="tcTab--slide">
         <div className="tc-page__container">
           <div className="dict--content">{this.renderYoutubeTab()}</div>
         </div>

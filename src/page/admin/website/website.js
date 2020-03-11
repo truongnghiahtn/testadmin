@@ -100,7 +100,7 @@ export default class website extends Component {
                       role="tabpanel"
                       aria-labelledby="pills-home-tab-fill"
                     >
-                      <div className="form-group">
+                      {/* <div className="form-group">
                         <div className="form-row">
                           <div className="col">
                             <label>Tiêu đề</label>
@@ -111,48 +111,7 @@ export default class website extends Component {
                             />
                           </div>
                         </div>
-                      </div>
-                      <div className="form-group">
-                        <div className="form-row">
-                          <div className="col">
-                            <label>Tiêu đề</label>
-                            {this.rendersumernote()}
-                          </div>
-                        </div>
-                      </div>
-                      <nav aria-label="Page navigation example">
-                        <ul className="pagination justify-content-end">
-                          <button
-                            type="reset"
-                            className="btn iq-bg-danger"
-                            style={{ marginRight: 10 }}
-                          >
-                            Cancel
-                          </button>
-                          <button type="submit" className="btn btn-primary">
-                            Submit
-                          </button>
-                        </ul>
-                      </nav>
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="pills-profile-fill"
-                      role="tabpanel"
-                      aria-labelledby="pills-profile-tab-fill"
-                    >
-                      <div className="form-group">
-                        <div className="form-row">
-                          <div className="col">
-                            <label>Tiêu đề</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder
-                            />
-                          </div>
-                        </div>
-                      </div>
+                      </div> */}
                       <div className="form-group">
                         <div className="form-row">
                           <div className="col">
@@ -163,15 +122,56 @@ export default class website extends Component {
                       </div>
                       <nav aria-label="Page navigation example">
                         <ul className="pagination justify-content-end">
-                          <button
+                          {/* <button
                             type="reset"
                             className="btn iq-bg-danger"
                             style={{ marginRight: 10 }}
                           >
                             Cancel
-                          </button>
+                          </button> */}
                           <button type="submit" className="btn btn-primary">
-                            Submit
+                            Sửa
+                          </button>
+                        </ul>
+                      </nav>
+                    </div>
+                    <div
+                      className="tab-pane fade"
+                      id="pills-profile-fill"
+                      role="tabpanel"
+                      aria-labelledby="pills-profile-tab-fill"
+                    >
+                      {/* <div className="form-group">
+                        <div className="form-row">
+                          <div className="col">
+                            <label>Tiêu đề</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder
+                            />
+                          </div>
+                        </div>
+                      </div> */}
+                      <div className="form-group">
+                        <div className="form-row">
+                          <div className="col">
+                            <label>Nội dung</label>
+                            {this.rendersumernote()}
+                          </div>
+                        </div>
+                      </div>
+                      <nav aria-label="Page navigation example">
+                        <ul className="pagination justify-content-end">
+                          {/* <button
+                            type="reset"
+                            className="btn iq-bg-danger"
+                            style={{ marginRight: 10 }}
+                          >
+                            Cancel
+                          </button> */}
+                          <button type="submit" className="btn btn-primary">
+                            Sửa
                           </button>
                         </ul>
                       </nav>

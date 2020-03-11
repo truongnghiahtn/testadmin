@@ -2,7 +2,7 @@ import * as Actiontype from "./../constants/actionType";
 import { CallAPI } from "../../utils/callApi";
 import { apiDevFast } from "../../utils/config";
 import swal from "sweetalert";
-import Axios from "axios";
+
 
 export const getDataSearchApi = data => {
   return dispatch => {
@@ -362,3 +362,39 @@ export const actDelWordAPI = id => {
       });
   };
 };
+
+// login
+
+export const actloginAdmin = (user, history) => {
+  return dispatch => {
+    CallAPI(`/login`, "POST", user, null)
+      .then(result => {
+      
+          sessionStorage.setItem("userAdmin", JSON.stringify(result.data));
+          history.push("admin-dashboard");
+          console.log(result.data);
+          dispatch({
+            type: Actiontype.ADMIN_LOGIN,
+            ADMIN_LOGIN: ""
+          });
+      })
+      .catch(err => {
+        console.log(err);
+        localStorage.removeItem("userAdmin");
+        dispatch({
+          type: Actiontype.ADMIN_LOGIN,
+          ADMIN_LOGIN: "Dang nhap khong thanh cong"
+        });
+        setTimeout(() => {
+          swal({
+            title: "The account or password is incorrect!",
+            text: "See you again!",
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+      });
+  };
+};
+// 

@@ -4,10 +4,8 @@ import _ from "lodash";
 
 class TraCau extends Component {
   renderDataTraCau = () => {
-    let sentences = _.get(this.props, "traCau[0].sentences", []);
-
-    return sentences.length
-      ? sentences.map((item, index) => {
+    return this.props.traCau.length
+      ? this.props.traCau.map((item, index) => {
           return (
             <li key={index}>
               <article id={item._id} className="tc-row tc-row-content">

@@ -25,12 +25,13 @@ export default function AdminTemplate({ Component, ...props }) {
     <Route
       {...props}
       render={propsComponent => {
-        return (
-          <Adminlayout>
-            <Component {...propsComponent} />
-          </Adminlayout>
-        );
-
+        if (sessionStorage.getItem("userAdmin")) {
+          return (
+            <Adminlayout>
+              <Component {...propsComponent} />
+            </Adminlayout>
+          );
+        }
         // chuyen ve trang admin
         return <Redirect to="/admin" />;
       }}

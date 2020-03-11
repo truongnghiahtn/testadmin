@@ -48,13 +48,13 @@ export default class sidebarAdmin extends Component {
     return (
       <div className="iq-sidebar">
         <div className="iq-sidebar-logo d-flex justify-content-between">
-          <a href="index.html">
+          <NavLink to="/admin-dashboard">
             <img
               src="/assets/images/logo-base.png"
               className="img-fluid"
               alt=""
             />
-          </a>
+          </NavLink>
           <div className="iq-menu-bt-sidebar">
             <div className="iq-menu-bt align-self-center">
               <div className="wrapper-menu">
@@ -139,7 +139,7 @@ export default class sidebarAdmin extends Component {
                 </a>
                 <ul className="iq-submenu collapse" id="collapseTwo">
                   <li>
-                    <NavLink to="/admin/word">
+                    <NavLink to="/admin-word">
                       <i className="fa fa-flag-checkered" aria-hidden="true" />
                       Quản trị từ ngữ
                     </NavLink>

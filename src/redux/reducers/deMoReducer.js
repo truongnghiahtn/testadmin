@@ -11,7 +11,8 @@ let initialState = {
   word: "",
   dataWords: {},
   dataAllWords: {},
-  editWord: null
+  editWord: null,
+  ADMIN_LOGIN: ""
 };
 
 const deMoReducer = (state = initialState, action) => {
@@ -167,6 +168,10 @@ const deMoReducer = (state = initialState, action) => {
         ...state.dataWords,
         result: listWordsUpdate
       };
+      return { ...state };
+    case ActionType.ADMIN_LOGIN:
+      state.ADMIN_LOGIN = action.ADMIN_LOGIN;
+      console.log(state.ADMIN_LOGIN);
       return { ...state };
     default:
       return { ...state };

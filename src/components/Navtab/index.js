@@ -216,7 +216,11 @@ function Navtab(props) {
           scrollButtons="on"
           aria-label="scrollable auto tabs example"
         >
-          {props.traCau.length ? renderTab() : ""}
+          {props.traCau.length ? (
+            renderTab()
+          ) : (
+            <Tab value="tracau" className="d-none" />
+          )}
           {props.word && !props.traCau.length ? (
             <Tab
               value={data[data.length - 1].id}

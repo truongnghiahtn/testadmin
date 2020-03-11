@@ -1,21 +1,25 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as action from "../../../redux/action";
+import PageTitleArea from "../../../components/PageTitleArea";
 
 const GioiThieu = props => {
   React.useEffect(() => {
     props.getDataPage("INTRO");
   }, []);
   return (
-    <h1 style={{ padding: "100px 0", textAlign: "center", color: "red" }}>
-      GioiThieu
-    </h1>
+    <div>
+      <PageTitleArea title="Giới thiệu" />
+      <div className="main-page-content">
+        {props.dataIntro ? <div>{props.dataIntro.content}</div> : ""}
+      </div>
+    </div>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    dataTerm: state.deMoReducer.dataTerm
+    dataIntro: state.deMoReducer.dataIntro
   };
 };
 const mapDispatchToProps = dispatch => {

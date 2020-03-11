@@ -46,12 +46,7 @@ const Navbar = () => {
   }, [width]);
 
   return (
-    <nav
-      className={
-        "mainnav navbar navbar-default justify-content-between" +
-        (window.location.pathname !== "/" ? " style-nav" : "")
-      }
-    >
+    <nav className={"mainnav navbar navbar-default justify-content-between"}>
       <div className="container relative">
         <a
           className="offcanvas dl-trigger paper-nav-toggle"
@@ -67,7 +62,11 @@ const Navbar = () => {
               {/* <h1>TRA CÂU</h1>
               <span>&nbsp;VIỆT - ANH</span>
               <h2>Công cụ tìm kiếm các cặp câu song ngữ</h2> */}
-              <img  src="./assets/images/logo-base.png" width="220px" height="55px"></img>
+              <img
+                src="./assets/images/logo-base.png"
+                width="220px"
+                height="55px"
+              ></img>
             </div>
           </NavLink>
         </div>

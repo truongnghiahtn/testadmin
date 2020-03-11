@@ -1,10 +1,7 @@
 .seaction {
   margin: 10px 0;
 }
-.makeStyles-root-1,
-.makeStyles-root-59 {
-  margin-top: 284px !important;
-}
+
 .search-section {
   position: absolute;
   top: 0;
@@ -175,28 +172,6 @@
       .autocomplete-suggestion {
         p {
           max-width: 70%;
-        }
-      }
-    }
-  }
-}
-@media (max-width: 767px) {
-  .search-section {
-    .search-title {
-      font-size: 27px;
-    }
-    .masthead {
-      .container {
-        padding-left: 15px;
-        padding-right: 15px;
-        max-width: 100%;
-        box-sizing: border-box;
-      }
-    }
-    #tc-content-search {
-      .autocomplete-suggestion {
-        p {
-          max-width: 65%;
         }
       }
     }

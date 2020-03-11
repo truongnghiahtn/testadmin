@@ -68,7 +68,7 @@ constructor(props) {
           <div className="Form_Overlay" />
           <div className="wrapper">
             <div className="container1">
-              <h1>Welcome</h1>
+              {/* <h1>Welcome</h1> */}
               <form
                 className="form"
                 autoComplete="off"
@@ -80,7 +80,7 @@ constructor(props) {
                   onChange={this.handleOnchanle}
                   onBlur={this.handleErrors}
                   onKeyUp={this.handleErrors}
-                  placeholder="Username"
+                  placeholder="Tài khoản"
                 />
                 {this.state.errors.username !== "" ? (
                   <div className="Form_err">
@@ -95,19 +95,19 @@ constructor(props) {
                   onChange={this.handleOnchanle}
                   onBlur={this.handleErrors}
                   onKeyUp={this.handleErrors}
-                  placeholder="Password"
+                  placeholder="Mật khẩu"
                 />
                 {this.state.errors.password !== "" &&
                 this.props.adminLogin === "" ? (
                   <div className="Form_err">
-                    (*) The account or password is incorrect!
+                    (*) Tài khoản hoặc mật khẩu không đúng!
                   </div>
                 ) : (
                   ""
                 )}
                 {this.props.adminLogin !== "" ? (
                   <div className="Form_err">
-                    (*) The account or password is incorrect!
+                     (*) Tài khoản hoặc mật khẩu không đúng!
                   </div>
                 ) : (
                   ""
@@ -117,7 +117,7 @@ constructor(props) {
                   type="submit"
                   disabled={!this.state.formValid}
                 >
-                  Login
+                  Đăng nhập
                 </button>
               </form>
             </div>

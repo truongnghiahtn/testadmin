@@ -158,7 +158,7 @@ class childModalWords extends Component {
         [event.target.name]: event.target.value
       },
       () => {
-        console.log(this.state.data);
+        console.log(this.state);
       }
     );
   };
@@ -563,6 +563,35 @@ class childModalWords extends Component {
                 </div>
               </div>
             </div>
+<<<<<<< HEAD
+=======
+            {/* {this.props.editInfoWord === null ? (
+              ""
+            ) : (
+              <React.Fragment>
+                <div className="form-group">
+                  <label>Thời gian</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Thời gian"
+                    value={this.state.values.createdAt}
+                    disabled
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Thời gian Update</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Thời gian Update"
+                    value={this.state.values.updatedAt}
+                    disabled
+                  />
+                </div>
+              </React.Fragment>
+            )} */}
+>>>>>>> fa4914e3f88e6333855003985b82cc67e336e60b
 
             <nav aria-label="Page navigation example">
               <ul className="pagination justify-content-end">
@@ -572,14 +601,14 @@ class childModalWords extends Component {
                   style={{ marginRight: 10 }}
                   data-dismiss="modal"
                 >
-                  Cancel
+                  Thoát
                 </button>
                 <button
                   type="submit"
                   className="btn btn-primary"
                   disabled={!this.state.formValid}
                 >
-                  Submit
+                  Gửi
                 </button>
               </ul>
             </nav>

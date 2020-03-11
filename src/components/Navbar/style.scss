@@ -75,7 +75,43 @@
     }
   }
 }
-
+.style-nav {
+  .relative {
+    .tc-site-logo {
+      a {
+        color: #8d8d8d;
+        .tc-site-logo-text {
+          h1 {
+            color: #1e85dd;
+          }
+          span {
+            color: #8d8d8d;
+          }
+          h2 {
+            color: #606676;
+          }
+        }
+      }
+    }
+    .paper_menu {
+      .xv-menuwrapper {
+        .dl-menu {
+          li {
+            a {
+              color: #86939e;
+              &.active {
+                color: #1876c0;
+              }
+              &:hover {
+                color: #1876c0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 @media (max-width: 1024px) {
   .mainnav {
     padding: 15px 15px 15px 0;
@@ -97,7 +133,7 @@
 .paper-nav-toggle.active i::before,
 .paper-nav-toggle.dl-active i::after,
 .paper-nav-toggle.dl-active i::before {
-  background: #1876c0;
+  background: white;
 }
 .paper-nav-toggle:active,
 .paper-nav-toggle:focus,
@@ -111,11 +147,11 @@
   display: inline-block;
   width: 25px;
   height: 2px;
-  color: #1876c0;
+  color: white;
   font: bold 14px/0.4 Helvetica;
   text-transform: uppercase;
   text-indent: -55px;
-  background: #1876c0;
+  background: white;
   transition: all 0.2s ease-out;
 }
 .paper-nav-toggle i::after,
@@ -123,7 +159,7 @@
   content: "";
   width: 25px;
   height: 2px;
-  background: #1876c0;
+  background: white;
   position: absolute;
   left: 0;
   transition: all 0.2s ease-out;
@@ -154,7 +190,7 @@
 }
 .paper-nav-toggle.active i,
 .paper-nav-toggle.dl-active i {
-  background: 0 0;
+  background: 0 0 !important;
 }
 .paper-nav-toggle.active i::before,
 .paper-nav-toggle.dl-active i::before {
@@ -187,6 +223,37 @@
   z-index: 2001;
   border-bottom: none !important;
   text-align: center;
+}
+
+.style-nav {
+  .paper-nav-toggle.active i::after,
+  .paper-nav-toggle.active i::before,
+  .paper-nav-toggle.dl-active i::after,
+  .paper-nav-toggle.dl-active i::before {
+    background: #1876c0;
+  }
+  .paper-nav-toggle i::after,
+  .paper-nav-toggle i::before {
+    content: "";
+    width: 25px;
+    height: 2px;
+    background: #1876c0;
+    position: absolute;
+    left: 0;
+    transition: all 0.2s ease-out;
+  }
+  .paper-nav-toggle i {
+    position: relative;
+    display: inline-block;
+    width: 25px;
+    height: 2px;
+    color: #1876c0;
+    font: bold 14px/0.4 Helvetica;
+    text-transform: uppercase;
+    text-indent: -55px;
+    background: #1876c0;
+    transition: all 0.2s ease-out;
+  }
 }
 @media (max-width: 1024px) {
   .paper-nav-toggle {
@@ -286,6 +353,18 @@
 @media (max-width: 1024px) {
   .mainnav {
     padding: 15px 15px 15px 0 !important;
+  }
+  .paper_menu .dl-menuwrapper ul li {
+    transition: all 0.2s linear;
+    a {
+      color: #67607c;
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+      a {
+        color: black;
+      }
+    }
   }
 }
 @media (min-width: 1024px) {

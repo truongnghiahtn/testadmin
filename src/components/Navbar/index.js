@@ -7,6 +7,7 @@ const Navbar = () => {
   const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
+    // console.log(window.location.pathname);
     $(".offcanvas").on("click", function() {
       $(this).toggleClass("dl-active");
       if ($(".offcanvas").hasClass("dl-active")) {
@@ -45,7 +46,12 @@ const Navbar = () => {
   }, [width]);
 
   return (
-    <nav className="mainnav navbar navbar-default justify-content-between">
+    <nav
+      className={
+        "mainnav navbar navbar-default justify-content-between" +
+        (window.location.pathname !== "/" ? " style-nav" : "")
+      }
+    >
       <div className="container relative">
         <a
           className="offcanvas dl-trigger paper-nav-toggle"

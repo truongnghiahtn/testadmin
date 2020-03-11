@@ -12,6 +12,8 @@ export const EDIT_MOVIES_API_DEVFAST = "EDIT_MOVIES_API_DEVFAST";
 export const EDIT_MOVIE = "EDIT_MOVIE";
 export const GET_EDIT_MOVIE = "GET_EDIT_MOVIE";
 export const SAVE_WORD = "SAVE_WORD";
+export const GET_INTRO = "GET_INTRO";
+export const GET_TERM = "GET_TERM";
 
 //words
 export const GET_ALL_WORDS_API_DEVFAST = "GET_ALL_WORDS_API_DEVFAST";
@@ -21,3 +23,6 @@ export const DEL_WORDS_API_DEVFAST = "DEL_WORDS_API_DEVFAST";
 export const EDIT_WORDS_API_DEVFAST = "EDIT_WORDS_API_DEVFAST";
 export const EDIT_WORD = "EDIT_WORD";
 export const GET_EDIT_WORD = "GET_EDIT_WORD";
+
+// login admin
+export const ADMIN_LOGIN = "ADMIN_LOGIN";

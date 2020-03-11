@@ -67,7 +67,7 @@ const routesAdmin = [
     component: Add_movie
   },
   {
-    path: "/admin/word",
+    path: "/admin-word",
     exact: false,
     component: WordsAdmin
   }

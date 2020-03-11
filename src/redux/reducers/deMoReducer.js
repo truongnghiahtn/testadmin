@@ -11,7 +11,10 @@ let initialState = {
   word: "",
   dataWords: {},
   dataAllWords: {},
-  editWord: null
+  editWord: null,
+  ADMIN_LOGIN: "",
+  dataIntro: "",
+  dataTerm: ""
 };
 
 const deMoReducer = (state = initialState, action) => {
@@ -36,6 +39,12 @@ const deMoReducer = (state = initialState, action) => {
       return { ...state };
     case ActionType.GET_VIDEO_API:
       state.video = action.video;
+      return { ...state };
+    case ActionType.GET_INTRO:
+      state.dataIntro = action.dataIntro;
+      return { ...state };
+    case ActionType.GET_TERM:
+      state.dataTerm = action.dataTerm;
       return { ...state };
     //Movies
     case ActionType.GET_ALL_WORDS_API_DEVFAST:
@@ -167,6 +176,10 @@ const deMoReducer = (state = initialState, action) => {
         ...state.dataWords,
         result: listWordsUpdate
       };
+      return { ...state };
+    case ActionType.ADMIN_LOGIN:
+      state.ADMIN_LOGIN = action.ADMIN_LOGIN;
+      console.log(state.ADMIN_LOGIN);
       return { ...state };
     default:
       return { ...state };

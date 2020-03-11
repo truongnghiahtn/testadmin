@@ -1,4 +1,5 @@
 .navtab {
+  margin-top: 285px !important;
   .MuiPaper-root {
     background-color: #fafafa;
     &.MuiPaper-elevation4 {
@@ -37,34 +38,44 @@
     }
   }
 }
-
+.makeStyles-root-1,
+.makeStyles-root-59 {
+  margin-top: 245px !important;
+}
 @media (min-width: 576px) {
   .navtab.container {
     padding: 0;
-    max-width: 510px;
+    max-width: 576px;
+  }
+  .MuiTab-root {
+    min-width: 140px !important;
   }
 }
 @media (min-width: 768px) {
   .navtab.container {
     padding: 0;
-    max-width: 690px;
+    max-width: 768px;
   }
 }
 @media (min-width: 992px) {
   .navtab.container {
     padding: 0;
-    max-width: 930px;
+    max-width: 992px;
+  }
+  .makeStyles-root-1,
+  .makeStyles-root-59 {
+    margin-top: 253px !important;
+  }
+}
+@media (min-width: 1024px) {
+  .makeStyles-root-1,
+  .makeStyles-root-59 {
+    margin-top: 283px !important;
   }
 }
 @media (min-width: 1200px) {
   .navtab.container {
     padding: 0;
     max-width: 1110px;
-  }
-}
-@media (max-width: 576px) {
-  .navtab.container {
-    padding: 0;
-    width: 480px;
   }
 }

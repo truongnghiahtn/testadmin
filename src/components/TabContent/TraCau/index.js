@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import _ from "lodash";
+
 class TraCau extends Component {
   renderDataTraCau = () => {
     return this.props.traCau.length

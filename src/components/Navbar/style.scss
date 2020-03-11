@@ -57,7 +57,7 @@
               display: block;
               font-size: 13px;
               font-weight: 400;
-              color: rgba(255, 255, 255, 0.6);
+              color: rgba(256, 256, 256, 0.6);
               position: relative;
               margin-left: 15px;
               text-decoration: none;
@@ -165,7 +165,7 @@
   transition: all 0.2s ease-out;
 }
 .paper-nav-toggle.paper-nav-white > i {
-  color: #fff;
+  color: white;
   background: #fff;
 }
 .paper-nav-toggle.paper-nav-white > i::after,
@@ -315,7 +315,7 @@
         border-bottom: 1px solid #fafafa;
         position: relative;
         a {
-          color: white;
+          color: black;
           display: block;
           position: relative;
           padding: 15px 20px;

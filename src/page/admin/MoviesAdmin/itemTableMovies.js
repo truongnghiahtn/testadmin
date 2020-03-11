@@ -12,9 +12,10 @@ class itemTable extends Component {
     let { movie, stt } = this.props;
     return (
       <tr>
-        <td className="index">{stt}</td>
+        <td>{stt+1}</td>
         <td>{this.convertHTML(movie.title)}</td>
         <td className="movie_content">{this.convertHTML(movie.content)}</td>
+        {/* <td>{this.convertHTML(movie.content)}</td> */}
         {/*         <td>
           <img
             src={movie.image}

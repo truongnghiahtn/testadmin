@@ -13,8 +13,8 @@ class itemTable extends Component {
     return (
       <tr>
         <td className="index">{stt}</td>
-        <td className="content_en">{this.convertHTML(word.word_name)}</td>
-        <td className="content_en">
+        <td >{this.convertHTML(word.word_name)}</td>
+        <td >
           {this.convertHTML(word.Vietnamese_meaning)}
         </td>
         <td className="content_en">

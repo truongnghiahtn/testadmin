@@ -64,9 +64,10 @@ const Navbar = () => {
         <div className="tc-site-logo">
           <NavLink title="Tra câu Việt - Anh" to="/">
             <div className="tc-site-logo-text">
-              <h1>TRA CÂU</h1>
+              {/* <h1>TRA CÂU</h1>
               <span>&nbsp;VIỆT - ANH</span>
-              <h2>Công cụ tìm kiếm các cặp câu song ngữ</h2>
+              <h2>Công cụ tìm kiếm các cặp câu song ngữ</h2> */}
+              <img  src="./assets/images/logo-base.png" width="220px" height="55px"></img>
             </div>
           </NavLink>
         </div>
@@ -81,16 +82,14 @@ const Navbar = () => {
               <li>
                 <NavLink to="/dieu-khoan">Điều khoản</NavLink>
               </li>
-              <li>
-                <NavLink to="/api">API</NavLink>
-              </li>
+
               <li>
                 <NavLink to="/bo-sung">Bổ sung câu mới</NavLink>
               </li>
               <li>
                 <NavLink to="/lien-he">Liên hệ</NavLink>
               </li>
-              <li className="share-menu-item">
+              {/* <li className="share-menu-item">
                 <div className="heart" />
                 <div
                   className="fb-share-button fb_iframe_widget"
@@ -125,7 +124,7 @@ const Navbar = () => {
                   </span>
                 </div>
                 <div className="heart" />
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

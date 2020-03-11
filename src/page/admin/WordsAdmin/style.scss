@@ -21,10 +21,10 @@
     }
   }
 }
-.dinh_dang_input{
+.dinh_dang_input {
   display: flex;
-  .xoa{
-    margin:2px ;
+  .xoa {
+    margin: 2px;
   }
 }
 @keyframes dash {
@@ -47,5 +47,16 @@
 }
 
 .page-link {
+  cursor: pointer;
+}
+
+.my-audio {
+  border: none;
+  width: 90%;
+  position: absolute;
+  z-index: 3;
+  top: 6px;
+  right: 99px;
+  pointer-events: none;
   cursor: pointer;
 }

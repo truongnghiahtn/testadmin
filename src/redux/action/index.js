@@ -343,8 +343,12 @@ export const actGetEditWord = data => {
 };
 
 export const actEditWordAPI = data => {
+  let formData = new FormData();
+  for (let key in data) {
+    formData.append(key, data[key]);
+  }
   return dispatch => {
-    CallAPI(`words/${data.id}`, "PUT", data, null, apiDevFast)
+    CallAPI(`words/${data.id}`, "PUT", formData, null, apiDevFast)
       .then(res => {
         setTimeout(() => {
           swal({

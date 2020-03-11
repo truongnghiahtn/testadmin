@@ -16,6 +16,7 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import { fileValidation } from "../../../components/Validation/File/index";
 import $ from "jquery";
 
 // Register the plugins
@@ -30,7 +31,7 @@ class childModalWords extends Component {
         word_name: "",
         Vietnamese_meaning: "",
         video: [],
-        audio: "",
+        audio: null,
         grammar: "",
         quotes: "",
         synonym: "",
@@ -48,7 +49,8 @@ class childModalWords extends Component {
       formValid: false,
       word_nameValid: false,
       Vietnamese_meaningValid: false,
-      data: ""
+      data: "",
+      hidden: false
     };
   }
 
@@ -162,12 +164,34 @@ class childModalWords extends Component {
   };
 
   handleOnchangeAudio = e => {
-    this.setState({
-      values: {
-        ...this.state.values,
-        audio: e.target.files[0]
+    const types = /(\.|\/)(mp3)$/i;
+    //file is the file, that the user wants to upload
+    let file = e.target.files[0];
+
+    if (file !== undefined) {
+      if (types.test(file.type) || types.test(file.name)) {
+        this.setState(
+          {
+            values: {
+              ...this.state.values,
+              audio: e.target.files[0]
+            },
+            hidden: false
+          },
+          console.log(this.state.values)
+        );
+      } else {
+        this.setState({
+          values: {
+            ...this.state.valies,
+            audio: "Choose file"
+          },
+          hidden: true
+        });
       }
-    });
+    } else {
+      return;
+    }
   };
 
   handleErrors = event => {
@@ -204,6 +228,13 @@ class childModalWords extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    this.setState({
+      values: {
+        ...this.state.values,
+        audio: this.state.fileAudio
+      }
+    });
+
     if (this.props.editInfoWord === null) {
       this.props.addWord(this.state.values);
       console.log(this.state.values);
@@ -230,8 +261,9 @@ class childModalWords extends Component {
       console.log(this.state.values);
     }
   };
+
   componentWillReceiveProps(nextProps) {
-    // console.log(nextProps.editInfoWord.video)
+    console.log(nextProps.editInfoWord);
 
     if (nextProps && nextProps.editInfoWord) {
       //Update
@@ -265,7 +297,8 @@ class childModalWords extends Component {
         },
         formValid: true,
         word_nameValid: true,
-        Vietnamese_meaningValid: true
+        Vietnamese_meaningValid: true,
+        hidden: true
       });
     } else {
       //ADD
@@ -275,17 +308,20 @@ class childModalWords extends Component {
           word_name: "",
           Vietnamese_meaning: "",
           video: [],
-          audio: null,
+          audio: "Choose file",
           grammar: "",
           quotes: "",
           synonym: "",
           technical_term: "",
           english_to_Vietnamese: "",
-          english_to_English: ""
+          english_to_English: "",
+          createdAt: "",
+          updateAt: ""
         },
         formValid: false,
         word_nameValid: false,
-        Vietnamese_meaningValid: false
+        Vietnamese_meaningValid: false,
+        hidden: true
       });
     }
   }
@@ -445,12 +481,22 @@ class childModalWords extends Component {
                         placeholder="Audio"
                         onChange={this.handleOnchangeAudio}
                         name="audio"
-                        accept="audio/*"
-                        /* value={
-                          this.state.values.audio ? this.state.values.audio : ""
-                        } */
                       />
-                      <label className="custom-file-label" htmlFor="customFile">
+                      {this.state.hidden ? (
+                        <input
+                          type="text"
+                          className="my-audio"
+                          value={this.state.values.audio}
+                          id="myaudio"
+                        />
+                      ) : (
+                        ""
+                      )}
+                      <label
+                        className="custom-file-label"
+                        htmlFor="customFile"
+                        id="labelFile"
+                      >
                         Choose file
                       </label>
                     </div>
@@ -517,32 +563,6 @@ class childModalWords extends Component {
                 </div>
               </div>
             </div>
-            {this.props.editInfoWord === null ? (
-              ""
-            ) : (
-              <React.Fragment>
-                <div className="form-group">
-                  <label>Thời gian</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Thời gian"
-                    value={this.state.values.createdAt}
-                    disabled
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Thời gian Update</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Thời gian Update"
-                    value={this.state.values.updatedAt}
-                    disabled
-                  />
-                </div>
-              </React.Fragment>
-            )}
 
             <nav aria-label="Page navigation example">
               <ul className="pagination justify-content-end">

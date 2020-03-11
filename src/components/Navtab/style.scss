@@ -48,7 +48,7 @@
     max-width: 576px;
   }
   .MuiTab-root {
-    min-width: 140px;
+    min-width: 140px !important;
   }
 }
 @media (min-width: 768px) {

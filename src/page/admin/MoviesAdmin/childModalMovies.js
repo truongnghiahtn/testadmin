@@ -15,7 +15,8 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-
+import { apiDevFast } from "../../../utils/config";
+import swal from "sweetalert";
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
@@ -55,7 +56,7 @@ class childModalMovies extends Component {
           }
         }
       ],
-      file: null
+      hidden: false
     };
   }
   handleOnchange = event => {
@@ -186,14 +187,11 @@ class childModalMovies extends Component {
         Vietnamese_meaningValid: true,
         formValid: true,
         files: [
-          ...this.state.files,
           {
-            source: `http://27.71.233.139:3001${nextProps.editInfoMovie.image}`,
-            options: {
-              type: "local"
-            }
+            source: `http://27.71.233.139:3001${nextProps.editInfoMovie.image}`
           }
-        ]
+        ],
+        hidden: false
       });
     } else {
       //ADD
@@ -218,10 +216,33 @@ class childModalMovies extends Component {
             options: {}
           }
         ],
-        file: null
+        hidden: false
       });
     }
   }
+
+  checkFile = () => {
+    swal({
+      title: "Are you sure?",
+      text: "Once edited, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then(willDelete => {
+      if (willDelete) {
+        this.setState({
+          values: {
+            ...this.state.values,
+            image: ""
+          },
+          files: [],
+          hidden: true
+        });
+      } else {
+        swal("Your imaginary file is safe!");
+      }
+    });
+  };
 
   render() {
     return (
@@ -324,28 +345,70 @@ class childModalMovies extends Component {
                 </div>
               </div>
             </div>
-
-            <FilePond
-              files={this.state.files}
-              allowMultiple={false}
-              maxFiles={1}
-              onupdatefiles={fileItems => {
-                console.log(fileItems);
-                this.setState({
-                  values: {
-                    ...this.state.values,
-                    image: fileItems.length ? fileItems[0].file : ""
-                  },
-                  files: fileItems.map(item => item.file)
-                });
-              }}
-            />
-            {this.state.errors.image !== "" ? (
-              <div className="Form_err errform">
-                (*) {this.state.errors.image}
+            {this.props.editInfoMovie && !this.state.hidden ? (
+              <div className="row">
+                <div className="col-6">
+                  <img
+                    className="image-style"
+                    src={apiDevFast + "/" + this.state.values.image}
+                    alt="!#"
+                  />
+                </div>
+                <div className="col-4 position-relative">
+                  <button
+                    className="btn btn-danger myBtn"
+                    type="button"
+                    onClick={() => this.checkFile()}
+                  >
+                    Sửa ảnh
+                  </button>
+                </div>
               </div>
             ) : (
-              ""
+              <React.Fragment>
+                <FilePond
+                  files={
+                    this.props.editInfoMovie || this.state.values.image
+                      ? this.state.files
+                      : null
+                  }
+                  allowMultiple={false}
+                  maxFiles={1}
+                  onupdatefiles={fileItems => {
+                    console.log(fileItems.length);
+                    fileItems.length > 0
+                      ? this.setState(
+                          {
+                            values: {
+                              ...this.state.values,
+                              image: fileItems[0].file
+                            },
+                            imageValid: true,
+                            files: fileItems.map(item => item.file)
+                          },
+                          console.log(this.state)
+                        )
+                      : this.setState(
+                          {
+                            values: {
+                              ...this.state.values,
+                              image: ""
+                            },
+                            imageValid: false,
+                            files: []
+                          },
+                          console.log(this.state)
+                        );
+                  }}
+                />
+                {this.state.errors.image !== "" ? (
+                  <div className="Form_err errform">
+                    (*) {this.state.errors.image}
+                  </div>
+                ) : (
+                  ""
+                )}
+              </React.Fragment>
             )}
 
             <div className="form-group">
@@ -388,34 +451,6 @@ class childModalMovies extends Component {
                 ""
               )}
             </div>
-
-            {this.props.editInfoMovie === null ? (
-              ""
-            ) : (
-              <React.Fragment>
-                <div className="form-group">
-                  <label>Thời gian</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Thời gian"
-                    value={this.state.values.createdAt}
-                    disabled
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Thời gian Update</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Thời gian Update"
-                    value={this.state.values.updatedAt}
-                    disabled
-                  />
-                </div>
-              </React.Fragment>
-            )}
-
             <nav aria-label="Page navigation example">
               <ul className="pagination justify-content-end">
                 <button

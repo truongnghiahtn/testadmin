@@ -178,8 +178,12 @@ export const actGetEditMovie = data => {
 };
 
 export const actEditMovieAPI = data => {
+  let formData = new FormData();
+  for (let key in data) {
+    formData.append(key, data[key]);
+  }
   return dispatch => {
-    CallAPI(`movies/${data.id}`, "PUT", data, null, apiDevFast)
+    CallAPI(`movies/${data.id}`, "PUT", formData, null, apiDevFast)
       .then(res => {
         setTimeout(() => {
           swal({

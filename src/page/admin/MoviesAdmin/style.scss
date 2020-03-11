@@ -5,6 +5,16 @@
   animation: spin 200ms linear infinite;
 }
 
+.image-style {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.myBtn {
+  position: absolute;
+  bottom: 8.5%;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

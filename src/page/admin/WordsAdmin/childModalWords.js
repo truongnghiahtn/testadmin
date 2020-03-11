@@ -29,7 +29,7 @@ class childModalWords extends Component {
         id: "",
         word_name: "",
         Vietnamese_meaning: "",
-        video: [1, 2, 3, 4],
+        video: [],
         audio: "",
         grammar: "",
         quotes: "",
@@ -47,7 +47,8 @@ class childModalWords extends Component {
       },
       formValid: false,
       word_nameValid: false,
-      Vietnamese_meaningValid: false
+      Vietnamese_meaningValid: false,
+      data: ""
     };
   }
 
@@ -146,12 +147,18 @@ class childModalWords extends Component {
   };
 
   handleOnchange = event => {
-    this.setState({
-      values: {
-        ...this.state.values,
+    this.setState(
+      {
+        values: {
+          ...this.state.values,
+          [event.target.name]: event.target.value
+        },
         [event.target.name]: event.target.value
+      },
+      () => {
+        console.log(this.state.data);
       }
-    });
+    );
   };
 
   handleOnchangeAudio = e => {
@@ -200,20 +207,46 @@ class childModalWords extends Component {
     if (this.props.editInfoWord === null) {
       this.props.addWord(this.state.values);
       console.log(this.state.values);
+      this.setState({
+        values: {
+          ...this.state.values,
+          word_name: "",
+          Vietnamese_meaning: "",
+          video: [],
+          audio: null,
+          grammar: "",
+          quotes: "",
+          synonym: "",
+          technical_term: "",
+          english_to_Vietnamese: "",
+          english_to_English: ""
+        },
+        formValid: false,
+        word_nameValid: false,
+        Vietnamese_meaningValid: false
+      });
     } else {
       this.props.editWord(this.state.values);
       console.log(this.state.values);
     }
   };
   componentWillReceiveProps(nextProps) {
+    // console.log(nextProps.editInfoWord.video)
+
     if (nextProps && nextProps.editInfoWord) {
       //Update
+      let TestVideo = nextProps.editInfoWord.video;
+      console.log(!Array.isArray(TestVideo), TestVideo);
+      if (!Array.isArray(TestVideo) && TestVideo) {
+        TestVideo = TestVideo.split(",");
+        console.log(TestVideo);
+      }
       this.setState({
         values: {
           ...this.state.values,
           word_name: nextProps.editInfoWord.word_name,
           Vietnamese_meaning: nextProps.editInfoWord.Vietnamese_meaning,
-          video: nextProps.editInfoWord.video,
+          video: TestVideo,
           audio: nextProps.editInfoWord.audio,
           quotes: nextProps.editInfoWord.quotes,
           synonym: nextProps.editInfoWord.synonym,
@@ -241,7 +274,7 @@ class childModalWords extends Component {
           ...this.state.values,
           word_name: "",
           Vietnamese_meaning: "",
-          video: [1, 2, 3, 4],
+          video: [],
           audio: null,
           grammar: "",
           quotes: "",
@@ -259,6 +292,61 @@ class childModalWords extends Component {
 
   handleOnchangeVideo = e => {
     console.log(e);
+  };
+  pushdatavideo = () => {
+    let { data } = this.state;
+    let updatevideo = this.state.values.video;
+    updatevideo = [...this.state.values.video, data];
+    this.setState(
+      {
+        values: {
+          ...this.state.values,
+          video: updatevideo
+        },
+        data: ""
+      },
+      () => {
+        console.log(this.state.values.video);
+      }
+    );
+  };
+  xoadulieu = index => {
+    let updatevideo = this.state.values.video;
+    updatevideo.splice(index, 1);
+    this.setState({
+      values: {
+        ...this.state.values,
+        video: updatevideo
+      }
+    });
+  };
+
+  rendervideo = () => {
+    console.log(this.state.values.video);
+    if (this.state.values.video) {
+      return this.state.values.video.length
+        ? this.state.values.video.map((item, index) => {
+            return (
+              <div className="dinh_dang_input">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={item}
+                  key={index}
+                />{" "}
+                <p
+                  className="btn btn-danger xoa"
+                  onClick={() => {
+                    this.xoadulieu(index);
+                  }}
+                >
+                  delete
+                </p>
+              </div>
+            );
+          })
+        : "";
+    }
   };
 
   render() {
@@ -379,10 +467,11 @@ class childModalWords extends Component {
                       type="text"
                       className="form-control"
                       placeholder=""
-                      onChange={this.handleOnchangeVideo}
-                      name="video"
-                      value={this.state.values.video}
+                      onChange={this.handleOnchange}
+                      name="data"
+                      value={this.state.data}
                     />
+                    {this.rendervideo()}
                     {/* {this.state.values.video.map((item, index) => {
                       return (
                         <React.Fagment>
@@ -399,19 +488,19 @@ class childModalWords extends Component {
                             ""
                           )}
                         </React.Fagment>
-                      ); */}
-                    })}
+                      );
+                    })} */}
                   </label>
                 </div>
               </div>
               <div className="col-2" style={{ lineHeight: "83px" }}>
-                <button
-                  className="btn btn-primary form-control"
+                <p
+                  className="btn btn-primary form-control pt-2 mt-3"
                   style={{ lineHeight: "initial" }}
-                  onClick={() => {}}
+                  onClick={this.pushdatavideo}
                 >
                   Thêm video
-                </button>
+                </p>
               </div>
             </div>
             <div className="tab-form">

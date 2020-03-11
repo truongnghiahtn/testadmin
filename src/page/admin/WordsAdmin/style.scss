@@ -21,7 +21,12 @@
     }
   }
 }
-
+.dinh_dang_input{
+  display: flex;
+  .xoa{
+    margin:2px ;
+  }
+}
 @keyframes dash {
   62.5% {
     opacity: 0;

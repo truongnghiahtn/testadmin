@@ -115,6 +115,14 @@ export const getDataPage = typePage => {
   };
 };
 
+export const postNewWordApi = data => {
+  return () => {
+    CallAPI("words", "POST", data).then(rs => {
+      console.log(rs);
+    });
+  };
+};
+
 //Movies Admin
 export const getMoviesApiDevfast = id => {
   return dispatch => {

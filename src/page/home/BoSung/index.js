@@ -2,22 +2,24 @@ import React, { Component, Fragment } from "react";
 import PageTitleArea from "../../../components/PageTitleArea";
 import Button from "@material-ui/core/Button";
 import swal from "sweetalert";
+import { connect } from "react-redux";
+import * as action from "../../../redux/action";
 
-export default class BoSung extends Component {
+class BoSung extends Component {
   constructor(props) {
     super(props);
     this.state = {
       values: {
-        wordEng: "",
-        wordViet: ""
+        word_name: "",
+        Vietnamese_meaning: ""
       },
       errs: {
-        wordEng: "",
-        wordViet: ""
+        word_name: "",
+        Vietnamese_meaning: ""
       },
       valids: {
-        wordEng: false,
-        wordViet: false,
+        word_name: false,
+        Vietnamese_meaning: false,
         form: false
       }
     };
@@ -40,13 +42,13 @@ export default class BoSung extends Component {
     isValid = massage !== "" ? false : true;
     if (value !== "") {
       switch (name) {
-        case "wordEng":
+        case "word_name":
           if (!value.match("^[a-zA-Z\\s]+$")) {
             isValid = false;
             massage = "không đúng định dạng.";
           }
           break;
-        case "wordViet":
+        case "Vietnamese_meaning":
           if (
             !value.match(
               "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" +
@@ -74,17 +76,12 @@ export default class BoSung extends Component {
   };
   formValidation = () => {
     let { valids } = this.state;
-    this.setState(
-      {
-        valids: {
-          ...valids,
-          form: valids.wordViet && valids.wordEng
-        }
-      },
-      () => {
-        console.log(this.state);
+    this.setState({
+      valids: {
+        ...valids,
+        form: valids.Vietnamese_meaning && valids.word_name
       }
-    );
+    });
   };
   handleOnSubmit = e => {
     e.preventDefault();
@@ -98,6 +95,7 @@ export default class BoSung extends Component {
           timer: 1500
         });
       }, 150);
+      this.props.postNewWordApi({ ...this.state.values, status: 0 });
     } else {
       setTimeout(() => {
         swal({
@@ -133,7 +131,7 @@ export default class BoSung extends Component {
               <div
                 className={
                   "bs-input-group bs-contain " +
-                  (errs.wordEng !== "" ? "bs-err-contain" : "")
+                  (errs.word_name !== "" ? "bs-err-contain" : "")
                 }
               >
                 <label htmlFor="bs-en">
@@ -144,16 +142,17 @@ export default class BoSung extends Component {
                     id="bs-en"
                     type="text"
                     placeholder="Câu trả lời của bạn"
-                    name="wordEng"
+                    name="word_name"
                     autoComplete="off"
-                    value={values.wordEng}
+                    value={values.word_name}
                     onChange={this.handleOnChange}
                     onBlur={this.handleOnChange}
                   />
                 </div>
-                {errs.wordEng !== "" ? (
+                {errs.word_name !== "" ? (
                   <p className="bs-err">
-                    <i className="fa fa-exclamation-circle"></i> {errs.wordEng}
+                    <i className="fa fa-exclamation-circle"></i>{" "}
+                    {errs.word_name}
                   </p>
                 ) : (
                   ""
@@ -162,7 +161,7 @@ export default class BoSung extends Component {
               <div
                 className={
                   "bs-input-group bs-contain " +
-                  (errs.wordViet !== "" ? "bs-err-contain" : "")
+                  (errs.Vietnamese_meaning !== "" ? "bs-err-contain" : "")
                 }
               >
                 <label htmlFor="bs-vi">
@@ -173,16 +172,17 @@ export default class BoSung extends Component {
                     id="bs-vi"
                     type="text"
                     placeholder="Câu trả lời của bạn"
-                    name="wordViet"
+                    name="Vietnamese_meaning"
                     autoComplete="off"
-                    value={values.wordViet}
+                    value={values.Vietnamese_meaning}
                     onChange={this.handleOnChange}
                     onBlur={this.handleOnChange}
                   />
                 </div>
-                {errs.wordViet !== "" ? (
+                {errs.Vietnamese_meaning !== "" ? (
                   <p className="bs-err">
-                    <i className="fa fa-exclamation-circle"></i> {errs.wordViet}
+                    <i className="fa fa-exclamation-circle"></i>{" "}
+                    {errs.Vietnamese_meaning}
                   </p>
                 ) : (
                   ""
@@ -198,3 +198,13 @@ export default class BoSung extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    postNewWordApi: data => {
+      dispatch(action.postNewWordApi(data));
+    }
+  };
+};
+
+export default connect(null, mapDispatchToProps)(BoSung);

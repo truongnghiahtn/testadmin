@@ -100,18 +100,6 @@ export default class website extends Component {
                       role="tabpanel"
                       aria-labelledby="pills-home-tab-fill"
                     >
-                      {/* <div className="form-group">
-                        <div className="form-row">
-                          <div className="col">
-                            <label>Tiêu đề</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder
-                            />
-                          </div>
-                        </div>
-                      </div> */}
                       <div className="form-group">
                         <div className="form-row">
                           <div className="col">
@@ -122,13 +110,6 @@ export default class website extends Component {
                       </div>
                       <nav aria-label="Page navigation example">
                         <ul className="pagination justify-content-end">
-                          {/* <button
-                            type="reset"
-                            className="btn iq-bg-danger"
-                            style={{ marginRight: 10 }}
-                          >
-                            Cancel
-                          </button> */}
                           <button type="submit" className="btn btn-primary">
                             Sửa
                           </button>
@@ -141,18 +122,6 @@ export default class website extends Component {
                       role="tabpanel"
                       aria-labelledby="pills-profile-tab-fill"
                     >
-                      {/* <div className="form-group">
-                        <div className="form-row">
-                          <div className="col">
-                            <label>Tiêu đề</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder
-                            />
-                          </div>
-                        </div>
-                      </div> */}
                       <div className="form-group">
                         <div className="form-row">
                           <div className="col">
@@ -163,13 +132,6 @@ export default class website extends Component {
                       </div>
                       <nav aria-label="Page navigation example">
                         <ul className="pagination justify-content-end">
-                          {/* <button
-                            type="reset"
-                            className="btn iq-bg-danger"
-                            style={{ marginRight: 10 }}
-                          >
-                            Cancel
-                          </button> */}
                           <button type="submit" className="btn btn-primary">
                             Sửa
                           </button>

@@ -16,6 +16,8 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import { fileValidation } from "../../../components/Validation/File/index";
+import $ from "jquery";
 
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
@@ -28,8 +30,9 @@ class childModalWords extends Component {
         id: "",
         word_name: "",
         Vietnamese_meaning: "",
-        video: "",
-        audio: "",
+        video: [],
+        audio: null,
+        grammar: "",
         quotes: "",
         synonym: "",
         technical_term: "",
@@ -45,8 +48,23 @@ class childModalWords extends Component {
       },
       formValid: false,
       word_nameValid: false,
-      Vietnamese_meaningValid: false
+      Vietnamese_meaningValid: false,
+      data: "",
+      hidden: false
     };
+  }
+
+  componentDidMount() {
+    $(".custom-file-input").on("change", function() {
+      var fileName = $(this)
+        .val()
+        .split("\\")
+        .pop();
+      $(this)
+        .siblings(".custom-file-label")
+        .addClass("selected")
+        .html(fileName);
+    });
   }
 
   convertHTML = html => {
@@ -73,6 +91,8 @@ class childModalWords extends Component {
 
   checkFieldValue = name => {
     switch (name) {
+      case "grammar":
+        return this.state.values.grammar;
       case "quotes":
         return this.state.values.quotes;
       case "synonym":
@@ -129,12 +149,49 @@ class childModalWords extends Component {
   };
 
   handleOnchange = event => {
-    this.setState({
-      values: {
-        ...this.state.values,
+    this.setState(
+      {
+        values: {
+          ...this.state.values,
+          [event.target.name]: event.target.value
+        },
         [event.target.name]: event.target.value
+      },
+      () => {
+        console.log(this.state);
       }
-    });
+    );
+  };
+
+  handleOnchangeAudio = e => {
+    const types = /(\.|\/)(mp3)$/i;
+    //file is the file, that the user wants to upload
+    let file = e.target.files[0];
+
+    if (file !== undefined) {
+      if (types.test(file.type) || types.test(file.name)) {
+        this.setState(
+          {
+            values: {
+              ...this.state.values,
+              audio: e.target.files[0]
+            },
+            hidden: false
+          },
+          console.log(this.state.values)
+        );
+      } else {
+        this.setState({
+          values: {
+            ...this.state.valies,
+            audio: "Choose file"
+          },
+          hidden: true
+        });
+      }
+    } else {
+      return;
+    }
   };
 
   handleErrors = event => {
@@ -171,25 +228,61 @@ class childModalWords extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    this.setState({
+      values: {
+        ...this.state.values,
+        audio: this.state.fileAudio
+      }
+    });
+
     if (this.props.editInfoWord === null) {
       this.props.addWord(this.state.values);
       console.log(this.state.values);
+      this.setState({
+        values: {
+          ...this.state.values,
+          word_name: "",
+          Vietnamese_meaning: "",
+          video: [],
+          audio: null,
+          grammar: "",
+          quotes: "",
+          synonym: "",
+          technical_term: "",
+          english_to_Vietnamese: "",
+          english_to_English: ""
+        },
+        formValid: false,
+        word_nameValid: false,
+        Vietnamese_meaningValid: false
+      });
     } else {
       this.props.editWord(this.state.values);
       console.log(this.state.values);
     }
   };
+
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps.editInfoWord);
+
     if (nextProps && nextProps.editInfoWord) {
       //Update
+      let TestVideo = nextProps.editInfoWord.video;
+      console.log(!Array.isArray(TestVideo), TestVideo);
+      if (!Array.isArray(TestVideo) && TestVideo) {
+        TestVideo = TestVideo.split(",");
+        console.log(TestVideo);
+      }
       this.setState({
         values: {
           ...this.state.values,
           word_name: nextProps.editInfoWord.word_name,
           Vietnamese_meaning: nextProps.editInfoWord.Vietnamese_meaning,
+          video: TestVideo,
           audio: nextProps.editInfoWord.audio,
           quotes: nextProps.editInfoWord.quotes,
           synonym: nextProps.editInfoWord.synonym,
+          grammar: nextProps.editInfoWord.grammar,
           id: nextProps.editInfoWord._id,
           technical_term: nextProps.editInfoWord.technical_term,
           english_to_Vietnamese: nextProps.editInfoWord.english_to_Vietnamese,
@@ -204,7 +297,8 @@ class childModalWords extends Component {
         },
         formValid: true,
         word_nameValid: true,
-        Vietnamese_meaningValid: true
+        Vietnamese_meaningValid: true,
+        hidden: true
       });
     } else {
       //ADD
@@ -213,26 +307,93 @@ class childModalWords extends Component {
           ...this.state.values,
           word_name: "",
           Vietnamese_meaning: "",
-          audio: "",
+          video: [],
+          audio: "Choose file",
+          grammar: "",
           quotes: "",
           synonym: "",
           technical_term: "",
           english_to_Vietnamese: "",
-          english_to_English: ""
+          english_to_English: "",
+          createdAt: "",
+          updateAt: ""
         },
         formValid: false,
         word_nameValid: false,
-        Vietnamese_meaningValid: false
+        Vietnamese_meaningValid: false,
+        hidden: true
       });
     }
   }
+
+  handleOnchangeVideo = e => {
+    console.log(e);
+  };
+  pushdatavideo = () => {
+    let { data } = this.state;
+    let updatevideo = this.state.values.video;
+    updatevideo = [...this.state.values.video, data];
+    this.setState(
+      {
+        values: {
+          ...this.state.values,
+          video: updatevideo
+        },
+        data: ""
+      },
+      () => {
+        console.log(this.state.values.video);
+      }
+    );
+  };
+  xoadulieu = index => {
+    let updatevideo = this.state.values.video;
+    updatevideo.splice(index, 1);
+    this.setState({
+      values: {
+        ...this.state.values,
+        video: updatevideo
+      }
+    });
+  };
+
+  rendervideo = () => {
+    console.log(this.state.values.video);
+    if (this.state.values.video) {
+      return this.state.values.video.length
+        ? this.state.values.video.map((item, index) => {
+            return (
+              <div className="dinh_dang_input">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={item}
+                  key={index}
+                />{" "}
+                <p
+                  className="btn btn-danger xoa"
+                  onClick={() => {
+                    this.xoadulieu(index);
+                  }}
+                >
+                  delete
+                </p>
+              </div>
+            );
+          })
+        : "";
+    }
+  };
 
   render() {
     return (
       <div>
         <div className="modal-header">
           {this.props.editInfoWord === null ? (
-            <h5 className="modal-title">Thêm từ / câu</h5>
+            <h5 className="modal-title">
+              <img src="/assets/images/language/uk_big.png" alt="" />
+              <span>&nbsp;Thêm từ / câu</span>
+            </h5>
           ) : (
             <h5 className="modal-title">Sửa từ / câu</h5>
           )}
@@ -251,11 +412,11 @@ class childModalWords extends Component {
               <div className="col">
                 <div className="form-group">
                   <label style={{ width: "100%" }}>
-                    EN
+                    Từ / Câu tiếng anh
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="English"
+                      placeholder=""
                       onChange={this.handleOnchange}
                       onBlur={this.handleErrors}
                       onKeyUp={this.handleErrors}
@@ -267,25 +428,6 @@ class childModalWords extends Component {
                       }
                     />
                   </label>
-
-                  {/*                   <ReactSummernote
-                    value={this.state.values.word_name}
-                    options={{
-                      lang: "ru-RU",
-                      height: 15,
-                      dialogsInBody: true,
-                      value: "",
-                      toolbar: [["view", ["fullscreen", "codeview"]]]
-                    }}
-                    onChange={c => {
-                      this.setState({
-                        values: {
-                          ...this.state.values,
-                          word_name: c
-                        }
-                      });
-                    }}
-                  /> */}
 
                   {this.state.errors.word_name !== "" ? (
                     <div className="Form_err errform">
@@ -300,30 +442,11 @@ class childModalWords extends Component {
               <div className="col">
                 <div className="form-group">
                   <label style={{ width: "100%" }}>
-                    Kinds
+                    Từ / Câu tiếng việt
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="kinds"
-                      onChange={this.handleOnchange}
-                      name="video"
-                      value={
-                        this.state.values.video ? this.state.values.video : ""
-                      }
-                    />
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col">
-                <div className="form-group">
-                  <label style={{ width: "100%" }}>
-                    VN
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Vietnamese"
+                      placeholder=""
                       onChange={this.handleOnchange}
                       onBlur={this.handleErrors}
                       onKeyUp={this.handleErrors}
@@ -344,23 +467,86 @@ class childModalWords extends Component {
                   )}
                 </div>
               </div>
-
+            </div>
+            <div className="row">
               <div className="col">
                 <div className="form-group">
                   <label style={{ width: "100%" }}>
                     Audio
+                    <div className="custom-file">
+                      <input
+                        type="file"
+                        className="custom-file-input"
+                        id="customFile"
+                        placeholder="Audio"
+                        onChange={this.handleOnchangeAudio}
+                        name="audio"
+                      />
+                      {this.state.hidden ? (
+                        <input
+                          type="text"
+                          className="my-audio"
+                          value={this.state.values.audio}
+                          id="myaudio"
+                        />
+                      ) : (
+                        ""
+                      )}
+                      <label
+                        className="custom-file-label"
+                        htmlFor="customFile"
+                        id="labelFile"
+                      >
+                        Choose file
+                      </label>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-10">
+                <div className="form-group">
+                  <label style={{ width: "100%" }}>
+                    Video
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="audio"
+                      placeholder=""
                       onChange={this.handleOnchange}
-                      name="audio"
-                      value={
-                        this.state.values.audio ? this.state.values.audio : ""
-                      }
+                      name="data"
+                      value={this.state.data}
                     />
+                    {this.rendervideo()}
+                    {/* {this.state.values.video.map((item, index) => {
+                      return (
+                        <React.Fagment>
+                          
+                          {index === 0 ? (
+                            <button
+                              className="btn btn-primary form-control"
+                              style={{ lineHeight: "initial" }}
+                              onClick={() => {}}
+                            >
+                              Thêm video
+                            </button>
+                          ) : (
+                            ""
+                          )}
+                        </React.Fagment>
+                      );
+                    })} */}
                   </label>
                 </div>
+              </div>
+              <div className="col-2" style={{ lineHeight: "83px" }}>
+                <p
+                  className="btn btn-primary form-control pt-2 mt-3"
+                  style={{ lineHeight: "initial" }}
+                  onClick={this.pushdatavideo}
+                >
+                  Thêm video
+                </p>
               </div>
             </div>
             <div className="tab-form">
@@ -377,32 +563,6 @@ class childModalWords extends Component {
                 </div>
               </div>
             </div>
-            {this.props.editInfoWord === null ? (
-              ""
-            ) : (
-              <React.Fragment>
-                <div className="form-group">
-                  <label>Thời gian</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Thời gian"
-                    value={this.state.values.createdAt}
-                    disabled
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Thời gian Update</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Thời gian Update"
-                    value={this.state.values.updatedAt}
-                    disabled
-                  />
-                </div>
-              </React.Fragment>
-            )}
 
             <nav aria-label="Page navigation example">
               <ul className="pagination justify-content-end">
@@ -412,14 +572,14 @@ class childModalWords extends Component {
                   style={{ marginRight: 10 }}
                   data-dismiss="modal"
                 >
-                  Cancel
+                  Thoát
                 </button>
                 <button
                   type="submit"
                   className="btn btn-primary"
                   disabled={!this.state.formValid}
                 >
-                  Submit
+                  Gửi
                 </button>
               </ul>
             </nav>

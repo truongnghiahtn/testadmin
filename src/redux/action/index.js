@@ -140,8 +140,17 @@ export const getMoviesApiDevfast = id => {
 };
 
 export const addMoviesApiDevfast = data => {
+  /*   const config = {
+    headers: {
+      "content-type": "multipart/form-data"
+    }
+  }; */
+  let formData = new FormData();
+  for (let key in data) {
+    formData.append(key, data[key]);
+  }
   return dispatch => {
-    CallAPI("movies", "POST", data, null, apiDevFast)
+    CallAPI("movies", "POST", formData, null, apiDevFast)
       .then(res => {
         swal({
           title: "Good job!",
@@ -183,8 +192,12 @@ export const actGetEditMovie = data => {
 };
 
 export const actEditMovieAPI = data => {
+  let formData = new FormData();
+  for (let key in data) {
+    formData.append(key, data[key]);
+  }
   return dispatch => {
-    CallAPI(`movies/${data.id}`, "PUT", data, null, apiDevFast)
+    CallAPI(`movies/${data.id}`, "PUT", formData, null, apiDevFast)
       .then(res => {
         setTimeout(() => {
           swal({
@@ -291,8 +304,12 @@ export const getWordsApiDevfast = id => {
 };
 
 export const addWordsApiDevfast = data => {
+  let formData = new FormData();
+  for (let key in data) {
+    formData.append(key, data[key]);
+  }
   return dispatch => {
-    CallAPI("words", "POST", data, null, apiDevFast)
+    CallAPI("words", "POST", formData, null, apiDevFast)
       .then(res => {
         swal({
           title: "Good job!",
@@ -334,8 +351,12 @@ export const actGetEditWord = data => {
 };
 
 export const actEditWordAPI = data => {
+  let formData = new FormData();
+  for (let key in data) {
+    formData.append(key, data[key]);
+  }
   return dispatch => {
-    CallAPI(`words/${data.id}`, "PUT", data, null, apiDevFast)
+    CallAPI(`words/${data.id}`, "PUT", formData, null, apiDevFast)
       .then(res => {
         setTimeout(() => {
           swal({
@@ -424,8 +445,8 @@ export const actloginAdmin = (user, history) => {
         });
         setTimeout(() => {
           swal({
-            title: "The account or password is incorrect!",
-            text: "See you again!",
+            title: "Tài khoản hoặc mật khẩu không đúng!",
+            text: "bạn xem lại!",
             icon: "error",
             buttons: false,
             timer: 1500

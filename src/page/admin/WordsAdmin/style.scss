@@ -21,7 +21,12 @@
     }
   }
 }
-
+.dinh_dang_input {
+  display: flex;
+  .xoa {
+    margin: 2px;
+  }
+}
 @keyframes dash {
   62.5% {
     opacity: 0;
@@ -30,7 +35,7 @@
     stroke-dashoffset: 0;
   }
 }
-.stt_en{
+.stt_en {
   width: 50px;
 }
 
@@ -39,4 +44,19 @@
   bottom: 20px;
   right: 30px;
   color: #222;
+}
+
+.page-link {
+  cursor: pointer;
+}
+
+.my-audio {
+  border: none;
+  width: 90%;
+  position: absolute;
+  z-index: 3;
+  top: 6px;
+  right: 99px;
+  pointer-events: none;
+  cursor: pointer;
 }

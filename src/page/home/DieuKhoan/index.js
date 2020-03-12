@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import * as action from "../../../redux/action";
 import PageTitleArea from "../../../components/PageTitleArea";
@@ -8,10 +8,10 @@ const DieuKhoan = props => {
     props.getDataPage("TERM");
   }, []);
   return (
-    <div>
+    <Fragment>
       <PageTitleArea title="Điều khoản" />
       {props.dataTerm ? <div>{props.dataTerm.content}</div> : ""}
-    </div>
+    </Fragment>
   );
 };
 

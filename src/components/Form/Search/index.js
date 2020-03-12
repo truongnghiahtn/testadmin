@@ -74,7 +74,11 @@ const Search = props => {
               onSubmit={handleOnSubmit}
             >
               <div className="tc-search-textboxwrap">
-                <div id="tc-b" className="tc-search-button">
+                <div
+                  id="tc-b"
+                  className="tc-search-button"
+                  onClick={handleOnSubmit}
+                >
                   <i className="fab fa-search"></i>
                 </div>
                 <input

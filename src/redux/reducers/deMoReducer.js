@@ -14,7 +14,8 @@ let initialState = {
   editWord: null,
   ADMIN_LOGIN: "",
   dataIntro: "",
-  dataTerm: ""
+  dataTerm: "",
+  dataContact: ""
 };
 
 const deMoReducer = (state = initialState, action) => {

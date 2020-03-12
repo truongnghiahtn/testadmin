@@ -101,6 +101,12 @@ export const getDataPage = typePage => {
               dataTerm: rs.data
             });
             break;
+          case "CONTACT":
+            dispatch({
+              type: Actiontype.GET_CONTACT,
+              dataContact: rs.data
+            });
+            break;
           default:
             break;
         }

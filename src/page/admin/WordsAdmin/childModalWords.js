@@ -156,7 +156,7 @@ class childModalWords extends Component {
         [event.target.name]: event.target.value
       },
       () => {
-        console.log(this.state.data);
+        console.log(this.state);
       }
     );
   };
@@ -517,7 +517,7 @@ class childModalWords extends Component {
                 </div>
               </div>
             </div>
-            {this.props.editInfoWord === null ? (
+            {/* {this.props.editInfoWord === null ? (
               ""
             ) : (
               <React.Fragment>
@@ -542,7 +542,7 @@ class childModalWords extends Component {
                   />
                 </div>
               </React.Fragment>
-            )}
+            )} */}
 
             <nav aria-label="Page navigation example">
               <ul className="pagination justify-content-end">
@@ -552,14 +552,14 @@ class childModalWords extends Component {
                   style={{ marginRight: 10 }}
                   data-dismiss="modal"
                 >
-                  Cancel
+                  Thoát
                 </button>
                 <button
                   type="submit"
                   className="btn btn-primary"
                   disabled={!this.state.formValid}
                 >
-                  Submit
+                  Gửi
                 </button>
               </ul>
             </nav>

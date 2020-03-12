@@ -441,8 +441,8 @@ export const actloginAdmin = (user, history) => {
         });
         setTimeout(() => {
           swal({
-            title: "The account or password is incorrect!",
-            text: "See you again!",
+            title: "Tài khoản hoặc mật khẩu không đúng!",
+            text: "bạn xem lại!",
             icon: "error",
             buttons: false,
             timer: 1500

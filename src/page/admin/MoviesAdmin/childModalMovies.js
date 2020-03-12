@@ -149,7 +149,29 @@ class childModalMovies extends Component {
     event.preventDefault();
     if (this.props.editInfoMovie === null) {
       this.props.addMovie(this.state.values);
-      console.log(this.state.values);
+      this.setState({
+        values: {
+          ...this.state.values,
+          image: "",
+          title: "",
+          content: "",
+          english_meaning: "",
+          Vietnamese_meaning: ""
+        },
+        imageValid: true,
+        titleValid: false,
+        contentValid: false,
+        english_meaningValid: false,
+        Vietnamese_meaningValid: false,
+        formValid: false,
+        files: [
+          {
+            source: "index.html",
+            options: {}
+          }
+        ],
+        hidden: false
+      });
     } else {
       this.props.editMovie(this.state.values);
       console.log(this.state.values);
@@ -204,7 +226,7 @@ class childModalMovies extends Component {
           english_meaning: "",
           Vietnamese_meaning: ""
         },
-        imageValid: false,
+        imageValid: true,
         titleValid: false,
         contentValid: false,
         english_meaningValid: false,
@@ -459,14 +481,14 @@ class childModalMovies extends Component {
                   style={{ marginRight: 10 }}
                   data-dismiss="modal"
                 >
-                  Cancel
+                  Thoát
                 </button>
                 <button
                   type="submit"
                   className="btn btn-primary"
                   disabled={!this.state.formValid}
                 >
-                  Submit
+                  Gửi
                 </button>
               </ul>
             </nav>

@@ -1,195 +1,90 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import ReactSummernote from "react-summernote";
 import "react-summernote/dist/react-summernote.css"; // import styles
 import "react-summernote/lang/summernote-ru-RU"; // you can import any other locale
+import { connect } from "react-redux";
+import * as action from "../../../redux/action/index";
+import { dataInfoWebsite } from "./dataInfoWebsite";
+import Intro from "./intro";
+import Term from "./term";
+import Mail from "./mail";
 
-export default class website extends Component {
-  onChange(content) {
-    console.log("onChange", content);
-  }
-  rendersumernote = () => {
-    return (
-      <ReactSummernote
-        options={{
-          lang: "ru-RU",
-          height: 400,
-          dialogsInBody: true,
-          toolbar: [
-            ["style", ["style"]],
-            ["font", ["bold", "underline", "clear"]],
-            ["fontname", ["fontname"]],
-            ["para", ["ul", "ol", "paragraph"]],
-            ["table", ["table"]],
-            ["insert", ["link", "picture", "video"]],
-            ["view", ["fullscreen", "codeview"]]
-          ]
-        }}
-        onChange={this.onChange}
-      />
-    );
+const Website = props => {
+  useEffect(() => {
+    props.getInfoWebsite("INTRO");
+    props.getInfoWebsite("TERM");
+  }, []);
+
+  const renderTab = () => {
+    return dataInfoWebsite.map((item, index) => (
+      <li className="nav-item" key={index}>
+        <a
+          className={index === 0 ? "nav-link active" : "nav-link"}
+          id={`pills-${item.id}-tab-fill`}
+          data-toggle="pill"
+          href={`#pills-${item.id}-fill`}
+          role="tab"
+          aria-controls={`pills-${item.id}`}
+          aria-selected="true"
+        >
+          {item.content}
+        </a>
+      </li>
+    ));
   };
 
-  render() {
-    return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-sm-12">
-            <div className="iq-card">
-              <div className="iq-card-header d-flex justify-content-between">
-                <div className="iq-header-title">
-                  <h4 className="card-title">
-                    <img
-                      src="/assets/images/language/uk_big.png"
-                      style={{ marginRight: 10 }}
-                    />
-                    Thông tin website
-                  </h4>
-                </div>
+  return (
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-sm-12">
+          <div className="iq-card">
+            <div className="iq-card-header d-flex justify-content-between">
+              <div className="iq-header-title">
+                <h4 className="card-title">
+                  <img
+                    src="/assets/images/language/uk_big.png"
+                    style={{ marginRight: 10 }}
+                  />
+                  Thông tin website
+                </h4>
               </div>
-              <div className="iq-card-body">
-                <div className="form-group">
-                  <ul
-                    className="nav nav-pills mb-3 nav-fill"
-                    id="pills-tab-1"
-                    role="tablist"
-                  >
-                    <li className="nav-item">
-                      <a
-                        className="nav-link active"
-                        id="pills-home-tab-fill"
-                        data-toggle="pill"
-                        href="#pills-home-fill"
-                        role="tab"
-                        aria-controls="pills-home"
-                        aria-selected="true"
-                      >
-                        Giới thiệu
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        className="nav-link"
-                        id="pills-profile-tab-fill"
-                        data-toggle="pill"
-                        href="#pills-profile-fill"
-                        role="tab"
-                        aria-controls="pills-profile"
-                        aria-selected="false"
-                      >
-                        Điều khoản
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        className="nav-link"
-                        id="pills-contact-tab-fill"
-                        data-toggle="pill"
-                        href="#pills-contact-fill"
-                        role="tab"
-                        aria-controls="pills-contact"
-                        aria-selected="false"
-                      >
-                        Thông tin mail
-                      </a>
-                    </li>
-                  </ul>
-                  <div className="tab-content" id="pills-tabContent-1">
-                    <div
-                      className="tab-pane fade show active"
-                      id="pills-home-fill"
-                      role="tabpanel"
-                      aria-labelledby="pills-home-tab-fill"
-                    >
-                      <div className="form-group">
-                        <div className="form-row">
-                          <div className="col">
-                            <label>Nội dung</label>
-                            {this.rendersumernote()}
-                          </div>
-                        </div>
-                      </div>
-                      <nav aria-label="Page navigation example">
-                        <ul className="pagination justify-content-end">
-                          <button type="submit" className="btn btn-primary">
-                            Sửa
-                          </button>
-                        </ul>
-                      </nav>
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="pills-profile-fill"
-                      role="tabpanel"
-                      aria-labelledby="pills-profile-tab-fill"
-                    >
-                      <div className="form-group">
-                        <div className="form-row">
-                          <div className="col">
-                            <label>Nội dung</label>
-                            {this.rendersumernote()}
-                          </div>
-                        </div>
-                      </div>
-                      <nav aria-label="Page navigation example">
-                        <ul className="pagination justify-content-end">
-                          <button type="submit" className="btn btn-primary">
-                            Sửa
-                          </button>
-                        </ul>
-                      </nav>
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="pills-contact-fill"
-                      role="tabpanel"
-                      aria-labelledby="pills-contact-tab-fill"
-                    >
-                      <div className="form-group">
-                        <div className="form-row">
-                          <div className="col">
-                            <label>Mail Server</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <div className="form-row">
-                          <div className="col">
-                            <label>Mail nhận</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <nav aria-label="Page navigation example">
-                        <ul className="pagination justify-content-end">
-                          <button
-                            type="reset"
-                            className="btn iq-bg-danger"
-                            style={{ marginRight: 10 }}
-                          >
-                            Cancel
-                          </button>
-                          <button type="submit" className="btn btn-primary">
-                            Submit
-                          </button>
-                        </ul>
-                      </nav>
-                    </div>
-                  </div>
+            </div>
+            <div className="iq-card-body">
+              <div className="form-group">
+                <ul
+                  className="nav nav-pills mb-3 nav-fill"
+                  id="pills-tab-1"
+                  role="tablist"
+                >
+                  {renderTab()}
+                </ul>
+                <div className="tab-content" id="pills-tabContent-1">
+                  <Intro dataIntro={props.dataIntro} />
+                  <Term dataTerm={props.dataTerm} />
+                  <Mail />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+const mapStateToProps = state => {
+  return {
+    dataTerm: state.deMoReducer.dataTerm,
+    dataIntro: state.deMoReducer.dataIntro
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getInfoWebsite: name => {
+      dispatch(action.getInfoWebsiteApi(name));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Website);

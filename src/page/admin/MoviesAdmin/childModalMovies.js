@@ -245,8 +245,8 @@ class childModalMovies extends Component {
 
   checkFile = () => {
     swal({
-      title: "Are you sure?",
-      text: "Once edited, you will not be able to recover this imaginary file!",
+      title: "Bạn có chắc không?",
+      text: "Sau khi chỉnh sửa, bạn sẽ không thể khôi phục tệp hình ảnh này!",
       icon: "warning",
       buttons: true,
       dangerMode: true
@@ -261,7 +261,7 @@ class childModalMovies extends Component {
           hidden: true
         });
       } else {
-        swal("Your imaginary file is safe!");
+        swal("Tệp hình ảnh của bạn an toàn!");
       }
     });
   };
@@ -416,7 +416,7 @@ class childModalMovies extends Component {
                               ...this.state.values,
                               image: ""
                             },
-                            imageValid: false,
+                            imageValid: true,
                             files: []
                           },
                           console.log(this.state)

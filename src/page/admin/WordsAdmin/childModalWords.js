@@ -580,32 +580,6 @@ class childModalWords extends Component {
                 </div>
               </div>
             </div>
-            {/* {this.props.editInfoWord === null ? (
-              ""
-            ) : (
-              <React.Fragment>
-                <div className="form-group">
-                  <label>Thời gian</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Thời gian"
-                    value={this.state.values.createdAt}
-                    disabled
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Thời gian Update</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Thời gian Update"
-                    value={this.state.values.updatedAt}
-                    disabled
-                  />
-                </div>
-              </React.Fragment>
-            )} */}
 
             <nav aria-label="Page navigation example">
               <ul className="pagination justify-content-end">

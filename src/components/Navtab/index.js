@@ -92,7 +92,7 @@ function Navtab(props) {
       content: ""
     },
     {
-      id: "dict_np",
+      id: "dict_tn",
       name: "Thành ngữ",
       Component: TraTu,
       status: false,

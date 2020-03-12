@@ -24,6 +24,9 @@ class PhuDePhim extends Component {
                             item.fields.thumbnail +
                             ".jpg"
                           }
+                          onError={e => {
+                            e.target.src = `http://27.71.233.139:3001/${item.fields.thumbnail}`;
+                          }}
                         />
                       </td>
                       <td valign="top">

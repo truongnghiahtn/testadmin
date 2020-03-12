@@ -1,6 +1,6 @@
 import * as Actiontype from "./../constants/actionType";
 import { CallAPI } from "../../utils/callApi";
-import { apiDevFast } from "../../utils/config";
+import { apiDevFast, api } from "../../utils/config";
 import swal from "sweetalert";
 
 export const getDataSearchApi = data => {

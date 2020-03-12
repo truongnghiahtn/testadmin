@@ -500,6 +500,7 @@ class childModalWords extends Component {
                       <div className="custom-file">
                         <input
                           type="file"
+                          accept="audio/*"
                           className="custom-file-input"
                           id="inputGroupFile04"
                           onChange={

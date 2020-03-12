@@ -185,6 +185,18 @@ const deMoReducer = (state = initialState, action) => {
       state.ADMIN_LOGIN = action.ADMIN_LOGIN;
       console.log(state.ADMIN_LOGIN);
       return { ...state };
+    case ActionType.GET_TERM_API_DEVFAST:
+      state.dataTerm = action.dataTerm;
+      return { ...state };
+    case ActionType.GET_INTRO_API_DEVFAST:
+      state.dataIntro = action.dataIntro;
+      return { ...state };
+    case ActionType.ADD_TERM_API_DEVFAST:
+      state.dataTerm = action.dataTerm;
+      return { ...state };
+    case ActionType.ADD_INTRO_API_DEVFAST:
+      state.dataTerm = action.dataIntro;
+      return { ...state };
     default:
       return { ...state };
   }

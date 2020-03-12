@@ -455,4 +455,78 @@ export const actloginAdmin = (user, history) => {
       });
   };
 };
-//
+
+//Term
+
+export const getInfoWebsiteApi = name => {
+  return dispatch => {
+    CallAPI(`staticContent/${name}`, "GET", null, null, apiDevFast)
+      .then(res => {
+        switch (name) {
+          case "TERM":
+            return dispatch({
+              type: Actiontype.GET_TERM_API_DEVFAST,
+              dataTerm: res.data
+            });
+          case "INTRO":
+            return dispatch({
+              type: Actiontype.GET_INTRO_API_DEVFAST,
+              dataIntro: res.data
+            });
+
+          default:
+            break;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
+export const addInfoWebsiteApi = (name, data) => {
+  return dispatch => {
+    CallAPI(`staticContent/${name}`, "PUT", data, null, apiDevFast)
+      .then(res => {
+        switch (name) {
+          case "TERM":
+            swal({
+              title: "Good job!",
+              text: `${res.statusText}!`,
+              icon: "success",
+              buttons: false,
+              timer: 1500
+            });
+            return dispatch({
+              type: Actiontype.ADD_TERM_API_DEVFAST,
+              dataTerm: res.data
+            });
+
+          case "INTRO":
+            swal({
+              title: "Good job!",
+              text: `${res.statusText}!`,
+              icon: "success",
+              buttons: false,
+              timer: 1500
+            });
+            return dispatch({
+              type: Actiontype.ADD_INTRO_API_DEVFAST,
+              dataIntro: res.data
+            });
+
+          default:
+            break;
+        }
+      })
+      .catch(err => {
+        swal({
+          title: "Error",
+          text: ` ${err.response.data.error}!`,
+          icon: "error",
+          buttons: false,
+          timer: 1500
+        });
+      });
+  };
+};

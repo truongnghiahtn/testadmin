@@ -16,7 +16,7 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import { fileValidation } from "../../../components/Validation/File/index";
+import swal from "sweetalert";
 import $ from "jquery";
 
 // Register the plugins
@@ -108,6 +108,8 @@ class childModalWords extends Component {
     }
   };
 
+  validationFile = e => {};
+
   renderContentTab = () => {
     return data.map((item, index) => (
       <div
@@ -164,34 +166,15 @@ class childModalWords extends Component {
   };
 
   handleOnchangeAudio = e => {
-    const types = /(\.|\/)(mp3)$/i;
-    //file is the file, that the user wants to upload
-    let file = e.target.files[0];
+    console.log(e.target.files[0]);
 
-    if (file !== undefined) {
-      if (types.test(file.type) || types.test(file.name)) {
-        this.setState(
-          {
-            values: {
-              ...this.state.values,
-              audio: e.target.files[0]
-            },
-            hidden: false
-          },
-          console.log(this.state.values)
-        );
-      } else {
-        this.setState({
-          values: {
-            ...this.state.valies,
-            audio: "Choose file"
-          },
-          hidden: true
-        });
-      }
-    } else {
-      return;
-    }
+    this.setState({
+      values: {
+        ...this.state.values,
+        audio: e.target.files[0]
+      },
+      hidden: true
+    });
   };
 
   handleErrors = event => {
@@ -228,13 +211,6 @@ class childModalWords extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    this.setState({
-      values: {
-        ...this.state.values,
-        audio: this.state.fileAudio
-      }
-    });
-
     if (this.props.editInfoWord === null) {
       this.props.addWord(this.state.values);
       console.log(this.state.values);
@@ -254,7 +230,8 @@ class childModalWords extends Component {
         },
         formValid: false,
         word_nameValid: false,
-        Vietnamese_meaningValid: false
+        Vietnamese_meaningValid: false,
+        hidden: false
       });
     } else {
       this.props.editWord(this.state.values);
@@ -298,17 +275,22 @@ class childModalWords extends Component {
         formValid: true,
         word_nameValid: true,
         Vietnamese_meaningValid: true,
-        hidden: true
+        hidden: false
       });
     } else {
       //ADD
+      let $e = $("#inputGroupFile04");
+      if ($e) {
+        $e.val("");
+      }
+
       this.setState({
         values: {
           ...this.state.values,
           word_name: "",
           Vietnamese_meaning: "",
           video: [],
-          audio: "Choose file",
+          audio: "",
           grammar: "",
           quotes: "",
           synonym: "",
@@ -321,7 +303,7 @@ class childModalWords extends Component {
         formValid: false,
         word_nameValid: false,
         Vietnamese_meaningValid: false,
-        hidden: true
+        hidden: false
       });
     }
   }
@@ -383,6 +365,28 @@ class childModalWords extends Component {
           })
         : "";
     }
+  };
+
+  checkFile = () => {
+    swal({
+      title: "Bạn có chắc không?",
+      text: "Sau khi chỉnh sửa, bạn sẽ không thể khôi phục tệp âm thanh này!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then(willDelete => {
+      if (willDelete) {
+        this.setState({
+          values: {
+            ...this.state.values,
+            audio: ""
+          },
+          hidden: true
+        });
+      } else {
+        swal("Tệp âm thanh của bạn an toàn!");
+      }
+    });
   };
 
   render() {
@@ -473,33 +477,46 @@ class childModalWords extends Component {
                 <div className="form-group">
                   <label style={{ width: "100%" }}>
                     Audio
-                    <div className="custom-file">
-                      <input
-                        type="file"
-                        className="custom-file-input"
-                        id="customFile"
-                        placeholder="Audio"
-                        onChange={this.handleOnchangeAudio}
-                        name="audio"
-                      />
-                      {this.state.hidden ? (
+                    {this.props.editInfoWord && !this.state.hidden ? (
+                      <div className="input-group mb-3">
                         <input
                           type="text"
-                          className="my-audio"
+                          className="form-control"
                           value={this.state.values.audio}
-                          id="myaudio"
+                          disabled
+                          readOnly
                         />
-                      ) : (
-                        ""
-                      )}
-                      <label
-                        className="custom-file-label"
-                        htmlFor="customFile"
-                        id="labelFile"
-                      >
-                        Choose file
-                      </label>
-                    </div>
+                        <div className="input-group-append">
+                          <button
+                            type="button"
+                            className="btn btn-danger"
+                            onClick={() => this.checkFile()}
+                          >
+                            Sửa audio
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="custom-file">
+                        <input
+                          type="file"
+                          className="custom-file-input"
+                          id="inputGroupFile04"
+                          onChange={
+                            this.validationFile
+                              ? this.handleOnchangeAudio
+                              : null
+                          }
+                        />
+                        <label
+                          id="avc"
+                          className="custom-file-label"
+                          htmlFor="inputGroupFile04"
+                        >
+                          Choose file
+                        </label>
+                      </div>
+                    )}
                   </label>
                 </div>
               </div>

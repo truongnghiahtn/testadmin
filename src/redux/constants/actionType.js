@@ -28,3 +28,9 @@ export const GET_EDIT_WORD = "GET_EDIT_WORD";
 
 // login admin
 export const ADMIN_LOGIN = "ADMIN_LOGIN";
+
+//Term
+export const GET_TERM_API_DEVFAST = "GET_TERM_API_DEVFAST";
+export const GET_INTRO_API_DEVFAST = "GET_INTRO_API_DEVFAST";
+export const ADD_TERM_API_DEVFAST = "ADD_TERM_API_DEVFAST";
+export const ADD_INTRO_API_DEVFAST = "ADD_INTRO_API_DEVFAST";

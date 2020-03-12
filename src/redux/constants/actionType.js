@@ -15,6 +15,7 @@ export const SAVE_WORD = "SAVE_WORD";
 export const GET_INTRO = "GET_INTRO";
 export const GET_TERM = "GET_TERM";
 export const GET_CONTACT = "GET_CONTACT";
+export const POST_NEW_WORD_API = "POST_NEW_WORD_API";
 
 //words
 export const GET_ALL_WORDS_API_DEVFAST = "GET_ALL_WORDS_API_DEVFAST";

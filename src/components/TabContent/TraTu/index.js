@@ -15,8 +15,10 @@ class TraTu extends Component {
       aTagUK.classList.add("uk");
       aTagUK.innerHTML = ico;
       aTagUK.href = `javascript:speakTS('${this.props.word}', 'uk');`;
-      $("#" + this.props.id + " .dict--title")[0].append(aTagUS);
-      $("#" + this.props.id + " .dict--title")[0].append(aTagUK);
+      if ($("#" + this.props.id + " .dict--title").length) {
+        $("#" + this.props.id + " .dict--title")[0].append(aTagUS);
+        $("#" + this.props.id + " .dict--title")[0].append(aTagUK);
+      }
     }
   }
 

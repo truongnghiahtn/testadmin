@@ -375,7 +375,7 @@ export const actEditWordAPI = data => {
       .then(res => {
         setTimeout(() => {
           swal({
-            title: "Good job!",
+            title: "Sửa thành công!",
             text: `${res.statusText}!`,
             icon: "success",
             buttons: false,
@@ -410,7 +410,7 @@ export const actDelWordAPI = id => {
       .then(res => {
         setTimeout(() => {
           swal({
-            title: "Good job!",
+            title: "Xóa Thành công!",
             text: `${res.statusText}!`,
             icon: "success",
             buttons: false,
@@ -511,7 +511,7 @@ export const addInfoWebsiteApi = (name, data) => {
         switch (name) {
           case "TERM":
             swal({
-              title: "Good job!",
+              title: "Sửa thành công!",
               text: `${res.statusText}!`,
               icon: "success",
               buttons: false,
@@ -524,7 +524,7 @@ export const addInfoWebsiteApi = (name, data) => {
 
           case "INTRO":
             swal({
-              title: "Good job!",
+              title: "Sửa thành công!",
               text: `${res.statusText}!`,
               icon: "success",
               buttons: false,
@@ -537,7 +537,7 @@ export const addInfoWebsiteApi = (name, data) => {
 
           case "CONTACT":
             swal({
-              title: "Good job!",
+              title: "Sửa thành công!",
               text: `${res.statusText}!`,
               icon: "success",
               buttons: false,

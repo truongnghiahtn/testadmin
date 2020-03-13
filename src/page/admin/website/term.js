@@ -4,6 +4,7 @@ import "react-summernote/dist/react-summernote.css"; // import styles
 import "react-summernote/lang/summernote-ru-RU"; // you can import any other locale
 import { connect } from "react-redux";
 import * as action from "../../../redux/action/index";
+import swal from "sweetalert";
 
 const Term = props => {
   const [dataTerm, setDataTerm] = useState({});
@@ -18,6 +19,21 @@ const Term = props => {
       setErrors(true);
     } else setErrors(false);
   };
+  const edit = (dataTerm) => {
+    swal({
+      title: "Bạn có chắc không?",
+      text: "Sau khi sửa, bạn sẽ không thể khôi phục !",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then(willDelete => {
+      if (willDelete) {
+        props.addInfoWebsiteApi("TERM", dataTerm)
+      } else {
+        swal("Thông tin của bạn an toàn!");
+      }
+    });
+  }; 
 
   return (
     <div
@@ -60,7 +76,8 @@ const Term = props => {
             type="submit"
             disabled={!errors}
             className="btn btn-primary"
-            onClick={() => props.addInfoWebsiteApi("TERM", dataTerm)}
+            // onClick={() => props.addInfoWebsiteApi("TERM", dataTerm)}
+            onClick={()=>{edit(dataTerm)}}
           >
             Sửa
           </button>

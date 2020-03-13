@@ -1,12 +1,27 @@
 import React, { Component } from "react";
 import * as action from "../../../redux/action/index";
 import { connect } from "react-redux";
-
+import swal from "sweetalert";
 class itemTable extends Component {
   convertHTML = html => {
     var tmp = document.createElement("DIV");
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || "";
+  };
+  xoaitem = (id) => {
+    swal({
+      title: "Bạn có chắc không?",
+      text: "Sau khi xóa, bạn sẽ không thể khôi phục !",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then(willDelete => {
+      if (willDelete) {
+        this.props.deleteMovie(id)
+      } else {
+        swal("Thông tin của bạn an toàn!");
+      }
+    });
   };
   render() {
     let { movie, stt } = this.props;
@@ -15,14 +30,7 @@ class itemTable extends Component {
         <td>{stt+1}</td>
         <td>{this.convertHTML(movie.title)}</td>
         <td className="movie_content">{this.convertHTML(movie.content)}</td>
-        {/* <td>{this.convertHTML(movie.content)}</td> */}
-        {/*         <td>
-          <img
-            src={movie.image}
-            alt=""
-            style={{ width: "100px", height: "70px" }}
-          />
-        </td> */}
+
         <td className="content_en">
           {movie.english_meaning
             ? this.convertHTML(movie.english_meaning)
@@ -48,7 +56,8 @@ class itemTable extends Component {
             <button
               type="button"
               className="btn btn-danger mb-3"
-              onClick={() => this.props.deleteMovie(movie._id)}
+       
+              onClick={()=>{this.xoaitem(movie._id)}}
             >
               <i className="ri-delete-bin-2-fill pr-0" />
               Xóa

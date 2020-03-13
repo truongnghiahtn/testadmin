@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import _ from "lodash";
 
 class TraCau extends Component {
   renderDataTraCau = () => {
@@ -16,8 +15,13 @@ class TraCau extends Component {
                       __html: item.fields.en
                     }}
                   ></em>
+
                   <a
-                    // href={`javascript:speakTS(${item._id})`}
+                    href={
+                      item._id.length < 20
+                        ? `javascript:speakTS(${item._id})`
+                        : `javascript:speakTS('${item.fields.en}','us')`
+                    }
                     className="v"
                   >
                     <i className="fa fa-bullhorn"></i>

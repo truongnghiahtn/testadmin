@@ -197,7 +197,11 @@ function Navtab(props) {
     return data.map((item, index) => {
       return item.status ? (
         <TabPanel value={value} index={item.id} key={index}>
-          {item.Component ? <item.Component content={item.content} /> : ""}
+          {item.Component ? (
+            <item.Component content={item.content} id={item.id} />
+          ) : (
+            ""
+          )}
         </TabPanel>
       ) : (
         ""

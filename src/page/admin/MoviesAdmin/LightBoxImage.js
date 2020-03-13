@@ -3,13 +3,13 @@ import FsLightbox from "fslightbox-react";
 import { apiDevFast } from "../../../utils/config";
 const LightBoxImage = ({ image, toggler }) => {
   const [productIndex, setProductIndex] = useState(0);
-  console.log(apiDevFast + "/" + image, toggler);
 
   return (
     <FsLightbox
       toggler={toggler}
+      type="image"
       sources={[apiDevFast + "/" + image]}
-      key={productIndex}
+      sourceIndex={productIndex}
     />
   );
 };

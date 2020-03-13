@@ -95,7 +95,7 @@ class BoSung extends Component {
           timer: 1500
         });
       }, 150);
-      this.props.postNewWordApi({ ...this.state.values, status: 0 });
+      this.props.postNewWordApi(this.state.values);
     } else {
       setTimeout(() => {
         swal({

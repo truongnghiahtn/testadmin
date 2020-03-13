@@ -47,6 +47,9 @@ const deMoReducer = (state = initialState, action) => {
     case ActionType.GET_TERM:
       state.dataTerm = action.dataTerm;
       return { ...state };
+    case ActionType.GET_CONTACT:
+      state.dataContact = action.dataContact;
+      return { ...state };
     //Movies
     case ActionType.GET_ALL_WORDS_API_DEVFAST:
       state.dataAllWords = action.dataWords;

@@ -56,8 +56,13 @@ const Navbar = () => {
         >
           <i></i>
         </a>
-        <div className="tc-site-logo">
-          <NavLink title="Tra câu Việt - Anh" to="/">
+        <div
+          className="tc-site-logo"
+          onClick={() => {
+            window.location.replace("/");
+          }}
+        >
+          <a title="Tra câu Việt - Anh">
             <div className="tc-site-logo-text">
               {/* <h1>TRA CÂU</h1>
               <span>&nbsp;VIỆT - ANH</span>
@@ -68,7 +73,7 @@ const Navbar = () => {
                 height="55px"
               ></img>
             </div>
-          </NavLink>
+          </a>
         </div>
         <div className="paper_menu">
           <div id="dl-menu" className="xv-menuwrapper responsive-menu">

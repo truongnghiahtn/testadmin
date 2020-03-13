@@ -7,6 +7,7 @@ const LienHe = props => {
   React.useEffect(() => {
     props.getDataPage("CONTACT");
   }, []);
+  
   return (
     <Fragment>
       <PageTitleArea title="Liên hệ" />
@@ -24,7 +25,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getDataPage: typePage => {
-      dispatch(action.getDataPage("TERM"));
+      dispatch(action.getDataPage(typePage));
     }
   };
 };

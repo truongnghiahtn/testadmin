@@ -558,6 +558,7 @@ class childModalWords extends Component {
                   className="btn btn-primary form-control pt-2 mt-3"
                   style={{ lineHeight: "initial" }}
                   onClick={this.pushdatavideo}
+                  disabled={this.state.data===""?(true):(false)}
                 >
                   Thêm video
                 </p>

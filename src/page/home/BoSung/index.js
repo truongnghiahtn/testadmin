@@ -88,14 +88,21 @@ class BoSung extends Component {
     if (this.state.valids.form) {
       setTimeout(() => {
         swal({
-          title: "Success",
-          text: `OK...!`,
+          title: "Thành công",
+          text: `Gửi thành công!`,
           icon: "success",
           buttons: false,
           timer: 1500
         });
       }, 150);
-      this.props.postNewWordApi({ ...this.state.values, status: 0 });
+      this.props.postNewWordApi(this.state.values);
+      this.setState({
+        values:{
+          ...this.state.values,
+          word_name: "",
+          Vietnamese_meaning: ""
+        }
+      })
     } else {
       setTimeout(() => {
         swal({

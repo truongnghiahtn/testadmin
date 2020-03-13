@@ -117,7 +117,7 @@ export const getDataPage = typePage => {
 
 export const postNewWordApi = data => {
   return () => {
-    CallAPI("words", "POST", data).then(rs => {
+    CallAPI("words/contribute", "POST", data).then(rs => {
       console.log(rs);
     });
   };

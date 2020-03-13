@@ -7,11 +7,19 @@ const LienHe = props => {
   React.useEffect(() => {
     props.getDataPage("CONTACT");
   }, []);
-  
+
   return (
     <Fragment>
       <PageTitleArea title="Liên hệ" />
-      {props.dataContact ? <div>{props.dataContact.content}</div> : ""}
+      {props.dataContact ? (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: props.dataContact.content
+          }}
+        ></div>
+      ) : (
+        ""
+      )}
     </Fragment>
   );
 };

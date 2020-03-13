@@ -10,7 +10,15 @@ const DieuKhoan = props => {
   return (
     <Fragment>
       <PageTitleArea title="Điều khoản" />
-      {props.dataTerm ? <div>{props.dataTerm.content}</div> : ""}
+      {props.dataTerm ? (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: props.dataTerm.content
+          }}
+        ></div>
+      ) : (
+        ""
+      )}
     </Fragment>
   );
 };

@@ -1,13 +1,23 @@
 import React, { Component, Fragment } from "react";
 import * as $ from "jquery";
+import { connect } from "react-redux";
 
 class TraTu extends Component {
   componentDidMount() {
-    console.log(this.props);
-    // var a = document.createElementNS(
-    //   '<a  className="v"><i className="fa fa-bullhorn"></i></a>'
-    // );
-    // $("#" + this.props.id + " .dict--title")[0].append(a);
+    if (this.props.id === "dict_ev" || this.props.id === "dict_aa") {
+      let ico = `<i class="fa fa-bullhorn"></i>`;
+      let aTagUS = document.createElement("a");
+      aTagUS.classList.add("us");
+      aTagUS.innerHTML = ico;
+      aTagUS.href = `javascript:speakTS('${this.props.word}', 'us');`;
+
+      let aTagUK = document.createElement("a");
+      aTagUK.classList.add("uk");
+      aTagUK.innerHTML = ico;
+      aTagUK.href = `javascript:speakTS('${this.props.word}', 'uk');`;
+      $("#" + this.props.id + " .dict--title")[0].append(aTagUS);
+      $("#" + this.props.id + " .dict--title")[0].append(aTagUK);
+    }
   }
 
   renderDataHTML = () => {
@@ -22,5 +32,9 @@ class TraTu extends Component {
     return <Fragment>{this.renderDataHTML()}</Fragment>;
   }
 }
-
-export default TraTu;
+const mapStateToProps = state => {
+  return {
+    word: state.deMoReducer.word
+  };
+};
+export default connect(mapStateToProps, null)(TraTu);

@@ -106,7 +106,7 @@ class BoSung extends Component {
     } else {
       setTimeout(() => {
         swal({
-          title: "Error",
+          title: "Lỗi",
           text: `Vui lòng kiểm tra lại thông tin!`,
           icon: "error",
           buttons: false,

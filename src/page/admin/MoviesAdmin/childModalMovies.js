@@ -18,6 +18,7 @@ import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { apiDevFast } from "../../../utils/config";
 import swal from "sweetalert";
+import LightBoxImage from "./LightBoxImage";
 // Register the plugins
 registerPlugin(
   FilePondPluginImageExifOrientation,
@@ -61,29 +62,23 @@ class childModalMovies extends Component {
           }
         }
       ],
-      hidden: false
+      hidden: false,
+      toggler: false
     };
   }
+
   handleOnchange = event => {
-    this.setState(
-      {
-        values: {
-          ...this.state.values,
-          [event.target.name]: event.target.value
-        }
-      },
-      () => {
-        console.log(this.state);
+    this.setState({
+      values: {
+        ...this.state.values,
+        [event.target.name]: event.target.value
       }
-    );
+    });
   };
   onChange = content => {
-    this.setState(
-      {
-        values: { ...this.state.values, content }
-      },
-      console.log(this.state)
-    );
+    this.setState({
+      values: { ...this.state.values, content }
+    });
   };
   onErrorContent = err => {
     let message = err.target.innerHTML === "" ? "Do not be empty" : "";
@@ -179,14 +174,11 @@ class childModalMovies extends Component {
       });
     } else {
       this.props.editMovie(this.state.values);
-      console.log(this.state.values);
     }
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps && nextProps.editInfoMovie) {
       //Update
-      console.log(nextProps.editInfoMovie);
-
       this.setState({
         values: {
           ...this.state.values,
@@ -373,17 +365,26 @@ class childModalMovies extends Component {
               </div>
             </div>
             {this.props.editInfoMovie && !this.state.hidden ? (
-              <div className="row">
-                <div className="col-6">
-                  <img
-                    className="image-style"
-                    src={apiDevFast + "/" + this.state.values.image}
-                    alt="!#"
-                  />
-                </div>
-                <div className="col-4 position-relative">
+              <div className="row justify-content-center">
+                <div className="lightbox">
+                  <div className="image-hover img-inner-shadow">
+                    <img
+                      src={apiDevFast + "/" + this.state.values.image}
+                      alt="!#"
+                    />
+                    <div
+                      className="layer"
+                      onClick={() =>
+                        this.setState({
+                          ...this.state,
+                          toggler: !this.state.toggler
+                        })
+                      }
+                    ></div>
+                  </div>
+
                   <button
-                    className="btn btn-danger myBtn"
+                    className="btn btn-danger"
                     type="button"
                     onClick={() => this.checkFile()}
                   >
@@ -403,30 +404,23 @@ class childModalMovies extends Component {
                   maxFiles={1}
                   acceptedFileTypes={["image/*"]}
                   onupdatefiles={fileItems => {
-                    console.log(fileItems.length);
                     fileItems.length > 0
-                      ? this.setState(
-                          {
-                            values: {
-                              ...this.state.values,
-                              image: fileItems[0].file
-                            },
-                            imageValid: true,
-                            files: fileItems.map(item => item.file)
+                      ? this.setState({
+                          values: {
+                            ...this.state.values,
+                            image: fileItems[0].file
                           },
-                          console.log(this.state)
-                        )
-                      : this.setState(
-                          {
-                            values: {
-                              ...this.state.values,
-                              image: ""
-                            },
-                            imageValid: true,
-                            files: []
+                          imageValid: true,
+                          files: fileItems.map(item => item.file)
+                        })
+                      : this.setState({
+                          values: {
+                            ...this.state.values,
+                            image: ""
                           },
-                          console.log(this.state)
-                        );
+                          imageValid: true,
+                          files: []
+                        });
                   }}
                 />
                 {this.state.errors.image !== "" ? (
@@ -472,7 +466,7 @@ class childModalMovies extends Component {
                 </div>
               </div>
               {this.state.errors.content !== "" ? (
-                <div className="Form_err errform">
+                <div className="Form_err errform errform-summernote">
                   (*) {this.state.errors.content}
                 </div>
               ) : (
@@ -500,6 +494,10 @@ class childModalMovies extends Component {
             </nav>
           </form>
         </div>
+        <LightBoxImage
+          image={this.state.values.image}
+          toggler={this.state.toggler}
+        />
       </div>
     );
   }

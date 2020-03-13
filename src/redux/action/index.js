@@ -307,18 +307,18 @@ export const addWordsApiDevfast = data => {
   let formData = new FormData();
 
   for (let key in data) {
-    if (key === "video") {
+    /*     if (key === "video") {
       for (let i in data.video) {
         formData.append("video", data.video[i]);
       }
-    } else {
-      formData.append(key, data[key]);
-    }
+    } else { */
+    formData.append(key, data[key]);
+    /* } */
   }
-  let a = formData.getAll("video");
+  /*   let a = formData.getAll("video");
   console.log(a);
 
-  formData.append("video", JSON.stringify(a));
+  formData.append("video", JSON.stringify(a)); */
 
   return dispatch => {
     CallAPI("words", "POST", formData, null, apiDevFast)

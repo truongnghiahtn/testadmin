@@ -290,7 +290,7 @@ export const getAllWordsApiDevfast = () => {
 
 export const getWordsApiDevfast = id => {
   return dispatch => {
-    CallAPI(`words?itemPerPage=5&page=${id}`, "GET", null, null, apiDevFast)
+    CallAPI(`words?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
       .then(res =>
         dispatch({
           type: Actiontype.GET_WORDS_API_DEVFAST,
@@ -305,11 +305,28 @@ export const getWordsApiDevfast = id => {
 
 export const addWordsApiDevfast = data => {
   let formData = new FormData();
-  for (let key in data) {
-    formData.append(key, data[key]);
+  formData.append("audio", data.audio);
+  /*   for (let key in data) {
+    if (key === "video") {
+        formData.append("video", JSON.stringify(data.video)); 
+      for (let i in data.video) {
+        formData.append("myarray[" + i + "]", data.video[i]);
+      }
+
+      break;
+    } else {
+      console.log(key);
+      formData.append(key, data[key]);
+    }
+  } */
+
+  for (var value of formData.values()) {
+    console.log(value);
   }
+  console.log({ ...data, formData });
+
   return dispatch => {
-    CallAPI("words", "POST", formData, null, apiDevFast)
+    CallAPI("words", "POST", { ...data, formData }, null, apiDevFast)
       .then(res => {
         swal({
           title: "Good job!",
@@ -318,10 +335,13 @@ export const addWordsApiDevfast = data => {
           buttons: false,
           timer: 1500
         });
-        dispatch({
-          type: Actiontype.ADD_WORDS_API_DEVFAST,
-          word: res.data
-        });
+        dispatch(
+          {
+            type: Actiontype.ADD_WORDS_API_DEVFAST,
+            word: res.data
+          },
+          console.log(res.data)
+        );
       })
       .catch(err => {
         setTimeout(() => {
@@ -473,7 +493,11 @@ export const getInfoWebsiteApi = name => {
               type: Actiontype.GET_INTRO_API_DEVFAST,
               dataIntro: res.data
             });
-
+          case "CONTACT":
+            return dispatch({
+              type: Actiontype.GET_CONTACT_API_DEVFAST,
+              dataContact: res.data
+            });
           default:
             break;
         }
@@ -485,6 +509,7 @@ export const getInfoWebsiteApi = name => {
 };
 
 export const addInfoWebsiteApi = (name, data) => {
+  console.log(data);
   return dispatch => {
     CallAPI(`staticContent/${name}`, "PUT", data, null, apiDevFast)
       .then(res => {
@@ -514,6 +539,22 @@ export const addInfoWebsiteApi = (name, data) => {
               type: Actiontype.ADD_INTRO_API_DEVFAST,
               dataIntro: res.data
             });
+
+          case "CONTACT":
+            swal({
+              title: "Good job!",
+              text: `${res.statusText}!`,
+              icon: "success",
+              buttons: false,
+              timer: 1500
+            });
+            return dispatch(
+              {
+                type: Actiontype.ADD_CONTACT_API_DEVFAST,
+                dataContact: res.data
+              },
+              console.log(res.data)
+            );
 
           default:
             break;

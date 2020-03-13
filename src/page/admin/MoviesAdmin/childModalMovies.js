@@ -14,11 +14,16 @@ import "filepond/dist/filepond.min.css";
 // Note: These need to be installed separately
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { apiDevFast } from "../../../utils/config";
 import swal from "sweetalert";
 // Register the plugins
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
+registerPlugin(
+  FilePondPluginImageExifOrientation,
+  FilePondPluginImagePreview,
+  FilePondPluginFileValidateType
+);
 
 class childModalMovies extends Component {
   constructor(props) {
@@ -396,6 +401,7 @@ class childModalMovies extends Component {
                   }
                   allowMultiple={false}
                   maxFiles={1}
+                  acceptedFileTypes={["image/*"]}
                   onupdatefiles={fileItems => {
                     console.log(fileItems.length);
                     fileItems.length > 0

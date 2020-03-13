@@ -85,14 +85,14 @@ export default class sidebarAdmin extends Component {
                 <i className="ri-subtract-line" />
                 <span>Quản lý</span>
               </li>
-              <li className>
+              <li>
                 <NavLink className="iq-waves-effect" to="/movie">
                   <i className="fa fa-film" aria-hidden="true" />
                   <span>Quản lý phim</span>
                 </NavLink>
               </li>
               <li></li>
-              <li className>
+              <li>
                 <NavLink className="iq-waves-effect" to="admin-website">
                   <i className="fab fa-chrome" aria-hidden="true" />
                   <span>Website</span>

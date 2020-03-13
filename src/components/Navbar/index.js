@@ -56,8 +56,13 @@ const Navbar = () => {
         >
           <i></i>
         </a>
-        <div className="tc-site-logo">
-          <a title="Tra câu Việt - Anh" href="#">
+        <div
+          className="tc-site-logo"
+          onClick={() => {
+            window.location.replace("/");
+          }}
+        >
+          <a title="Tra câu Việt - Anh">
             <div className="tc-site-logo-text">
               {/* <h1>TRA CÂU</h1>
               <span>&nbsp;VIỆT - ANH</span>

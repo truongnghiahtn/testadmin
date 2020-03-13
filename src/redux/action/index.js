@@ -71,8 +71,10 @@ export const getPhuDePhimApi = data => {
 
 export const getVideoApi = data => {
   return dispatch => {
+    console.log(data);
     CallAPI(`video/${data}`)
       .then(rs => {
+        console.log(data);
         dispatch({
           type: Actiontype.GET_VIDEO_API,
           video: rs.data.transcripts
@@ -117,7 +119,7 @@ export const getDataPage = typePage => {
 
 export const postNewWordApi = data => {
   return () => {
-    CallAPI("words", "POST", data).then(rs => {
+    CallAPI("words/contribute", "POST", data).then(rs => {
       console.log(rs);
     });
   };

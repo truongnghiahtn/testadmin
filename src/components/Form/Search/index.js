@@ -6,16 +6,16 @@ import * as $ from "jquery";
 const Search = props => {
   const [prevKw, setPrevKw] = useState("");
   const [currentKw, setCurrentKw] = useState("");
+  const [isSubmit, setIsSubmit] = useState(false);
   useEffect(() => {
     if (prevKw === currentKw && currentKw) {
       props.getDataSearchApi(currentKw);
       setPrevKw("");
     }
-    if (props.dataSearch.length && currentKw) {
+    if (props.dataSearch.length) setIsSubmit(false);
+    if (props.dataSearch.length && currentKw && !isSubmit)
       $("#tc-content-search").addClass("show");
-    } else {
-      $("#tc-content-search").removeClass("show");
-    }
+    else $("#tc-content-search").removeClass("show");
 
     $(document).on("click", function(e) {
       e.target.id != "tc-s"
@@ -57,9 +57,17 @@ const Search = props => {
 
   const handleOnSubmit = e => {
     e.preventDefault();
-    $(".s-suggest-content").length
-      ? $(".s-suggest-content")[0].click()
-      : props.saveWord(currentKw);
+    if ($(".s-suggest-content").length) {
+      $(".s-suggest-content")[0].click();
+      setIsSubmit(false);
+    } else {
+      props.saveWord(currentKw);
+      props.getTraCauApi(currentKw);
+      props.getTraTuApi(currentKw);
+      props.getPhuDePhimApi(currentKw);
+      props.getVideoApi(currentKw);
+      setIsSubmit(true);
+    }
   };
 
   return (

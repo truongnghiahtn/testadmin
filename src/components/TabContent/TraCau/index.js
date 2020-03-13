@@ -15,18 +15,17 @@ class TraCau extends Component {
                       __html: item.fields.en
                     }}
                   ></em>
-                  {item._id.length < 20 ? (
-                    <a href={`javascript:speakTS(${item._id})`} className="v">
-                      <i className="fa fa-bullhorn"></i>
-                    </a>
-                  ) : (
-                    <a
-                      href={`javascript:speakTS('${item.fields.en}','us')`}
-                      className="v"
-                    >
-                      <i className="fa fa-bullhorn"></i>
-                    </a>
-                  )}
+
+                  <a
+                    href={
+                      item._id.length < 20
+                        ? `javascript:speakTS(${item._id})`
+                        : `javascript:speakTS('${item.fields.en}','us')`
+                    }
+                    className="v"
+                  >
+                    <i className="fa fa-bullhorn"></i>
+                  </a>
                 </p>
               </article>
             </li>

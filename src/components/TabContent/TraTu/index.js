@@ -2,19 +2,12 @@ import React, { Component, Fragment } from "react";
 import * as $ from "jquery";
 
 class TraTu extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      content: ""
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    let { content } = this.props;
-    if (content !== nextProps.content) {
-      this.setState({ content });
-      console.log(this.props.id);
-    }
+  componentDidMount() {
+    console.log(this.props);
+    // var a = document.createElementNS(
+    //   '<a  className="v"><i className="fa fa-bullhorn"></i></a>'
+    // );
+    // $("#" + this.props.id + " .dict--title")[0].append(a);
   }
 
   renderDataHTML = () => {

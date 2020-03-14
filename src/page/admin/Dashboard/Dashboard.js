@@ -1,9 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import HeaderAdmin from "./../../../components/headerAdmin/headerAdmin";
+import * as action from "../../../redux/action/index";
+import { connect } from "react-redux";
+
 const $ = window.$;
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
   componentDidMount() {
     /* Header fixed */
 
@@ -92,6 +95,7 @@ export default class Dashboard extends Component {
         series.dataFields.category = "country";
       }); // end am4core.ready()
     }
+    this.props.getListAdmin(1);
   }
   render() {
     return (
@@ -186,3 +190,12 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getListAdmin: id => {
+      dispatch(action.getAdminApiDevfast(id));
+    }
+  };
+};
+export default connect(null, mapDispatchToProps)(Dashboard);

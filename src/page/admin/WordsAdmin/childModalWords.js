@@ -150,8 +150,6 @@ class childModalWords extends Component {
   };
 
   handleOnchange = event => {
-    console.log(this.fileInput.value);
-
     this.setState(
       {
         values: {

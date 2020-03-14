@@ -3,6 +3,8 @@ import { CallAPI } from "../../utils/callApi";
 import { apiDevFast, api } from "../../utils/config";
 import swal from "sweetalert";
 
+const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
+
 export const getDataSearchApi = data => {
   return dispatch => {
     if (data) {
@@ -143,47 +145,68 @@ export const postContactApi = data => {
 //Movies Admin
 export const getMoviesApiDevfast = id => {
   return dispatch => {
-    CallAPI(`admin?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
-      .then(res =>
-        dispatch({
-          type: Actiontype.GET_ADMIN_API_DEVFAST,
-          dataAdmin: res.data
-        })
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI(
+        `movies?itemPerPage=20&page=${id}`,
+        "GET",
+        null,
+        headers,
+        apiDevFast
       )
-      .catch(err => {
-        console.log(err);
-      });
+        .then(res =>
+          dispatch({
+            type: Actiontype.GET_MOVIES_API_DEVFAST,
+            dataMovies: res.data
+          })
+        )
+        .catch(err => {
+          console.log(err);
+        });
+    }
   };
 };
 
 export const addMoviesApiDevfast = data => {
+  let formData = new FormData();
+
+  for (let key in data) {
+    formData.append(key, data[key]);
+  }
   return dispatch => {
-    CallAPI("movies", "POST", data, null, apiDevFast)
-      .then(res => {
-        swal({
-          title: "Good job!",
-          text: `${res.statusText}!`,
-          icon: "success",
-          buttons: false,
-          timer: 1500
-        });
-        dispatch({
-          type: Actiontype.ADD_ADMIN_API_DEVFAST,
-          movie: res.data
-        });
-      })
-      .catch(err => {
-        setTimeout(() => {
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI("movies", "POST", formData, headers, apiDevFast)
+        .then(res => {
           swal({
-            title: "Error",
-            text: ` ${err.response.data.error}!`,
-            icon: "error",
+            title: "Good job!",
+            text: `${res.statusText}!`,
+            icon: "success",
             buttons: false,
             timer: 1500
           });
-        }, 150);
-        console.log(err);
-      });
+          dispatch({
+            type: Actiontype.ADD_MOVIES_API_DEVFAST,
+            movie: res.data
+          });
+        })
+        .catch(err => {
+          setTimeout(() => {
+            swal({
+              title: "Error",
+              text: ` ${err.response.data.error}!`,
+              icon: "error",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+          console.log(err);
+        });
+    }
   };
 };
 
@@ -205,68 +228,78 @@ export const actEditMovieAPI = data => {
     formData.append(key, data[key]);
   }
   return dispatch => {
-    CallAPI(`movies/${data.id}`, "PUT", formData, null, apiDevFast)
-      .then(res => {
-        setTimeout(() => {
-          swal({
-            title: "Good job!",
-            text: `${res.statusText}!`,
-            icon: "success",
-            buttons: false,
-            timer: 1500
-          });
-        }, 150);
-        dispatch(
-          {
-            type: Actiontype.EDIT_ADMIN_API_DEVFAST,
-            movie: res.data
-          },
-          console.log(res)
-        );
-      })
-      .catch(err => {
-        setTimeout(() => {
-          swal({
-            title: "Error",
-            text: ` ${err.response.data.error}!`,
-            icon: "error",
-            buttons: false,
-            timer: 1500
-          });
-        }, 150);
-      });
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI(`movies/${data.id}`, "PUT", formData, headers, apiDevFast)
+        .then(res => {
+          setTimeout(() => {
+            swal({
+              title: "Good job!",
+              text: `${res.statusText}!`,
+              icon: "success",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+          dispatch(
+            {
+              type: Actiontype.EDIT_MOVIES_API_DEVFAST,
+              movie: res.data
+            },
+            console.log(res)
+          );
+        })
+        .catch(err => {
+          setTimeout(() => {
+            swal({
+              title: "Error",
+              text: ` ${err.response.data.error}!`,
+              icon: "error",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+        });
+    }
   };
 };
 
 export const actDelMovieAPI = id => {
   return dispatch => {
-    CallAPI(`movies/${id}`, "DELETE", null, null, apiDevFast)
-      .then(res => {
-        setTimeout(() => {
-          swal({
-            title: "Good job!",
-            text: `${res.statusText}!`,
-            icon: "success",
-            buttons: false,
-            timer: 1500
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI(`movies/${id}`, "DELETE", null, headers, apiDevFast)
+        .then(res => {
+          setTimeout(() => {
+            swal({
+              title: "Good job!",
+              text: `${res.statusText}!`,
+              icon: "success",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+          dispatch({
+            type: Actiontype.DEL_MOVIES_API_DEVFAST,
+            idMovie: res.data.data._id
           });
-        }, 150);
-        dispatch({
-          type: Actiontype.DEL_ADMIN_API_DEVFAST,
-          idMovie: res.data.data._id
+        })
+        .catch(err => {
+          setTimeout(() => {
+            swal({
+              title: "Error",
+              text: ` ${err.response.data.error}!`,
+              icon: "error",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
         });
-      })
-      .catch(err => {
-        setTimeout(() => {
-          swal({
-            title: "Error",
-            text: ` ${err.response.data.error}!`,
-            icon: "error",
-            buttons: false,
-            timer: 1500
-          });
-        }, 150);
-      });
+    }
   };
 };
 
@@ -319,35 +352,40 @@ export const addWordsApiDevfast = data => {
   }
 
   return dispatch => {
-    CallAPI("words", "POST", formData, null, apiDevFast)
-      .then(res => {
-        swal({
-          title: "Good job!",
-          text: `${res.statusText}!`,
-          icon: "success",
-          buttons: false,
-          timer: 1500
-        });
-        dispatch(
-          {
-            type: Actiontype.ADD_WORDS_API_DEVFAST,
-            word: res.data
-          },
-          console.log(res.data)
-        );
-      })
-      .catch(err => {
-        setTimeout(() => {
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI("words", "POST", formData, headers, apiDevFast)
+        .then(res => {
           swal({
-            title: "Error",
-            text: ` ${err.response.data.error}!`,
-            icon: "error",
+            title: "Good job!",
+            text: `${res.statusText}!`,
+            icon: "success",
             buttons: false,
             timer: 1500
           });
-        }, 150);
-        console.log(err);
-      });
+          dispatch(
+            {
+              type: Actiontype.ADD_WORDS_API_DEVFAST,
+              word: res.data
+            },
+            console.log(res.data)
+          );
+        })
+        .catch(err => {
+          setTimeout(() => {
+            swal({
+              title: "Error",
+              text: ` ${err.response.data.error}!`,
+              icon: "error",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+          console.log(err);
+        });
+    }
   };
 };
 
@@ -364,74 +402,87 @@ export const actGetEditWord = data => {
 };
 
 export const actEditWordAPI = data => {
+  console.log(data);
+
   let formData = new FormData();
   for (let key in data) {
     formData.append(key, data[key]);
   }
   return dispatch => {
-    CallAPI(`words/${data.id}`, "PUT", formData, null, apiDevFast)
-      .then(res => {
-        setTimeout(() => {
-          swal({
-            title: "Sửa thành công!",
-            text: `${res.statusText}!`,
-            icon: "success",
-            buttons: false,
-            timer: 1500
-          });
-        }, 150);
-        dispatch(
-          {
-            type: Actiontype.EDIT_WORDS_API_DEVFAST,
-            word: res.data
-          },
-          console.log(res)
-        );
-      })
-      .catch(err => {
-        setTimeout(() => {
-          swal({
-            title: "Error",
-            text: ` ${err.response.data.error}!`,
-            icon: "error",
-            buttons: false,
-            timer: 1500
-          });
-        }, 150);
-      });
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI(`words/${data.id}`, "PUT", formData, headers, apiDevFast)
+        .then(res => {
+          setTimeout(() => {
+            swal({
+              title: "Sửa thành công!",
+              text: `${res.statusText}!`,
+              icon: "success",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+          dispatch(
+            {
+              type: Actiontype.EDIT_WORDS_API_DEVFAST,
+              word: res.data
+            },
+            console.log(res)
+          );
+        })
+        .catch(err => {
+          setTimeout(() => {
+            swal({
+              title: "Error",
+              text: ` ${err.response.data.error}!`,
+              icon: "error",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+        });
+    }
   };
 };
 
 export const actDelWordAPI = id => {
   return dispatch => {
-    CallAPI(`words/${id}`, "DELETE", null, null, apiDevFast)
-      .then(res => {
-        setTimeout(() => {
-          swal({
-            title: "Xóa Thành công!",
-            text: `${res.statusText}!`,
-            icon: "success",
-            buttons: false,
-            timer: 1500
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI(`words/${id}`, "DELETE", null, headers, apiDevFast)
+        .then(res => {
+          setTimeout(() => {
+            swal({
+              title: "Xóa Thành công!",
+              text: `${res.statusText}!`,
+              icon: "success",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+          dispatch({
+            type: Actiontype.DEL_WORDS_API_DEVFAST,
+            idWord: res.data.data
           });
-        }, 150);
-        dispatch({
-          type: Actiontype.DEL_WORDS_API_DEVFAST,
-          idWord: res.data.data._id
+          console.log(res.data.data);
+        })
+        .catch(err => {
+          setTimeout(() => {
+            swal({
+              title: "Error",
+              text: ` ${err.response.data.error}!`,
+              icon: "error",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+          console.log(err);
         });
-      })
-      .catch(err => {
-        setTimeout(() => {
-          swal({
-            title: "Error",
-            text: ` ${err.response.data.error}!`,
-            icon: "error",
-            buttons: false,
-            timer: 1500
-          });
-        }, 150);
-        console.log(err);
-      });
+    }
   };
 };
 
@@ -615,8 +666,6 @@ export const actDelCustomerAPI = id => {
   };
 };
 
-const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
-
 //Admin
 export const getAdminApiDevfast = id => {
   return dispatch => {
@@ -754,6 +803,75 @@ export const actDelAdminAPI = id => {
             type: Actiontype.DEL_ADMIN_API_DEVFAST,
             idAdmin: res.data.data._id
           });
+        })
+        .catch(err => {
+          setTimeout(() => {
+            swal({
+              title: "Error",
+              text: ` ${err.response.data.error}!`,
+              icon: "error",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+        });
+    }
+  };
+};
+
+//words unapproved
+
+export const getWordsUnapprovedApiDevfast = id => {
+  return dispatch => {
+    CallAPI(
+      `contribute/unapproved?itemPerPage=20&page=${id}`,
+      "GET",
+      null,
+      null,
+      apiDevFast
+    )
+      .then(res =>
+        dispatch({
+          type: Actiontype.GET_WORDS_UNAPPROVED_API_DEVFAST,
+          dataWords: res.data
+        })
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
+export const actAppovedWordAPI = data => {
+  return dispatch => {
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI(
+        `words/${data.id}`,
+        "PUT",
+        { status: data.status },
+        headers,
+        apiDevFast
+      )
+        .then(res => {
+          setTimeout(() => {
+            swal({
+              title: "Sửa thành công!",
+              text: `${res.statusText}!`,
+              icon: "success",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+          dispatch(
+            {
+              type: Actiontype.APPROVED_WORD_API,
+              word: res.data
+            },
+            console.log(res.data)
+          );
         })
         .catch(err => {
           setTimeout(() => {

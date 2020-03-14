@@ -50,8 +50,7 @@ class childModalWords extends Component {
       word_nameValid: false,
       Vietnamese_meaningValid: false,
       data: "",
-      hidden: false,
-      inputKey: ""
+      hidden: false
     };
     this.fileInput = React.createRef();
   }
@@ -162,6 +161,7 @@ class childModalWords extends Component {
         console.log(this.state);
       }
     );
+    document.getElementById("inputGroupFile04").value = "";
   };
 
   handleOnchangeAudio = e => {
@@ -211,6 +211,8 @@ class childModalWords extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log(this.state.values);
+    this.fileInput.current.value = "";
+    console.log(this.fileInput.current.value);
 
     if (this.props.editInfoWord === null) {
       this.props.addWord(this.state.values);
@@ -231,18 +233,17 @@ class childModalWords extends Component {
         formValid: false,
         word_nameValid: false,
         Vietnamese_meaningValid: false,
-        hidden: false,
-        inputKey: ""
+        hidden: false
       });
-      this.fileInput.value = "";
     } else {
       this.props.editWord(this.state.values);
+      let input = $("#inputGroupFile04");
     }
   };
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps.editInfoWord);
-
+    console.log(this.fileInput.current.value);
     if (nextProps && nextProps.editInfoWord) {
       //Update
       let TestVideo = nextProps.editInfoWord.video;
@@ -340,7 +341,7 @@ class childModalWords extends Component {
       return this.state.values.video.length
         ? this.state.values.video.map((item, index) => {
             return (
-              <div className="dinh_dang_input">
+              <div className="dinh_dang_input" key={index}>
                 <input
                   type="text"
                   className="form-control"
@@ -499,11 +500,9 @@ class childModalWords extends Component {
                           className="custom-file-input"
                           id="inputGroupFile04"
                           onChange={this.handleOnchangeAudio}
-                          ref={ref => (this.fileInput = ref)}
-                          key={this.state.inputKey}
+                          ref={this.fileInput}
                         />
                         <label
-                          id="avc"
                           className="custom-file-label"
                           htmlFor="inputGroupFile04"
                         >

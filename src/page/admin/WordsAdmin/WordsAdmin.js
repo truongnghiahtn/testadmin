@@ -99,7 +99,9 @@ const WordsAdmin = props => {
                   data-toggle="modal"
                   data-target="#modelId"
                   className="btn btn-sm iq-bg-success"
-                  onClick={() => props.actOnEditWord()}
+                  onClick={() => {
+                    props.actOnEditWord();
+                  }}
                 >
                   <i className="ri-add-fill">
                     <span className="pl-1">Thêm word</span>
@@ -122,18 +124,22 @@ const WordsAdmin = props => {
                     </tr>
                   </thead>
                   {loading ? (
-                    <div className="indicator">
-                      <svg width="16px" height="12px">
-                        <polyline
-                          id="back"
-                          points="1 6 4 6 6 11 10 1 12 6 15 6"
-                        />
-                        <polyline
-                          id="front"
-                          points="1 6 4 6 6 11 10 1 12 6 15 6"
-                        />
-                      </svg>
-                    </div>
+                    <tbody>
+                      <tr>
+                        <td className="indicator border-0">
+                          <svg width="16px" height="12px">
+                            <polyline
+                              id="back"
+                              points="1 6 4 6 6 11 10 1 12 6 15 6"
+                            />
+                            <polyline
+                              id="front"
+                              points="1 6 4 6 6 11 10 1 12 6 15 6"
+                            />
+                          </svg>
+                        </td>
+                      </tr>
+                    </tbody>
                   ) : (
                     <tbody className="fadeIn animated">{renderTbody()}</tbody>
                   )}

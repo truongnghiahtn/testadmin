@@ -85,12 +85,17 @@ export default class sidebarAdmin extends Component {
                 <i className="ri-subtract-line" />
                 <span>Quản lý</span>
               </li>
-              <li>
-                <NavLink className="iq-waves-effect" to="/movie">
-                  <i className="fa fa-film" aria-hidden="true" />
-                  <span>Quản lý phim</span>
-                </NavLink>
-              </li>
+              {JSON.parse(sessionStorage.getItem("userAdmin")).role ===
+              "supper" ? (
+                <li>
+                  <NavLink className="iq-waves-effect" to="/admin-user">
+                    <i className="fa fa-film" aria-hidden="true" />
+                    <span>Admin</span>
+                  </NavLink>
+                </li>
+              ) : (
+                ""
+              )}
               <li></li>
               <li>
                 <NavLink className="iq-waves-effect" to="admin-website">
@@ -112,10 +117,10 @@ export default class sidebarAdmin extends Component {
                 </a>
                 <ul className="iq-submenu collapse" id="collapseOne">
                   <li>
-                    <a href="#">
+                    <NavLink to="/admin-customer">
                       <i className="fa fa-id-badge" aria-hidden="true" />
                       Thông tin
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
                     <a href="contribute.html">
@@ -145,10 +150,10 @@ export default class sidebarAdmin extends Component {
                     </NavLink>
                   </li>
                   <li>
-                    <a href="film.html">
+                    <NavLink to="/admin-movie">
                       <i className="fa fa-film" aria-hidden="true" />
-                      Tựa đề phim
-                    </a>
+                      Quản lý phim
+                    </NavLink>
                   </li>
                 </ul>
               </li>

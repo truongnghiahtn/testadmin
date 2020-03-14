@@ -11,6 +11,7 @@ export const CallAPI = (
   return Axios({
     method,
     url: `${Api}/${uri}`,
-    data: body
+    data: body,
+    headers
   });
 };

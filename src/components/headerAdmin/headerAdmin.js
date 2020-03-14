@@ -194,7 +194,7 @@ const HeaderAdmin = () => {
                   <i className="ri-fullscreen-line" />
                 </a>
               </li>
-              <li className="nav-item">
+              {/*               <li className="nav-item">
                 <a href="#" className="search-toggle iq-waves-effect">
                   <i className="ri-notification-3-fill" />
                   <span className="bg-danger dots" />
@@ -281,8 +281,8 @@ const HeaderAdmin = () => {
                     </div>
                   </div>
                 </div>
-              </li>
-              <li className="nav-item dropdown">
+              </li> */}
+              {/* <li className="nav-item dropdown">
                 <a href="#" className="search-toggle iq-waves-effect">
                   <i className="ri-mail-open-fill" />
                   <span className="bg-primary count-mail" />
@@ -381,7 +381,7 @@ const HeaderAdmin = () => {
                     </div>
                   </div>
                 </div>
-              </li>
+              </li> */}
             </ul>
           </div>
           <ul className="navbar-list">
@@ -408,75 +408,14 @@ const HeaderAdmin = () => {
                       </h5>
                       <span className="text-white font-size-12">Available</span>
                     </div>
-                    <a
-                      href="profile.html"
-                      className="iq-sub-card iq-bg-primary-hover"
-                    >
-                      <div className="media align-items-center">
-                        <div className="rounded iq-card-icon iq-bg-primary">
-                          <i className="ri-file-user-line" />
-                        </div>
-                        <div className="media-body ml-3">
-                          <h6 className="mb-0 ">My Profile</h6>
-                          <p className="mb-0 font-size-12">
-                            View personal profile details.
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                    <a
-                      href="profile-edit.html"
-                      className="iq-sub-card iq-bg-primary-hover"
-                    >
-                      <div className="media align-items-center">
-                        <div className="rounded iq-card-icon iq-bg-primary">
-                          <i className="ri-profile-line" />
-                        </div>
-                        <div className="media-body ml-3">
-                          <h6 className="mb-0 ">Edit Profile</h6>
-                          <p className="mb-0 font-size-12">
-                            Modify your personal details.
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                    <a
-                      href="account-setting.html"
-                      className="iq-sub-card iq-bg-primary-hover"
-                    >
-                      <div className="media align-items-center">
-                        <div className="rounded iq-card-icon iq-bg-primary">
-                          <i className="ri-account-box-line" />
-                        </div>
-                        <div className="media-body ml-3">
-                          <h6 className="mb-0 ">Account settings</h6>
-                          <p className="mb-0 font-size-12">
-                            Manage your account parameters.
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                    <a
-                      href="privacy-setting.html"
-                      className="iq-sub-card iq-bg-primary-hover"
-                    >
-                      <div className="media align-items-center">
-                        <div className="rounded iq-card-icon iq-bg-primary">
-                          <i className="ri-lock-line" />
-                        </div>
-                        <div className="media-body ml-3">
-                          <h6 className="mb-0 ">Privacy Settings</h6>
-                          <p className="mb-0 font-size-12">
-                            Control your privacy parameters.
-                          </p>
-                        </div>
-                      </div>
-                    </a>
                     <div className="d-inline-block w-100 text-center p-3">
                       <a
                         className="bg-primary iq-sign-btn"
-                        href="sign-in.html"
+                        href="/"
                         role="button"
+                        onClick={() => {
+                          sessionStorage.clear();
+                        }}
                       >
                         Sign out
                         <i className="ri-login-box-line ml-2" />

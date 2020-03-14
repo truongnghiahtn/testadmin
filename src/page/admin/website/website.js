@@ -8,7 +8,7 @@ import { dataInfoWebsite } from "./dataInfoWebsite";
 import Intro from "./intro";
 import Term from "./term";
 import Mail from "./mail";
-import Contact from "./contact";
+/* import Contact from "./contact"; */
 
 const Website = props => {
   useEffect(() => {
@@ -18,7 +18,7 @@ const Website = props => {
   }, []);
 
   const renderTab = () => {
-    return dataInfoWebsite.map((item, index) => (
+    return dataInfoWebsite.slice(0, 3).map((item, index) => (
       <li className="nav-item" key={index}>
         <a
           className={index === 0 ? "nav-link active" : "nav-link"}
@@ -64,7 +64,7 @@ const Website = props => {
                   <Intro dataIntro={props.dataIntro} />
                   <Term dataTerm={props.dataTerm} />
                   <Mail />
-                  <Contact dataContact={props.dataContact} />
+                  {/* <Contact dataContact={props.dataContact} /> */}
                 </div>
               </div>
             </div>

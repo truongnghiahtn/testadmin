@@ -12,8 +12,24 @@ const Mail = () => {
         <div className="form-group">
           <div className="form-row">
             <div className="col">
-              <label>Mail Server</label>
-              <input type="text" className="form-control" />
+              <label>Mail server</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Tài khoản"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="form-row">
+            <div className="col">
+              <label>Mật khẩu mail server</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Mật khẩu"
+              />
             </div>
           </div>
         </div>
@@ -21,7 +37,23 @@ const Mail = () => {
           <div className="form-row">
             <div className="col">
               <label>Mail nhận</label>
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Tài khoản"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="form-row">
+            <div className="col">
+              <label>Mật khẩu mail nhận</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Mật khẩu"
+              />
             </div>
           </div>
         </div>

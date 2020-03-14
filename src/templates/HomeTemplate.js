@@ -3,10 +3,6 @@ import { Route } from "react-router-dom";
 import Navbar from "../components/Navbar/index";
 
 const HomeLayout = props => {
-  React.useEffect(() => {
-
-    sessionStorage.clear();
-  }, [props.location]);
   return (
     <React.Fragment>
       <Navbar />

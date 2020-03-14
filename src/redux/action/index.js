@@ -123,6 +123,14 @@ export const postNewWordApi = data => {
   };
 };
 
+export const postContactApi = data => {
+  return () => {
+    CallAPI("customer", "POST", data).then(rs => {
+      console.log(rs);
+    });
+  };
+};
+
 //Movies Admin
 export const getMoviesApiDevfast = id => {
   return dispatch => {

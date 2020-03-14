@@ -191,11 +191,17 @@ const deMoReducer = (state = initialState, action) => {
     case ActionType.GET_INTRO_API_DEVFAST:
       state.dataIntro = action.dataIntro;
       return { ...state };
+    case ActionType.GET_CONTACT_API_DEVFAST:
+      state.dataContact = action.dataContact;
+      return { ...state };
     case ActionType.ADD_TERM_API_DEVFAST:
       state.dataTerm = action.dataTerm;
       return { ...state };
     case ActionType.ADD_INTRO_API_DEVFAST:
-      state.dataTerm = action.dataIntro;
+      state.dataIntro = action.dataIntro;
+      return { ...state };
+    case ActionType.ADD_CONTACT_API_DEVFAST:
+      state.dataContact = action.dataContact;
       return { ...state };
     default:
       return { ...state };

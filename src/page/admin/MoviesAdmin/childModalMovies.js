@@ -14,11 +14,17 @@ import "filepond/dist/filepond.min.css";
 // Note: These need to be installed separately
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { apiDevFast } from "../../../utils/config";
 import swal from "sweetalert";
+import LightBoxImage from "./LightBoxImage";
 // Register the plugins
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
+registerPlugin(
+  FilePondPluginImageExifOrientation,
+  FilePondPluginImagePreview,
+  FilePondPluginFileValidateType
+);
 
 class childModalMovies extends Component {
   constructor(props) {
@@ -56,29 +62,23 @@ class childModalMovies extends Component {
           }
         }
       ],
-      hidden: false
+      hidden: false,
+      toggler: false
     };
   }
+
   handleOnchange = event => {
-    this.setState(
-      {
-        values: {
-          ...this.state.values,
-          [event.target.name]: event.target.value
-        }
-      },
-      () => {
-        console.log(this.state);
+    this.setState({
+      values: {
+        ...this.state.values,
+        [event.target.name]: event.target.value
       }
-    );
+    });
   };
   onChange = content => {
-    this.setState(
-      {
-        values: { ...this.state.values, content }
-      },
-      console.log(this.state)
-    );
+    this.setState({
+      values: { ...this.state.values, content }
+    });
   };
   onErrorContent = err => {
     let message = err.target.innerHTML === "" ? "Do not be empty" : "";
@@ -174,14 +174,11 @@ class childModalMovies extends Component {
       });
     } else {
       this.props.editMovie(this.state.values);
-      console.log(this.state.values);
     }
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps && nextProps.editInfoMovie) {
       //Update
-      console.log(nextProps.editInfoMovie);
-
       this.setState({
         values: {
           ...this.state.values,
@@ -268,233 +265,250 @@ class childModalMovies extends Component {
 
   render() {
     return (
-      <div>
-        <div className="modal-header">
-          {this.props.editInfoMovie === null ? (
-            <h5 className="modal-title">Thêm phim</h5>
-          ) : (
-            <h5 className="modal-title">Sửa phim</h5>
-          )}
-          <button
-            type="button"
-            className="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div className="modal-body edit-modal">
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <label style={{ width: "100%" }}>
-                Tên phim
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Tên phim"
-                  onChange={this.handleOnchange}
-                  onBlur={this.handleErrors}
-                  onKeyUp={this.handleErrors}
-                  name="title"
-                  value={this.state.values.title ? this.state.values.title : ""}
-                />
-              </label>
-              {this.state.errors.title !== "" ? (
-                <div className="Form_err errform">
-                  (*) {this.state.errors.title}
+      <>
+        <div>
+          <div className="modal-header">
+            {this.props.editInfoMovie === null ? (
+              <h5 className="modal-title">Thêm phim</h5>
+            ) : (
+              <h5 className="modal-title">Sửa phim</h5>
+            )}
+            <button
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div className="modal-body edit-modal">
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <label style={{ width: "100%" }}>
+                  Tên phim
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Tên phim"
+                    onChange={this.handleOnchange}
+                    onBlur={this.handleErrors}
+                    onKeyUp={this.handleErrors}
+                    name="title"
+                    value={
+                      this.state.values.title ? this.state.values.title : ""
+                    }
+                  />
+                </label>
+                {this.state.errors.title !== "" ? (
+                  <div className="Form_err errform">
+                    (*) {this.state.errors.title}
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+
+              <div className="row">
+                <div className="col">
+                  <div className="form-group">
+                    <label style={{ width: "100%" }}>
+                      EN
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="English"
+                        onChange={this.handleOnchange}
+                        onBlur={this.handleErrors}
+                        onKeyUp={this.handleErrors}
+                        name="english_meaning"
+                        value={
+                          this.state.values.english_meaning
+                            ? this.state.values.english_meaning
+                            : ""
+                        }
+                      />
+                    </label>
+                    {this.state.errors.english_meaning !== "" ? (
+                      <div className="Form_err errform">
+                        (*) {this.state.errors.english_meaning}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="form-group">
+                    <label style={{ width: "100%" }}>
+                      VN
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Vietnamese"
+                        onChange={this.handleOnchange}
+                        onBlur={this.handleErrors}
+                        onKeyUp={this.handleErrors}
+                        name="Vietnamese_meaning"
+                        value={
+                          this.state.values.Vietnamese_meaning
+                            ? this.state.values.Vietnamese_meaning
+                            : ""
+                        }
+                      />
+                    </label>
+                    {this.state.errors.Vietnamese_meaning !== "" ? (
+                      <div className="Form_err errform">
+                        (*) {this.state.errors.Vietnamese_meaning}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div>
+              </div>
+              {this.props.editInfoMovie && !this.state.hidden ? (
+                <div className="row justify-content-center">
+                  <div className="lightbox">
+                    <div className="image-hover img-inner-shadow">
+                      <img
+                        className="img-fluid"
+                        src={apiDevFast + "/" + this.state.values.image}
+                        alt="!#"
+                      />
+                      <div
+                        className="layer"
+                        onClick={() => {
+                          this.setState({
+                            ...this.state,
+                            toggler: !this.state.toggler
+                          });
+                          window.$(".fslightbox-source").css("width", "auto");
+                        }}
+                      ></div>
+                    </div>
+
+                    <button
+                      className="btn btn-danger"
+                      type="button"
+                      onClick={() => this.checkFile()}
+                    >
+                      Sửa ảnh
+                    </button>
+                  </div>
                 </div>
               ) : (
-                ""
-              )}
-            </div>
-
-            <div className="row">
-              <div className="col">
-                <div className="form-group">
-                  <label style={{ width: "100%" }}>
-                    EN
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="English"
-                      onChange={this.handleOnchange}
-                      onBlur={this.handleErrors}
-                      onKeyUp={this.handleErrors}
-                      name="english_meaning"
-                      value={
-                        this.state.values.english_meaning
-                          ? this.state.values.english_meaning
-                          : ""
-                      }
-                    />
-                  </label>
-                  {this.state.errors.english_meaning !== "" ? (
-                    <div className="Form_err errform">
-                      (*) {this.state.errors.english_meaning}
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </div>
-              <div className="col">
-                <div className="form-group">
-                  <label style={{ width: "100%" }}>
-                    VN
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Vietnamese"
-                      onChange={this.handleOnchange}
-                      onBlur={this.handleErrors}
-                      onKeyUp={this.handleErrors}
-                      name="Vietnamese_meaning"
-                      value={
-                        this.state.values.Vietnamese_meaning
-                          ? this.state.values.Vietnamese_meaning
-                          : ""
-                      }
-                    />
-                  </label>
-                  {this.state.errors.Vietnamese_meaning !== "" ? (
-                    <div className="Form_err errform">
-                      (*) {this.state.errors.Vietnamese_meaning}
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </div>
-            </div>
-            {this.props.editInfoMovie && !this.state.hidden ? (
-              <div className="row">
-                <div className="col-6">
-                  <img
-                    className="image-style"
-                    src={apiDevFast + "/" + this.state.values.image}
-                    alt="!#"
-                  />
-                </div>
-                <div className="col-4 position-relative">
-                  <button
-                    className="btn btn-danger myBtn"
-                    type="button"
-                    onClick={() => this.checkFile()}
-                  >
-                    Sửa ảnh
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <React.Fragment>
-                <FilePond
-                  files={
-                    this.props.editInfoMovie || this.state.values.image
-                      ? this.state.files
-                      : null
-                  }
-                  allowMultiple={false}
-                  maxFiles={1}
-                  onupdatefiles={fileItems => {
-                    console.log(fileItems.length);
-                    fileItems.length > 0
-                      ? this.setState(
-                          {
+                <React.Fragment>
+                  <FilePond
+                    files={
+                      this.props.editInfoMovie || this.state.values.image
+                        ? this.state.files
+                        : null
+                    }
+                    allowMultiple={false}
+                    maxFiles={1}
+                    acceptedFileTypes={["image/*"]}
+                    onupdatefiles={fileItems => {
+                      fileItems.length > 0
+                        ? this.setState({
                             values: {
                               ...this.state.values,
                               image: fileItems[0].file
                             },
                             imageValid: true,
                             files: fileItems.map(item => item.file)
-                          },
-                          console.log(this.state)
-                        )
-                      : this.setState(
-                          {
+                          })
+                        : this.setState({
                             values: {
                               ...this.state.values,
                               image: ""
                             },
                             imageValid: true,
                             files: []
-                          },
-                          console.log(this.state)
-                        );
-                  }}
-                />
-                {this.state.errors.image !== "" ? (
-                  <div className="Form_err errform">
-                    (*) {this.state.errors.image}
+                          });
+                    }}
+                  />
+                  {this.state.errors.image !== "" ? (
+                    <div className="Form_err errform">
+                      (*) {this.state.errors.image}
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </React.Fragment>
+              )}
+
+              <div className="form-group">
+                <div className="form-row">
+                  <div className="col">
+                    <label>Phụ đề phim</label>
+                    <ReactSummernote
+                      value={
+                        this.state.values.content
+                          ? this.state.values.content
+                          : ""
+                      }
+                      defaultValue=""
+                      name="content"
+                      options={{
+                        lang: "ru-RU",
+                        height: 200,
+                        dialogsInBody: true,
+                        value: "asdasd",
+                        toolbar: [
+                          ["style", ["style"]],
+                          ["font", ["bold", "underline", "clear"]],
+                          ["fontname", ["fontname"]],
+                          ["color", ["Rencent  Color"]],
+                          ["para", ["ul", "ol", "paragraph"]],
+                          ["table", ["table"]],
+                          ["insert", ["link", "picture", "video"]],
+                          ["view", ["fullscreen", "codeview"]]
+                        ]
+                      }}
+                      onChange={this.onChange}
+                      onBlur={this.onErrorContent}
+                      onKeyUp={this.onErrorContent}
+                    />
+                  </div>
+                </div>
+                {this.state.errors.content !== "" ? (
+                  <div className="Form_err errform errform-summernote">
+                    (*) {this.state.errors.content}
                   </div>
                 ) : (
                   ""
                 )}
-              </React.Fragment>
-            )}
-
-            <div className="form-group">
-              <div className="form-row">
-                <div className="col">
-                  <label>Phụ đề phim</label>
-                  <ReactSummernote
-                    value={
-                      this.state.values.content ? this.state.values.content : ""
-                    }
-                    defaultValue=""
-                    name="content"
-                    options={{
-                      lang: "ru-RU",
-                      height: 200,
-                      dialogsInBody: true,
-                      value: "asdasd",
-                      toolbar: [
-                        ["style", ["style"]],
-                        ["font", ["bold", "underline", "clear"]],
-                        ["fontname", ["fontname"]],
-                        ["color", ["Rencent  Color"]],
-                        ["para", ["ul", "ol", "paragraph"]],
-                        ["table", ["table"]],
-                        ["insert", ["link", "picture", "video"]],
-                        ["view", ["fullscreen", "codeview"]]
-                      ]
-                    }}
-                    onChange={this.onChange}
-                    onBlur={this.onErrorContent}
-                    onKeyUp={this.onErrorContent}
-                  />
-                </div>
               </div>
-              {this.state.errors.content !== "" ? (
-                <div className="Form_err errform">
-                  (*) {this.state.errors.content}
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
-            <nav aria-label="Page navigation example">
-              <ul className="pagination justify-content-end">
-                <button
-                  type="reset"
-                  className="btn iq-bg-danger"
-                  style={{ marginRight: 10 }}
-                  data-dismiss="modal"
-                >
-                  Thoát
-                </button>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={!this.state.formValid}
-                >
-                  Gửi
-                </button>
-              </ul>
-            </nav>
-          </form>
+              <nav aria-label="Page navigation example">
+                <ul className="pagination justify-content-end">
+                  <button
+                    type="reset"
+                    className="btn iq-bg-danger"
+                    style={{ marginRight: 10 }}
+                    data-dismiss="modal"
+                  >
+                    Thoát
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={!this.state.formValid}
+                  >
+                    Gửi
+                  </button>
+                </ul>
+              </nav>
+            </form>
+          </div>
         </div>
-      </div>
+        <div>
+          <LightBoxImage
+            image={this.state.values.image}
+            toggler={this.state.toggler}
+          />
+        </div>
+      </>
     );
   }
 }

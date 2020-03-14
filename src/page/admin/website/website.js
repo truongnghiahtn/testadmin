@@ -8,11 +8,13 @@ import { dataInfoWebsite } from "./dataInfoWebsite";
 import Intro from "./intro";
 import Term from "./term";
 import Mail from "./mail";
+import Contact from "./contact";
 
 const Website = props => {
   useEffect(() => {
     props.getInfoWebsite("INTRO");
     props.getInfoWebsite("TERM");
+    props.getInfoWebsite("CONTACT");
   }, []);
 
   const renderTab = () => {
@@ -62,6 +64,7 @@ const Website = props => {
                   <Intro dataIntro={props.dataIntro} />
                   <Term dataTerm={props.dataTerm} />
                   <Mail />
+                  <Contact dataContact={props.dataContact} />
                 </div>
               </div>
             </div>
@@ -75,7 +78,8 @@ const Website = props => {
 const mapStateToProps = state => {
   return {
     dataTerm: state.deMoReducer.dataTerm,
-    dataIntro: state.deMoReducer.dataIntro
+    dataIntro: state.deMoReducer.dataIntro,
+    dataContact: state.deMoReducer.dataContact
   };
 };
 

@@ -31,7 +31,7 @@ class childModalWords extends Component {
         word_name: "",
         Vietnamese_meaning: "",
         video: [],
-        audio: null,
+        audio: "",
         grammar: "",
         quotes: "",
         synonym: "",
@@ -50,8 +50,10 @@ class childModalWords extends Component {
       word_nameValid: false,
       Vietnamese_meaningValid: false,
       data: "",
-      hidden: false
+      hidden: false,
+      inputKey: ""
     };
+    this.fileInput = React.createRef();
   }
 
   componentDidMount() {
@@ -108,8 +110,6 @@ class childModalWords extends Component {
     }
   };
 
-  validationFile = e => {};
-
   renderContentTab = () => {
     return data.map((item, index) => (
       <div
@@ -151,6 +151,8 @@ class childModalWords extends Component {
   };
 
   handleOnchange = event => {
+    console.log(this.fileInput.value);
+
     this.setState(
       {
         values: {
@@ -208,19 +210,20 @@ class childModalWords extends Component {
       formValid: this.state.word_nameValid && this.state.Vietnamese_meaningValid
     });
   };
+
   handleSubmit = event => {
     event.preventDefault();
+    console.log(this.state.values);
 
     if (this.props.editInfoWord === null) {
       this.props.addWord(this.state.values);
-      console.log(this.state.values);
       this.setState({
         values: {
           ...this.state.values,
           word_name: "",
           Vietnamese_meaning: "",
           video: [],
-          audio: null,
+          audio: "",
           grammar: "",
           quotes: "",
           synonym: "",
@@ -231,11 +234,12 @@ class childModalWords extends Component {
         formValid: false,
         word_nameValid: false,
         Vietnamese_meaningValid: false,
-        hidden: false
+        hidden: false,
+        inputKey: ""
       });
+      this.fileInput.value = "";
     } else {
       this.props.editWord(this.state.values);
-      console.log(this.state.values);
     }
   };
 
@@ -245,7 +249,6 @@ class childModalWords extends Component {
     if (nextProps && nextProps.editInfoWord) {
       //Update
       let TestVideo = nextProps.editInfoWord.video;
-      console.log(!Array.isArray(TestVideo), TestVideo);
       if (!Array.isArray(TestVideo) && TestVideo) {
         TestVideo = TestVideo.split(",");
         console.log(TestVideo);
@@ -279,10 +282,6 @@ class childModalWords extends Component {
       });
     } else {
       //ADD
-      let $e = $("#inputGroupFile04");
-      if ($e) {
-        $e.val("");
-      }
 
       this.setState({
         values: {
@@ -340,7 +339,6 @@ class childModalWords extends Component {
   };
 
   rendervideo = () => {
-    console.log(this.state.values.video);
     if (this.state.values.video) {
       return this.state.values.video.length
         ? this.state.values.video.map((item, index) => {
@@ -503,11 +501,9 @@ class childModalWords extends Component {
                           accept="audio/*"
                           className="custom-file-input"
                           id="inputGroupFile04"
-                          onChange={
-                            this.validationFile
-                              ? this.handleOnchangeAudio
-                              : null
-                          }
+                          onChange={this.handleOnchangeAudio}
+                          ref={ref => (this.fileInput = ref)}
+                          key={this.state.inputKey}
                         />
                         <label
                           id="avc"
@@ -562,6 +558,7 @@ class childModalWords extends Component {
                   className="btn btn-primary form-control pt-2 mt-3"
                   style={{ lineHeight: "initial" }}
                   onClick={this.pushdatavideo}
+                  disabled={this.state.data===""?(true):(false)}
                 >
                   Thêm video
                 </p>

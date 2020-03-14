@@ -6,12 +6,12 @@ import { connect } from "react-redux";
 import * as action from "../../../redux/action/index";
 import swal from "sweetalert";
 
-const Intro = props => {
-  const [dataIntro, setDataIntro] = useState({});
+const Contact = props => {
+  const [dataContact, setDataContact] = useState({});
   const [errors, setErrors] = useState(false);
 
   useEffect(() => {
-    setDataIntro(props.dataIntro);
+    setDataContact(props.dataContact);
   }, [props]);
 
   const handleErrors = e => {
@@ -28,7 +28,7 @@ const Intro = props => {
       dangerMode: true
     }).then(willDelete => {
       if (willDelete) {
-        props.addInfoWebsiteApi("INTRO", dataIntro);
+        props.addInfoWebsiteApi("CONTACT", dataContact)
       } else {
         swal("Thông tin của bạn an toàn!");
       }
@@ -37,17 +37,17 @@ const Intro = props => {
 
   return (
     <div
-      className="tab-pane fade show active"
-      id="pills-intro-fill"
+      className="tab-pane fade"
+      id="pills-contact-fill"
       role="tabpanel"
-      aria-labelledby="pills-intro-tab-fill"
+      aria-labelledby="pills-contact-tab-fill"
     >
       <div className="form-group">
         <div className="form-row">
           <div className="col">
             <label>Nội dung</label>
             <ReactSummernote
-              value={dataIntro ? dataIntro.content : ""}
+              value={dataContact ? dataContact.content : ""}
               options={{
                 lang: "ru-RU",
                 height: 400,
@@ -64,7 +64,7 @@ const Intro = props => {
               }}
               onKeyUp={handleErrors}
               onChange={c => {
-                setDataIntro({ ...dataIntro, content: c });
+                setDataContact({ ...dataContact, content: c });
               }}
             />
           </div>
@@ -74,12 +74,10 @@ const Intro = props => {
         <ul className="pagination justify-content-end">
           <button
             type="submit"
-            className="btn btn-primary"
             disabled={!errors}
-            // onClick={() => {
-            //   props.addInfoWebsiteApi("INTRO", dataIntro);
-            // }}
-            onClick={()=>{edit(dataIntro)}}
+            className="btn btn-primary"
+            // onClick={() => props.addInfoWebsiteApi("CONTACT", dataContact)}
+            onClick={()=>{edit(dataContact)}}
           >
             Sửa
           </button>
@@ -97,4 +95,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Intro);
+export default connect(null, mapDispatchToProps)(Contact);

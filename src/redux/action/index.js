@@ -307,7 +307,7 @@ export const getAllWordsApiDevfast = () => {
 
 export const getWordsApiDevfast = id => {
   return dispatch => {
-    CallAPI(`words?itemPerPage=5&page=${id}`, "GET", null, null, apiDevFast)
+    CallAPI(`words?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
       .then(res =>
         dispatch({
           type: Actiontype.GET_WORDS_API_DEVFAST,
@@ -322,9 +322,11 @@ export const getWordsApiDevfast = id => {
 
 export const addWordsApiDevfast = data => {
   let formData = new FormData();
+
   for (let key in data) {
     formData.append(key, data[key]);
   }
+
   return dispatch => {
     CallAPI("words", "POST", formData, null, apiDevFast)
       .then(res => {
@@ -335,10 +337,13 @@ export const addWordsApiDevfast = data => {
           buttons: false,
           timer: 1500
         });
-        dispatch({
-          type: Actiontype.ADD_WORDS_API_DEVFAST,
-          word: res.data
-        });
+        dispatch(
+          {
+            type: Actiontype.ADD_WORDS_API_DEVFAST,
+            word: res.data
+          },
+          console.log(res.data)
+        );
       })
       .catch(err => {
         setTimeout(() => {
@@ -377,7 +382,7 @@ export const actEditWordAPI = data => {
       .then(res => {
         setTimeout(() => {
           swal({
-            title: "Good job!",
+            title: "Sửa thành công!",
             text: `${res.statusText}!`,
             icon: "success",
             buttons: false,
@@ -412,7 +417,7 @@ export const actDelWordAPI = id => {
       .then(res => {
         setTimeout(() => {
           swal({
-            title: "Good job!",
+            title: "Xóa Thành công!",
             text: `${res.statusText}!`,
             icon: "success",
             buttons: false,
@@ -490,7 +495,11 @@ export const getInfoWebsiteApi = name => {
               type: Actiontype.GET_INTRO_API_DEVFAST,
               dataIntro: res.data
             });
-
+          case "CONTACT":
+            return dispatch({
+              type: Actiontype.GET_CONTACT_API_DEVFAST,
+              dataContact: res.data
+            });
           default:
             break;
         }
@@ -502,13 +511,14 @@ export const getInfoWebsiteApi = name => {
 };
 
 export const addInfoWebsiteApi = (name, data) => {
+  console.log(data);
   return dispatch => {
     CallAPI(`staticContent/${name}`, "PUT", data, null, apiDevFast)
       .then(res => {
         switch (name) {
           case "TERM":
             swal({
-              title: "Good job!",
+              title: "Sửa thành công!",
               text: `${res.statusText}!`,
               icon: "success",
               buttons: false,
@@ -521,7 +531,7 @@ export const addInfoWebsiteApi = (name, data) => {
 
           case "INTRO":
             swal({
-              title: "Good job!",
+              title: "Sửa thành công!",
               text: `${res.statusText}!`,
               icon: "success",
               buttons: false,
@@ -531,6 +541,22 @@ export const addInfoWebsiteApi = (name, data) => {
               type: Actiontype.ADD_INTRO_API_DEVFAST,
               dataIntro: res.data
             });
+
+          case "CONTACT":
+            swal({
+              title: "Sửa thành công!",
+              text: `${res.statusText}!`,
+              icon: "success",
+              buttons: false,
+              timer: 1500
+            });
+            return dispatch(
+              {
+                type: Actiontype.ADD_CONTACT_API_DEVFAST,
+                dataContact: res.data
+              },
+              console.log(res.data)
+            );
 
           default:
             break;

@@ -4,22 +4,37 @@ import "react-summernote/dist/react-summernote.css"; // import styles
 import "react-summernote/lang/summernote-ru-RU"; // you can import any other locale
 import { connect } from "react-redux";
 import * as action from "../../../redux/action/index";
+import swal from "sweetalert";
 
 const Term = props => {
-  const [dataTerm, setDataTerm] = useState({
-    _id: props.dataTerm._id,
-    content: props.dataTerm.content,
-    contentType: props.dataTerm.contentType
-  });
+  const [dataTerm, setDataTerm] = useState({});
+  const [errors, setErrors] = useState(false);
 
   useEffect(() => {
     setDataTerm(props.dataTerm);
-    console.log(dataTerm);
   }, [props]);
 
-  useEffect(() => {
-    console.log(dataTerm);
-  }, [dataTerm]);
+  const handleErrors = e => {
+    if (e.target.innerHTML !== "") {
+      setErrors(true);
+    } else setErrors(false);
+  };
+  const edit = (dataTerm) => {
+    swal({
+      title: "Bạn có chắc không?",
+      text: "Sau khi sửa, bạn sẽ không thể khôi phục !",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then(willDelete => {
+      if (willDelete) {
+        props.addInfoWebsiteApi("TERM", dataTerm)
+      } else {
+        swal("Thông tin của bạn an toàn!");
+      }
+    });
+  }; 
+
   return (
     <div
       className="tab-pane fade"
@@ -32,7 +47,7 @@ const Term = props => {
           <div className="col">
             <label>Nội dung</label>
             <ReactSummernote
-              value={props.dataTerm.content}
+              value={dataTerm ? dataTerm.content : ""}
               options={{
                 lang: "ru-RU",
                 height: 400,
@@ -47,6 +62,7 @@ const Term = props => {
                   ["view", ["fullscreen", "codeview"]]
                 ]
               }}
+              onKeyUp={handleErrors}
               onChange={c => {
                 setDataTerm({ ...dataTerm, content: c });
               }}
@@ -58,8 +74,10 @@ const Term = props => {
         <ul className="pagination justify-content-end">
           <button
             type="submit"
+            disabled={!errors}
             className="btn btn-primary"
-            onClick={() => props.addInfoWebsiteApi("TERM", dataTerm)}
+            // onClick={() => props.addInfoWebsiteApi("TERM", dataTerm)}
+            onClick={()=>{edit(dataTerm)}}
           >
             Sửa
           </button>

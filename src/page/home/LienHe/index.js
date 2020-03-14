@@ -13,19 +13,19 @@ class LienHe extends Component {
         email: "",
         fullname: "",
         phone: "",
-        massage: ""
+        message: ""
       },
       errs: {
         email: "",
         fullname: "",
         phone: "",
-        massage: ""
+        message: ""
       },
       valids: {
         email: false,
         fullname: false,
         phone: false,
-        massage: false,
+        message: false,
         form: false
       }
     };
@@ -45,8 +45,8 @@ class LienHe extends Component {
   handleOnErr = (name, value) => {
     let { errs, valids } = this.state;
     let isValid = false;
-    let massage = value === "" ? "Vui lòng nhập câu trả lời của bạn" : "";
-    isValid = massage !== "" ? false : true;
+    let message = value === "" ? "Vui lòng nhập câu trả lời của bạn" : "";
+    isValid = message !== "" ? false : true;
     if (value !== "") {
       switch (name) {
         case "email":
@@ -57,7 +57,7 @@ class LienHe extends Component {
             )
           ) {
             isValid = false;
-            massage = "không đúng định dạng.";
+            message = "không đúng định dạng.";
           }
           break;
         case "fullname":
@@ -69,13 +69,13 @@ class LienHe extends Component {
             )
           ) {
             isValid = false;
-            massage = "không đúng định dạng.";
+            message = "không đúng định dạng.";
           }
           break;
         case "phone":
           if (!value.match("^[0-9]*$")) {
             isValid = false;
-            massage = "không đúng định dạng.";
+            message = "không đúng định dạng.";
           }
           break;
         default:
@@ -84,7 +84,7 @@ class LienHe extends Component {
     }
     this.setState(
       {
-        errs: { ...errs, [name]: massage },
+        errs: { ...errs, [name]: message },
         valids: { ...valids, [name]: isValid }
       },
       () => {
@@ -97,7 +97,7 @@ class LienHe extends Component {
     this.setState({
       valids: {
         ...valids,
-        form: valids.email && valids.fullname && valids.phone && valids.massage
+        form: valids.email && valids.fullname && valids.phone && valids.message
       }
     });
   };
@@ -175,7 +175,7 @@ class LienHe extends Component {
                   }
                 >
                   <label htmlFor="lh-vi">
-                    Email<span> *</span>
+                    email<span> *</span>
                   </label>
                   <div className="lh-textbox">
                     <input
@@ -229,28 +229,28 @@ class LienHe extends Component {
                 <div
                   className={
                     "lh-input-group lh-contain " +
-                    (errs.massage !== "" ? "lh-err-contain" : "")
+                    (errs.message !== "" ? "lh-err-contain" : "")
                   }
                 >
                   <label htmlFor="lh-vi">
                     Tin nhắn<span> *</span>
                   </label>
-                  <div className="lh-textbox lh-textbox-massage">
+                  <div className="lh-textbox lh-textbox-message">
                     <textarea
                       id="lh-vi"
                       type="text"
                       placeholder="Câu trả lời của bạn"
-                      name="massage"
+                      name="message"
                       autoComplete="off"
-                      value={values.massage}
+                      value={values.message}
                       onChange={this.handleOnChange}
                       onBlur={this.handleOnChange}
                     />
                   </div>
-                  {errs.massage !== "" ? (
+                  {errs.message !== "" ? (
                     <p className="lh-err">
                       <i className="fa fa-exclamation-circle"></i>{" "}
-                      {errs.massage}
+                      {errs.message}
                     </p>
                   ) : (
                     ""

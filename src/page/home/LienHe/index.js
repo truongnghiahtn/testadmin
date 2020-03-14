@@ -104,15 +104,6 @@ class LienHe extends Component {
   handleOnSubmit = e => {
     e.preventDefault();
     if (this.state.valids.form) {
-      setTimeout(() => {
-        swal({
-          title: "Success",
-          text: `OK...!`,
-          icon: "success",
-          buttons: false,
-          timer: 1500
-        });
-      }, 150);
       this.props.postContactApi(this.state.values);
     } else {
       setTimeout(() => {

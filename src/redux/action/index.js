@@ -126,6 +126,15 @@ export const postNewWordApi = data => {
 export const postContactApi = data => {
   return () => {
     CallAPI("customer", "POST", data).then(rs => {
+      setTimeout(() => {
+        swal({
+          title: "Success",
+          text: `OK...!`,
+          icon: "success",
+          buttons: false,
+          timer: 1500
+        });
+      }, 150);
       console.log(rs);
     });
   };

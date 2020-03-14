@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class TraCau extends Component {
+  componentDidMount() {
+    let script = document.createElement("script");
+    script.setAttribute("type", "text/javascript");
+    script.setAttribute("src", "/assets/js/audio.js");
+    document.getElementById("root").after(script);
+  }
   renderDataTraCau = () => {
     return this.props.traCau.length
       ? this.props.traCau.map((item, index) => {

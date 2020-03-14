@@ -85,25 +85,17 @@ export default class sidebarAdmin extends Component {
                 <i className="ri-subtract-line" />
                 <span>Quản lý</span>
               </li>
-              {/* {JSON.parse(sessionStorage.getItem("userAdmin")).role ===
+              {JSON.parse(sessionStorage.getItem("userAdmin")).role ===
               "supper" ? (
                 <li>
                   <NavLink className="iq-waves-effect" to="/admin-user">
-                    <i className="fa fa-film" aria-hidden="true" />
+                    <i className="fa fa-user" aria-hidden="true" />
                     <span>Admin</span>
                   </NavLink>
                 </li>
               ) : (
                 ""
-              )} */}
-
-              <li>
-                {" "}
-                <NavLink className="iq-waves-effect" to="/admin-user">
-                  <i className="fa fa-film" aria-hidden="true" />
-                  <span>Admin</span>
-                </NavLink>
-              </li>
+              )}
               <li>
                 <NavLink className="iq-waves-effect" to="admin-website">
                   <i className="fab fa-chrome" aria-hidden="true" />

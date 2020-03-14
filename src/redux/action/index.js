@@ -584,66 +584,71 @@ export const getInfoWebsiteApi = name => {
 };
 
 export const addInfoWebsiteApi = (name, data) => {
-  console.log(data);
   return dispatch => {
-    CallAPI(`staticContent/${name}`, "PUT", data, null, apiDevFast)
-      .then(res => {
-        switch (name) {
-          case "TERM":
-            swal({
-              title: "Sửa thành công!",
-              text: `${res.statusText}!`,
-              icon: "success",
-              buttons: false,
-              timer: 1500
-            });
-            return dispatch({
-              type: Actiontype.ADD_TERM_API_DEVFAST,
-              dataTerm: res.data
-            });
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI(`staticContent/${name}`, "PUT", data, headers, apiDevFast)
+        .then(res => {
+          switch (name) {
+            case "TERM":
+              swal({
+                title: "Sửa thành công!",
+                text: `${res.statusText}!`,
+                icon: "success",
+                buttons: false,
+                timer: 1500
+              });
+              return dispatch({
+                type: Actiontype.ADD_TERM_API_DEVFAST,
+                dataTerm: res.data
+              });
 
-          case "INTRO":
-            swal({
-              title: "Sửa thành công!",
-              text: `${res.statusText}!`,
-              icon: "success",
-              buttons: false,
-              timer: 1500
-            });
-            return dispatch({
-              type: Actiontype.ADD_INTRO_API_DEVFAST,
-              dataIntro: res.data
-            });
+            case "INTRO":
+              swal({
+                title: "Sửa thành công!",
+                text: `${res.statusText}!`,
+                icon: "success",
+                buttons: false,
+                timer: 1500
+              });
+              return dispatch({
+                type: Actiontype.ADD_INTRO_API_DEVFAST,
+                dataIntro: res.data
+              });
 
-          case "CONTACT":
-            swal({
-              title: "Sửa thành công!",
-              text: `${res.statusText}!`,
-              icon: "success",
-              buttons: false,
-              timer: 1500
-            });
-            return dispatch(
-              {
-                type: Actiontype.ADD_CONTACT_API_DEVFAST,
-                dataContact: res.data
-              },
-              console.log(res.data)
-            );
+            case "CONTACT":
+              swal({
+                title: "Sửa thành công!",
+                text: `${res.statusText}!`,
+                icon: "success",
+                buttons: false,
+                timer: 1500
+              });
+              return dispatch(
+                {
+                  type: Actiontype.ADD_CONTACT_API_DEVFAST,
+                  dataContact: res.data
+                },
+                console.log(res.data)
+              );
 
-          default:
-            break;
-        }
-      })
-      .catch(err => {
-        swal({
-          title: "Error",
-          text: ` ${err.response.data.message}!`,
-          icon: "error",
-          buttons: false,
-          timer: 1500
+            default:
+              break;
+          }
+        })
+        .catch(err => {
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.message}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
         });
-      });
+    }
   };
 };
 

@@ -35,24 +35,26 @@ class PhuDePhim extends Component {
                             <tr>
                               <td>
                                 <div className="mq-sentences">
-                                  <p className="tc-row--text vi">
-                                    {item.fields.vi}
-                                  </p>
-                                  <p
-                                    className="tc-row--text en"
-                                    dangerouslySetInnerHTML={{
-                                      __html: item.fields.en
-                                    }}
-                                  ></p>
+                                  <div>
+                                    <p className="tc-row--text vi">
+                                      {item.fields.vi}
+                                    </p>
+                                    <p
+                                      className="tc-row--text en"
+                                      dangerouslySetInnerHTML={{
+                                        __html: item.fields.en
+                                      }}
+                                    ></p>
+                                    <small className="tc-row--text movie-title">
+                                      {item.fields.movie_title}
+                                    </small>
+                                  </div>
                                   <a
                                     href={`javascript:speakTS('${item.fields.en}', 'us');`}
                                     className="pd-speak"
                                   >
                                     <i className="fa fa-bullhorn"></i>
                                   </a>
-                                  <small className="tc-row--text movie-title">
-                                    {item.fields.movie_title}
-                                  </small>
                                 </div>
                               </td>
                             </tr>

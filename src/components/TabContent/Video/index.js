@@ -1,9 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 class Video extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataVideo: []
+    };
+  }
+  componentDidMount() {
+    let { video } = this.props;
+    typeof video === "string"
+      ? this.setState({ dataVideo: video.split(",") })
+      : this.setState({ dataVideo: [...video] });
+  }
   renderYoutubeTab = () => {
-    return this.props.video.length
-      ? this.props.video.map((item, index) => {
+    let { dataVideo } = this.state;
+    return dataVideo.length
+      ? dataVideo.map((item, index) => {
           return (
             <div id="youtube-tab" key={index}>
               <div className="youtube-container">

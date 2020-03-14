@@ -10,15 +10,19 @@ const GioiThieu = props => {
   return (
     <Fragment>
       <PageTitleArea title="Giới thiệu" />
-      {props.dataIntro ? (
-        <div
-          dangerouslySetInnerHTML={{
-            __html: props.dataIntro.content
-          }}
-        ></div>
-      ) : (
-        ""
-      )}
+      <div className="gioithieu-area">
+        <div className="container">
+          {props.dataIntro ? (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: props.dataIntro.content
+              }}
+            ></div>
+          ) : (
+            ""
+          )}
+        </div>
+      </div>
     </Fragment>
   );
 };

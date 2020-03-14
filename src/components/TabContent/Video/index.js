@@ -35,10 +35,7 @@ class Video extends Component {
                 style={{ display: "none" }}
               ></div>
               <div className="youtube-caption">
-                <div className="text">
-                  down onto the table here yeah and start showing them it's very
-                  technical what
-                </div>
+                <div className="text"></div>
               </div>
             </div>
           );

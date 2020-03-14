@@ -61,7 +61,8 @@ const WordsAdmin = props => {
 
   const renderTbody = () => {
     if (!isEmpty(data)) {
-      return data.result.map((item, index) => (
+      let dataUpdate = data.result.filter(item => item.status !== 0);
+      return dataUpdate.map((item, index) => (
         <ItemTable
           word={item}
           stt={index + data.pagination.minIndex + 1}

@@ -19,7 +19,7 @@ const Contact = props => {
       setErrors(true);
     } else setErrors(false);
   };
-  const edit = (dataTerm) => {
+  const edit = dataTerm => {
     swal({
       title: "Bạn có chắc không?",
       text: "Sau khi sửa, bạn sẽ không thể khôi phục !",
@@ -28,12 +28,12 @@ const Contact = props => {
       dangerMode: true
     }).then(willDelete => {
       if (willDelete) {
-        props.addInfoWebsiteApi("CONTACT", dataContact)
+        props.addInfoWebsiteApi("CONTACT", dataContact);
       } else {
         swal("Thông tin của bạn an toàn!");
       }
     });
-  }; 
+  };
 
   return (
     <div
@@ -55,6 +55,7 @@ const Contact = props => {
                 toolbar: [
                   ["style", ["style"]],
                   ["font", ["bold", "underline", "clear"]],
+                  ["color", ["color"]],
                   ["fontname", ["fontname"]],
                   ["para", ["ul", "ol", "paragraph"]],
                   ["table", ["table"]],
@@ -77,7 +78,9 @@ const Contact = props => {
             disabled={!errors}
             className="btn btn-primary"
             // onClick={() => props.addInfoWebsiteApi("CONTACT", dataContact)}
-            onClick={()=>{edit(dataContact)}}
+            onClick={() => {
+              edit(dataContact);
+            }}
           >
             Sửa
           </button>

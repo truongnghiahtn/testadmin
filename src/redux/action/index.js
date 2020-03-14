@@ -145,27 +145,16 @@ export const postContactApi = data => {
 //Movies Admin
 export const getMoviesApiDevfast = id => {
   return dispatch => {
-    if (authToken) {
-      let headers = {
-        Authorization: authToken.access_token
-      };
-      CallAPI(
-        `movies?itemPerPage=20&page=${id}`,
-        "GET",
-        null,
-        headers,
-        apiDevFast
+    CallAPI(`movies?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
+      .then(res =>
+        dispatch({
+          type: Actiontype.GET_MOVIES_API_DEVFAST,
+          dataMovies: res.data
+        })
       )
-        .then(res =>
-          dispatch({
-            type: Actiontype.GET_MOVIES_API_DEVFAST,
-            dataMovies: res.data
-          })
-        )
-        .catch(err => {
-          console.log(err);
-        });
-    }
+      .catch(err => {
+        console.log(err);
+      });
   };
 };
 
@@ -659,7 +648,6 @@ export const getAdminApiDevfast = id => {
       let headers = {
         Authorization: authToken.access_token
       };
-
       CallAPI(
         `admin?itemPerPage=20&page=${id}`,
         "GET",

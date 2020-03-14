@@ -211,8 +211,8 @@ class childModalWords extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log(this.state.values);
-    this.fileInput.current.value = "";
-    console.log(this.fileInput.current.value);
+    /*     this.fileInput.current.value = "";
+    console.log(this.fileInput.current.value); */
 
     if (this.props.editInfoWord === null) {
       this.props.addWord(this.state.values);
@@ -243,7 +243,7 @@ class childModalWords extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps.editInfoWord);
-    console.log(this.fileInput.current.value);
+    /*  console.log(this.fileInput.current.value); */
     if (nextProps && nextProps.editInfoWord) {
       //Update
       let TestVideo = nextProps.editInfoWord.video;

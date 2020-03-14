@@ -19,7 +19,7 @@ const Term = props => {
       setErrors(true);
     } else setErrors(false);
   };
-  const edit = (dataTerm) => {
+  const edit = dataTerm => {
     swal({
       title: "Bạn có chắc không?",
       text: "Sau khi sửa, bạn sẽ không thể khôi phục !",
@@ -28,12 +28,12 @@ const Term = props => {
       dangerMode: true
     }).then(willDelete => {
       if (willDelete) {
-        props.addInfoWebsiteApi("TERM", dataTerm)
+        props.addInfoWebsiteApi("TERM", dataTerm);
       } else {
         swal("Thông tin của bạn an toàn!");
       }
     });
-  }; 
+  };
 
   return (
     <div
@@ -55,6 +55,7 @@ const Term = props => {
                 toolbar: [
                   ["style", ["style"]],
                   ["font", ["bold", "underline", "clear"]],
+                  ["color", ["color"]],
                   ["fontname", ["fontname"]],
                   ["para", ["ul", "ol", "paragraph"]],
                   ["table", ["table"]],
@@ -77,7 +78,9 @@ const Term = props => {
             disabled={!errors}
             className="btn btn-primary"
             // onClick={() => props.addInfoWebsiteApi("TERM", dataTerm)}
-            onClick={()=>{edit(dataTerm)}}
+            onClick={() => {
+              edit(dataTerm);
+            }}
           >
             Sửa
           </button>

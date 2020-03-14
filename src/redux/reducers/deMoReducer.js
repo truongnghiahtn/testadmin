@@ -15,7 +15,10 @@ let initialState = {
   ADMIN_LOGIN: "",
   dataIntro: "",
   dataTerm: "",
-  dataContact: ""
+  dataContact: "",
+  dataCustomer: {},
+  dataAdmin: {},
+  editAdmin: null
 };
 
 const deMoReducer = (state = initialState, action) => {
@@ -202,6 +205,77 @@ const deMoReducer = (state = initialState, action) => {
       return { ...state };
     case ActionType.ADD_CONTACT_API_DEVFAST:
       state.dataContact = action.dataContact;
+      return { ...state };
+    //Customer
+    case ActionType.GET_CUSTOMER_API_DEVFAST:
+      state.dataCustomer = action.dataCustomer;
+      return { ...state };
+    case ActionType.DEL_CUSTOMER_API_DEVFAST:
+      let totalItemCustomer = state.dataCustomer.pagination.totalItem - 1;
+      let resultCustomer = state.dataCustomer.result.filter(
+        item => action.idCustomer !== item._id
+      );
+      let paginationCustomer = {
+        ...state.dataCustomer.pagination,
+        totalItemCustomer
+      };
+      let dataCustomer = {
+        ...state.dataCustomer,
+        paginationCustomer,
+        resultCustomer
+      };
+      state.dataCustomer = { ...dataCustomer };
+      return { ...state };
+
+    //Admin
+    case ActionType.GET_ADMIN_API_DEVFAST:
+      state.dataAdmin = action.dataAdmin;
+      return { ...state };
+    case ActionType.EDIT_ADMIN:
+      state.editAdmin = action.admin;
+      return { ...state };
+    case ActionType.GET_EDIT_ADMIN:
+      state.editAdmin = action.admin;
+      return { ...state };
+    case ActionType.DEL_ADMIN_API_DEVFAST:
+      let totalItemAdmin = state.dataAdmin.pagination.totalItem - 1;
+      let resultAdmin = state.dataAdmin.result.filter(
+        item => action.idAdmin !== item._id
+      );
+      let paginationAdmin = {
+        ...state.dataAdmin.pagination,
+        totalItem: totalItemAdmin
+      };
+      let dataAdmin = {
+        ...state.dataAdmin,
+        pagination: paginationAdmin,
+        result: resultAdmin
+      };
+      state.dataAdmin = { ...dataAdmin };
+      return { ...state };
+    case ActionType.ADD_ADMIN_API_DEVFAST:
+      let totalItem1Ad = state.dataAdmin.pagination.totalItem + 1;
+      let pagination1Ad = {
+        ...state.dataAdmin.pagination,
+        totalItem: totalItem1Ad
+      };
+      let result1Ad = state.dataAdmin.result;
+      result1Ad.splice(0, 0, action.admin);
+      state.dataAdmin = {
+        ...state.dataAdmin,
+        pagination: pagination1Ad,
+        result: result1Ad
+      };
+      return { ...state };
+    case ActionType.EDIT_ADMIN_API_DEVFAST:
+      let indexAdmin = state.dataAdmin.result.findIndex(
+        item => item._id === action.admin._id
+      );
+      let listAdminUpdate = state.dataAdmin.result;
+      if (indexAdmin !== -1) {
+        listAdminUpdate[indexAdmin] = action.admin;
+      }
+      state.dataAdmin = { ...state.dataAdmin, result: listAdminUpdate };
       return { ...state };
     default:
       return { ...state };

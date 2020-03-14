@@ -143,11 +143,11 @@ export const postContactApi = data => {
 //Movies Admin
 export const getMoviesApiDevfast = id => {
   return dispatch => {
-    CallAPI(`movies?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
+    CallAPI(`admin?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
       .then(res =>
         dispatch({
-          type: Actiontype.GET_MOVIES_API_DEVFAST,
-          dataMovies: res.data
+          type: Actiontype.GET_ADMIN_API_DEVFAST,
+          dataAdmin: res.data
         })
       )
       .catch(err => {
@@ -157,17 +157,8 @@ export const getMoviesApiDevfast = id => {
 };
 
 export const addMoviesApiDevfast = data => {
-  /*   const config = {
-    headers: {
-      "content-type": "multipart/form-data"
-    }
-  }; */
-  let formData = new FormData();
-  for (let key in data) {
-    formData.append(key, data[key]);
-  }
   return dispatch => {
-    CallAPI("movies", "POST", formData, null, apiDevFast)
+    CallAPI("movies", "POST", data, null, apiDevFast)
       .then(res => {
         swal({
           title: "Good job!",
@@ -177,7 +168,7 @@ export const addMoviesApiDevfast = data => {
           timer: 1500
         });
         dispatch({
-          type: Actiontype.ADD_MOVIES_API_DEVFAST,
+          type: Actiontype.ADD_ADMIN_API_DEVFAST,
           movie: res.data
         });
       })
@@ -227,7 +218,7 @@ export const actEditMovieAPI = data => {
         }, 150);
         dispatch(
           {
-            type: Actiontype.EDIT_MOVIES_API_DEVFAST,
+            type: Actiontype.EDIT_ADMIN_API_DEVFAST,
             movie: res.data
           },
           console.log(res)
@@ -261,7 +252,7 @@ export const actDelMovieAPI = id => {
           });
         }, 150);
         dispatch({
-          type: Actiontype.DEL_MOVIES_API_DEVFAST,
+          type: Actiontype.DEL_ADMIN_API_DEVFAST,
           idMovie: res.data.data._id
         });
       })
@@ -571,5 +562,210 @@ export const addInfoWebsiteApi = (name, data) => {
           timer: 1500
         });
       });
+  };
+};
+
+//Customer Admin
+
+export const getCustomerApiDevfast = id => {
+  return dispatch => {
+    CallAPI(`customer?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
+      .then(res =>
+        dispatch({
+          type: Actiontype.GET_CUSTOMER_API_DEVFAST,
+          dataCustomer: res.data
+        })
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
+export const actDelCustomerAPI = id => {
+  return dispatch => {
+    CallAPI(`customer/${id}`, "DELETE", null, null, apiDevFast)
+      .then(res => {
+        setTimeout(() => {
+          swal({
+            title: "Xóa Thành công!",
+            text: `${res.statusText}!`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+        dispatch({
+          type: Actiontype.DEL_CUSTOMER_API_DEVFAST,
+          idCustomer: res.data.data._id
+        });
+      })
+      .catch(err => {
+        setTimeout(() => {
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.error}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+        console.log(err);
+      });
+  };
+};
+
+const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
+
+//Admin
+export const getAdminApiDevfast = id => {
+  return dispatch => {
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+
+      CallAPI(
+        `admin?itemPerPage=20&page=${id}`,
+        "GET",
+        null,
+        headers,
+        apiDevFast
+      )
+        .then(res =>
+          dispatch({
+            type: Actiontype.GET_ADMIN_API_DEVFAST,
+            dataAdmin: res.data
+          })
+        )
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  };
+};
+
+export const addAdminApiDevfast = data => {
+  return dispatch => {
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI("admin", "POST", data, headers, apiDevFast)
+        .then(res => {
+          swal({
+            title: "Good job!",
+            text: `${res.statusText}!`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
+          dispatch({
+            type: Actiontype.ADD_ADMIN_API_DEVFAST,
+            admin: res.data
+          });
+        })
+        .catch(err => {
+          setTimeout(() => {
+            swal({
+              title: "Error",
+              text: ` ${err.response.data.error}!`,
+              icon: "error",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+          console.log(err);
+        });
+    }
+  };
+};
+
+export const actOnEditAdmin = () => {
+  return dispatch => {
+    dispatch({ type: Actiontype.EDIT_ADMIN, admin: null });
+  };
+};
+
+export const actGetEditAdmin = data => {
+  return dispatch => {
+    dispatch({ type: Actiontype.GET_EDIT_ADMIN, admin: data });
+  };
+};
+
+export const actEditAdminAPI = data => {
+  return dispatch => {
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      console.log(data);
+
+      CallAPI(`admin/${data.id}`, "PUT", data, headers, apiDevFast)
+        .then(res => {
+          setTimeout(() => {
+            swal({
+              title: "Good job!",
+              text: `${res.statusText}!`,
+              icon: "success",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+          dispatch({
+            type: Actiontype.EDIT_ADMIN_API_DEVFAST,
+            admin: res.data
+          });
+          console.log(res.data);
+        })
+        .catch(err => {
+          setTimeout(() => {
+            swal({
+              title: "Error",
+              text: ` ${err.response.data.error}!`,
+              icon: "error",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+        });
+    }
+  };
+};
+
+export const actDelAdminAPI = id => {
+  return dispatch => {
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI(`admin/${id}`, "DELETE", null, headers, apiDevFast)
+        .then(res => {
+          setTimeout(() => {
+            swal({
+              title: "Good job!",
+              text: `${res.statusText}!`,
+              icon: "success",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+          dispatch({
+            type: Actiontype.DEL_ADMIN_API_DEVFAST,
+            idAdmin: res.data.data._id
+          });
+        })
+        .catch(err => {
+          setTimeout(() => {
+            swal({
+              title: "Error",
+              text: ` ${err.response.data.error}!`,
+              icon: "error",
+              buttons: false,
+              timer: 1500
+            });
+          }, 150);
+        });
+    }
   };
 };

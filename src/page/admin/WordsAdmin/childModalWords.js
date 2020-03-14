@@ -125,16 +125,15 @@ class childModalWords extends Component {
             lang: "ru-RU",
             height: 200,
             dialogsInBody: true,
-            value: "",
             toolbar: [
               ["style", ["style"]],
               ["font", ["bold", "underline", "clear"]],
+              ["color", ["color"]],
               ["fontname", ["fontname"]],
-              ["color", ["Rencent  Color"]],
               ["para", ["ul", "ol", "paragraph"]],
               ["table", ["table"]],
-              ["insert", ["link", "picture", "video"]],
-              ["view", ["fullscreen", "codeview"]]
+              ["insert", ["link", "picture"]],
+              ["view", ["codeview"]]
             ]
           }}
           onChange={c => {
@@ -558,7 +557,7 @@ class childModalWords extends Component {
                   className="btn btn-primary form-control pt-2 mt-3"
                   style={{ lineHeight: "initial" }}
                   onClick={this.pushdatavideo}
-                  disabled={this.state.data===""?(true):(false)}
+                  disabled={this.state.data === "" ? true : false}
                 >
                   Thêm video
                 </p>

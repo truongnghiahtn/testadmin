@@ -7,8 +7,9 @@ import LienHe from "./page/home/LienHe";
 import Dashboard from "./page/admin/Dashboard/Dashboard";
 import MoviesAdmin from "./page/admin/MoviesAdmin/MoviesAdmin";
 import Website from "./page/admin/website/website";
-import Add_movie from "./page/admin/add_movie/add_movie";
 import WordsAdmin from "./page/admin/WordsAdmin/WordsAdmin";
+import Admin from "./page/admin/Admin/Admin";
+import CustomerAdmin from "./page/admin/CustomerAdmin/CustomerAdmin";
 
 const routesHome = [
   {
@@ -52,7 +53,7 @@ const routesAdmin = [
     component: Dashboard
   },
   {
-    path: "/movie",
+    path: "/admin-movie",
     exact: false,
     component: MoviesAdmin
   },
@@ -62,14 +63,19 @@ const routesAdmin = [
     component: Website
   },
   {
-    path: "/add-movie",
-    exact: false,
-    component: Add_movie
-  },
-  {
     path: "/admin-word",
     exact: false,
     component: WordsAdmin
+  },
+  {
+    path: "/admin-user",
+    exact: false,
+    component: Admin
+  },
+  {
+    path: "/admin-customer",
+    exact: false,
+    component: CustomerAdmin
   }
 ];
 

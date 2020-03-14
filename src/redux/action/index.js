@@ -981,8 +981,6 @@ export const actAppovedWordAPI = data => {
 //excel
 
 export const addExcelApiDevfast = file => {
-  console.log(file);
-
   let formData = new FormData();
   formData.append("file", file);
 
@@ -1055,8 +1053,6 @@ export const getMailApiDevfast = id => {
 };
 
 export const actEditMailAPI = data => {
-  console.log(data);
-
   return dispatch => {
     const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
     if (authToken) {

@@ -52,7 +52,6 @@ class childModalWords extends Component {
       data: "",
       hidden: false
     };
-    this.fileInput = React.createRef();
   }
 
   componentDidMount() {
@@ -149,24 +148,16 @@ class childModalWords extends Component {
   };
 
   handleOnchange = event => {
-    this.setState(
-      {
-        values: {
-          ...this.state.values,
-          [event.target.name]: event.target.value
-        },
+    this.setState({
+      values: {
+        ...this.state.values,
         [event.target.name]: event.target.value
       },
-      () => {
-        console.log(this.state);
-      }
-    );
-    document.getElementById("inputGroupFile04").value = "";
+      [event.target.name]: event.target.value
+    });
   };
 
   handleOnchangeAudio = e => {
-    console.log(e.target.files[0]);
-
     this.setState({
       values: {
         ...this.state.values,
@@ -210,9 +201,6 @@ class childModalWords extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state.values);
-    /*     this.fileInput.current.value = "";
-    console.log(this.fileInput.current.value); */
 
     if (this.props.editInfoWord === null) {
       this.props.addWord(this.state.values);
@@ -235,21 +223,21 @@ class childModalWords extends Component {
         Vietnamese_meaningValid: false,
         hidden: false
       });
+      $("#inputGroupFile04").val("");
+      $("#custom-html").text("Choose file");
     } else {
       this.props.editWord(this.state.values);
-      let input = $("#inputGroupFile04");
+      $("#inputGroupFile04").val("");
+      $("#custom-html").text("Choose file");
     }
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.editInfoWord);
-    /*  console.log(this.fileInput.current.value); */
     if (nextProps && nextProps.editInfoWord) {
       //Update
       let TestVideo = nextProps.editInfoWord.video;
       if (!Array.isArray(TestVideo) && TestVideo) {
         TestVideo = TestVideo.split(",");
-        console.log(TestVideo);
       }
       this.setState({
         values: {
@@ -280,7 +268,8 @@ class childModalWords extends Component {
       });
     } else {
       //ADD
-
+      $("#inputGroupFile04").val("");
+      $("#custom-html").text("Choose file");
       this.setState({
         values: {
           ...this.state.values,
@@ -305,25 +294,17 @@ class childModalWords extends Component {
     }
   }
 
-  handleOnchangeVideo = e => {
-    console.log(e);
-  };
   pushdatavideo = () => {
     let { data } = this.state;
     let updatevideo = this.state.values.video;
     updatevideo = [...this.state.values.video, data];
-    this.setState(
-      {
-        values: {
-          ...this.state.values,
-          video: updatevideo
-        },
-        data: ""
+    this.setState({
+      values: {
+        ...this.state.values,
+        video: updatevideo
       },
-      () => {
-        console.log(this.state.values.video);
-      }
-    );
+      data: ""
+    });
   };
   xoadulieu = index => {
     let updatevideo = this.state.values.video;
@@ -407,7 +388,7 @@ class childModalWords extends Component {
           </button>
         </div>
         <div className="modal-body edit-modal">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} id="form_id">
             <div className="row">
               <div className="col">
                 <div className="form-group">
@@ -500,11 +481,11 @@ class childModalWords extends Component {
                           className="custom-file-input"
                           id="inputGroupFile04"
                           onChange={this.handleOnchangeAudio}
-                          ref={this.fileInput}
                         />
                         <label
                           className="custom-file-label"
                           htmlFor="inputGroupFile04"
+                          id="custom-html"
                         >
                           Choose file
                         </label>

@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as action from "../../../redux/action/index";
+import $ from "jquery";
 class modalExcel extends Component {
   constructor(props) {
     super(props);
     this.state = {
       excel: "",
-      error: true,
+      error: false,
       message: ""
     };
   }
@@ -27,13 +28,20 @@ class modalExcel extends Component {
       this.setState({
         excel: "",
         error: false,
-        message: "Do not be empty!"
+        message: "(*) Do not be empty!"
       });
     }
   };
 
   handleOnSubmit = e => {
     this.props.addExcel(this.state.excel);
+    this.setState({
+      excel: "",
+      error: false,
+      message: ""
+    });
+    $("#inputGroupFile01").val("");
+    $("#custom-excel").text("Choose file excel");
   };
 
   render() {
@@ -42,9 +50,7 @@ class modalExcel extends Component {
         <div
           class="modal fade"
           id="modalExcel"
-          tabindex="-1"
           role="dialog"
-          aria-labelledby="modelTitleId"
           aria-hidden="true"
         >
           <div class="modal-dialog" role="document">
@@ -68,18 +74,19 @@ class modalExcel extends Component {
                     id="inputGroupFile01"
                     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                     onChange={this.handleOnchange}
-                    onKeyUp={this.handleOnError}
+                    onInput={this.handleOnError}
                   />
                   <label
                     className="custom-file-label"
                     htmlFor="inputGroupFile01"
+                    id="custom-excel"
                   >
                     Choose file excel
                   </label>
                 </div>
                 {!this.state.error ? (
-                  <div className="Form_err errform">
-                    (*) {this.state.message}
+                  <div className="Form_err errform mt-0">
+                    {this.state.message}
                   </div>
                 ) : (
                   ""

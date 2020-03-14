@@ -78,8 +78,7 @@ class Mail extends Component {
       },
       () => {
         this.FormValidation();
-      },
-      console.log(this.state)
+      }
     );
   };
 

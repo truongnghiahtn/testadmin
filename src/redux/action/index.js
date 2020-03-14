@@ -128,14 +128,25 @@ export const postContactApi = data => {
     CallAPI("customer", "POST", data).then(rs => {
       setTimeout(() => {
         swal({
-          title: "Success",
-          text: `OK...!`,
+          title: "Bạn đã gửi thành công",
+          text: ` Gửi thành Công...!`,
           icon: "success",
           buttons: false,
           timer: 1500
         });
       }, 150);
       console.log(rs);
+    })
+    .catch(err => {
+      setTimeout(() => {
+        swal({
+          title: "Không Gửi được",
+          text: `Gửi thất bại!`,
+          icon: "error",
+          buttons: false,
+          timer: 1500
+        });
+      }, 150);
     });
   };
 };
@@ -143,7 +154,8 @@ export const postContactApi = data => {
 //Movies Admin
 export const getMoviesApiDevfast = id => {
   return dispatch => {
-    CallAPI(`admin?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
+ 
+    CallAPI(`/movies?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
       .then(res =>
         dispatch({
           type: Actiontype.GET_ADMIN_API_DEVFAST,
@@ -283,16 +295,22 @@ export const saveWord = word => {
 
 export const getAllWordsApiDevfast = () => {
   return dispatch => {
-    CallAPI(`words`, "GET", null, null, apiDevFast)
-      .then(res =>
-        dispatch({
-          type: Actiontype.GET_ALL_WORDS_API_DEVFAST,
-          dataWords: res.data
-        })
-      )
-      .catch(err => {
-        console.log(err);
-      });
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+
+      CallAPI(`words`, "GET", null, null, apiDevFast)
+        .then(res =>
+          dispatch({
+            type: Actiontype.GET_ALL_WORDS_API_DEVFAST,
+            dataWords: res.data
+          })
+        )
+        .catch(err => {
+          console.log(err);
+        });
+    }
   };
 };
 

@@ -458,12 +458,12 @@ class childModalMovies extends Component {
                         toolbar: [
                           ["style", ["style"]],
                           ["font", ["bold", "underline", "clear"]],
+                          ["color", ["color"]],
                           ["fontname", ["fontname"]],
-                          ["color", ["Rencent  Color"]],
                           ["para", ["ul", "ol", "paragraph"]],
                           ["table", ["table"]],
-                          ["insert", ["link", "picture", "video"]],
-                          ["view", ["fullscreen", "codeview"]]
+                          ["insert", ["link", "picture"]],
+                          ["view", ["codeview"]]
                         ]
                       }}
                       onChange={this.onChange}

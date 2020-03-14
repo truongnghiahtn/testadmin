@@ -55,11 +55,12 @@ const Intro = props => {
                 toolbar: [
                   ["style", ["style"]],
                   ["font", ["bold", "underline", "clear"]],
+                  ["color", ["color"]],
                   ["fontname", ["fontname"]],
                   ["para", ["ul", "ol", "paragraph"]],
                   ["table", ["table"]],
-                  ["insert", ["link", "picture", "video"]],
-                  ["view", ["fullscreen", "codeview"]]
+                  ["insert", ["link", "picture"]],
+                  ["view", ["codeview"]]
                 ]
               }}
               onKeyUp={handleErrors}

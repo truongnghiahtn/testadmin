@@ -54,12 +54,13 @@ const Term = props => {
                 dialogsInBody: true,
                 toolbar: [
                   ["style", ["style"]],
-                  ["font", ["bold", "underline", "clear"]],
-                  ["fontname", ["fontname"]],
-                  ["para", ["ul", "ol", "paragraph"]],
-                  ["table", ["table"]],
-                  ["insert", ["link", "picture", "video"]],
-                  ["view", ["fullscreen", "codeview"]]
+              ["font", ["bold", "underline", "clear"]],
+              ["color", ["color"]],
+              ["fontname", ["fontname"]],
+              ["para", ["ul", "ol", "paragraph"]],
+              ["table", ["table"]],
+              ["insert", ["link", "picture"]],
+              ["view", ["codeview"]]
                 ]
               }}
               onKeyUp={handleErrors}

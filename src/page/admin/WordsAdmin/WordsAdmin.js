@@ -8,6 +8,7 @@ import Modalfather from "../../../components/modal/fatherModal";
 import * as action from "../../../redux/action/index";
 import SearchAdmin from "../../../components/SearchAdmin";
 import Pagination from "../../../components/Pagination/index";
+import MoldalExcel from "./modalExcel";
 const Modal = Modalfather(ChildModal);
 
 const WordsAdmin = props => {
@@ -108,6 +109,16 @@ const WordsAdmin = props => {
                     <span className="pl-1">Thêm word</span>
                   </i>
                 </button>
+                <button
+                  data-toggle="modal"
+                  data-target="#modalExcel"
+                  className="btn btn-sm iq-bg-success ml-2"
+                  onClick={() => {}}
+                >
+                  <i className="ri-add-fill">
+                    <span className="pl-1">Thêm excel</span>
+                  </i>
+                </button>
               </span>
             </div>
             <div className="iq-card-body">
@@ -200,6 +211,7 @@ const WordsAdmin = props => {
         </div>
       </div>
       <Modal />
+      <MoldalExcel />
     </div>
   );
 };

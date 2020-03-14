@@ -14,7 +14,8 @@ const Website = props => {
   useEffect(() => {
     props.getInfoWebsite("INTRO");
     props.getInfoWebsite("TERM");
-    props.getInfoWebsite("CONTACT");
+    /*  props.getInfoWebsite("CONTACT"); */
+    props.getMail();
   }, []);
 
   const renderTab = () => {
@@ -63,7 +64,7 @@ const Website = props => {
                 <div className="tab-content" id="pills-tabContent-1">
                   <Intro dataIntro={props.dataIntro} />
                   <Term dataTerm={props.dataTerm} />
-                  <Mail />
+                  <Mail dataMail={props.dataMail} />
                   {/* <Contact dataContact={props.dataContact} /> */}
                 </div>
               </div>
@@ -79,7 +80,8 @@ const mapStateToProps = state => {
   return {
     dataTerm: state.deMoReducer.dataTerm,
     dataIntro: state.deMoReducer.dataIntro,
-    dataContact: state.deMoReducer.dataContact
+    dataContact: state.deMoReducer.dataContact,
+    dataMail: state.deMoReducer.dataMail
   };
 };
 
@@ -87,6 +89,9 @@ const mapDispatchToProps = dispatch => {
   return {
     getInfoWebsite: name => {
       dispatch(action.getInfoWebsiteApi(name));
+    },
+    getMail: () => {
+      dispatch(action.getMailApiDevfast());
     }
   };
 };

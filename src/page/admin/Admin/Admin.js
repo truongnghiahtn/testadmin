@@ -20,7 +20,6 @@ const Admin = props => {
     setTimeout(() => {
       setLoading(false);
     }, 150);
-    console.log(123456);
   }, [currentPage]);
 
   useEffect(() => {
@@ -73,7 +72,7 @@ const Admin = props => {
               <div className="iq-header-title">
                 <h4 className="card-title">
                   <i
-                    className="fa fa-film"
+                    className="fa fa-user"
                     aria-hidden="true"
                     style={{ marginRight: 10 }}
                   />
@@ -91,7 +90,7 @@ const Admin = props => {
                   onClick={() => props.onEditAdmin()}
                 >
                   <i className="ri-add-fill">
-                    <span className="pl-1">Thêm phim</span>
+                    <span className="pl-1">Thêm tài khoản</span>
                   </i>
                 </button>
               </span>
@@ -105,8 +104,8 @@ const Admin = props => {
                   <thead>
                     <tr>
                       <th>STT</th>
-                      <th>Username</th>
-                      <th>role</th>
+                      <th>Tên tài khoản</th>
+                      <th>Quyền</th>
                       <th>Chức năng</th>
                     </tr>
                   </thead>

@@ -3,8 +3,6 @@ import { CallAPI } from "../../utils/callApi";
 import { apiDevFast, api } from "../../utils/config";
 import swal from "sweetalert";
 
-const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
-
 export const getDataSearchApi = data => {
   return dispatch => {
     if (data) {
@@ -165,6 +163,7 @@ export const addMoviesApiDevfast = data => {
     formData.append(key, data[key]);
   }
   return dispatch => {
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
     if (authToken) {
       let headers = {
         Authorization: authToken.access_token
@@ -172,7 +171,7 @@ export const addMoviesApiDevfast = data => {
       CallAPI("movies", "POST", formData, headers, apiDevFast)
         .then(res => {
           swal({
-            title: "Good job!",
+            title: "Thêm thành công!",
             text: `${res.statusText}!`,
             icon: "success",
             buttons: false,
@@ -186,7 +185,7 @@ export const addMoviesApiDevfast = data => {
         .catch(err => {
           setTimeout(() => {
             swal({
-              title: "Error",
+              title: "Thêm không thành công!",
               text: ` ${err.response.data.message}!`,
               icon: "error",
               buttons: false,
@@ -195,6 +194,14 @@ export const addMoviesApiDevfast = data => {
           }, 150);
           console.log(err);
         });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
+      });
     }
   };
 };
@@ -217,6 +224,7 @@ export const actEditMovieAPI = data => {
     formData.append(key, data[key]);
   }
   return dispatch => {
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
     if (authToken) {
       let headers = {
         Authorization: authToken.access_token
@@ -225,7 +233,7 @@ export const actEditMovieAPI = data => {
         .then(res => {
           setTimeout(() => {
             swal({
-              title: "Good job!",
+              title: "Sửa thành công!",
               text: `${res.statusText}!`,
               icon: "success",
               buttons: false,
@@ -243,7 +251,7 @@ export const actEditMovieAPI = data => {
         .catch(err => {
           setTimeout(() => {
             swal({
-              title: "Error",
+              title: "Sửa không thành công!",
               text: ` ${err.response.data.message}!`,
               icon: "error",
               buttons: false,
@@ -251,12 +259,21 @@ export const actEditMovieAPI = data => {
             });
           }, 150);
         });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
+      });
     }
   };
 };
 
 export const actDelMovieAPI = id => {
   return dispatch => {
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
     if (authToken) {
       let headers = {
         Authorization: authToken.access_token
@@ -265,7 +282,7 @@ export const actDelMovieAPI = id => {
         .then(res => {
           setTimeout(() => {
             swal({
-              title: "Good job!",
+              title: "Xóa thành công!",
               text: `${res.statusText}!`,
               icon: "success",
               buttons: false,
@@ -280,7 +297,7 @@ export const actDelMovieAPI = id => {
         .catch(err => {
           setTimeout(() => {
             swal({
-              title: "Error",
+              title: "Xóa không thành công!",
               text: ` ${err.response.data.message}!`,
               icon: "error",
               buttons: false,
@@ -288,6 +305,14 @@ export const actDelMovieAPI = id => {
             });
           }, 150);
         });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
+      });
     }
   };
 };
@@ -341,6 +366,7 @@ export const addWordsApiDevfast = data => {
   }
 
   return dispatch => {
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
     if (authToken) {
       let headers = {
         Authorization: authToken.access_token
@@ -348,7 +374,7 @@ export const addWordsApiDevfast = data => {
       CallAPI("words", "POST", formData, headers, apiDevFast)
         .then(res => {
           swal({
-            title: "Good job!",
+            title: "Thêm thành công!",
             text: `${res.statusText}!`,
             icon: "success",
             buttons: false,
@@ -364,7 +390,7 @@ export const addWordsApiDevfast = data => {
         })
         .catch(err => {
           swal({
-            title: "Error",
+            title: "Thêm không thành công!",
             text: ` ${err.response.data.message}!`,
             icon: "error",
             buttons: false,
@@ -372,6 +398,14 @@ export const addWordsApiDevfast = data => {
           });
           console.log(err);
         });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
+      });
     }
   };
 };
@@ -396,6 +430,7 @@ export const actEditWordAPI = data => {
     formData.append(key, data[key]);
   }
   return dispatch => {
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
     if (authToken) {
       let headers = {
         Authorization: authToken.access_token
@@ -419,19 +454,28 @@ export const actEditWordAPI = data => {
         })
         .catch(err => {
           swal({
-            title: "Error",
+            title: "Sửa không thành công!",
             text: ` ${err.response.data.message}!`,
             icon: "error",
             buttons: false,
             timer: 1500
           });
         });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
+      });
     }
   };
 };
 
 export const actDelWordAPI = id => {
   return dispatch => {
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
     if (authToken) {
       let headers = {
         Authorization: authToken.access_token
@@ -453,7 +497,7 @@ export const actDelWordAPI = id => {
         })
         .catch(err => {
           swal({
-            title: "Error",
+            title: "Xóa không thành công!",
             text: ` ${err.response.data.message}!`,
             icon: "error",
             buttons: false,
@@ -461,6 +505,14 @@ export const actDelWordAPI = id => {
           });
           console.log(err);
         });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
+      });
     }
   };
 };
@@ -599,51 +651,86 @@ export const addInfoWebsiteApi = (name, data) => {
 
 export const getCustomerApiDevfast = id => {
   return dispatch => {
-    CallAPI(`customer?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
-      .then(res =>
-        dispatch({
-          type: Actiontype.GET_CUSTOMER_API_DEVFAST,
-          dataCustomer: res.data
-        })
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI(
+        `customer?itemPerPage=20&page=${id}`,
+        "GET",
+        null,
+        headers,
+        apiDevFast
       )
-      .catch(err => {
-        console.log(err);
+        .then(res =>
+          dispatch({
+            type: Actiontype.GET_CUSTOMER_API_DEVFAST,
+            dataCustomer: res.data
+          })
+        )
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
       });
+    }
   };
 };
 
 export const actDelCustomerAPI = id => {
   return dispatch => {
-    CallAPI(`customer/${id}`, "DELETE", null, null, apiDevFast)
-      .then(res => {
-        swal({
-          title: "Xóa Thành công!",
-          text: `${res.statusText}!`,
-          icon: "success",
-          buttons: false,
-          timer: 1500
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI(`customer/${id}`, "DELETE", null, headers, apiDevFast)
+        .then(res => {
+          swal({
+            title: "Xóa Thành công!",
+            text: `${res.statusText}!`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
+          dispatch({
+            type: Actiontype.DEL_CUSTOMER_API_DEVFAST,
+            idCustomer: res.data.data._id
+          });
+        })
+        .catch(err => {
+          swal({
+            title: "Xóa không thành công!",
+            text: ` ${err.response.data.message}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
+          console.log(err);
         });
-        dispatch({
-          type: Actiontype.DEL_CUSTOMER_API_DEVFAST,
-          idCustomer: res.data.data._id
-        });
-      })
-      .catch(err => {
-        swal({
-          title: "Error",
-          text: ` ${err.response.data.message}!`,
-          icon: "error",
-          buttons: false,
-          timer: 1500
-        });
-        console.log(err);
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
       });
+    }
   };
 };
 
 //Admin
 export const getAdminApiDevfast = id => {
   return dispatch => {
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
     if (authToken) {
       let headers = {
         Authorization: authToken.access_token
@@ -664,12 +751,21 @@ export const getAdminApiDevfast = id => {
         .catch(err => {
           console.log(err);
         });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
+      });
     }
   };
 };
 
 export const addAdminApiDevfast = data => {
   return dispatch => {
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
     if (authToken) {
       let headers = {
         Authorization: authToken.access_token
@@ -677,7 +773,7 @@ export const addAdminApiDevfast = data => {
       CallAPI("admin", "POST", data, headers, apiDevFast)
         .then(res => {
           swal({
-            title: "Good job!",
+            title: "Thêm thành công!",
             text: `${res.statusText}!`,
             icon: "success",
             buttons: false,
@@ -690,13 +786,21 @@ export const addAdminApiDevfast = data => {
         })
         .catch(err => {
           swal({
-            title: "Error",
+            title: "Thêm không thành công!",
             text: ` ${err.response.data.message}!`,
             icon: "error",
             buttons: false,
             timer: 1500
           });
         });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
+      });
     }
   };
 };
@@ -715,6 +819,7 @@ export const actGetEditAdmin = data => {
 
 export const actEditAdminAPI = data => {
   return dispatch => {
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
     if (authToken) {
       let headers = {
         Authorization: authToken.access_token
@@ -724,7 +829,7 @@ export const actEditAdminAPI = data => {
       CallAPI(`admin/${data.id}`, "PUT", data, headers, apiDevFast)
         .then(res => {
           swal({
-            title: "Good job!",
+            title: "Sửa thành công!",
             text: `${res.statusText}!`,
             icon: "success",
             buttons: false,
@@ -738,19 +843,28 @@ export const actEditAdminAPI = data => {
         })
         .catch(err => {
           swal({
-            title: "Error",
+            title: "Sửa không thành công!",
             text: ` ${err.response.data.message}!`,
             icon: "error",
             buttons: false,
             timer: 1500
           });
         });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
+      });
     }
   };
 };
 
 export const actDelAdminAPI = id => {
   return dispatch => {
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
     if (authToken) {
       let headers = {
         Authorization: authToken.access_token
@@ -758,7 +872,7 @@ export const actDelAdminAPI = id => {
       CallAPI(`admin/${id}`, "DELETE", null, headers, apiDevFast)
         .then(res => {
           swal({
-            title: "Good job!",
+            title: "Xóa thành công!",
             text: `${res.statusText}!`,
             icon: "success",
             buttons: false,
@@ -771,13 +885,21 @@ export const actDelAdminAPI = id => {
         })
         .catch(err => {
           swal({
-            title: "Error",
+            title: "Xóa không thành công!",
             text: ` ${err.response.data.message}!`,
             icon: "error",
             buttons: false,
             timer: 1500
           });
         });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
+      });
     }
   };
 };
@@ -807,6 +929,7 @@ export const getWordsUnapprovedApiDevfast = id => {
 
 export const actAppovedWordAPI = data => {
   return dispatch => {
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
     if (authToken) {
       let headers = {
         Authorization: authToken.access_token
@@ -820,7 +943,7 @@ export const actAppovedWordAPI = data => {
       )
         .then(res => {
           swal({
-            title: "Sửa thành công!",
+            title: "Duyệt thành công!",
             text: `${res.statusText}!`,
             icon: "success",
             buttons: false,
@@ -836,6 +959,129 @@ export const actAppovedWordAPI = data => {
         })
         .catch(err => {
           swal({
+            title: "Duyệt không thành công!",
+            text: ` ${err.response.data.message}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
+        });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
+      });
+    }
+  };
+};
+
+//excel
+
+export const addExcelApiDevfast = file => {
+  console.log(file);
+
+  let formData = new FormData();
+  formData.append("file", file);
+
+  return dispatch => {
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI("excel", "POST", formData, headers, apiDevFast)
+        .then(res => {
+          swal({
+            title: "Gửi thành công!",
+            text: `${res.statusText}!`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
+        })
+        .catch(err => {
+          swal({
+            title: "Gửi không thành công!",
+            text: ` ${err.response.data.message}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
+        });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
+      });
+    }
+  };
+};
+
+//email
+
+export const getMailApiDevfast = id => {
+  return dispatch => {
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI(`email`, "GET", null, headers, apiDevFast)
+        .then(res =>
+          dispatch({
+            type: Actiontype.GET_MAIL_API_DEVFAST,
+            dataMail: res.data
+          })
+        )
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
+      });
+    }
+  };
+};
+
+export const actEditMailAPI = data => {
+  console.log(data);
+
+  return dispatch => {
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI(`email/${data._id}`, "PUT", data, headers, apiDevFast)
+        .then(res => {
+          swal({
+            title: "Sửa thành công!",
+            text: `${res.statusText}!`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
+          dispatch(
+            {
+              type: Actiontype.EDIT_MAIL_API_DEVFAST,
+              mail: res.data
+            },
+            console.log(res.data)
+          );
+        })
+        .catch(err => {
+          swal({
             title: "Error",
             text: ` ${err.response.data.message}!`,
             icon: "error",
@@ -843,6 +1089,14 @@ export const actAppovedWordAPI = data => {
             timer: 1500
           });
         });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
+      });
     }
   };
 };

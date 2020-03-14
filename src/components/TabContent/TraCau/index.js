@@ -14,7 +14,12 @@ class TraCau extends Component {
           return (
             <li key={index}>
               <article id={item._id} className="tc-row tc-row-content">
-                <p className="tc-row--text vi">{item.fields.vi}</p>
+                <p
+                  className="tc-row--text vi"
+                  dangerouslySetInnerHTML={{
+                    __html: item.fields.vi
+                  }}
+                ></p>
                 <p className="tc-row--text en">
                   <em
                     dangerouslySetInnerHTML={{

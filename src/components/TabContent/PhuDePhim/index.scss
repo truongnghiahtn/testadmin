@@ -17,12 +17,29 @@
       padding: 0 0 0 5px;
       float: left;
       border-left: 5px solid #eee;
+      .pd-speak {
+        margin-left: 10px;
+        color: #ddd;
+        &:hover {
+          color: #aaa;
+        }
+        &:active {
+          color: #eee;
+        }
+      }
+      small {
+        display: block;
+      }
     }
     .tc-row--text {
       margin: 0;
       font-size: 15px;
       line-height: 1.2;
       font-weight: 400;
+      display: inline;
+      &.vi {
+        display: block;
+      }
       &.en {
         margin-top: 4px;
       }

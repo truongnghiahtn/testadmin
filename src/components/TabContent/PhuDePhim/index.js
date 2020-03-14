@@ -44,6 +44,12 @@ class PhuDePhim extends Component {
                                       __html: item.fields.en
                                     }}
                                   ></p>
+                                  <a
+                                    href={`javascript:speakTS('${item.fields.en}', 'us');`}
+                                    className="pd-speak"
+                                  >
+                                    <i className="fa fa-bullhorn"></i>
+                                  </a>
                                   <small className="tc-row--text movie-title">
                                     {item.fields.movie_title}
                                   </small>

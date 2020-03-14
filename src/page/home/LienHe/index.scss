@@ -108,9 +108,9 @@
             }
           }
         }
-        .lh-textbox-massage {
+        .lh-textbox-message {
           &::after {
-            display: none;
+            display: none !important;
           }
         }
         .lh-err {

@@ -2,13 +2,24 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class TraCau extends Component {
+  componentDidMount() {
+    let script = document.createElement("script");
+    script.setAttribute("type", "text/javascript");
+    script.setAttribute("src", "/assets/js/audio.js");
+    document.getElementById("root").after(script);
+  }
   renderDataTraCau = () => {
     return this.props.traCau.length
       ? this.props.traCau.map((item, index) => {
           return (
             <li key={index}>
               <article id={item._id} className="tc-row tc-row-content">
-                <p className="tc-row--text vi">{item.fields.vi}</p>
+                <p
+                  className="tc-row--text vi"
+                  dangerouslySetInnerHTML={{
+                    __html: item.fields.vi
+                  }}
+                ></p>
                 <p className="tc-row--text en">
                   <em
                     dangerouslySetInnerHTML={{

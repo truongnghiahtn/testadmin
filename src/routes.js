@@ -19,27 +19,27 @@ const routesHome = [
   },
   {
     path: "/gioi-thieu",
-    exact: true,
+    exact: false,
     component: GioiThieu
   },
   {
     path: "/dieu-khoan",
-    exact: true,
+    exact: false,
     component: DieuKhoan
   },
   {
     path: "/API",
-    exact: true,
+    exact: false,
     component: API
   },
   {
     path: "/bo-sung",
-    exact: true,
+    exact: false,
     component: BoSung
   },
   {
     path: "/lien-he",
-    exact: true,
+    exact: false,
     component: LienHe
   }
 ];

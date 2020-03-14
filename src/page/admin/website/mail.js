@@ -203,15 +203,8 @@ class Mail extends Component {
           </div>
           <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-end">
-              <button
-                type="reset"
-                className="btn iq-bg-danger"
-                style={{ marginRight: 10 }}
-              >
-                Cancel
-              </button>
               <button type="submit" className="btn btn-primary">
-                Submit
+                Sửa
               </button>
             </ul>
           </nav>

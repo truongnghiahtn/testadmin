@@ -12,8 +12,8 @@ const Modal = Modalfather(ChildModal);
 const MoviesAdmin = props => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [showPagination, setShowPagination] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [numberPage, setNumberPage] = useState(1);
 
   useEffect(() => {
     /*          const fetchPosts = async () => {
@@ -58,15 +58,19 @@ const MoviesAdmin = props => {
   const renderTbody = () => {
     if (!isEmpty(data)) {
       return data.result.map((item, index) => (
-        <ItemTable movie={item} stt={index} key={index} />
+        <ItemTable
+          movie={item}
+          stt={index + data.pagination.minIndex + 1}
+          key={index}
+        />
       ));
     }
   };
 
   const paginate = number => {
     setCurrentPage(number);
-    setNumberPage(number);
   };
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -116,29 +120,34 @@ const MoviesAdmin = props => {
                     </tr>
                   </thead>
                   {loading ? (
-                    <div
-                      className="loader"
-                      style={{ width: "2em", height: "2em", top: "120px" }}
-                    ></div>
+                    <div className="indicator">
+                      <svg width="16px" height="12px">
+                        <polyline
+                          id="back"
+                          points="1 6 4 6 6 11 10 1 12 6 15 6"
+                        />
+                        <polyline
+                          id="front"
+                          points="1 6 4 6 6 11 10 1 12 6 15 6"
+                        />
+                      </svg>
+                    </div>
                   ) : (
                     <tbody className="fadeIn animated">{renderTbody()}</tbody>
                   )}
                 </table>
-                {!isEmpty(data) ? (
+                {isEmpty(data) ? (
+                  ""
+                ) : showPagination ? (
                   <nav aria-label="Page navigation example">
                     <ul className="pagination justify-content-end">
                       <li
-                        className={
-                          data.pagination.page === 1
-                            ? "page-item active"
-                            : "page-item"
-                        }
+                        className="page-item"
                         onClick={() => {
-                          paginate(1);
-                          setNumberPage(-1);
+                          paginate(currentPage > 1 ? currentPage - 1 : 1);
                         }}
                       >
-                        <a className="page-link" href="#" aria-label="Previous">
+                        <a className="page-link" aria-label="Previous">
                           <span aria-hidden="true">«</span>
                         </a>
                       </li>
@@ -147,30 +156,27 @@ const MoviesAdmin = props => {
                         itemPerPage={data.pagination.itemPerPage}
                         totalItem={data.pagination.totalItem}
                         paginate={paginate}
-                        numberPage={numberPage}
+                        numberPage={currentPage}
                       />
 
                       <li
-                        className={
-                          data.pagination.page ===
-                          Math.ceil(
-                            data.pagination.totalItem /
-                              data.pagination.itemPerPage
-                          )
-                            ? "page-item active"
-                            : "page-item"
-                        }
+                        className="page-item"
                         onClick={() => {
                           paginate(
-                            Math.ceil(
-                              data.pagination.totalItem /
-                                data.pagination.itemPerPage
-                            )
+                            currentPage <
+                              Math.ceil(
+                                data.pagination.totalItem /
+                                  data.pagination.itemPerPage
+                              )
+                              ? currentPage + 1
+                              : Math.ceil(
+                                  data.pagination.totalItem /
+                                    data.pagination.itemPerPage
+                                )
                           );
-                          setNumberPage(-1);
                         }}
                       >
-                        <a className="page-link" href="#" aria-label="Next">
+                        <a className="page-link" aria-label="Next">
                           <span aria-hidden="true">»</span>
                         </a>
                       </li>

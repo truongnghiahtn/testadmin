@@ -123,6 +123,23 @@ export const postNewWordApi = data => {
   };
 };
 
+export const postContactApi = data => {
+  return () => {
+    CallAPI("customer", "POST", data).then(rs => {
+      setTimeout(() => {
+        swal({
+          title: "Success",
+          text: `OK...!`,
+          icon: "success",
+          buttons: false,
+          timer: 1500
+        });
+      }, 150);
+      console.log(rs);
+    });
+  };
+};
+
 //Movies Admin
 export const getMoviesApiDevfast = id => {
   return dispatch => {
@@ -305,28 +322,13 @@ export const getWordsApiDevfast = id => {
 
 export const addWordsApiDevfast = data => {
   let formData = new FormData();
-  formData.append("audio", data.audio);
-  /*   for (let key in data) {
-    if (key === "video") {
-        formData.append("video", JSON.stringify(data.video)); 
-      for (let i in data.video) {
-        formData.append("myarray[" + i + "]", data.video[i]);
-      }
 
-      break;
-    } else {
-      console.log(key);
-      formData.append(key, data[key]);
-    }
-  } */
-
-  for (var value of formData.values()) {
-    console.log(value);
+  for (let key in data) {
+    formData.append(key, data[key]);
   }
-  console.log({ ...data, formData });
 
   return dispatch => {
-    CallAPI("words", "POST", { ...data, formData }, null, apiDevFast)
+    CallAPI("words", "POST", formData, null, apiDevFast)
       .then(res => {
         swal({
           title: "Good job!",

@@ -8,7 +8,7 @@ class itemTable extends Component {
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || "";
   };
-  xoaitem = (id) => {
+  xoaitem = id => {
     swal({
       title: "Bạn có chắc không?",
       text: "Sau khi xóa, bạn sẽ không thể khôi phục !",
@@ -17,7 +17,7 @@ class itemTable extends Component {
       dangerMode: true
     }).then(willDelete => {
       if (willDelete) {
-        this.props.deleteMovie(id)
+        this.props.deleteMovie(id);
       } else {
         swal("Thông tin của bạn an toàn!");
       }
@@ -27,7 +27,7 @@ class itemTable extends Component {
     let { movie, stt } = this.props;
     return (
       <tr>
-        <td>{stt+1}</td>
+        <td>{stt}</td>
         <td>{this.convertHTML(movie.title)}</td>
         <td className="movie_content">{this.convertHTML(movie.content)}</td>
 
@@ -56,8 +56,9 @@ class itemTable extends Component {
             <button
               type="button"
               className="btn btn-danger mb-3"
-       
-              onClick={()=>{this.xoaitem(movie._id)}}
+              onClick={() => {
+                this.xoaitem(movie._id);
+              }}
             >
               <i className="ri-delete-bin-2-fill pr-0" />
               Xóa

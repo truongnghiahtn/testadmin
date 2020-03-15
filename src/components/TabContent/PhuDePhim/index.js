@@ -50,7 +50,11 @@ class PhuDePhim extends Component {
                                     </small>
                                   </div>
                                   <a
-                                    href={`javascript:speakTS('${item.fields.en}', 'us');`}
+                                    href={
+                                      item._id.length < 20
+                                        ? `javascript:speakTS(${item._id})`
+                                        : `javascript:speakTS("${item.fields.en}",'us')`
+                                    }
                                     className="pd-speak"
                                   >
                                     <i className="fa fa-bullhorn"></i>

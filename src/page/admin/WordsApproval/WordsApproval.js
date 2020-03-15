@@ -5,7 +5,7 @@ import ItemTable from "./itemTableWordsApproval";
 import * as action from "../../../redux/action/index";
 import SearchAdmin from "../../../components/SearchAdmin";
 import Pagination from "../../../components/Pagination/index";
-
+import TestPagination from "../../../components/Pagination/TestPagination";
 const WordsApproval = props => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -113,47 +113,11 @@ const WordsApproval = props => {
                   ""
                 ) : showPagination ? (
                   <nav aria-label="Page navigation example">
-                    <ul className="pagination justify-content-end">
-                      <li
-                        className="page-item"
-                        onClick={() => {
-                          paginate(currentPage > 1 ? currentPage - 1 : 1);
-                        }}
-                      >
-                        <a className="page-link" aria-label="Previous">
-                          <span aria-hidden="true">«</span>
-                        </a>
-                      </li>
-
-                      <Pagination
-                        itemPerPage={data.pagination.itemPerPage}
-                        totalItem={data.pagination.totalItem}
-                        paginate={paginate}
-                        numberPage={currentPage}
-                      />
-
-                      <li
-                        className="page-item"
-                        onClick={() => {
-                          paginate(
-                            currentPage <
-                              Math.ceil(
-                                data.pagination.totalItem /
-                                  data.pagination.itemPerPage
-                              )
-                              ? currentPage + 1
-                              : Math.ceil(
-                                  data.pagination.totalItem /
-                                    data.pagination.itemPerPage
-                                )
-                          );
-                        }}
-                      >
-                        <a className="page-link" aria-label="Next">
-                          <span aria-hidden="true">»</span>
-                        </a>
-                      </li>
-                    </ul>
+                    <TestPagination
+                      totalItem={data.pagination.totalItem}
+                      itemPerPage={data.pagination.itemPerPage}
+                      paginate={paginate}
+                    />
                   </nav>
                 ) : (
                   ""

@@ -9,6 +9,7 @@ import * as action from "../../../redux/action/index";
 import SearchAdmin from "../../../components/SearchAdmin";
 import Pagination from "../../../components/Pagination/index";
 import MoldalExcel from "./modalExcel";
+import TestPagination from "../../../components/Pagination/TestPagination";
 const Modal = Modalfather(ChildModal);
 
 const WordsAdmin = props => {
@@ -160,8 +161,8 @@ const WordsAdmin = props => {
                   ""
                 ) : showPagination ? (
                   <nav aria-label="Page navigation example">
-                    <ul className="pagination justify-content-end">
-                      <li
+                    {/*  <ul className="pagination justify-content-end"> */}
+                    {/*                       <li
                         className="page-item"
                         onClick={() => {
                           paginate(currentPage > 1 ? currentPage - 1 : 1);
@@ -170,16 +171,20 @@ const WordsAdmin = props => {
                         <a className="page-link" aria-label="Previous">
                           <span aria-hidden="true">«</span>
                         </a>
-                      </li>
-
+                      </li> */}
+                    {/* 
                       <Pagination
                         itemPerPage={data.pagination.itemPerPage}
                         totalItem={data.pagination.totalItem}
                         paginate={paginate}
                         numberPage={currentPage}
-                      />
-
-                      <li
+                      /> */}
+                    <TestPagination
+                      totalItem={data.pagination.totalItem}
+                      itemPerPage={data.pagination.itemPerPage}
+                      paginate={paginate}
+                    />
+                    {/* <li
                         className="page-item"
                         onClick={() => {
                           paginate(
@@ -195,12 +200,12 @@ const WordsAdmin = props => {
                                 )
                           );
                         }}
-                      >
+                      > 
                         <a className="page-link" aria-label="Next">
                           <span aria-hidden="true">»</span>
                         </a>
-                      </li>
-                    </ul>
+                      </li> */}
+                    {/* </ul> */}
                   </nav>
                 ) : (
                   ""

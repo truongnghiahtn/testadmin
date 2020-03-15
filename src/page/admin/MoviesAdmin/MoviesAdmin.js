@@ -8,12 +8,13 @@ import * as action from "../../../redux/action/index";
 import SearchAdmin from "../../../components/SearchAdmin";
 import Pagination from "../../../components/Pagination/index";
 import TestPagination from "../../../components/Pagination/TestPagination";
+import Axios from "axios";
+import { apiDevFast } from "../../../utils/config";
 const Modal = Modalfather(ChildModal);
 
 const MoviesAdmin = props => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({ pagination: {}, result: [] });
   const [loading, setLoading] = useState(false);
-  const [showPagination, setShowPagination] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -42,14 +43,23 @@ const MoviesAdmin = props => {
   };
 
   const handleFilter = keyword => {
-    let dataUpdate = { ...data };
+    /*     let dataUpdate = { ...data };
     dataUpdate.result = props.listMovies.result.filter(
       item =>
         convertHTML(item.title)
           .toLowerCase()
           .indexOf(keyword.toLowerCase()) > -1
     );
-    setData(dataUpdate);
+    setData(dataUpdate); */
+
+    return Axios({
+      method: "GET",
+      url: `${apiDevFast}/adminSearch/movie/${keyword}`
+    })
+      .then(res => {
+        setData({ pagination: {}, result: res.data });
+      })
+      .catch(err => props.getListMovies(currentPage));
   };
 
   const isEmpty = obj => {
@@ -61,10 +71,31 @@ const MoviesAdmin = props => {
       return data.result.map((item, index) => (
         <ItemTable
           movie={item}
-          stt={index + data.pagination.minIndex + 1}
+          stt={
+            index +
+            1 +
+            (!isEmpty(data.pagination) ? data.pagination.minIndex : 0)
+          }
           key={index}
         />
       ));
+    }
+  };
+
+  const renderPagination = () => {
+    if (!isEmpty(data)) {
+      return !isEmpty(data.pagination) && data.result.length > 0 ? (
+        <nav aria-label="Page navigation example">
+          <TestPagination
+            totalItem={data.pagination.totalItem}
+            itemPerPage={data.pagination.itemPerPage}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
+        </nav>
+      ) : (
+        ""
+      );
     }
   };
 
@@ -141,19 +172,7 @@ const MoviesAdmin = props => {
                     <tbody className="fadeIn animated">{renderTbody()}</tbody>
                   )}
                 </table>
-                {isEmpty(data) ? (
-                  ""
-                ) : showPagination ? (
-                  <nav aria-label="Page navigation example">
-                    <TestPagination
-                      totalItem={data.pagination.totalItem}
-                      itemPerPage={data.pagination.itemPerPage}
-                      paginate={paginate}
-                    />
-                  </nav>
-                ) : (
-                  ""
-                )}
+                {renderPagination()}
               </div>
             </div>
           </div>

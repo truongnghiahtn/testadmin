@@ -9,12 +9,15 @@ import * as action from "../../../redux/action/index";
 import SearchAdmin from "../../../components/SearchAdmin";
 import Pagination from "../../../components/Pagination/index";
 import MoldalExcel from "./modalExcel";
+import TestPagination from "../../../components/Pagination/TestPagination";
+import Axios from "axios";
+import { apiDevFast } from "../../../utils/config";
+
 const Modal = Modalfather(ChildModal);
 
 const WordsAdmin = props => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({ pagination: {}, result: [] });
   const [loading, setLoading] = useState(false);
-  const [showPagination, setShowPagination] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -31,6 +34,7 @@ const WordsAdmin = props => {
 
   useEffect(() => {
     setData(props.listWords);
+    console.log(props.listWords);
   }, [props.listWords]);
 
   const convertHTML = html => {
@@ -40,20 +44,14 @@ const WordsAdmin = props => {
   };
 
   const handleFilter = keyword => {
-    let dataUpdate = { ...props.allListWords };
-    dataUpdate.result = props.allListWords.result.filter(
-      item =>
-        convertHTML(item.word_name)
-          .toLowerCase()
-          .indexOf(keyword.toLowerCase()) > -1
-    );
-    if (keyword) {
-      setData(dataUpdate);
-      setShowPagination(false);
-    } else {
-      props.getListWords(currentPage);
-      setShowPagination(true);
-    }
+    return Axios({
+      method: "GET",
+      url: `${apiDevFast}/adminSearch/word/${keyword}`
+    })
+      .then(res => {
+        setData({ pagination: {}, result: res.data });
+      })
+      .catch(err => props.getListWords(currentPage));
   };
 
   const isEmpty = obj => {
@@ -66,10 +64,31 @@ const WordsAdmin = props => {
       return dataUpdate.map((item, index) => (
         <ItemTable
           word={item}
-          stt={index + data.pagination.minIndex + 1}
+          stt={
+            index +
+            1 +
+            (!isEmpty(data.pagination) ? data.pagination.minIndex : 0)
+          }
           key={index}
         />
       ));
+    }
+  };
+
+  const renderPagination = () => {
+    if (!isEmpty(data)) {
+      return !isEmpty(data.pagination) && data.result.length > 0 ? (
+        <nav aria-label="Page navigation example">
+          <TestPagination
+            totalItem={data.pagination.totalItem}
+            itemPerPage={data.pagination.itemPerPage}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
+        </nav>
+      ) : (
+        ""
+      );
     }
   };
 
@@ -156,7 +175,7 @@ const WordsAdmin = props => {
                     <tbody className="fadeIn animated">{renderTbody()}</tbody>
                   )}
                 </table>
-                {isEmpty(data) ? (
+                {/* {isEmpty(data) < 1 ? (
                   ""
                 ) : showPagination ? (
                   <nav aria-label="Page navigation example">
@@ -171,14 +190,17 @@ const WordsAdmin = props => {
                           <span aria-hidden="true">«</span>
                         </a>
                       </li>
-
                       <Pagination
                         itemPerPage={data.pagination.itemPerPage}
                         totalItem={data.pagination.totalItem}
                         paginate={paginate}
                         numberPage={currentPage}
                       />
-
+                      <TestPagination
+                        totalItem={data.pagination.totalItem}
+                        itemPerPage={data.pagination.itemPerPage}
+                        paginate={paginate}
+                      />
                       <li
                         className="page-item"
                         onClick={() => {
@@ -204,7 +226,8 @@ const WordsAdmin = props => {
                   </nav>
                 ) : (
                   ""
-                )}
+                )} */}
+                {renderPagination()}
               </div>
             </div>
           </div>

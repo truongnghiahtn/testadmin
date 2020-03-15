@@ -123,10 +123,10 @@ export default class sidebarAdmin extends Component {
                     </NavLink>
                   </li>
                   <li>
-                    <a href="contribute.html">
-                      <i className="fa fa-book" aria-hidden="true" />
-                      Đóng góp
-                    </a>
+                    <NavLink to="/admin-word-approval">
+                      <i className="fa fa-flag-checkered" aria-hidden="true" />
+                      Bổ sung từ
+                    </NavLink>
                   </li>
                 </ul>
               </li>

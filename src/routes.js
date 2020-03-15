@@ -10,6 +10,7 @@ import Website from "./page/admin/website/website";
 import WordsAdmin from "./page/admin/WordsAdmin/WordsAdmin";
 import Admin from "./page/admin/Admin/Admin";
 import CustomerAdmin from "./page/admin/CustomerAdmin/CustomerAdmin";
+import WordsApproval from "./page/admin/WordsApproval/WordsApproval";
 
 const routesHome = [
   {
@@ -76,6 +77,11 @@ const routesAdmin = [
     path: "/admin-customer",
     exact: false,
     component: CustomerAdmin
+  },
+  {
+    path: "/admin-word-approval",
+    exact: false,
+    component: WordsApproval
   }
 ];
 

@@ -18,7 +18,8 @@ let initialState = {
   dataContact: "",
   dataCustomer: {},
   dataAdmin: {},
-  editAdmin: null
+  editAdmin: null,
+  dataWordsUnapproved: {}
 };
 
 const deMoReducer = (state = initialState, action) => {
@@ -111,29 +112,42 @@ const deMoReducer = (state = initialState, action) => {
       state.editWord = action.word;
       return { ...state };
     case ActionType.DEL_WORDS_API_DEVFAST:
-      let totalItemWords = state.dataWords.pagination.totalItem - 1;
-      let resultWords = state.dataWords.result.filter(
-        item => action.idWord !== item._id
-      );
-      let resulAlltWords = state.dataAllWords.result.filter(
-        item => action.idWord !== item._id
-      );
-      let paginationWord = {
-        ...state.dataWords.pagination,
-        totalItem: totalItemWords
-      };
-      let dataWords = {
-        ...state.dataWords,
-        pagination: paginationWord,
-        result: resultWords
-      };
-      state.dataAllWords = {
-        ...state.dataAllWords,
-        pagination: paginationWord,
-        result: resulAlltWords
-      };
-      state.dataWords = { ...dataWords };
-      return { ...state };
+      if (action.idWord.status === 1) {
+        let totalItemWords = state.dataWords.pagination.totalItem - 1;
+        let resultWords = state.dataWords.result.filter(
+          item => action.idWord._id !== item._id
+        );
+        let resulAlltWords = state.dataAllWords.result.filter(
+          item => action.idWord._id !== item._id
+        );
+        let paginationWord = {
+          ...state.dataWords.pagination,
+          totalItem: totalItemWords
+        };
+        let dataWords = {
+          ...state.dataWords,
+          pagination: paginationWord,
+          result: resultWords
+        };
+        state.dataAllWords = {
+          ...state.dataAllWords,
+          pagination: paginationWord,
+          result: resulAlltWords
+        };
+        state.dataWords = { ...dataWords };
+        return { ...state };
+      } else {
+        let dataWordsUn = state.dataWordsUnapproved.result.filter(
+          item => action.idWord._id !== item._id
+        );
+
+        state.dataWordsUnapproved = {
+          ...state.dataWordsUnapproved,
+          result: dataWordsUn
+        };
+        return { ...state };
+      }
+
     case ActionType.ADD_WORDS_API_DEVFAST:
       let totalItemWords1 = state.dataWords.pagination.totalItem + 1;
       let paginationWords1 = {
@@ -148,6 +162,7 @@ const deMoReducer = (state = initialState, action) => {
       let resulAlltWords1 = state.dataAllWords.result;
       resultWords1.splice(0, 0, action.word);
       resulAlltWords1.splice(0, 0, action.word);
+
       state.dataWords = {
         ...state.dataWords,
         pagination: paginationWords1,
@@ -221,8 +236,8 @@ const deMoReducer = (state = initialState, action) => {
       };
       let dataCustomer = {
         ...state.dataCustomer,
-        paginationCustomer,
-        resultCustomer
+        pagination: paginationCustomer,
+        result: resultCustomer
       };
       state.dataCustomer = { ...dataCustomer };
       return { ...state };
@@ -276,6 +291,22 @@ const deMoReducer = (state = initialState, action) => {
         listAdminUpdate[indexAdmin] = action.admin;
       }
       state.dataAdmin = { ...state.dataAdmin, result: listAdminUpdate };
+      return { ...state };
+
+    //words unapproved
+    case ActionType.GET_WORDS_UNAPPROVED_API_DEVFAST:
+      state.dataWordsUnapproved = action.dataWords;
+      return { ...state };
+    case ActionType.APPROVED_WORD_API:
+      console.log(action.word._id);
+
+      let dataWordsUpdate = state.dataWordsUnapproved.result.filter(
+        item => item._id !== action.word._id
+      );
+      state.dataWordsUnapproved = {
+        ...state.dataWordsUnapproved,
+        result: dataWordsUpdate
+      };
       return { ...state };
     default:
       return { ...state };

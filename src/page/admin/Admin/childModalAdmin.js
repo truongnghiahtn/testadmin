@@ -92,7 +92,7 @@ class childModalAdmin extends Component {
         values: {
           ...this.state.values,
           username: nextProps.editInfoAdmin.username,
-          password: nextProps.editInfoAdmin.password,
+          password: "",
           id: nextProps.editInfoAdmin._id,
           createdAt: nextProps.editInfoAdmin.createdAt,
           updatedAt: nextProps.editInfoAdmin.updatedAt
@@ -151,6 +151,7 @@ class childModalAdmin extends Component {
                     onBlur={this.handleErrors}
                     onKeyUp={this.handleErrors}
                     name="username"
+                    disabled={this.props.editInfoAdmin ? true : false}
                     value={
                       this.state.values.username
                         ? this.state.values.username

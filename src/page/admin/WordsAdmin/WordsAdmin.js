@@ -34,7 +34,6 @@ const WordsAdmin = props => {
 
   useEffect(() => {
     setData(props.listWords);
-    console.log(props.listWords);
   }, [props.listWords]);
 
   const convertHTML = html => {

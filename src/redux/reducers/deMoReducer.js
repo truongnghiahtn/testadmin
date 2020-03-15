@@ -19,7 +19,8 @@ let initialState = {
   dataCustomer: {},
   dataAdmin: {},
   editAdmin: null,
-  dataWordsUnapproved: {}
+  dataWordsUnapproved: {},
+  dataMail: {}
 };
 
 const deMoReducer = (state = initialState, action) => {
@@ -306,6 +307,13 @@ const deMoReducer = (state = initialState, action) => {
         ...state.dataWordsUnapproved,
         result: dataWordsUpdate
       };
+      return { ...state };
+    //email
+    case ActionType.GET_MAIL_API_DEVFAST:
+      state.dataMail = action.dataMail[0];
+      return { ...state };
+    case ActionType.EDIT_MAIL_API_DEVFAST:
+      state.dataMail = action.mail;
       return { ...state };
     default:
       return { ...state };

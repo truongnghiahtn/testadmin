@@ -130,8 +130,8 @@ export const postContactApi = data => {
     CallAPI("customer", "POST", data).then(rs => {
       setTimeout(() => {
         swal({
-          title: "Bạn đã gửi thành công",
-          text: ` Gửi thành Công...!`,
+          title: "Gửi Thành Công",
+          text: `Thành công!`,
           icon: "success",
           buttons: false,
           timer: 1500
@@ -139,17 +139,17 @@ export const postContactApi = data => {
       }, 150);
       console.log(rs);
     })
-    .catch(err => {
+    .catch(rs=>{
       setTimeout(() => {
         swal({
-          title: "Không Gửi được",
-          text: `Gửi thất bại!`,
+          title: "Gửi Thất bại",
+          text: `Mail bạn bị trùng!`,
           icon: "error",
           buttons: false,
           timer: 1500
         });
       }, 150);
-    });
+    })
   };
 };
 
@@ -327,22 +327,16 @@ export const saveWord = word => {
 
 export const getAllWordsApiDevfast = () => {
   return dispatch => {
-    if (authToken) {
-      let headers = {
-        Authorization: authToken.access_token
-      };
-
-      CallAPI(`words`, "GET", null, null, apiDevFast)
-        .then(res =>
-          dispatch({
-            type: Actiontype.GET_ALL_WORDS_API_DEVFAST,
-            dataWords: res.data
-          })
-        )
-        .catch(err => {
-          console.log(err);
-        });
-    }
+    CallAPI(`words`, "GET", null, null, apiDevFast)
+      .then(res =>
+        dispatch({
+          type: Actiontype.GET_ALL_WORDS_API_DEVFAST,
+          dataWords: res.data
+        })
+      )
+      .catch(err => {
+        console.log(err);
+      });
   };
 };
 

@@ -1,17 +1,16 @@
 import React from "react";
 import Pagination from "react-pagination-library";
-import "react-pagination-library/build/css/index.css"; //for css
+import "react-pagination-library/build/css/index.css";
 
 class TestPagination extends React.Component {
   state = {
-    currentPage: 1
+    currentPage: this.props.currentPage
   };
   changeCurrentPage = numPage => {
     this.setState({ currentPage: numPage });
-    //fetch a data
-    //or update a query to get data
     this.props.paginate(numPage);
   };
+
   render() {
     return (
       <>

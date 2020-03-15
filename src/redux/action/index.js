@@ -125,28 +125,30 @@ export const postNewWordApi = data => {
 
 export const postContactApi = data => {
   return () => {
-    CallAPI("customer", "POST", data).then(rs => {
-      setTimeout(() => {
-        swal({
-          title: "gửi thành công",
-          text: `Thành công`,
-          icon: "success",
-          buttons: false,
-          timer: 1500
-        });
-      }, 150);
-      console.log(rs);
-    }).catch(rs=>{
-      setTimeout(() => {
-        swal({
-          title: "Gửi thất bại",
-          text: `thất bại!`,
-          icon: "error",
-          buttons: false,
-          timer: 1500
-        });
-      }, 150);
-    });
+    CallAPI("customer", "POST", data)
+      .then(rs => {
+        setTimeout(() => {
+          swal({
+            title: "gửi thành công",
+            text: `Thành công`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+        console.log(rs);
+      })
+      .catch(rs => {
+        setTimeout(() => {
+          swal({
+            title: "Gửi thất bại",
+            text: `thất bại!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+      });
   };
 };
 
@@ -923,22 +925,36 @@ export const actDelAdminAPI = id => {
 
 export const getWordsUnapprovedApiDevfast = id => {
   return dispatch => {
-    CallAPI(
-      `contribute/unapproved?itemPerPage=20&page=${id}`,
-      "GET",
-      null,
-      null,
-      apiDevFast
-    )
-      .then(res =>
-        dispatch({
-          type: Actiontype.GET_WORDS_UNAPPROVED_API_DEVFAST,
-          dataWords: res.data
-        })
+    const authToken = JSON.parse(sessionStorage.getItem("userAdmin"));
+    if (authToken) {
+      let headers = {
+        Authorization: authToken.access_token
+      };
+      CallAPI(
+        `contribute/unapproved?itemPerPage=20&page=${id}`,
+        "GET",
+        null,
+        headers,
+        apiDevFast
       )
-      .catch(err => {
-        console.log(err);
+        .then(res =>
+          dispatch({
+            type: Actiontype.GET_WORDS_UNAPPROVED_API_DEVFAST,
+            dataWords: res.data
+          })
+        )
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      swal({
+        title: "Error",
+        text: `Unauthorized`,
+        icon: "error",
+        buttons: false,
+        timer: 1500
       });
+    }
   };
 };
 
@@ -1112,20 +1128,19 @@ export const actEditMailAPI = data => {
   };
 };
 
-
 // get top trending
-export const getListTopWord =()=>{
-  return dispatch =>{
-    CallAPI('words/topTrending/6',"GET",null,null,apiDevFast)
-    .then(res=>{
-      console.log(res)
-      dispatch({
-        type:Actiontype.GET_TOP_WORD,
-        dataTopWord:res.data
+export const getListTopWord = () => {
+  return dispatch => {
+    CallAPI("words/topTrending/6", "GET", null, null, apiDevFast)
+      .then(res => {
+        console.log(res);
+        dispatch({
+          type: Actiontype.GET_TOP_WORD,
+          dataTopWord: res.data
+        });
       })
-    })
-    .catch(err=>{
-      console.log(err)
-    })
-  }
-}
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};

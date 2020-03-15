@@ -459,7 +459,7 @@ class childModalMovies extends Component {
                           ["style", ["style"]],
                           ["font", ["bold", "underline", "clear"]],
                           ["fontname", ["fontname"]],
-                          ["color", ["Rencent  Color"]],
+                          ["color", ["color"]],
                           ["para", ["ul", "ol", "paragraph"]],
                           ["table", ["table"]],
                           ["insert", ["link", "picture", "video"]],

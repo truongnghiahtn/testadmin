@@ -19,7 +19,7 @@ const Intro = props => {
       setErrors(true);
     } else setErrors(false);
   };
-  const edit = (dataTerm) => {
+  const edit = dataTerm => {
     swal({
       title: "Bạn có chắc không?",
       text: "Sau khi sửa, bạn sẽ không thể khôi phục !",
@@ -33,7 +33,7 @@ const Intro = props => {
         swal("Thông tin của bạn an toàn!");
       }
     });
-  }; 
+  };
 
   return (
     <div
@@ -55,6 +55,7 @@ const Intro = props => {
                 toolbar: [
                   ["style", ["style"]],
                   ["font", ["bold", "underline", "clear"]],
+                  ["color", ["color"]],
                   ["fontname", ["fontname"]],
                   ["para", ["ul", "ol", "paragraph"]],
                   ["table", ["table"]],
@@ -79,7 +80,9 @@ const Intro = props => {
             // onClick={() => {
             //   props.addInfoWebsiteApi("INTRO", dataIntro);
             // }}
-            onClick={()=>{edit(dataIntro)}}
+            onClick={() => {
+              edit(dataIntro);
+            }}
           >
             Sửa
           </button>

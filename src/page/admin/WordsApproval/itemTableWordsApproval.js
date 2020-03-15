@@ -47,7 +47,7 @@ class itemTable extends Component {
                 this.duyetitem(word._id);
               }}
             >
-              <i className="ri-delete-bin-2-fill pr-0" />
+              <i class="ri-check-fill pr-0"></i>
               Duyệt
             </button>
 
@@ -57,6 +57,7 @@ class itemTable extends Component {
               onClick={() => {
                 this.xoaitem(word._id);
               }}
+              style={{ width: "84px" }}
             >
               <i className="ri-delete-bin-2-fill pr-0" />
               Xóa

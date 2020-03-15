@@ -156,27 +156,16 @@ export const postContactApi = data => {
 //Movies Admin
 export const getMoviesApiDevfast = id => {
   return dispatch => {
-    if (authToken) {
-      let headers = {
-        Authorization: authToken.access_token
-      };
-      CallAPI(
-        `movies?itemPerPage=20&page=${id}`,
-        "GET",
-        null,
-        headers,
-        apiDevFast
+    CallAPI(`movies?itemPerPage=20&page=${id}`, "GET", null, null, apiDevFast)
+      .then(res =>
+        dispatch({
+          type: Actiontype.GET_MOVIES_API_DEVFAST,
+          dataMovies: res.data
+        })
       )
-        .then(res =>
-          dispatch({
-            type: Actiontype.GET_MOVIES_API_DEVFAST,
-            dataMovies: res.data
-          })
-        )
-        .catch(err => {
-          console.log(err);
-        });
-    }
+      .catch(err => {
+        console.log(err);
+      });
   };
 };
 
@@ -209,7 +198,7 @@ export const addMoviesApiDevfast = data => {
           setTimeout(() => {
             swal({
               title: "Error",
-              text: ` ${err.response.data.error}!`,
+              text: ` ${err.response.data.message}!`,
               icon: "error",
               buttons: false,
               timer: 1500
@@ -266,7 +255,7 @@ export const actEditMovieAPI = data => {
           setTimeout(() => {
             swal({
               title: "Error",
-              text: ` ${err.response.data.error}!`,
+              text: ` ${err.response.data.message}!`,
               icon: "error",
               buttons: false,
               timer: 1500
@@ -303,7 +292,7 @@ export const actDelMovieAPI = id => {
           setTimeout(() => {
             swal({
               title: "Error",
-              text: ` ${err.response.data.error}!`,
+              text: ` ${err.response.data.message}!`,
               icon: "error",
               buttons: false,
               timer: 1500
@@ -385,15 +374,13 @@ export const addWordsApiDevfast = data => {
           );
         })
         .catch(err => {
-          setTimeout(() => {
-            swal({
-              title: "Error",
-              text: ` ${err.response.data.error}!`,
-              icon: "error",
-              buttons: false,
-              timer: 1500
-            });
-          }, 150);
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.message}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
           console.log(err);
         });
     }
@@ -426,15 +413,13 @@ export const actEditWordAPI = data => {
       };
       CallAPI(`words/${data.id}`, "PUT", formData, headers, apiDevFast)
         .then(res => {
-          setTimeout(() => {
-            swal({
-              title: "Sửa thành công!",
-              text: `${res.statusText}!`,
-              icon: "success",
-              buttons: false,
-              timer: 1500
-            });
-          }, 150);
+          swal({
+            title: "Sửa thành công!",
+            text: `${res.statusText}!`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
           dispatch(
             {
               type: Actiontype.EDIT_WORDS_API_DEVFAST,
@@ -444,15 +429,13 @@ export const actEditWordAPI = data => {
           );
         })
         .catch(err => {
-          setTimeout(() => {
-            swal({
-              title: "Error",
-              text: ` ${err.response.data.error}!`,
-              icon: "error",
-              buttons: false,
-              timer: 1500
-            });
-          }, 150);
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.message}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
         });
     }
   };
@@ -466,15 +449,13 @@ export const actDelWordAPI = id => {
       };
       CallAPI(`words/${id}`, "DELETE", null, headers, apiDevFast)
         .then(res => {
-          setTimeout(() => {
-            swal({
-              title: "Xóa Thành công!",
-              text: `${res.statusText}!`,
-              icon: "success",
-              buttons: false,
-              timer: 1500
-            });
-          }, 150);
+          swal({
+            title: "Xóa Thành công!",
+            text: `${res.statusText}!`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
           dispatch({
             type: Actiontype.DEL_WORDS_API_DEVFAST,
             idWord: res.data.data
@@ -482,15 +463,13 @@ export const actDelWordAPI = id => {
           console.log(res.data.data);
         })
         .catch(err => {
-          setTimeout(() => {
-            swal({
-              title: "Error",
-              text: ` ${err.response.data.error}!`,
-              icon: "error",
-              buttons: false,
-              timer: 1500
-            });
-          }, 150);
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.message}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
           console.log(err);
         });
     }
@@ -618,7 +597,7 @@ export const addInfoWebsiteApi = (name, data) => {
       .catch(err => {
         swal({
           title: "Error",
-          text: ` ${err.response.data.error}!`,
+          text: ` ${err.response.data.message}!`,
           icon: "error",
           buttons: false,
           timer: 1500
@@ -648,30 +627,26 @@ export const actDelCustomerAPI = id => {
   return dispatch => {
     CallAPI(`customer/${id}`, "DELETE", null, null, apiDevFast)
       .then(res => {
-        setTimeout(() => {
-          swal({
-            title: "Xóa Thành công!",
-            text: `${res.statusText}!`,
-            icon: "success",
-            buttons: false,
-            timer: 1500
-          });
-        }, 150);
+        swal({
+          title: "Xóa Thành công!",
+          text: `${res.statusText}!`,
+          icon: "success",
+          buttons: false,
+          timer: 1500
+        });
         dispatch({
           type: Actiontype.DEL_CUSTOMER_API_DEVFAST,
           idCustomer: res.data.data._id
         });
       })
       .catch(err => {
-        setTimeout(() => {
-          swal({
-            title: "Error",
-            text: ` ${err.response.data.error}!`,
-            icon: "error",
-            buttons: false,
-            timer: 1500
-          });
-        }, 150);
+        swal({
+          title: "Error",
+          text: ` ${err.response.data.message}!`,
+          icon: "error",
+          buttons: false,
+          timer: 1500
+        });
         console.log(err);
       });
   };
@@ -684,7 +659,6 @@ export const getAdminApiDevfast = id => {
       let headers = {
         Authorization: authToken.access_token
       };
-
       CallAPI(
         `admin?itemPerPage=20&page=${id}`,
         "GET",
@@ -726,16 +700,13 @@ export const addAdminApiDevfast = data => {
           });
         })
         .catch(err => {
-          setTimeout(() => {
-            swal({
-              title: "Error",
-              text: ` ${err.response.data.error}!`,
-              icon: "error",
-              buttons: false,
-              timer: 1500
-            });
-          }, 150);
-          console.log(err);
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.message}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
         });
     }
   };
@@ -763,15 +734,13 @@ export const actEditAdminAPI = data => {
 
       CallAPI(`admin/${data.id}`, "PUT", data, headers, apiDevFast)
         .then(res => {
-          setTimeout(() => {
-            swal({
-              title: "Good job!",
-              text: `${res.statusText}!`,
-              icon: "success",
-              buttons: false,
-              timer: 1500
-            });
-          }, 150);
+          swal({
+            title: "Good job!",
+            text: `${res.statusText}!`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
           dispatch({
             type: Actiontype.EDIT_ADMIN_API_DEVFAST,
             admin: res.data
@@ -779,15 +748,13 @@ export const actEditAdminAPI = data => {
           console.log(res.data);
         })
         .catch(err => {
-          setTimeout(() => {
-            swal({
-              title: "Error",
-              text: ` ${err.response.data.error}!`,
-              icon: "error",
-              buttons: false,
-              timer: 1500
-            });
-          }, 150);
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.message}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
         });
     }
   };
@@ -801,30 +768,26 @@ export const actDelAdminAPI = id => {
       };
       CallAPI(`admin/${id}`, "DELETE", null, headers, apiDevFast)
         .then(res => {
-          setTimeout(() => {
-            swal({
-              title: "Good job!",
-              text: `${res.statusText}!`,
-              icon: "success",
-              buttons: false,
-              timer: 1500
-            });
-          }, 150);
+          swal({
+            title: "Good job!",
+            text: `${res.statusText}!`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
           dispatch({
             type: Actiontype.DEL_ADMIN_API_DEVFAST,
             idAdmin: res.data.data._id
           });
         })
         .catch(err => {
-          setTimeout(() => {
-            swal({
-              title: "Error",
-              text: ` ${err.response.data.error}!`,
-              icon: "error",
-              buttons: false,
-              timer: 1500
-            });
-          }, 150);
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.message}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
         });
     }
   };
@@ -867,15 +830,13 @@ export const actAppovedWordAPI = data => {
         apiDevFast
       )
         .then(res => {
-          setTimeout(() => {
-            swal({
-              title: "Sửa thành công!",
-              text: `${res.statusText}!`,
-              icon: "success",
-              buttons: false,
-              timer: 1500
-            });
-          }, 150);
+          swal({
+            title: "Sửa thành công!",
+            text: `${res.statusText}!`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
           dispatch(
             {
               type: Actiontype.APPROVED_WORD_API,
@@ -885,15 +846,13 @@ export const actAppovedWordAPI = data => {
           );
         })
         .catch(err => {
-          setTimeout(() => {
-            swal({
-              title: "Error",
-              text: ` ${err.response.data.error}!`,
-              icon: "error",
-              buttons: false,
-              timer: 1500
-            });
-          }, 150);
+          swal({
+            title: "Error",
+            text: ` ${err.response.data.message}!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
         });
     }
   };

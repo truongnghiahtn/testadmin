@@ -78,7 +78,8 @@ class Mail extends Component {
       },
       () => {
         this.FormValidation();
-      }
+      },
+      console.log(this.state)
     );
   };
 
@@ -202,8 +203,15 @@ class Mail extends Component {
           </div>
           <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-end">
+              {/* <button
+                type="reset"
+                className="btn iq-bg-danger"
+                style={{ marginRight: 10 }}
+              >
+                Cancel
+              </button> */}
               <button type="submit" className="btn btn-primary">
-                Sửa
+                Submit
               </button>
             </ul>
           </nav>

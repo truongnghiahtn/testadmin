@@ -49,6 +49,7 @@ class itemTable extends Component {
               onClick={() => {
                 this.xoaitem(admin._id);
               }}
+              disabled={admin.role==="supper"?(true):(false)}
             >
               <i className="ri-delete-bin-2-fill pr-0" />
               Xóa

@@ -152,7 +152,8 @@ const HeaderAdmin = () => {
       }
     });
   }, []);
-
+  
+  const name = JSON.parse(sessionStorage.getItem("userAdmin"));
   return (
     <div className="iq-top-navbar">
       <div className="iq-navbar-custom">
@@ -395,18 +396,18 @@ const HeaderAdmin = () => {
                   className="img-fluid rounded mr-3"
                 />
                 <div className="caption">
-                  <h6 className="mb-0 line-height">Bini Jets</h6>
-                  <span className="font-size-12">Available</span>
+            <h6 className="mb-0 line-height">{name.username}</h6>
+                  {/* <span className="font-size-12">Available</span> */}
                 </div>
               </a>
-              <div className="iq-sub-dropdown iq-user-dropdown">
+              <div className="iq-sub-dropdown iq-user-dropdown edit_signout">
                 <div className="iq-card shadow-none m-0">
-                  <div className="iq-card-body p-0 ">
+                  <div className="iq-card-body p-0  ">
                     <div className="bg-primary p-3">
                       <h5 className="mb-0 text-white line-height">
-                        Hello Bini Jets
+                        Hello  {name.username}
                       </h5>
-                      <span className="text-white font-size-12">Available</span>
+                      {/* <span className="text-white font-size-12">Available</span> */}
                     </div>
                     <div className="d-inline-block w-100 text-center p-3">
                       <a
@@ -417,7 +418,7 @@ const HeaderAdmin = () => {
                           sessionStorage.clear();
                         }}
                       >
-                        Sign out
+                       Đăng xuất
                         <i className="ri-login-box-line ml-2" />
                       </a>
                     </div>

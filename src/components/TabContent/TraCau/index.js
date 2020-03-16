@@ -2,12 +2,42 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class TraCau extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isPlaying: false
+    };
+  }
+
   componentDidMount() {
     let script = document.createElement("script");
     script.setAttribute("type", "text/javascript");
     script.setAttribute("src", "/assets/js/audio.js");
     document.getElementById("root").after(script);
   }
+
+  playAudio = url => {
+    if (!this.state.isPlaying) {
+      let sound = document.getElementById("sound");
+      sound.setAttribute("src", url);
+      sound.play();
+      this.setState({
+        isPlaying: true
+      });
+    } else {
+      this.stopAudio();
+    }
+  };
+
+  stopAudio = () => {
+    let sound = document.getElementById("sound");
+    sound.pause();
+    sound.currentTime = 0;
+    this.setState({
+      isPlaying: false
+    });
+  };
+
   renderDataTraCau = () => {
     return this.props.traCau.length
       ? this.props.traCau.map((item, index) => {
@@ -26,17 +56,30 @@ class TraCau extends Component {
                       __html: item.fields.en
                     }}
                   ></em>
-
-                  <a
-                    href={
-                      item._id.length < 20
-                        ? `javascript:speakTS(${item._id})`
-                        : `javascript:speakTS("${item.fields.en}",'us')`
-                    }
-                    className="v"
-                  >
-                    <i className="fa fa-bullhorn"></i>
-                  </a>
+                  {item.fields.audio ? (
+                    <a
+                      onClick={() => {
+                        this.playAudio(
+                          `http://27.71.233.139:3001/${item.fields.audio}`
+                        );
+                      }}
+                      className="v"
+                    >
+                      <i className="fa fa-bullhorn"></i>
+                    </a>
+                  ) : (
+                    <a
+                      href={
+                        item._id.length < 20
+                          ? `javascript:speakTS(${item._id})`
+                          : `javascript:speakTS("${item.fields.en}",'us')`
+                      }
+                      onClick={this.stopAudio}
+                      className="v"
+                    >
+                      <i className="fa fa-bullhorn"></i>
+                    </a>
+                  )}
                 </p>
               </article>
             </li>
@@ -44,6 +87,7 @@ class TraCau extends Component {
         })
       : "";
   };
+
   render() {
     return (
       <article id="tc" data-tab-name="Tra câu" className="tcTab--slide active">
@@ -52,6 +96,7 @@ class TraCau extends Component {
             {this.props.traCau ? this.renderDataTraCau() : ""}
           </ul>
         </div>
+        <audio id="sound" src=""></audio>
       </article>
     );
   }

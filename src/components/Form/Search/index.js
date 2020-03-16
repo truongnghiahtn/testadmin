@@ -57,17 +57,19 @@ const Search = props => {
 
   const handleOnSubmit = e => {
     e.preventDefault();
-    if ($(".s-suggest-content").length) {
-      $(".s-suggest-content")[0].click();
-      setIsSubmit(false);
-    } else {
-      props.saveWord(currentKw);
-      props.getTraCauApi(currentKw);
-      props.getTraTuApi(currentKw);
-      props.getPhuDePhimApi(currentKw);
-      props.getVideoApi(currentKw);
-      setIsSubmit(true);
-    }
+    setTimeout(() => {
+      if ($(".s-suggest-content").length) {
+        $(".s-suggest-content")[0].click();
+        setIsSubmit(false);
+      } else {
+        props.saveWord(currentKw);
+        props.getTraCauApi(currentKw);
+        props.getTraTuApi(currentKw);
+        props.getPhuDePhimApi(currentKw);
+        props.getVideoApi(currentKw);
+        setIsSubmit(true);
+      }
+    }, 1000);
   };
 
   return (

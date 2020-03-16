@@ -5,3 +5,31 @@
     }
   }
 }
+
+.pagination {
+  justify-content: flex-end;
+  ul {
+    a {
+      border: 1px solid #089bab;
+      line-height: 1.25;
+      font-size: 14px;
+      font-weight: 400;
+      margin-left: -1px;
+      margin-right: 0;
+      &.is-active {
+        background-color: #089bab;
+        border-color: #089bab;
+        color: #fff;
+      }
+      &:first-child {
+        margin-left: 0;
+        border-top-left-radius: 0.25rem;
+        border-bottom-left-radius: 0.25rem;
+      }
+      &:last-child {
+        border-top-right-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+      }
+    }
+  }
+}

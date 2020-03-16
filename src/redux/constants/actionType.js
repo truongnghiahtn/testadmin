@@ -60,3 +60,8 @@ export const ADD_EXCEL_API_DEVFAST = "ADD_EXCEL_API_DEVFAST";
 
 export const GET_MAIL_API_DEVFAST = "GET_MAIL_API_DEVFAST";
 export const EDIT_MAIL_API_DEVFAST = "EDIT_MAIL_API_DEVFAST";
+
+
+// top trendingword
+
+export const GET_TOP_WORD ="GET_TOP_WORD"

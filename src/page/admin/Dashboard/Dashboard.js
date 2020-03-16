@@ -7,7 +7,14 @@ import { connect } from "react-redux";
 const $ = window.$;
 
 class Dashboard extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      datalist:{}
+    }
+  }
   componentDidMount() {
+   
     /* Header fixed */
 
     /* Ripple Effect */
@@ -23,6 +30,7 @@ class Dashboard extends Component {
     /* Search input */
 
     /* Counter */
+
 
     $(".counter").counterUp({
       delay: 10,
@@ -40,62 +48,132 @@ class Dashboard extends Component {
     });
     wow.init();
 
-    if ($("#am-3dpie-chart").length) {
-      window.am4core.ready(function() {
-        // Themes begin
-        window.am4core.useTheme(window.am4themes_animated);
-        // Themes end
+    // if ($("#am-3dpie-chart").length) {
+    //   window.am4core.ready(function() {
+    //     // Themes begin
+    //     window.am4core.useTheme(window.am4themes_animated);
+    //     // Themes end
 
-        var chart = window.am4core.create(
-          "am-3dpie-chart",
-          window.am4charts.PieChart3D
-        );
-        chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+    //     var chart = window.am4core.create(
+    //       "am-3dpie-chart",
+    //       window.am4charts.PieChart3D
+    //     );
+    //     chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
-        chart.legend = new window.am4charts.Legend();
+    //     chart.legend = new window.am4charts.Legend();
 
-        chart.data = [
-          {
-            country: "Lithuania",
-            litres: 501.9,
-            fill: "red"
-          },
-          {
-            country: "Germany",
-            litres: 165.8
-          },
-          {
-            country: "Australia",
-            litres: 139.9
-          },
-          {
-            country: "Austria",
-            litres: 128.3
-          },
-          {
-            country: "UK",
-            litres: 99
-          },
-          {
-            country: "Belgium",
-            litres: 60
-          }
-        ];
+    //     chart.data = [
+    //       {
+    //         country: "Lithuania",
+    //         litres: 10,
+            
+    //       },
+    //       {
+    //         country: "Germany",
+    //         litres: 165.8
+    //       },
+    //       {
+    //         country: "Australia",
+    //         litres: 139.9
+    //       },
+    //       {
+    //         country: "Austria",
+    //         litres: 128.3
+    //       },
+    //       {
+    //         country: "UK",
+    //         litres: 99
+    //       },
+    //       {
+    //         country: "Belgium",
+    //         litres: 60
+    //       },
+    //     ];
 
-        var series = chart.series.push(new window.am4charts.PieSeries3D());
-        series.colors.list = [
-          window.am4core.color("#089bab"),
-          window.am4core.color("#FC9F5B"),
-          window.am4core.color("#57de53"),
-          window.am4core.color("#f26361"),
-          window.am4core.color("#ababab"),
-          window.am4core.color("#61e2fc")
-        ];
-        series.dataFields.value = "litres";
-        series.dataFields.category = "country";
-      }); // end am4core.ready()
-    }
+    //     var series = chart.series.push(new window.am4charts.PieSeries3D());
+    //     series.colors.list = [
+    //       window.am4core.color("#089bab"),
+    //       window.am4core.color("#FC9F5B"),
+    //       window.am4core.color("#57de53"),
+    //       window.am4core.color("#f26361"),
+    //       window.am4core.color("#ababab"),
+    //       window.am4core.color("#61e2fc")
+    //     ];
+    //     series.dataFields.value = "litres";
+    //     series.dataFields.category = "country";
+    //   }); // end am4core.ready()
+    // }
     this.props.getListAdmin(1);
+    this.props.getlistTopWords();
+    console.log(this.state.datalist)
+
+  }
+  componentWillReceiveProps(nextProps){
+
+    if(nextProps && nextProps.listTopWord){
+    
+      this.setState({
+        datalist:nextProps.listTopWord
+      },()=>{
+        console.log(this.state.datalist)
+      })
+    
+      if ($("#am-3dpie-chart").length) {
+        window.am4core.ready(function() {
+          // Themes begin
+          window.am4core.useTheme(window.am4themes_animated);
+          // Themes end
+  
+          var chart = window.am4core.create(
+            "am-3dpie-chart",
+            window.am4charts.PieChart3D
+          );
+          chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+  
+          chart.legend = new window.am4charts.Legend();
+          chart.data = [
+            {
+              country: nextProps.listTopWord[0].word_name,
+              litres: nextProps.listTopWord[0].countQuery,
+              
+            },
+            {
+              country: nextProps.listTopWord[1].word_name,
+              litres: nextProps.listTopWord[1].countQuery,
+            },
+            {
+              country: nextProps.listTopWord[2].word_name,
+              litres: nextProps.listTopWord[2].countQuery,
+            },
+            {
+              country: nextProps.listTopWord[3].word_name,
+              litres: nextProps.listTopWord[3].countQuery,
+            },
+            {
+              country: nextProps.listTopWord[4].word_name,
+              litres: nextProps.listTopWord[4].countQuery,
+            },
+            {
+              country: nextProps.listTopWord[5].word_name,
+              litres: nextProps.listTopWord[5].countQuery,
+            },
+        
+          ];
+  
+          var series = chart.series.push(new window.am4charts.PieSeries3D());
+          series.colors.list = [
+            window.am4core.color("#089bab"),
+            window.am4core.color("#FC9F5B"),
+            window.am4core.color("#57de53"),
+            window.am4core.color("#f26361"),
+            window.am4core.color("#ababab"),
+            window.am4core.color("#61e2fc")
+          ];
+          series.dataFields.value = "litres";
+          series.dataFields.category = "country";
+        }); // end am4core.ready()
+      }
+    }
   }
   render() {
     return (
@@ -191,11 +269,19 @@ class Dashboard extends Component {
   }
 }
 
+const mapStateToProps =state =>{
+  return{
+    listTopWord:state.deMoReducer.dataTopWord
+  }
+}
 const mapDispatchToProps = dispatch => {
   return {
     getListAdmin: id => {
       dispatch(action.getAdminApiDevfast(id));
+    },
+    getlistTopWords:()=>{
+      dispatch(action.getListTopWord ())
     }
   };
 };
-export default connect(null, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

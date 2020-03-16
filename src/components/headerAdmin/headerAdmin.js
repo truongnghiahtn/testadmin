@@ -412,7 +412,7 @@ const HeaderAdmin = () => {
                     <div className="d-inline-block w-100 text-center p-3">
                       <a
                         className="bg-primary iq-sign-btn"
-                        href="/"
+                        href="/admin"
                         role="button"
                         onClick={() => {
                           sessionStorage.clear();

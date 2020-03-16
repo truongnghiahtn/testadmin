@@ -76,7 +76,7 @@ const Intro = props => {
           <button
             type="submit"
             className="btn btn-primary"
-            disabled={!errors}
+            
             // onClick={() => {
             //   props.addInfoWebsiteApi("INTRO", dataIntro);
             // }}

@@ -9,6 +9,22 @@
     top: 0;
     left: 0;
     z-index: 1000;
+       .logout-home{
+      position: absolute;
+      bottom:25px;
+      right: 20px;
+      z-index: 10;
+      cursor: pointer;
+      font-size: 19px;
+      font-weight: 600;
+      a{
+        color: rgba($color:#ffffff, $alpha: 0.8);
+        &:hover{
+          color: rgba($color:#ffffff, $alpha: 1);
+        }
+      }
+      
+    }
   }
 
   .Form_Overlay {

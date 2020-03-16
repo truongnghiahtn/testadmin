@@ -115,11 +115,18 @@
       text-overflow: ellipsis;
       font-size: 1.02em;
       color: #333;
+      .sl,
+      p {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
       .sl {
         float: left;
         color: #1371bb;
         font-weight: 500;
         font-size: 14px;
+        width: 120px;
       }
       .sr {
         float: right;
@@ -129,32 +136,11 @@
       p {
         padding-left: 5px;
         display: inline-block;
-        word-break: break-all;
-        white-space: normal;
+        width: 450px;
       }
       &:hover {
         background: #f0f0f0;
         cursor: pointer;
-      }
-    }
-  }
-}
-@media (max-width: 1024px) {
-  .search-section {
-    #tc-content-search {
-      .autocomplete-suggestion {
-        .sl,
-        p {
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
-        }
-        .sl {
-          max-width: 100px;
-        }
-        p {
-          max-width: 80%;
-        }
       }
     }
   }
@@ -170,13 +156,6 @@
         padding-right: 30px;
         max-width: 100%;
         box-sizing: border-box;
-      }
-    }
-    #tc-content-search {
-      .autocomplete-suggestion {
-        p {
-          max-width: 70%;
-        }
       }
     }
   }
@@ -197,7 +176,7 @@
     #tc-content-search {
       .autocomplete-suggestion {
         .sl {
-          max-width: 200px;
+          width: fit-content;
         }
         p {
           display: none;

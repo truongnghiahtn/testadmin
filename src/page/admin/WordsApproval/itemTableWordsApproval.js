@@ -36,8 +36,8 @@ class itemTable extends Component {
     return (
       <tr>
         <td className="index">{stt}</td>
-        <td>{word.word_name}</td>
-        <td>{word.Vietnamese_meaning}</td>
+        <td className="td-break">{word.word_name}</td>
+        <td className="td-break">{word.Vietnamese_meaning}</td>
         <td className="content_en">
           <span className="table-remove">
             <button
@@ -47,7 +47,7 @@ class itemTable extends Component {
                 this.duyetitem(word._id);
               }}
             >
-              <i class="ri-check-fill pr-0"></i>
+              <i className="ri-check-fill pr-0"></i>
               Duyệt
             </button>
 

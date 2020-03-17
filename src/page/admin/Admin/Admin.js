@@ -81,7 +81,7 @@ const Admin = props => {
                 </h4>
               </div>
               <span
-                className="table-add float-right mb-3 mr-2"
+                className="table-add float-right mr-2"
                 style={{ marginTop: "1rem!important" }}
               >
                 <button
@@ -107,7 +107,7 @@ const Admin = props => {
                       <th width="50">STT</th>
                       <th>Tên tài khoản</th>
                       <th>Quyền</th>
-                      <th width="150">Chức năng</th>
+                      <th className="th-function">Chức năng</th>
                     </tr>
                   </thead>
                   {loading ? (

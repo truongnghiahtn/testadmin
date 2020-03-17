@@ -120,7 +120,7 @@ const MoviesAdmin = props => {
                 </h4>
               </div>
               <span
-                className="table-add float-right mb-3 mr-2"
+                className="table-add float-right mr-2"
                 style={{ marginTop: "1rem!important" }}
               >
                 <button
@@ -148,7 +148,7 @@ const MoviesAdmin = props => {
                       <th>Tựa đề phim</th>
                       <th>EN</th>
                       <th>VI</th>
-                      <th width="150">Chức năng</th>
+                      <th className="th-function">Chức năng</th>
                     </tr>
                   </thead>
                   {loading ? (

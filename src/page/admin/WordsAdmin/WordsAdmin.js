@@ -112,8 +112,8 @@ const WordsAdmin = props => {
                 </h4>
               </div>
               <span
-                className="table-add float-right mb-3 mr-2"
-                style={{ marginTop: "1rem!important" }}
+                className="table-add float-right mr-2"
+                style={{ marginTop: "1rem!important", textAlign: "end" }}
               >
                 <button
                   data-toggle="modal"
@@ -150,7 +150,7 @@ const WordsAdmin = props => {
                       <th width="50">STT</th>
                       <th>Tên từ / câu</th>
                       <th>VI</th>
-                      <th width="150">Chức năng</th>
+                      <th className="th-function">Chức năng</th>
                     </tr>
                   </thead>
                   {loading ? (

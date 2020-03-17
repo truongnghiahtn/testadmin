@@ -91,7 +91,7 @@ const CustomerAdmin = props => {
                       <th>Email</th>
                       <th>Phone</th>
                       <th>Message</th>
-                      <th width="150">Chức năng</th>
+                      <th className="th-function">Chức năng</th>
                     </tr>
                   </thead>
                   {loading ? (

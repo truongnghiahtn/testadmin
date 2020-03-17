@@ -57,10 +57,31 @@
 
 .table {
   table-layout: fixed;
+  thead {
+    th {
+      vertical-align: middle !important;
+      &.th-function {
+        width: 150px;
+      }
+    }
+  }
   tbody {
     tr {
       .td-break {
         overflow-wrap: break-word;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .table {
+    display: table !important;
+    thead {
+      th {
+        &.th-function {
+          width: 100px;
+        }
       }
     }
   }

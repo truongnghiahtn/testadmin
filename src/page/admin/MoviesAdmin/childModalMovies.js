@@ -149,7 +149,7 @@ class childModalMovies extends Component {
     event.preventDefault();
     if (this.props.editInfoMovie === null) {
       this.props.addMovie(this.state.values);
-      this.setState({
+      /* this.setState({
         values: {
           ...this.state.values,
           image: "",
@@ -171,7 +171,7 @@ class childModalMovies extends Component {
           }
         ],
         hidden: false
-      });
+      }); */
     } else {
       this.props.editMovie(this.state.values);
     }

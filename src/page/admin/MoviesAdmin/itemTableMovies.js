@@ -28,20 +28,22 @@ class itemTable extends Component {
     return (
       <tr>
         <td>{stt}</td>
-        <td>{this.convertHTML(movie.title)}</td>
-        <td className="movie_content">{this.convertHTML(movie.content)}</td>
+        <td className="td-break">{this.convertHTML(movie.title)}</td>
+        <td className="movie_content td-break">
+          {this.convertHTML(movie.content)}
+        </td>
 
-        <td className="content_en">
+        <td className="td-break">
           {movie.english_meaning
             ? this.convertHTML(movie.english_meaning)
             : "!#"}
         </td>
-        <td className="content_en">
+        <td className="td-break">
           {movie.Vietnamese_meaning
             ? this.convertHTML(movie.Vietnamese_meaning)
             : "!#"}
         </td>
-        <td className="content_en">
+        <td>
           <span className="table-remove">
             <button
               type="button"

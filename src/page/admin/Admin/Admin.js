@@ -104,10 +104,10 @@ const Admin = props => {
                 <table className="table table-bordered table-responsive-md table-striped text-center">
                   <thead>
                     <tr>
-                      <th>STT</th>
+                      <th width="50">STT</th>
                       <th>Tên tài khoản</th>
                       <th>Quyền</th>
-                      <th>Chức năng</th>
+                      <th width="150">Chức năng</th>
                     </tr>
                   </thead>
                   {loading ? (

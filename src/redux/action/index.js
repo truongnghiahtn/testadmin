@@ -4,6 +4,7 @@ import { apiDevFast, api } from "../../utils/config";
 import swal from "sweetalert";
 
 export const getDataSearchApi = data => {
+  data = data.replace(/[^a-zA-Z ]/g, "");
   return dispatch => {
     if (data) {
       CallAPI(`suggest/${data}`)
@@ -26,6 +27,7 @@ export const getDataSearchApi = data => {
 };
 
 export const getTraCauApi = data => {
+  data = data.replace(/[^a-zA-Z ]/g, "");
   return dispatch => {
     CallAPI(`sentence/${data}/en`)
       .then(rs => {
@@ -40,6 +42,7 @@ export const getTraCauApi = data => {
   };
 };
 export const getTraTuApi = data => {
+  data = data.replace(/[^a-zA-Z ]/g, "");
   return dispatch => {
     CallAPI(`sentence/${data}/en`)
       .then(rs => {
@@ -55,6 +58,7 @@ export const getTraTuApi = data => {
 };
 
 export const getPhuDePhimApi = data => {
+  data = data.replace(/[^a-zA-Z ]/g, "");
   return dispatch => {
     CallAPI(`subtitle/${data}/en`)
       .then(rs => {
@@ -70,6 +74,7 @@ export const getPhuDePhimApi = data => {
 };
 
 export const getVideoApi = data => {
+  data = data.replace(/[^a-zA-Z ]/g, "");
   return dispatch => {
     CallAPI(`video/${data}`)
       .then(rs => {
@@ -125,28 +130,30 @@ export const postNewWordApi = data => {
 
 export const postContactApi = data => {
   return () => {
-    CallAPI("customer", "POST", data).then(rs => {
-      setTimeout(() => {
-        swal({
-          title: "gửi thành công",
-          text: `Thành công`,
-          icon: "success",
-          buttons: false,
-          timer: 1500
-        });
-      }, 150);
-      console.log(rs);
-    }).catch(rs=>{
-      setTimeout(() => {
-        swal({
-          title: "Gửi thất bại",
-          text: `thất bại!`,
-          icon: "error",
-          buttons: false,
-          timer: 1500
-        });
-      }, 150);
-    });
+    CallAPI("customer", "POST", data)
+      .then(rs => {
+        setTimeout(() => {
+          swal({
+            title: "gửi thành công",
+            text: `Thành công`,
+            icon: "success",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+        console.log(rs);
+      })
+      .catch(rs => {
+        setTimeout(() => {
+          swal({
+            title: "Gửi thất bại",
+            text: `thất bại!`,
+            icon: "error",
+            buttons: false,
+            timer: 1500
+          });
+        }, 150);
+      });
   };
 };
 
@@ -398,15 +405,28 @@ export const addWordsApiDevfast = data => {
             console.log(res.data)
           );
         })
-        .catch(err => {
-          swal({
-            title: "Thêm không thành công!",
-            text: ` ${err.response.data.message}!`,
-            icon: "error",
-            buttons: false,
-            timer: 1500
-          });
-          console.log(err);
+        .catch((err) => {
+          if(err.response.status===409)
+          {
+            swal({
+              title: "Thêm không thành công!",
+              text: ` Từ này đã tồn tại`,
+              icon: "error",
+              buttons: false,
+              timer: 1500
+            });
+     
+          }else{
+            swal({
+              title: "Thêm không thành công!",
+              text: ` ${err.response.data.message}!`,
+              icon: "error",
+              buttons: false,
+              timer: 1500
+            });
+     
+          }
+     
         });
     } else {
       swal({
@@ -1112,20 +1132,19 @@ export const actEditMailAPI = data => {
   };
 };
 
-
 // get top trending
-export const getListTopWord =()=>{
-  return dispatch =>{
-    CallAPI('words/topTrending/6',"GET",null,null,apiDevFast)
-    .then(res=>{
-      console.log(res)
-      dispatch({
-        type:Actiontype.GET_TOP_WORD,
-        dataTopWord:res.data
+export const getListTopWord = () => {
+  return dispatch => {
+    CallAPI("words/topTrending/6", "GET", null, null, apiDevFast)
+      .then(res => {
+        console.log(res);
+        dispatch({
+          type: Actiontype.GET_TOP_WORD,
+          dataTopWord: res.data
+        });
       })
-    })
-    .catch(err=>{
-      console.log(err)
-    })
-  }
-}
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};

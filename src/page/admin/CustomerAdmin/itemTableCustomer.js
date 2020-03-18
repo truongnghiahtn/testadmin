@@ -30,11 +30,11 @@ class itemTable extends Component {
     return (
       <tr>
         <td className="index">{stt}</td>
-        <td>{customer.fullname}</td>
-        <td>{customer.email}</td>
-        <td>{customer.phone}</td>
+        <td className="content_en">{customer.fullname}</td>
+        <td className="email-customer">{customer.email}</td>
+        <td className="content_en">{customer.phone}</td>
         <td>{customer.message}</td>
-        <td className="content_en">
+        <td className="chuc-nang">
           <span className="table-remove">
             <button
               type="button"

@@ -169,7 +169,7 @@ class childModalWords extends Component {
 
   handleErrors = event => {
     let { name, value } = event.target;
-    let message = value === "" ? "Do not be empty" : "";
+    let message = value === "" ? "Mời bạn nhập dữ liệu" : "";
     let { word_nameValid, Vietnamese_meaningValid } = this.state;
     switch (name) {
       case "word_name":

@@ -1,8 +1,8 @@
 .movie_content {
-  width: 500px;
+  max-width: 400px;
 }
 .content_en {
-  width: 150px;
+  max-width: 150px;
 }
 .edit-modal {
   max-height: 550px;
@@ -13,4 +13,13 @@
 }
 .edit_signout{
   width: 170px!important;
+}
+.chuc-nang{
+  width: 130px;
+}
+.content_word{
+  max-width: 400px;
+}
+.content_en_vi{
+  max-width: 180px;
 }

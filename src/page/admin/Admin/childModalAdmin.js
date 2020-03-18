@@ -37,7 +37,7 @@ class childModalAdmin extends Component {
 
   handleErrors = event => {
     let { name, value } = event.target;
-    let message = value === "" ? "Do not be empty" : "";
+    let message = value === "" ? "Mời bạn nhập dữ liệu" : "";
     let { usernameValid, passwordValid } = this.state;
     switch (name) {
       case "username":

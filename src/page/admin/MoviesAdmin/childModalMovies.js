@@ -81,7 +81,7 @@ class childModalMovies extends Component {
     });
   };
   onErrorContent = err => {
-    let message = err.target.innerHTML === "" ? "Do not be empty" : "";
+    let message = err.target.innerHTML === "" ? "Mời bạn nhập dữ liệu" : "";
     let { contentValid } = this.state;
     contentValid = message !== "" ? false : true;
 
@@ -98,7 +98,7 @@ class childModalMovies extends Component {
 
   handleErrors = event => {
     let { name, value } = event.target;
-    let message = value === "" ? "Do not be empty" : "";
+    let message = value === "" ? "Mời bạn nhập dữ liệu" : "";
     let {
       titleValid,
       english_meaningValid,

@@ -40,30 +40,30 @@ class BoSung extends Component {
     let isValid = false;
     let massage = value === "" ? "Vui lòng nhập câu trả lời của bạn" : "";
     isValid = massage !== "" ? false : true;
-    if (value !== "") {
-      switch (name) {
-        case "word_name":
-          if (!value.match("^[a-zA-Z\\s]+$")) {
-            isValid = false;
-            massage = "không đúng định dạng.";
-          }
-          break;
-        case "Vietnamese_meaning":
-          if (
-            !value.match(
-              "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" +
-                "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" +
-                "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$"
-            )
-          ) {
-            isValid = false;
-            massage = "không đúng định dạng.";
-          }
-          break;
-        default:
-          break;
-      }
-    }
+    // if (value !== "") {
+    //   switch (name) {
+    //     case "word_name":
+    //       if (!value.match("^[a-zA-Z\\s]+$")) {
+    //         isValid = false;
+    //         massage = "không đúng định dạng.";
+    //       }
+    //       break;
+    //     case "Vietnamese_meaning":
+    //       if (
+    //         !value.match(
+    //           "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" +
+    //             "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" +
+    //             "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$"
+    //         )
+    //       ) {
+    //         isValid = false;
+    //         massage = "không đúng định dạng.";
+    //       }
+    //       break;
+    //     default:
+    //       break;
+    //   }
+    // }
     this.setState(
       {
         errs: { ...errs, [name]: massage },

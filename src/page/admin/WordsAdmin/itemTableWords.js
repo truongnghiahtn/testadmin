@@ -30,11 +30,11 @@ class itemTable extends Component {
     return (
       <tr>
         <td className="index">{stt}</td>
-        <td >{this.convertHTML(word.word_name)}</td>
-        <td >
+        <td className="content_word">{this.convertHTML(word.word_name)}</td>
+        <td className="content_word">
           {this.convertHTML(word.Vietnamese_meaning)}
         </td>
-        <td className="content_en">
+        <td className="chuc-nang">
           <span className="table-remove">
             <button
               type="button"

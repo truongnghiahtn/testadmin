@@ -27,21 +27,21 @@ class itemTable extends Component {
     let { movie, stt } = this.props;
     return (
       <tr>
-        <td>{stt}</td>
+        <td className="index">{stt}</td>
         <td>{this.convertHTML(movie.title)}</td>
         <td className="movie_content">{this.convertHTML(movie.content)}</td>
 
-        <td className="content_en">
+        <td className="content_en_vi">
           {movie.english_meaning
             ? this.convertHTML(movie.english_meaning)
             : "!#"}
         </td>
-        <td className="content_en">
+        <td className="content_en_vi">
           {movie.Vietnamese_meaning
             ? this.convertHTML(movie.Vietnamese_meaning)
             : "!#"}
         </td>
-        <td className="content_en">
+        <td className="chuc-nang">
           <span className="table-remove">
             <button
               type="button"

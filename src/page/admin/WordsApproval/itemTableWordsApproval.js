@@ -36,9 +36,9 @@ class itemTable extends Component {
     return (
       <tr>
         <td className="index">{stt}</td>
-        <td>{word.word_name}</td>
-        <td>{word.Vietnamese_meaning}</td>
-        <td className="content_en">
+        <td className="content_word">{word.word_name}</td>
+        <td className="content_word">{word.Vietnamese_meaning}</td>
+        <td className="chuc-nang">
           <span className="table-remove">
             <button
               type="button"

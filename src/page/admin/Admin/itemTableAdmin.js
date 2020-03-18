@@ -27,11 +27,11 @@ class itemTable extends Component {
     let { admin, stt } = this.props;
     return (
       <tr>
-        <td>{stt}</td>
+        <td className="index">{stt}</td>
         <td>{admin.username}</td>
         <td>{admin.role}</td>
 
-        <td className="content_en">
+        <td className="chuc-nang">
           <span className="table-remove">
             <button
               type="button"

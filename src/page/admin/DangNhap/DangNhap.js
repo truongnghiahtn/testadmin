@@ -120,6 +120,9 @@ constructor(props) {
                   Đăng nhập
                 </button>
               </form>
+              <div className="logout-home">
+                <a href="/">Về Trang chủ</a>
+              </div>
             </div>
             <ul className="bg-bubbles">
               <li />

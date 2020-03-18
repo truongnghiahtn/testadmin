@@ -537,7 +537,7 @@ class childModalWords extends Component {
                   onClick={this.pushdatavideo}
                   disabled={this.state.data === "" ? true : false}
                 >
-                  Thêm video
+                  Tạo video
                 </p>
               </div>
             </div>

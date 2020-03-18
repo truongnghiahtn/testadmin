@@ -211,7 +211,7 @@ class Mail extends Component {
                 Cancel
               </button> */}
               <button type="submit" className="btn btn-primary">
-                Submit
+                Gửi
               </button>
             </ul>
           </nav>

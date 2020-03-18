@@ -20,7 +20,8 @@ let initialState = {
   dataAdmin: {},
   editAdmin: null,
   dataWordsUnapproved: {},
-  dataMail: {}
+  dataMail: {},
+  dataTopWord: {}
 };
 
 const deMoReducer = (state = initialState, action) => {
@@ -314,6 +315,11 @@ const deMoReducer = (state = initialState, action) => {
       return { ...state };
     case ActionType.EDIT_MAIL_API_DEVFAST:
       state.dataMail = action.mail;
+      return { ...state };
+    // Top Trending Word
+    case ActionType.GET_TOP_WORD:
+      state.dataTopWord = action.dataTopWord;
+      console.log(state.dataTopWord)
       return { ...state };
     default:
       return { ...state };

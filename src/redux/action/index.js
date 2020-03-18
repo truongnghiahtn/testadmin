@@ -1118,3 +1118,20 @@ export const actEditMailAPI = data => {
     }
   };
 };
+
+// get top trending
+export const getListTopWord = () => {
+  return dispatch => {
+    CallAPI("words/topTrending/6", "GET", null, null, apiDevFast)
+      .then(res => {
+        console.log(res);
+        dispatch({
+          type: Actiontype.GET_TOP_WORD,
+          dataTopWord: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};

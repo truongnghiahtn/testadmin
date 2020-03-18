@@ -75,7 +75,7 @@ const Term = props => {
         <ul className="pagination justify-content-end">
           <button
             type="submit"
-            disabled={!errors}
+            
             className="btn btn-primary"
             // onClick={() => props.addInfoWebsiteApi("TERM", dataTerm)}
             onClick={() => {

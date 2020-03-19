@@ -72,7 +72,10 @@ class TraCau extends Component {
                       href={
                         item._id.length < 20
                           ? `javascript:speakTS(${item._id})`
-                          : `javascript:speakTS("${item.fields.en}",'us')`
+                          : `javascript:speakTS("${item.fields.en.replace(
+                              /<|\/|em>/g,
+                              ""
+                            )}",'us')`
                       }
                       onClick={this.stopAudio}
                       className="v"

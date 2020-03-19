@@ -7,16 +7,16 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-image: url("/assets/images/bg-head.jpg");
+  // background-image: url("/assets/images/bg-head.jpg");
   background-position: 50% 50%;
   background-size: cover;
   padding: 120px 0 70px;
   text-align: center;
   .search-title {
-    color: white;
+    color: #151886;
     font-size: 32px;
     margin-bottom: 40px;
-    font-weight: 400;
+    font-weight: 300;
   }
   .masthead {
     position: relative;
@@ -42,17 +42,16 @@
           font-size: 18px;
           padding-left: 60px;
           height: 60px;
-          background-color: rgba(255, 255, 255, 0.2);
           border-color: transparent;
-          color: white;
           font-weight: 100;
           border-radius: 5px;
+          border: 2px solid #d2d2d2;
+          border-radius: 30px;
           &::placeholder {
-            color: rgba(255, 255, 255, 0.75);
+            color: #d2d2d2;
           }
           &:focus {
-            background-color: rgba(255, 255, 255, 0.25);
-            border-color: transparent;
+            border: 2px solid #d2d2d2;
           }
         }
         .tc-search-button {
@@ -68,7 +67,7 @@
             position: absolute;
             font-size: 32px;
             font-weight: 100;
-            color: rgba(255, 255, 255, 0.75);
+            color: #505050;
             left: 0;
             top: 0;
             right: 0;
@@ -81,7 +80,7 @@
             }
           }
           &:hover i {
-            color: white;
+            color: #505050;
           }
         }
       }

@@ -32,11 +32,7 @@ const Search = props => {
           dangerouslySetInnerHTML={{ __html: item.fields.shorttext }}
           className="s-suggest-content"
           onClick={() => {
-            props.getTraCauApi(item.fields.word);
-            props.getTraTuApi(item.fields.word);
-            props.getPhuDePhimApi(item.fields.word);
-            props.getVideoApi(item.fields.word);
-            props.saveWord(item.fields.word);
+            handleDataSearch(item.fields.word);
             $("#tc-s")[0].value = item.fields.word;
           }}
         ></div>
@@ -62,16 +58,30 @@ const Search = props => {
         $(".s-suggest-content")[0].click();
         setIsSubmit(false);
       } else {
-        props.saveWord(currentKw);
-        props.getTraCauApi(currentKw);
-        props.getTraTuApi(currentKw);
-        props.getPhuDePhimApi(currentKw);
-        props.getVideoApi(currentKw);
+        handleDataSearch(currentKw);
         setIsSubmit(true);
       }
     }, 1000);
   };
 
+  const handleDataSearch = data => {
+    data = data.replace(
+      /!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'| |\"|\&|\#|\[|\]|~|$|_/g,
+      ""
+    );
+    let lang = !data.match(
+      "[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" +
+        "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" +
+        "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$"
+    )
+      ? "en"
+      : "vi";
+    props.saveWord(data);
+    props.getTraCauApi(data, lang);
+    props.getTraTuApi(data, lang);
+    props.getPhuDePhimApi(data, lang);
+    props.getVideoApi(data, lang);
+  };
   return (
     <section className="search-section home-search">
       <h1 className="search-title">How can we help you?</h1>
@@ -133,14 +143,14 @@ const mapDispatchToProps = dispatch => {
     saveWord: word => {
       dispatch(action.saveWord(word));
     },
-    getTraCauApi: data => {
-      dispatch(action.getTraCauApi(data));
+    getTraCauApi: (data, lang) => {
+      dispatch(action.getTraCauApi(data, lang));
     },
-    getTraTuApi: data => {
-      dispatch(action.getTraTuApi(data));
+    getTraTuApi: (data, lang) => {
+      dispatch(action.getTraTuApi(data, lang));
     },
-    getPhuDePhimApi: data => {
-      dispatch(action.getPhuDePhimApi(data));
+    getPhuDePhimApi: (data, lang) => {
+      dispatch(action.getPhuDePhimApi(data, lang));
     },
     getVideoApi: data => {
       dispatch(action.getVideoApi(data));

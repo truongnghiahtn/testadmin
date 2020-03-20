@@ -2,13 +2,12 @@ import * as Actiontype from "./../constants/actionType";
 import { CallAPI } from "../../utils/callApi";
 import { apiDevFast, api } from "../../utils/config";
 import swal from "sweetalert";
-
 export const getDataSearchApi = data => {
-  data = data.replace(/[^a-zA-Z ]/g, "");
   return dispatch => {
     if (data) {
       CallAPI(`suggest/${data}`)
         .then(rs => {
+          console.log(rs);
           dispatch({
             type: Actiontype.GET_DATA_SEARCH,
             dataSearch: rs.data.tratu
@@ -26,10 +25,9 @@ export const getDataSearchApi = data => {
   };
 };
 
-export const getTraCauApi = data => {
-  data = data.replace(/[^a-zA-Z ]/g, "");
+export const getTraCauApi = (data, lang) => {
   return dispatch => {
-    CallAPI(`sentence/${data}/en`)
+    CallAPI(`sentence/${data}/${lang}`)
       .then(rs => {
         dispatch({
           type: Actiontype.GET_TRA_CAU_API,
@@ -41,10 +39,9 @@ export const getTraCauApi = data => {
       });
   };
 };
-export const getTraTuApi = data => {
-  data = data.replace(/[^a-zA-Z ]/g, "");
+export const getTraTuApi = (data, lang) => {
   return dispatch => {
-    CallAPI(`sentence/${data}/en`)
+    CallAPI(`sentence/${data}/${lang}`)
       .then(rs => {
         dispatch({
           type: Actiontype.GET_TRA_TU_API,
@@ -57,10 +54,9 @@ export const getTraTuApi = data => {
   };
 };
 
-export const getPhuDePhimApi = data => {
-  data = data.replace(/[^a-zA-Z ]/g, "");
+export const getPhuDePhimApi = (data, lang) => {
   return dispatch => {
-    CallAPI(`subtitle/${data}/en`)
+    CallAPI(`subtitle/${data}/${lang}`)
       .then(rs => {
         dispatch({
           type: Actiontype.GET_PHU_DE_PHIM_API,
@@ -74,7 +70,6 @@ export const getPhuDePhimApi = data => {
 };
 
 export const getVideoApi = data => {
-  data = data.replace(/[^a-zA-Z ]/g, "");
   return dispatch => {
     CallAPI(`video/${data}`)
       .then(rs => {
@@ -405,9 +400,8 @@ export const addWordsApiDevfast = data => {
             console.log(res.data)
           );
         })
-        .catch((err) => {
-          if(err.response.status===409)
-          {
+        .catch(err => {
+          if (err.response.status === 409) {
             swal({
               title: "Thêm không thành công!",
               text: ` Từ này đã tồn tại`,
@@ -415,8 +409,7 @@ export const addWordsApiDevfast = data => {
               buttons: false,
               timer: 1500
             });
-     
-          }else{
+          } else {
             swal({
               title: "Thêm không thành công!",
               text: ` ${err.response.data.message}!`,
@@ -424,9 +417,7 @@ export const addWordsApiDevfast = data => {
               buttons: false,
               timer: 1500
             });
-     
           }
-     
         });
     } else {
       swal({

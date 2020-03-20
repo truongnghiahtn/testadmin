@@ -17,7 +17,7 @@
 
 .page-title-content h2 {
   margin-bottom: 0;
-  color: #ffffff;
+  color: #151886;
   font-size: 42px;
   font-weight: 500;
   text-transform: uppercase;
@@ -32,7 +32,7 @@
 }
 
 .page-title-content ul li {
-  color: #ffffff;
+  color: #505050;
   display: inline-block;
   position: relative;
   font-weight: 400;
@@ -43,7 +43,7 @@
 
 .page-title-content ul li a {
   display: inline-block;
-  color: #ffffff;
+  color: #505050;
 }
 
 .page-title-content ul li::before {
@@ -54,7 +54,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #f20791;
+  background-color: #505050;
 }
 
 .page-title-content ul li:last-child::before {

@@ -1,7 +1,7 @@
 .navtab {
   margin-top: 285px !important;
   .MuiPaper-root {
-    background-color: #fafafa;
+    background-color: white;
     &.MuiPaper-elevation4 {
       box-shadow: none;
     }
@@ -16,6 +16,7 @@
           font-size: 16px;
           text-transform: none;
           display: block;
+          font-weight: 400;
           &::first-letter {
             text-transform: capitalize;
           }

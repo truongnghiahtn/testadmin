@@ -47,7 +47,7 @@ const Navbar = () => {
 
   return (
     <nav className={"mainnav navbar navbar-default justify-content-between"}>
-      <div className="container relative">
+      <div className="container relative mt-4">
         <a
           className="offcanvas dl-trigger paper-nav-toggle"
           data-toggle="offcanvas"
@@ -62,36 +62,36 @@ const Navbar = () => {
             window.location.replace("/");
           }}
         >
-          <a title="Tra câu Việt - Anh">
+          <a title="Tra câu Việt - Anh ">
             <div className="tc-site-logo-text">
               {/* <h1>TRA CÂU</h1>
               <span>&nbsp;VIỆT - ANH</span>
               <h2>Công cụ tìm kiếm các cặp câu song ngữ</h2> */}
-              <img
-                src="./assets/images/logo-base.png"
-                width="220px"
+              {/* <img
+                src="./assets/images/favicon.png"
+                width="100px"
                 height="55px"
-              ></img>
+              ></img> */}
             </div>
           </a>
         </div>
         <div className="paper_menu">
           <div id="dl-menu" className="xv-menuwrapper responsive-menu">
             <ul className="dl-menu align-items-center">
-              <li>
+              {/* <li>
                 <NavLink to="/gioi-thieu" activeClassName="active">
                   Giới thiệu
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/dieu-khoan">Điều khoản</NavLink>
-              </li>
+              </li> */}
 
               <li>
-                <NavLink to="/bo-sung">Bổ sung câu mới</NavLink>
+                <NavLink to="/bo-sung" activeClassName="active">Add</NavLink>
               </li>
               <li>
-                <NavLink to="/lien-he">Liên hệ</NavLink>
+                <NavLink to="/lien-he">Contact</NavLink>
               </li>
               {/* <li className="share-menu-item">
                 <div className="heart" />

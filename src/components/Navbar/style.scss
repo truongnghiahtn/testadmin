@@ -58,16 +58,16 @@
               display: block;
               font-size: 13px;
               font-weight: 400;
-              color: rgba(256, 256, 256, 0.6);
+              color: #828282;
               position: relative;
               margin-left: 15px;
               text-decoration: none;
               transition: none;
               &.active {
-                color: white;
+                color: #151886;
               }
               &:hover {
-                color: white;
+                color: #151886;
               }
             }
           }
@@ -98,7 +98,7 @@
 .paper-nav-toggle.active i::before,
 .paper-nav-toggle.dl-active i::after,
 .paper-nav-toggle.dl-active i::before {
-  background: white;
+  background: #828282;
 }
 .paper-nav-toggle:active,
 .paper-nav-toggle:focus,
@@ -112,11 +112,11 @@
   display: inline-block;
   width: 25px;
   height: 2px;
-  color: white;
+  color: #828282;
   font: bold 14px/0.4 Helvetica;
   text-transform: uppercase;
   text-indent: -55px;
-  background: white;
+  background: #828282;
   transition: all 0.2s ease-out;
 }
 .paper-nav-toggle i::after,
@@ -124,7 +124,7 @@
   content: "";
   width: 25px;
   height: 2px;
-  background: white;
+  background: #828282;
   position: absolute;
   left: 0;
   transition: all 0.2s ease-out;
@@ -209,8 +209,7 @@
     top: 50%;
     right: 0;
     transform: translateY(-50%);
-    width: 100%;
-    max-width: 300px;
+    width: 250px;
     float: left;
     -webkit-perspective: 1000px;
     perspective: 1000px;
@@ -247,7 +246,7 @@
       transform-style: preserve-3d;
       background: #fff;
       li {
-        border-bottom: 1px solid #fafafa;
+        border-bottom: 1px solid white;
         position: relative;
         a {
           color: black;
@@ -292,12 +291,11 @@
   .paper_menu .dl-menuwrapper ul li {
     transition: all 0.2s linear;
     a {
-      color: #67607c;
+      color: #828282;
     }
     &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
       a {
-        color: black;
+        color: #151886;
       }
     }
   }

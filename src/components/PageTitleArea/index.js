@@ -6,7 +6,7 @@ export default class PageTitleArea extends Component {
       <div>
         <div
           className="page-title-area"
-          style={{ backgroundImage: "url('/assets/images/bg-head.jpg')" }}
+          // style={{ backgroundImage: "url('/assets/images/bg-head.jpg')" }}
         >
           <div className="container">
             <div className="page-title-content">

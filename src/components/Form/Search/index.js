@@ -74,7 +74,8 @@ const Search = props => {
 
   return (
     <section className="search-section home-search">
-      <h1 className="search-title">How can we help you?</h1>
+      {/* <h1 className="search-title">FIDING ME</h1> */}
+      <img className="search-title " src="./assets/images/logo-findingme.svg"  ></img>
       <div className="masthead text-center">
         <div className="container">
           <div className="tc-header">
@@ -95,7 +96,7 @@ const Search = props => {
                   id="tc-s"
                   className="tc-search-textbox"
                   type="text"
-                  placeholder="Nhập từ hoặc câu cần tìm kiếm"
+                  placeholder="Typing your words"
                   name="keyword"
                   autoFocus
                   autoComplete="off"

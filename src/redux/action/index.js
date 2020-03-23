@@ -24,11 +24,15 @@ export const getDataSearchApi = data => {
     }
   };
 };
-
+const hiddenLoaderSearch = () => {
+  if (document.getElementById("tc-loader").classList[0] !== "hidden")
+    document.getElementById("tc-loader").classList.add("hidden");
+};
 export const getTraCauApi = (data, lang) => {
   return dispatch => {
     CallAPI(`sentence/${data}/${lang}`)
       .then(rs => {
+        hiddenLoaderSearch();
         dispatch({
           type: Actiontype.GET_TRA_CAU_API,
           traCau: rs.data.sentences
@@ -43,6 +47,7 @@ export const getTraTuApi = (data, lang) => {
   return dispatch => {
     CallAPI(`sentence/${data}/${lang}`)
       .then(rs => {
+        hiddenLoaderSearch();
         dispatch({
           type: Actiontype.GET_TRA_TU_API,
           traTu: rs.data.tratu[0]
@@ -58,6 +63,7 @@ export const getPhuDePhimApi = (data, lang) => {
   return dispatch => {
     CallAPI(`subtitle/${data}/${lang}`)
       .then(rs => {
+        hiddenLoaderSearch();
         dispatch({
           type: Actiontype.GET_PHU_DE_PHIM_API,
           phuDePhim: rs.data
@@ -73,6 +79,7 @@ export const getVideoApi = data => {
   return dispatch => {
     CallAPI(`video/${data}`)
       .then(rs => {
+        hiddenLoaderSearch();
         dispatch({
           type: Actiontype.GET_VIDEO_API,
           video: rs.data.transcripts

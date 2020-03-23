@@ -65,10 +65,7 @@ const Search = props => {
   };
 
   const handleDataSearch = data => {
-    $(".tc-loader").removeClass("hidden");
-    setTimeout(() => {
-      $(".tc-loader").addClass("hidden");
-    }, 1000);
+    $("#tc-loader").removeClass("hidden");
     data = data.replace(
       /!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'| |\"|\&|\#|\[|\]|~|$|_/g,
       ""
@@ -89,7 +86,10 @@ const Search = props => {
   return (
     <section className="search-section home-search">
       {/* <h1 className="search-title">FIDING ME</h1> */}
-      <img className="search-title " src="./assets/images/logo-findingme.svg"  ></img>
+      <img
+        className="search-title "
+        src="./assets/images/logo-findingme.svg"
+      ></img>
       <div className="masthead text-center">
         <div className="container">
           <div className="tc-header">
@@ -131,7 +131,7 @@ const Search = props => {
           </div>
         </div>
       </div>
-      <div className="tc-loader hidden">
+      <div id="tc-loader" className="hidden">
         <div class="tc-loader-inside">
           <div class="m-dot-loader">
             <div class="m-loading-dots"></div>

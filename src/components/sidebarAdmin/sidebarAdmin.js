@@ -50,7 +50,7 @@ export default class sidebarAdmin extends Component {
         <div className="iq-sidebar-logo d-flex justify-content-between">
           <NavLink to="/admin-dashboard">
             <img
-              src="/assets/images/logo-base.png"
+              src="/assets/images/favicon.png"
               className="img-fluid"
               alt=""
             />

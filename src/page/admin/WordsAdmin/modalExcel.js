@@ -92,22 +92,33 @@ class modalExcel extends Component {
                   ""
                 )}
               </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
+              <div className="modal-footer justify-content-between">
+                <button type="button" className="btn btn-sm iq-bg-success">
+                  <a
+                    href="https://drive.google.com/u/0/uc?id=1fEcV5qUT2RBBEuDcpieAztoXCe9tJ9v0&export=download"
+                    download
+                    style={{ color: "#00CA04" }}
+                  >
+                    Excel mẫu
+                  </a>
                 </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  disabled={!this.state.error}
-                  onClick={() => this.handleOnSubmit()}
-                >
-                  Save
-                </button>
+                <div>
+                  <button
+                    type="button"
+                    className="btn btn-secondary mr-2"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    disabled={!this.state.error}
+                    onClick={() => this.handleOnSubmit()}
+                  >
+                    Save
+                  </button>
+                </div>
               </div>
             </div>
           </div>

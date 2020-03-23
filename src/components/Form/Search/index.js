@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import "./style.scss";
 import { connect } from "react-redux";
 import * as action from "../../../redux/action/index";
@@ -65,6 +65,10 @@ const Search = props => {
   };
 
   const handleDataSearch = data => {
+    $(".tc-loader").removeClass("hidden");
+    setTimeout(() => {
+      $(".tc-loader").addClass("hidden");
+    }, 1000);
     data = data.replace(
       /!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'| |\"|\&|\#|\[|\]|~|$|_/g,
       ""
@@ -125,6 +129,18 @@ const Search = props => {
               {props.dataSearch.length > 0 ? renderDataSearch() : ""}
             </div>
           </div>
+        </div>
+      </div>
+      <div className="tc-loader hidden">
+        <div class="tc-loader-inside">
+          <div class="m-dot-loader">
+            <div class="m-loading-dots"></div>
+            <div class="m-loading-dots"></div>
+            <div class="m-loading-dots"></div>
+            <div class="m-loading-dots"></div>
+            <div class="m-loading-dots"></div>
+          </div>
+          <span>Loading</span>
         </div>
       </div>
     </section>
